@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GIAMA | Concesionario Oficial MG en Mar del Plata</title>
-  <meta name="description" content="Concesionario oficial MG en Mar del Plata. MG3 Hybrid, ZS Hybrid+, MG4 y Cyberster. Test drive, cotización y postventa. Grupo GIAMA, más de 40 años en el mercado automotor.">
-  <meta name="keywords" content="MG, GIAMA, concesionario, Mar del Plata, MG3, ZS, MG4, Cyberster, híbrido, eléctrico, test drive">
+  <meta name="description" content="Concesionario oficial MG en Mar del Plata. MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa. Grupo GIAMA, más de 40 años en el mercado automotor.">
+  <meta name="keywords" content="MG, GIAMA, concesionario, Mar del Plata, MG3, ZS, híbrido, test drive">
   <link rel="icon" type="image/png" href="logo-mg.png">
   <!-- Open Graph -->
   <meta property="og:title" content="GIAMA | Concesionario Oficial MG en Mar del Plata">
-  <meta property="og:description" content="MG3 Hybrid, ZS Hybrid+, MG4 Electric y Cyberster. Test drive, cotización y postventa en Mar del Plata.">
+  <meta property="og:description" content="MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa en Mar del Plata.">
   <meta property="og:image" content="logo-mg.png">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
@@ -96,6 +96,9 @@
       transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
     }
     .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu { overflow-y: auto; }
+    .mobile-menu a[style*="padding-left"]::after { display: none; }
+    .mobile-menu a[style*="padding-left"] { border-bottom: 1px solid rgba(255,255,255,0.05); }
     .mobile-menu a {
       display: flex; justify-content: space-between; align-items: center;
       padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -182,7 +185,8 @@
 
     /* ============ MODELS GRID ============ */
     .models-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;
+      max-width: 800px; margin: 0 auto;
     }
     .model-card {
       background: var(--grey-light); border-radius: 12px; padding: 30px 24px;
@@ -424,7 +428,7 @@
     /* ============ RESPONSIVE ============ */
     @media (max-width: 1200px) {
       .section { padding: 80px 40px; }
-      .models-grid { grid-template-columns: repeat(2, 1fr); }
+      .models-grid { grid-template-columns: 1fr; max-width: 400px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .modal-body { padding: 40px 30px; }
     }
@@ -475,11 +479,10 @@
         <div class="nav-dropdown-menu">
           <a href="#" onclick="event.preventDefault();openModel('mg3')">MG3 Hybrid+</a>
           <a href="#" onclick="event.preventDefault();openModel('zs')">MG ZS Hybrid+</a>
-          <a href="#" onclick="event.preventDefault();openModel('mg4')">MG4 Electric</a>
-          <a href="#" onclick="event.preventDefault();openModel('cyberster')">MG Cyberster</a>
         </div>
       </div>
       <a href="#concesionario">Concesionario</a>
+      <a href="#sobre-mg">Sobre MG</a>
       <a href="#test-drive">Test Drive</a>
       <a href="#contacto">Contacto</a>
     </div>
@@ -498,10 +501,12 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#modelos" onclick="toggleMenu()">Modelos</a>
+  <a href="#" onclick="event.preventDefault();toggleMenu();openModel('mg3')" style="padding-left:20px;font-size:14px;font-weight:400;opacity:0.7;">— MG3 Hybrid+</a>
+  <a href="#" onclick="event.preventDefault();toggleMenu();openModel('zs')" style="padding-left:20px;font-size:14px;font-weight:400;opacity:0.7;">— MG ZS Hybrid+</a>
   <a href="#concesionario" onclick="toggleMenu()">Concesionario</a>
+  <a href="#sobre-mg" onclick="toggleMenu()">Sobre MG</a>
   <a href="#test-drive" onclick="toggleMenu()">Test Drive</a>
   <a href="#contacto" onclick="toggleMenu()">Contacto</a>
-  <a href="#sobre-mg" onclick="toggleMenu()">Sobre MG</a>
   <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" class="mobile-wa" onclick="toggleMenu()">WhatsApp</a>
 </div>
 
@@ -522,7 +527,7 @@
     </div>
   </div>
   <div class="hero-slide" data-model="zs">
-    <div class="slide-bg" style="background-image: url('JPG/mg3_exterior6.jpg'); background: linear-gradient(135deg, #0a1628, #0f2440, #162d50);"></div>
+    <div class="slide-bg" style="background: linear-gradient(135deg, #0a1628, #0f2440, #162d50);"></div>
     <img class="hero-car-img" src="ZS/diamond-red.png" alt="MG ZS Hybrid+ rojo — SUV híbrido GIAMA Mar del Plata" style="position:absolute;bottom:18%;left:50%;transform:translateX(-50%);width:55%;max-width:650px;z-index:2;">
     <div class="slide-content">
       <span class="slide-tag hybrid">Hybrid+</span>
@@ -535,35 +540,6 @@
       </div>
     </div>
   </div>
-  <div class="hero-slide" data-model="mg4">
-    <div class="slide-bg" style="background: linear-gradient(135deg, #0f3460, #1a1a2e, #162d50);"></div>
-    <div style="position:absolute;bottom:25%;left:50%;transform:translateX(-50%);width:60%;max-width:700px;height:200px;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;z-index:2;"><span style="color:rgba(255,255,255,0.3);font-size:16px;">Imagen MG4 - Placeholder</span></div>
-    <div class="slide-content">
-      <span class="slide-tag electric">100% Eléctrico</span>
-      <h2>MG4 Electric</h2>
-      <p>Hasta 520 km de autonomía | De 170 a 435 CV</p>
-      <div class="slide-price">Desde USD 31.700*</div>
-      <div class="slide-ctas">
-        <button class="btn-primary" onclick="openModel('mg4')">Ver modelo</button>
-        <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
-      </div>
-    </div>
-  </div>
-  <div class="hero-slide" data-model="cyberster">
-    <div class="slide-bg" style="background: linear-gradient(135deg, #2d1b33, #1a1a2e, #0f3460);"></div>
-    <div style="position:absolute;bottom:25%;left:50%;transform:translateX(-50%);width:60%;max-width:700px;height:200px;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;z-index:2;"><span style="color:rgba(255,255,255,0.3);font-size:16px;">Imagen Cyberster - Placeholder</span></div>
-    <div class="slide-content">
-      <span class="slide-tag electric">100% Eléctrico</span>
-      <h2>MG Cyberster</h2>
-      <p>El roadster eléctrico de 502 CV | 0-100 en 3.7s</p>
-      <div class="slide-price">USD 130.000*</div>
-      <div class="slide-ctas">
-        <button class="btn-primary" onclick="openModel('cyberster')">Ver modelo</button>
-        <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
-      </div>
-    </div>
-  </div>
-
   <div class="slider-arrows">
     <button class="slider-arrow" onclick="prevSlide()">&#8592;</button>
     <button class="slider-arrow" onclick="nextSlide()">&#8594;</button>
@@ -571,8 +547,6 @@
   <div class="slider-dots">
     <button class="slider-dot active" onclick="goToSlide(0)"></button>
     <button class="slider-dot" onclick="goToSlide(1)"></button>
-    <button class="slider-dot" onclick="goToSlide(2)"></button>
-    <button class="slider-dot" onclick="goToSlide(3)"></button>
   </div>
 </section>
 
@@ -580,7 +554,7 @@
 <section class="section" id="modelos">
   <p class="section-tag reveal">Modelos</p>
   <h2 class="section-title reveal">Encontrá tu MG ideal</h2>
-  <p class="section-subtitle reveal">Desde hatchbacks híbridos hasta el roadster eléctrico más emocionante. Todos con garantía extendida líder en el segmento.</p>
+  <p class="section-subtitle reveal">Tecnología híbrida de última generación con garantía extendida líder en el segmento.</p>
 
   <div class="models-grid">
     <!-- MG3 -->
@@ -601,26 +575,6 @@
       <p class="card-specs">191 CV | 4.9 L/100 km | SUV compacto</p>
       <div class="warranty-badge"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> 6 años de garantía</div>
       <p class="card-price">Desde USD 27.500* <span>Comfort</span></p>
-      <button class="btn-ver-modelo">Ver modelo</button>
-    </div>
-    <!-- MG4 -->
-    <div class="model-card reveal" onclick="openModel('mg4')">
-      <span class="card-tag electric">100% Eléctrico</span>
-      <div class="card-img"><div style="height:150px;display:flex;align-items:center;justify-content:center;background:rgba(0,119,255,0.05);border-radius:8px;border:2px dashed rgba(0,119,255,0.15);width:100%;"><span style="color:#999;font-size:13px;">Imagen MG4</span></div></div>
-      <h3>MG4 Electric</h3>
-      <p class="card-specs">Hasta 435 CV | 520 km autonomía | 4 versiones</p>
-      <div class="warranty-badge"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> 6 años de garantía</div>
-      <p class="card-price">Desde USD 31.700* <span>Standard</span></p>
-      <button class="btn-ver-modelo">Ver modelo</button>
-    </div>
-    <!-- Cyberster -->
-    <div class="model-card reveal" onclick="openModel('cyberster')">
-      <span class="card-tag electric">100% Eléctrico</span>
-      <div class="card-img"><div style="height:150px;display:flex;align-items:center;justify-content:center;background:rgba(0,119,255,0.05);border-radius:8px;border:2px dashed rgba(0,119,255,0.15);width:100%;"><span style="color:#999;font-size:13px;">Imagen Cyberster</span></div></div>
-      <h3>MG Cyberster</h3>
-      <p class="card-specs">502 CV | 0-100 en 3.7s | Roadster</p>
-      <div class="warranty-badge"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> 6 años de garantía</div>
-      <p class="card-price">USD 130.000* <span>A pedido</span></p>
       <button class="btn-ver-modelo">Ver modelo</button>
     </div>
   </div>
@@ -645,7 +599,7 @@
     </div>
     <div class="about-visual reveal">
       <div class="about-img-box" style="background-image:url('JPG/mg3_exterior7.jpg');"></div>
-      <div class="about-img-box" style="background-image:url('JPG/mg3 interior.jpg');"></div>
+      <div class="about-img-box" style="background-image:url('JPG/mg3_interior.jpg');"></div>
       <div class="about-img-box" style="background-image:url('ZS/diamond-red.png'); background-color:#f0f0f0; background-size:contain; background-repeat:no-repeat;"></div>
     </div>
   </div>
@@ -660,30 +614,30 @@
     <div class="conc-info reveal">
       <div class="conc-detail">
         <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        <p><strong>Dirección</strong>Gascón 3265, Mar del Plata, Buenos Aires</p>
+        <p><strong>Dirección</strong><br>Gascón 3265, Mar del Plata, Buenos Aires</p>
       </div>
       <div class="conc-detail">
         <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        <p><strong>Teléfono</strong>+54 9 11 3134 7853</p>
+        <p><strong>Teléfono</strong><br><a href="tel:+5491131347853">+54 9 11 3134 7853</a></p>
       </div>
       <div class="conc-detail">
         <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-        <p><strong>Horarios</strong>Lunes a Viernes 9 a 18 hs<br>Sábados 9 a 13 hs</p>
+        <p><strong>Horarios</strong><br>Lunes a Viernes 9 a 18 hs<br>Sábados 9 a 13 hs</p>
       </div>
       <div class="conc-detail">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        <p><strong>Email</strong>info@giama.com.ar</p>
+        <p><strong>Email</strong><br><a href="mailto:info@giamamg.com.ar">info@giamamg.com.ar</a></p>
       </div>
       <div class="conc-detail">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-        <p><strong>Zona de cobertura</strong>Mar del Plata y Tandil</p>
+        <p><strong>Zona de cobertura</strong><br>Mar del Plata y Tandil</p>
       </div>
       <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" class="btn-primary" style="margin-top:20px;">
         Contactar por WhatsApp
       </a>
     </div>
     <div class="conc-map reveal">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3143.5!2d-57.555!3d-38.005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDAzJzE4LjAiUyA1N8KwMzMnMTguMCJX!5e0!3m2!1ses!2sar!4v1" allowfullscreen loading="lazy" title="Mapa ubicación GIAMA MG Gascón 3265 Mar del Plata"></iframe>
+      <iframe src="https://maps.google.com/maps?q=Gascón+3265+Mar+del+Plata+Argentina&output=embed" allowfullscreen loading="lazy" title="Mapa ubicación GIAMA MG Gascón 3265 Mar del Plata"></iframe>
     </div>
   </div>
 </section>
@@ -725,8 +679,6 @@
               <option value="">Seleccionar modelo</option>
               <option value="MG3 Hybrid+">MG3 Hybrid+</option>
               <option value="MG ZS Hybrid+">MG ZS Hybrid+</option>
-              <option value="MG4 Electric">MG4 Electric</option>
-              <option value="MG Cyberster">MG Cyberster</option>
             </select>
           </div>
         </div>
@@ -786,8 +738,6 @@
               <option value="">Seleccionar modelo</option>
               <option value="MG3 Hybrid+">MG3 Hybrid+</option>
               <option value="MG ZS Hybrid+">MG ZS Hybrid+</option>
-              <option value="MG4 Electric">MG4 Electric</option>
-              <option value="MG Cyberster">MG Cyberster</option>
             </select>
           </div>
         </div>
@@ -873,8 +823,6 @@
       <h4>Modelos</h4>
       <a href="#" onclick="event.preventDefault();openModel('mg3')">MG3 Hybrid+</a>
       <a href="#" onclick="event.preventDefault();openModel('zs')">MG ZS Hybrid+</a>
-      <a href="#" onclick="event.preventDefault();openModel('mg4')">MG4 Electric</a>
-      <a href="#" onclick="event.preventDefault();openModel('cyberster')">MG Cyberster</a>
     </div>
     <div class="footer-col">
       <h4>GIAMA</h4>
@@ -885,10 +833,10 @@
     </div>
     <div class="footer-col">
       <h4>Contacto</h4>
-      <a href="#">Gascón 3265, Mar del Plata</a>
+      <a href="https://maps.google.com/?q=Gascón+3265+Mar+del+Plata" target="_blank">Gascón 3265, Mar del Plata</a>
       <a href="tel:+5491131347853">+54 9 11 3134 7853</a>
       <a href="https://wa.me/5491131347853" target="_blank">WhatsApp</a>
-      <a href="mailto:info@giama.com.ar">info@giama.com.ar</a>
+      <a href="mailto:info@giamamg.com.ar">info@giamamg.com.ar</a>
     </div>
   </div>
   <p class="footer-legal">Los precios expresados en dólares son referenciales y pueden variar. Consulte con el concesionario para valores actualizados. MG Argentina — Importado por Eximar.</p>
@@ -989,9 +937,9 @@
       <img src="JPG/mg3_exterior.jpg" alt="MG3 Hybrid+ exterior frontal">
       <img src="JPG/mg3_exterior2.jpg" alt="MG3 Hybrid+ exterior lateral">
       <img src="JPG/mg3_exterior3.jpg" alt="MG3 Hybrid+ exterior trasera">
-      <img src="JPG/mg3 interior.jpg" alt="MG3 Hybrid+ interior tablero">
-      <img src="JPG/mg3 interior2.jpg" alt="MG3 Hybrid+ interior asientos">
-      <img src="JPG/mg3 interior4.jpg" alt="MG3 Hybrid+ interior detalle">
+      <img src="JPG/mg3_interior.jpg" alt="MG3 Hybrid+ interior tablero">
+      <img src="JPG/mg3_interior2.jpg" alt="MG3 Hybrid+ interior asientos">
+      <img src="JPG/mg3_interior4.jpg" alt="MG3 Hybrid+ interior detalle">
     </div>
 
     <p class="price-note">* Precios en USD. Sujetos a modificación sin previo aviso. Consultar condiciones vigentes en el concesionario.</p>
@@ -1047,9 +995,12 @@
       </div>
       <div class="spec-panel">
         <table class="spec-table">
-          <tr><td>Categoría</td><td>SUV Compacto</td></tr>
+          <tr><td>Largo</td><td>4.430 mm</td></tr>
+          <tr><td>Ancho</td><td>1.809 mm</td></tr>
+          <tr><td>Alto</td><td>1.653 mm</td></tr>
+          <tr><td>Distancia entre ejes</td><td>2.610 mm</td></tr>
+          <tr><td>Baúl</td><td>443 litros</td></tr>
           <tr><td>Tracción</td><td>Delantera (FWD)</td></tr>
-          <tr><td>Baúl</td><td>Generoso, versatil</td></tr>
         </table>
       </div>
       <div class="spec-panel">
@@ -1077,6 +1028,9 @@
       <tr><td>Airbags</td><td>6</td><td>6</td></tr>
       <tr><td>ADAS completo</td><td>Sí</td><td>Sí</td></tr>
       <tr><td>Pantalla multimedia</td><td>Sí</td><td>Sí</td></tr>
+      <tr><td>Apple CarPlay / Android Auto</td><td>Sí</td><td>Sí</td></tr>
+      <tr><td>Techo panorámico</td><td>No</td><td>Sí</td></tr>
+      <tr><td>Cámara 360°</td><td>No</td><td>Sí</td></tr>
       <tr class="price-row"><td>Precio</td><td>USD 27.500*</td><td>USD 29.900*</td></tr>
     </table>
     <p class="price-note">* Precios en USD. Sujetos a modificación sin previo aviso.</p>
@@ -1087,125 +1041,6 @@
   </div>
 </div>
 
-<!-- MG4 Modal -->
-<div class="model-modal" id="modal-mg4">
-  <button class="modal-close" onclick="closeModel('mg4')">&times;</button>
-  <div class="modal-hero">
-    <div class="modal-bg" style="background:linear-gradient(135deg,#0f3460,#1a1a2e,#162d50);"></div>
-    <div class="modal-info"><h1>MG4 Electric</h1><p>Hatchback | 100% Eléctrico | Hasta 435 CV</p></div>
-  </div>
-  <div class="modal-body">
-    <div class="warranty-banner">
-      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-      <div class="wb-text"><h4>6 años / 120.000 km + 8 años / 160.000 km batería</h4><p>Beneficios fiscales por vehículo eléctrico (exención arancelaria)</p></div>
-    </div>
-    <h2>Especificaciones técnicas</h2>
-    <div class="specs-tabs" data-model="mg4">
-      <button class="spec-tab active" onclick="showTab('mg4',0,this)">Motor</button>
-      <button class="spec-tab" onclick="showTab('mg4',1,this)">Autonomía</button>
-      <button class="spec-tab" onclick="showTab('mg4',2,this)">Dimensiones</button>
-    </div>
-    <div class="spec-panels" data-model="mg4">
-      <div class="spec-panel active">
-        <table class="spec-table">
-          <tr><td>Tipo</td><td>100% Eléctrico</td></tr>
-          <tr><td>Potencia</td><td>De 170 a 435 CV (según versión)</td></tr>
-          <tr><td>Tracción</td><td>Simple o integral (AWD)</td></tr>
-          <tr><td>Versiones</td><td>4 disponibles</td></tr>
-        </table>
-      </div>
-      <div class="spec-panel">
-        <table class="spec-table">
-          <tr><td>Autonomía mínima</td><td>350 km</td></tr>
-          <tr><td>Autonomía máxima</td><td>520 km</td></tr>
-          <tr><td>Carga rápida</td><td>Sí (DC)</td></tr>
-        </table>
-      </div>
-      <div class="spec-panel">
-        <table class="spec-table">
-          <tr><td>Largo</td><td>~4.300 mm</td></tr>
-          <tr><td>Categoría</td><td>Hatchback eléctrico</td></tr>
-        </table>
-      </div>
-    </div>
-    <h2 style="margin-top:40px;">Precios</h2>
-    <p style="font-size:18px;font-weight:700;color:var(--red);margin-bottom:10px;">Desde USD 31.700*</p>
-    <p class="price-note">* Precios en USD. Sujetos a modificación sin previo aviso. 4 versiones disponibles, consultar equipamiento de cada una.</p>
-    <div class="modal-ctas">
-      <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20cotizar%20el%20MG4%20Electric" target="_blank" class="btn-primary">Cotizar MG4</a>
-      <a href="#test-drive" class="btn-outline-white" style="border-color:var(--black);color:var(--black);" onclick="closeModel('mg4')">Agendar Test Drive</a>
-    </div>
-  </div>
-</div>
-
-<!-- Cyberster Modal -->
-<div class="model-modal" id="modal-cyberster">
-  <button class="modal-close" onclick="closeModel('cyberster')">&times;</button>
-  <div class="modal-hero">
-    <div class="modal-bg" style="background:linear-gradient(135deg,#2d1b33,#1a1a2e,#0f3460);"></div>
-    <div class="modal-info"><h1>MG Cyberster</h1><p>Roadster | 100% Eléctrico | 502 CV</p></div>
-  </div>
-  <div class="modal-body">
-    <div class="warranty-banner">
-      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-      <div class="wb-text"><h4>6 años / 120.000 km + 8 años / 160.000 km batería</h4><p>La nave insignia de MG — a pedido</p></div>
-    </div>
-    <h2>Especificaciones técnicas</h2>
-    <div class="specs-tabs" data-model="cyberster">
-      <button class="spec-tab active" onclick="showTab('cyberster',0,this)">Motor</button>
-      <button class="spec-tab" onclick="showTab('cyberster',1,this)">Batería</button>
-      <button class="spec-tab" onclick="showTab('cyberster',2,this)">Equipamiento</button>
-      <button class="spec-tab" onclick="showTab('cyberster',3,this)">Dimensiones</button>
-    </div>
-    <div class="spec-panels" data-model="cyberster">
-      <div class="spec-panel active">
-        <table class="spec-table">
-          <tr><td>Motores</td><td>2 eléctricos (delantero 201 CV + trasero 335 CV)</td></tr>
-          <tr><td>Potencia total</td><td>502 CV</td></tr>
-          <tr><td>Torque</td><td>725 Nm</td></tr>
-          <tr><td>0-100 km/h</td><td>3.7 segundos</td></tr>
-          <tr><td>Velocidad máxima</td><td>208 km/h</td></tr>
-          <tr><td>Tracción</td><td>Integral (AWD)</td></tr>
-        </table>
-      </div>
-      <div class="spec-panel">
-        <table class="spec-table">
-          <tr><td>Batería</td><td>77 kWh iones de litio</td></tr>
-          <tr><td>Autonomía</td><td>446 km (WLTP)</td></tr>
-          <tr><td>Carga rápida (10-80%)</td><td>38 minutos</td></tr>
-        </table>
-      </div>
-      <div class="spec-panel">
-        <table class="spec-table">
-          <tr><td>Puertas</td><td>Tipo tijera</td></tr>
-          <tr><td>Capota</td><td>Lona eléctrica (abre en 10 seg)</td></tr>
-          <tr><td>Plazas</td><td>2</td></tr>
-          <tr><td>Llantas</td><td>20 pulgadas</td></tr>
-          <tr><td>Frenos</td><td>Brembo</td></tr>
-          <tr><td>Airbags</td><td>6</td></tr>
-          <tr><td>Cámara</td><td>360 grados</td></tr>
-          <tr><td>Audio</td><td>Bose</td></tr>
-          <tr><td>Pantalla central</td><td>7" táctil</td></tr>
-          <tr><td>Tablero digital</td><td>10.25"</td></tr>
-        </table>
-      </div>
-      <div class="spec-panel">
-        <table class="spec-table">
-          <tr><td>Baúl</td><td>249 litros</td></tr>
-          <tr><td>Versión</td><td>Deluxe AWD (única)</td></tr>
-        </table>
-      </div>
-    </div>
-    <h2 style="margin-top:40px;">Precio</h2>
-    <p style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:10px;">USD 130.000*</p>
-    <p style="font-size:14px;color:#666;margin-bottom:10px;">Versión única: Deluxe AWD — A pedido</p>
-    <p class="price-note">* Precio en USD. Sujeto a modificación sin previo aviso.</p>
-    <div class="modal-ctas">
-      <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20el%20MG%20Cyberster" target="_blank" class="btn-primary">Consultar Cyberster</a>
-      <a href="#test-drive" class="btn-outline-white" style="border-color:var(--black);color:var(--black);" onclick="closeModel('cyberster')">Agendar Test Drive</a>
-    </div>
-  </div>
-</div>
 
 <!-- ========== WHATSAPP FLOAT ========== -->
 <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
@@ -1284,6 +1119,7 @@
   function submitTestDrive(e) {
     e.preventDefault();
     const name = document.getElementById('td-name').value;
+    const email = document.getElementById('td-email').value;
     const phone = document.getElementById('td-phone').value;
     const model = document.getElementById('td-model').value;
     const date = document.getElementById('td-date').value;
@@ -1292,6 +1128,7 @@
     const text = encodeURIComponent(
       'Hola, quiero agendar un test drive.\n' +
       'Nombre: ' + name + '\n' +
+      'Email: ' + email + '\n' +
       'Teléfono: ' + phone + '\n' +
       'Modelo: ' + model + '\n' +
       'Fecha: ' + date + '\n' +
@@ -1304,6 +1141,7 @@
   function submitQuote(e) {
     e.preventDefault();
     const name = document.getElementById('q-name').value;
+    const email = document.getElementById('q-email').value;
     const phone = document.getElementById('q-phone').value;
     const model = document.getElementById('q-model').value;
     const version = document.getElementById('q-version').value;
@@ -1312,6 +1150,7 @@
     const text = encodeURIComponent(
       'Hola, quiero cotizar un MG.\n' +
       'Nombre: ' + name + '\n' +
+      'Email: ' + email + '\n' +
       'Teléfono: ' + phone + '\n' +
       'Modelo: ' + model + '\n' +
       'Versión: ' + version + '\n' +
