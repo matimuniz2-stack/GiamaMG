@@ -112,35 +112,44 @@
     }
     .mobile-menu .mobile-wa::after { display: none; }
 
-    /* ============ HERO CAROUSEL ============ */
-    .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; background: #000; }
+    /* ============ HERO ============ */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px; overflow: hidden; background: #000;
+    }
     .hero-slide {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      opacity: 0; transition: opacity 1s ease; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 1.2s ease;
     }
     .hero-slide.active { opacity: 1; }
     .hero-slide .slide-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-size: cover; background-position: center;
+      animation: heroZoom 12s ease-out forwards;
     }
+    @keyframes heroZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
     .hero-slide .slide-bg::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 100%);
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%);
     }
-    .slide-content {
-      position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%);
-      text-align: center; color: #fff; z-index: 2; width: 90%; max-width: 700px;
+    .hero-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0 80px 120px; color: #fff; z-index: 2;
     }
-    .slide-content .slide-tag {
-      display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 12px;
-      font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+    .hero-badge {
+      display: inline-block; padding: 8px 20px; border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 30px; font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 2px; margin-bottom: 24px; backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.08);
     }
-    .slide-tag.hybrid { background: var(--green-hybrid); color: #000; }
-    .slide-tag.electric { background: var(--blue-electric); color: #fff; }
-    .slide-content h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
-    .slide-content p { font-size: 18px; opacity: 0.85; margin-bottom: 10px; }
-    .slide-content .slide-price { font-size: 22px; font-weight: 700; margin-bottom: 24px; }
-    .slide-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero-title {
+      font-size: clamp(36px, 5.5vw, 64px); font-weight: 800; line-height: 1.08;
+      margin-bottom: 16px; max-width: 700px;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px); opacity: 0.75; margin-bottom: 36px;
+      max-width: 500px; line-height: 1.6;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 14px 32px; background: var(--red); color: #fff;
@@ -150,32 +159,35 @@
     .btn-primary:hover { background: #a00f28; }
     .btn-outline-white {
       display: inline-flex; align-items: center; padding: 14px 32px;
-      border: 1.5px solid #fff; color: #fff; font-size: 14px; font-weight: 500;
+      border: 1.5px solid rgba(255,255,255,0.5); color: #fff; font-size: 14px; font-weight: 500;
       background: transparent; border-radius: 4px; transition: all 0.3s;
     }
     .btn-outline-white:hover { background: #fff; color: var(--black); }
 
-    /* Slider dots */
-    .slider-dots {
-      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 10px; z-index: 10;
+    /* Hero dots */
+    .hero-dots {
+      position: absolute; bottom: 40px; right: 80px; display: flex; gap: 10px; z-index: 10;
     }
-    .slider-dot {
-      width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff;
-      background: transparent; cursor: pointer; transition: all 0.3s; padding: 0;
+    .hero-dot {
+      width: 40px; height: 3px; border: none; border-radius: 2px;
+      background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.4s; padding: 0;
     }
-    .slider-dot.active { background: var(--red); border-color: var(--red); }
-    .slider-arrows {
-      position: absolute; top: 50%; width: 100%; display: flex;
-      justify-content: space-between; padding: 0 20px; z-index: 10; transform: translateY(-50%);
+    .hero-dot.active { background: #fff; width: 60px; }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 80px; z-index: 10;
+      display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.5);
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
     }
-    .slider-arrow {
-      width: 48px; height: 48px; border: none; background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(5px); color: #fff; font-size: 22px; cursor: pointer;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      transition: background 0.3s;
+    .hero-scroll-line {
+      width: 1px; height: 40px; background: rgba(255,255,255,0.2); position: relative; overflow: hidden;
     }
-    .slider-arrow:hover { background: rgba(255,255,255,0.3); }
+    .hero-scroll-line::after {
+      content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+      background: #fff; animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
 
     /* ============ SECTION COMMON ============ */
     .section { padding: 100px 80px; }
@@ -219,22 +231,72 @@
     }
     .btn-ver-modelo:hover { background: var(--red); }
 
-    /* ============ ABOUT MG ============ */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .about-content p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 20px; }
-    .about-content strong { color: var(--black); }
-    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+    /* ============ ABOUT / HISTORY TIMELINE ============ */
+    .about-intro { max-width: 700px; margin-bottom: 60px; }
+    .about-intro p { font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 16px; }
+    .about-intro strong { color: var(--black); }
+    .about-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
+      margin-top: 50px; margin-bottom: 80px; padding: 40px 0; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;
+    }
     .stat { text-align: center; }
-    .stat .stat-number { font-size: 36px; font-weight: 800; color: var(--red); }
-    .stat .stat-label { font-size: 13px; color: #666; margin-top: 4px; }
-    .about-visual {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    .stat .stat-number { font-size: 42px; font-weight: 800; color: var(--red); line-height: 1; }
+    .stat .stat-label { font-size: 13px; color: #666; margin-top: 8px; }
+
+    /* Timeline */
+    .timeline-title { font-size: clamp(24px, 3vw, 36px); font-weight: 800; margin-bottom: 60px; text-align: center; }
+    .timeline { position: relative; max-width: 1000px; margin: 0 auto; }
+    .timeline::before {
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--red), #ddd);
+      transform: translateX(-50%);
     }
-    .about-img-box {
-      border-radius: 12px; overflow: hidden; aspect-ratio: 1;
-      background-size: cover; background-position: center;
+    .timeline-item {
+      display: flex; align-items: center; margin-bottom: 60px; position: relative;
+      opacity: 0; transform: translateY(30px); transition: all 0.8s ease;
     }
-    .about-img-box:first-child { grid-row: span 2; aspect-ratio: auto; }
+    .timeline-item.visible { opacity: 1; transform: translateY(0); }
+    .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+    .timeline-item:nth-child(odd) .timeline-content { text-align: right; padding-right: 60px; padding-left: 0; }
+    .timeline-item:nth-child(even) .timeline-content { padding-left: 60px; }
+    .timeline-img, .timeline-content { width: 50%; }
+    .timeline-img {
+      overflow: hidden; border-radius: 12px; aspect-ratio: 16/10;
+    }
+    .timeline-img img {
+      width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s;
+      filter: grayscale(0.2);
+    }
+    .timeline-item:hover .timeline-img img { transform: scale(1.05); filter: grayscale(0); }
+    .timeline-item:last-child .timeline-img img { filter: none; }
+    .timeline-year {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      width: 56px; height: 56px; border-radius: 50%; background: var(--red);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; z-index: 2; box-shadow: 0 4px 15px rgba(196,18,48,0.3);
+    }
+    .timeline-content h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .timeline-content p { font-size: 14px; color: #666; line-height: 1.7; }
+
+    /* GIAMA Section */
+    .giama-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      margin-top: 80px; padding-top: 80px; border-top: 1px solid #ddd;
+    }
+    .giama-block h3 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; margin-bottom: 20px; }
+    .giama-block p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 16px; }
+    .giama-highlight {
+      display: flex; align-items: center; gap: 14px; padding: 20px 24px;
+      background: rgba(196,18,48,0.06); border-radius: 10px; border-left: 4px solid var(--red);
+    }
+    .giama-highlight p { margin: 0; font-weight: 600; color: var(--black); }
+    .giama-imgs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .giama-imgs img {
+      width: 100%; border-radius: 10px; aspect-ratio: 4/3; object-fit: cover;
+    }
+    .giama-imgs img:first-child { grid-column: span 2; aspect-ratio: 16/9; }
 
     /* ============ CONCESIONARIO ============ */
     .concesionario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
@@ -365,8 +427,57 @@
     .version-table .price-row td { font-weight: 800; font-size: 16px; color: var(--red); background: var(--grey-light); }
 
     /* Gallery */
+    .gallery-section-title { font-size: 16px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; margin-top: 10px; }
     .modal-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
-    .modal-gallery img { width: 100%; border-radius: 8px; aspect-ratio: 16/10; object-fit: cover; }
+    .modal-gallery img {
+      width: 100%; border-radius: 8px; aspect-ratio: 16/10; object-fit: cover;
+      cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .modal-gallery img:hover { transform: scale(1.03); box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+    .modal-gallery.gallery-2col { grid-template-columns: repeat(2, 1fr); }
+    .modal-gallery .gallery-wide { grid-column: span 2; aspect-ratio: 21/9; }
+    .modal-gallery .gallery-tall { grid-row: span 2; aspect-ratio: auto; height: 100%; }
+
+    /* Ficha download */
+    .ficha-download {
+      display: flex; align-items: center; gap: 30px; padding: 30px;
+      background: var(--grey-light); border-radius: 12px; margin: 40px 0;
+    }
+    .ficha-download img { width: 200px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    .ficha-download-info h4 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .ficha-download-info p { font-size: 14px; color: #666; margin-bottom: 16px; }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; background: var(--black); color: #fff;
+      font-size: 13px; font-weight: 600; border: none; border-radius: 6px;
+      transition: background 0.3s; cursor: pointer;
+    }
+    .btn-download:hover { background: var(--red); }
+    .btn-download svg { width: 16px; height: 16px; fill: #fff; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 3000;
+      background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 8px; object-fit: contain; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 30px;
+      width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.1);
+      color: #fff; border: none; font-size: 28px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close:hover { background: var(--red); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.1);
+      color: #fff; border: none; font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
 
     /* Warranty banner */
     .warranty-banner {
@@ -431,6 +542,9 @@
       .models-grid { grid-template-columns: 1fr; max-width: 400px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .modal-body { padding: 40px 30px; }
+      .hero-content { padding: 0 40px 100px; }
+      .hero-dots { right: 40px; }
+      .hero-scroll { left: 40px; }
     }
     @media (max-width: 768px) {
       .navbar { padding: 0 16px; height: 64px; }
@@ -438,29 +552,48 @@
       .hamburger { display: flex; }
       .section { padding: 60px 20px; }
       .models-grid { grid-template-columns: 1fr; }
-      .about-grid, .concesionario-grid, .form-grid { grid-template-columns: 1fr; }
-      .about-stats { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .concesionario-grid, .form-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .postventa-cards { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; gap: 30px; }
       .footer { padding: 50px 20px 24px; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .form-row { grid-template-columns: 1fr; }
       .hero { min-height: 500px; }
-      .slide-content { bottom: 100px; }
-      .slider-arrows { display: none; }
+      .hero-content { padding: 0 24px 90px; }
+      .hero-dots { right: 24px; bottom: 24px; }
+      .hero-scroll { display: none; }
       .modal-hero { height: 50vh; }
       .modal-hero .modal-info { left: 20px; bottom: 20px; }
       .modal-hero .modal-info h1 { font-size: 28px; }
       .modal-gallery { grid-template-columns: 1fr 1fr; }
+      .modal-gallery .gallery-wide { grid-column: span 2; }
       .modal-ctas { flex-direction: column; }
       .modal-close { top: 12px; right: 16px; }
       .version-table { font-size: 12px; }
       .specs-tabs { gap: 0; }
       .spec-tab { padding: 10px 14px; font-size: 12px; }
+      /* Timeline responsive */
+      .timeline::before { left: 20px; }
+      .timeline-item, .timeline-item:nth-child(odd) { flex-direction: column; }
+      .timeline-img, .timeline-content { width: 100%; }
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        text-align: left; padding: 20px 0 0 0;
+      }
+      .timeline-year {
+        position: relative; left: 0; transform: none;
+        margin-bottom: 16px; width: 48px; height: 48px; font-size: 12px;
+      }
+      .timeline-item { margin-bottom: 50px; }
+      .giama-block { grid-template-columns: 1fr; gap: 30px; }
+      .ficha-download { flex-direction: column; text-align: center; }
+      .ficha-download img { width: 100%; max-width: 300px; }
     }
     @media (max-width: 480px) {
       .stat .stat-number { font-size: 28px; }
       .model-card { padding: 24px 16px; }
+      .about-stats { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -510,41 +643,34 @@
   <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" class="mobile-wa" onclick="toggleMenu()">WhatsApp</a>
 </div>
 
-<!-- ========== HERO CAROUSEL ========== -->
+<!-- ========== HERO ========== -->
 <section class="hero" id="hero">
-  <div class="hero-slide active" data-model="mg3">
-    <div class="slide-bg" style="background-image: url('JPG/mg3_exterior.jpg');"></div>
-    <div class="slide-content">
-      <span class="slide-tag hybrid">Full Hybrid</span>
-      <h2>MG3 Hybrid+</h2>
-      <p>Tecnología Full Hybrid | 195 CV | 4.4 L/100 km</p>
-      <div class="slide-price">Desde USD 23.500*</div>
-      <div class="slide-ctas">
-        <button class="btn-primary" onclick="openModel('mg3')">Ver modelo</button>
-        <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
-      </div>
+  <div class="hero-slide active">
+    <div class="slide-bg" style="background-image: url('img/hero/KV-1.jpg');"></div>
+  </div>
+  <div class="hero-slide">
+    <div class="slide-bg" style="background-image: url('img/hero/Leopard eye headlights.jpg');"></div>
+  </div>
+  <div class="hero-slide">
+    <div class="slide-bg" style="background-image: url('img/hero/Front grille.jpg');"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Concesionario Oficial MG</div>
+    <h1 class="hero-title">Tradición británica.<br>Tecnología de vanguardia.</h1>
+    <p class="hero-sub">Más de 100 años de legado automotriz. Tecnología Full Hybrid que no requiere enchufe. Ahora en Mar del Plata.</p>
+    <div class="hero-ctas">
+      <a href="#modelos" class="btn-primary">Descubrí los modelos</a>
+      <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
     </div>
   </div>
-  <div class="hero-slide" data-model="zs">
-    <div class="slide-bg" style="background: linear-gradient(135deg, #0a1628, #0f2440, #162d50);"></div>
-    <div class="slide-content">
-      <span class="slide-tag hybrid">Hybrid+</span>
-      <h2>MG ZS Hybrid+</h2>
-      <p>El SUV híbrido más equipado | 191 CV | 4.9 L/100 km</p>
-      <div class="slide-price">Desde USD 27.500*</div>
-      <div class="slide-ctas">
-        <button class="btn-primary" onclick="openModel('zs')">Ver modelo</button>
-        <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
-      </div>
-    </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
   </div>
-  <div class="slider-arrows">
-    <button class="slider-arrow" onclick="prevSlide()">&#8592;</button>
-    <button class="slider-arrow" onclick="nextSlide()">&#8594;</button>
-  </div>
-  <div class="slider-dots">
-    <button class="slider-dot active" onclick="goToSlide(0)"></button>
-    <button class="slider-dot" onclick="goToSlide(1)"></button>
+  <div class="hero-dots">
+    <button class="hero-dot active" onclick="goToSlide(0)"></button>
+    <button class="hero-dot" onclick="goToSlide(1)"></button>
+    <button class="hero-dot" onclick="goToSlide(2)"></button>
   </div>
 </section>
 
@@ -579,26 +705,85 @@
   <p class="price-note" style="text-align:center;margin-top:30px;">* Precios en USD. Sujetos a modificación sin previo aviso. Consultar condiciones vigentes en el concesionario.</p>
 </section>
 
-<!-- ========== SOBRE MG ========== -->
+<!-- ========== SOBRE MG / HISTORIA ========== -->
 <section class="section" id="sobre-mg" style="background:var(--grey-light);">
   <p class="section-tag reveal">Sobre MG</p>
   <h2 class="section-title reveal">Más de 100 años de historia británica</h2>
-  <div class="about-grid">
-    <div class="about-content reveal">
-      <p><strong>MG (Morris Garages)</strong> fue fundada en 1924 en Oxford, Inglaterra. Con más de 100 años de historia, la marca es ícono de autos deportivos y roadsters legendarios como el MGA, MGB y MGF.</p>
-      <p>Desde 2007 forma parte de <strong>SAIC Motor</strong>, uno de los grupos automotrices más grandes del mundo. Hoy mantiene su centro de diseño en Londres y combina la tradición británica con tecnología de vanguardia en movilidad híbrida y eléctrica.</p>
-      <p><strong>En Argentina:</strong> MG llegó en 2025 a través de <strong>Eximar</strong>, el mismo importador de Volvo, Jaguar, Land Rover y Geely. La red inicial cuenta con 10 concesionarios en todo el país.</p>
-      <p><strong>En Mar del Plata:</strong> <strong>GIAMA</strong>, con más de 40 años de trayectoria automotriz, es el concesionario oficial de MG en Mar del Plata y Tandil. Inauguración en noviembre 2025 en Gascón 3265.</p>
-      <div class="about-stats">
-        <div class="stat"><div class="stat-number">100+</div><div class="stat-label">Años de historia</div></div>
-        <div class="stat"><div class="stat-number">40+</div><div class="stat-label">Países</div></div>
-        <div class="stat"><div class="stat-number">6</div><div class="stat-label">Años de garantía</div></div>
+  <div class="about-intro reveal">
+    <p><strong>MG (Morris Garages)</strong> fue fundada en 1924 en Oxford, Inglaterra. Desde entonces, la marca se convirtió en ícono de autos deportivos y roadsters legendarios, combinando diseño británico con ingeniería de vanguardia.</p>
+    <p>Hoy, como parte de <strong>SAIC Motor</strong>, MG mantiene su centro de diseño en Londres y lidera la transición hacia la movilidad híbrida y eléctrica en más de 40 países.</p>
+  </div>
+
+  <div class="about-stats reveal">
+    <div class="stat"><div class="stat-number">1924</div><div class="stat-label">Fundación en Oxford</div></div>
+    <div class="stat"><div class="stat-number">100+</div><div class="stat-label">Años de historia</div></div>
+    <div class="stat"><div class="stat-number">40+</div><div class="stat-label">Países</div></div>
+    <div class="stat"><div class="stat-number">6</div><div class="stat-label">Años de garantía</div></div>
+  </div>
+
+  <h3 class="timeline-title reveal">Un siglo de pasión automotriz</h3>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-img"><img src="img/history/Old No 1.jpg" alt="Old Number One — el primer MG, 1924" loading="lazy"></div>
+      <div class="timeline-year">1924</div>
+      <div class="timeline-content">
+        <h3>Old Number One</h3>
+        <p>Cecil Kimber crea el primer MG en Oxford. Nace una leyenda del automovilismo deportivo británico que marcaría la historia para siempre.</p>
       </div>
     </div>
-    <div class="about-visual reveal">
-      <div class="about-img-box" style="background-image:url('JPG/mg3_exterior7.jpg');"></div>
-      <div class="about-img-box" style="background-image:url('JPG/mg3_interior.jpg');"></div>
-      <div class="about-img-box" style="background-image:url('ZS/diamond-red.png'); background-color:#f0f0f0; background-size:contain; background-repeat:no-repeat;"></div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-img"><img src="img/history/Auto MG ANT.jpg" alt="MG en competición, años 1930" loading="lazy"></div>
+      <div class="timeline-year">1930s</div>
+      <div class="timeline-content">
+        <h3>Espíritu de competición</h3>
+        <p>MG domina las pistas europeas. Sus autos de carrera se convierten en ícono de velocidad, estableciendo récords mundiales y ganando seguidores en todo el mundo.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-img"><img src="img/history/AutoCasa.jpg" alt="MGA Roadster clásico, años 1950" loading="lazy"></div>
+      <div class="timeline-year">1950s</div>
+      <div class="timeline-content">
+        <h3>MGA — Elegancia atemporal</h3>
+        <p>El MGA redefine el roadster. Líneas aerodinámicas y pura elegancia británica lo convierten en uno de los autos más deseados de la época.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-img"><img src="img/history/antiguo4.jpg" alt="MGB GT, años 1960" loading="lazy"></div>
+      <div class="timeline-year">1960s</div>
+      <div class="timeline-content">
+        <h3>MGB — Un clásico inmortal</h3>
+        <p>Con más de 500.000 unidades producidas, el MGB se convierte en el auto deportivo británico más exitoso de la historia. Un verdadero ícono cultural.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-img"><img src="img/history/cyberster.jpg" alt="MG Cyberster, 2024" loading="lazy"></div>
+      <div class="timeline-year">2024</div>
+      <div class="timeline-content">
+        <h3>Cyberster — El futuro es ahora</h3>
+        <p>MG presenta el Cyberster, un roadster 100% eléctrico que rinde homenaje al legado deportivo de la marca con tecnología del siglo XXI.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIAMA block -->
+  <div class="giama-block reveal">
+    <div>
+      <h3>MG llega a Argentina con GIAMA</h3>
+      <p>En 2025, MG desembarca en Argentina a través de <strong>Eximar</strong>, el mismo importador de Volvo, Jaguar, Land Rover y Geely, con una red inicial de 10 concesionarios en todo el país.</p>
+      <p><strong>GIAMA</strong>, con más de 40 años de trayectoria en el mercado automotor, es el concesionario oficial de MG en <strong>Mar del Plata y Tandil</strong>.</p>
+      <div class="giama-highlight">
+        <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:var(--red);flex-shrink:0;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <p>Gascón 3265, Mar del Plata — Inauguración noviembre 2025</p>
+      </div>
+    </div>
+    <div class="giama-imgs">
+      <img src="img/hero/KV-2.jpg" alt="MG3 Hybrid+ — vista profesional" loading="lazy">
+      <img src="img/mg3-interior/Steering Wheel.jpg" alt="MG3 interior — volante" loading="lazy">
+      <img src="img/mg3-lux/Wheels.jpg" alt="MG3 — llantas de diseño" loading="lazy">
     </div>
   </div>
 </section>
@@ -847,9 +1032,9 @@
 <!-- ========== MODEL MODALS ========== -->
 <div class="model-modal" id="modal-mg3">
   <button class="modal-close" onclick="closeModel('mg3')">&times;</button>
-  <div class="modal-hero">
-    <div class="modal-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);"></div>
-    <img class="modal-car" id="mg3-modal-img" src="MG3/rojo.png" alt="MG3 Hybrid+ — vista principal">
+  <div class="modal-hero" style="background:url('img/mg3-lux/KV-1.jpg') center/cover no-repeat;">
+    <div class="modal-bg" style="background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.3) 100%);"></div>
+    <img class="modal-car" id="mg3-modal-img" src="MG3/rojo.png" alt="MG3 Hybrid+ — vista principal" style="display:none;">
     <div class="modal-info"><h1>MG3 Hybrid+</h1><p>Hatchback | Full Hybrid | 195 CV</p></div>
   </div>
   <div class="modal-body">
@@ -931,13 +1116,50 @@
     </table>
 
     <h2>Galería</h2>
-    <div class="modal-gallery">
-      <img src="JPG/mg3_exterior.jpg" alt="MG3 Hybrid+ exterior frontal">
-      <img src="JPG/mg3_exterior2.jpg" alt="MG3 Hybrid+ exterior lateral">
-      <img src="JPG/mg3_exterior3.jpg" alt="MG3 Hybrid+ exterior trasera">
-      <img src="JPG/mg3_interior.jpg" alt="MG3 Hybrid+ interior tablero">
-      <img src="JPG/mg3_interior2.jpg" alt="MG3 Hybrid+ interior asientos">
-      <img src="JPG/mg3_interior4.jpg" alt="MG3 Hybrid+ interior detalle">
+
+    <p class="gallery-section-title">Exterior</p>
+    <div class="modal-gallery" id="mg3-gallery">
+      <img src="img/mg3-lux/KV-1.jpg" alt="MG3 Hybrid+ vista frontal" class="gallery-wide" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Right Front 45°.jpg" alt="MG3 frontal derecho 45°" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Left Front 45°.jpg" alt="MG3 frontal izquierdo 45°" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Right Back 45°.jpg" alt="MG3 trasera derecha" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Left Back 30°.jpg" alt="MG3 trasera izquierda" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/The Front.jpg" alt="MG3 vista frontal" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Leopard eye headlights.jpg" alt="MG3 faros Leopard Eye LED" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Front grille.jpg" alt="MG3 grilla frontal" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Taillights.jpg" alt="MG3 luces traseras LED" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Wheels.jpg" alt="MG3 llantas de aleación" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Headlights.jpg" alt="MG3 faros delanteros" onclick="openLightbox(this)">
+      <img src="img/mg3-lux/Front Side.jpg" alt="MG3 vista lateral frontal" onclick="openLightbox(this)">
+    </div>
+
+    <p class="gallery-section-title">Interior</p>
+    <div class="modal-gallery" id="mg3-interior-gallery">
+      <img src="img/mg3-interior/Front Seat.jpg" alt="MG3 asientos delanteros" class="gallery-wide" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/The Dashboard.jpg" alt="MG3 tablero digital" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Screen.jpg" alt="MG3 pantalla multimedia" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Steering Wheel.jpg" alt="MG3 volante multifunción" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Central Control.jpg" alt="MG3 consola central" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Copilot Deck.jpg" alt="MG3 panel copiloto" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Door panel-1.jpg" alt="MG3 panel de puerta" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Back Seat.jpg" alt="MG3 asientos traseros" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Front Row Space.jpg" alt="MG3 espacio delantero" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Trunk-1.jpg" alt="MG3 baúl abierto" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Trunk-2.jpg" alt="MG3 baúl capacidad" onclick="openLightbox(this)">
+      <img src="img/mg3-interior/Trunk-3.jpg" alt="MG3 baúl asientos abatidos" onclick="openLightbox(this)">
+    </div>
+
+    <!-- Ficha Técnica Download -->
+    <div class="ficha-download">
+      <img src="img/ficha-preview.png" alt="Ficha técnica MG3 Hybrid+ preview">
+      <div class="ficha-download-info">
+        <h4>Ficha Técnica MG3 Hybrid+</h4>
+        <p>Descargá la ficha técnica completa con todas las especificaciones, dimensiones y equipamiento de cada versión.</p>
+        <a href="img/MG3-Ficha-Tecnica.pdf" download class="btn-download">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Descargar PDF
+        </a>
+      </div>
     </div>
 
     <p class="price-note">* Precios en USD. Sujetos a modificación sin previo aviso. Consultar condiciones vigentes en el concesionario.</p>
@@ -1057,7 +1279,7 @@
   // ===== HERO SLIDER =====
   let currentSlide = 0;
   const slides = document.querySelectorAll('.hero-slide');
-  const dots = document.querySelectorAll('.slider-dot');
+  const dots = document.querySelectorAll('.hero-dot');
   let slideInterval;
 
   function goToSlide(n) {
@@ -1066,11 +1288,14 @@
     currentSlide = (n + slides.length) % slides.length;
     slides[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
+    // Re-trigger zoom animation
+    const bg = slides[currentSlide].querySelector('.slide-bg');
+    if (bg) { bg.style.animation = 'none'; bg.offsetHeight; bg.style.animation = ''; }
   }
   function nextSlide() { goToSlide(currentSlide + 1); resetInterval(); }
   function prevSlide() { goToSlide(currentSlide - 1); resetInterval(); }
-  function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 6000); }
-  slideInterval = setInterval(nextSlide, 6000);
+  function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 7000); }
+  slideInterval = setInterval(nextSlide, 7000);
 
   // ===== MODEL MODALS =====
   function openModel(model) {
@@ -1176,16 +1401,53 @@
     });
   });
 
-  // Close modal on Escape
+  // ===== LIGHTBOX =====
+  let lightboxImages = [];
+  let lightboxIndex = 0;
+
+  function openLightbox(img) {
+    const gallery = img.closest('.modal-gallery');
+    lightboxImages = Array.from(gallery.querySelectorAll('img'));
+    lightboxIndex = lightboxImages.indexOf(img);
+    const lb = document.getElementById('lightbox');
+    lb.querySelector('img').src = img.src;
+    lb.classList.add('open');
+  }
+  function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+  function lightboxNav(dir) {
+    lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
+    document.querySelector('#lightbox img').src = lightboxImages[lightboxIndex].src;
+  }
+
+  // Close modal/lightbox on Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
+      const lb = document.getElementById('lightbox');
+      if (lb.classList.contains('open')) { closeLightbox(); return; }
       document.querySelectorAll('.model-modal.open').forEach(m => {
         m.classList.remove('open');
         document.body.style.overflow = '';
       });
     }
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
   });
+
+  // ===== TIMELINE REVEAL =====
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const timelineObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  timelineItems.forEach(el => timelineObs.observe(el));
 </script>
+
+<!-- ========== LIGHTBOX ========== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation();lightboxNav(-1)">&#8592;</button>
+  <img src="" alt="Galería MG3" onclick="event.stopPropagation()">
+  <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation();lightboxNav(1)">&#8594;</button>
+</div>
 
 </body>
 </html>
