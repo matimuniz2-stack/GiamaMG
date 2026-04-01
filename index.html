@@ -3,1117 +3,1352 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MG Motor Argentina: Innovación, Diseño y Tecnología en Autos</title>
+  <title>GIAMA | Concesionario Oficial MG en Mar del Plata</title>
+  <meta name="description" content="Concesionario oficial MG en Mar del Plata. MG3 Hybrid, ZS Hybrid+, MG4 y Cyberster. Test drive, cotización y postventa. Grupo GIAMA, más de 40 años en el mercado automotor.">
+  <meta name="keywords" content="MG, GIAMA, concesionario, Mar del Plata, MG3, ZS, MG4, Cyberster, híbrido, eléctrico, test drive">
+  <link rel="icon" type="image/png" href="logo-mg.png">
+  <!-- Open Graph -->
+  <meta property="og:title" content="GIAMA | Concesionario Oficial MG en Mar del Plata">
+  <meta property="og:description" content="MG3 Hybrid, ZS Hybrid+, MG4 Electric y Cyberster. Test drive, cotización y postventa en Mar del Plata.">
+  <meta property="og:image" content="logo-mg.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ============ RESET & BASE ============ */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: auto; }
-    body {
-      font-family: 'Inter', sans-serif;
-      color: #1B1B1B;
-      background: #fff;
-      overflow-x: hidden;
+    /* ============ VARIABLES ============ */
+    :root {
+      --red: #C41230;
+      --black: #1B1B1B;
+      --white: #ffffff;
+      --grey-light: #f5f5f5;
+      --grey-mid: #999;
+      --green-hybrid: #15DB41;
+      --blue-electric: #0077FF;
+      --font: 'Inter', sans-serif;
     }
+
+    /* ============ RESET ============ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--black); background: var(--white); overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
     ul { list-style: none; }
+    button { font-family: var(--font); cursor: pointer; }
+    input, select, textarea { font-family: var(--font); }
 
     /* ============ NAVBAR ============ */
     .navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: #000;
-      padding: 0 40px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+      padding: 0 40px; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar-left { display: flex; align-items: center; gap: 40px; }
+    .navbar-logo { display: flex; align-items: center; gap: 10px; }
+    .navbar-logo img { width: 48px; height: 48px; filter: invert(1) brightness(2); }
+    .navbar-giama { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links > a, .nav-dropdown > .nav-drop-trigger {
+      color: #fff; font-size: 14px; font-weight: 500; transition: opacity 0.3s;
+      background: none; border: none; padding: 0; cursor: pointer;
+    }
+    .nav-links > a:hover, .nav-dropdown:hover > .nav-drop-trigger { opacity: 0.7; }
+    .nav-dropdown { position: relative; }
+    .nav-drop-trigger { display: flex; align-items: center; gap: 4px; }
+    .nav-drop-trigger::after { content: '\25BE'; font-size: 10px; }
+    .nav-dropdown-menu {
+      position: absolute; top: 100%; left: 0; min-width: 200px;
+      background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,0.15); border-radius: 6px;
+      padding: 8px 0; opacity: 0; visibility: hidden;
+      transform: translateY(10px); transition: all 0.3s;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown-menu a {
+      display: block; padding: 10px 20px; font-size: 14px; color: var(--black); transition: background 0.2s;
+    }
+    .nav-dropdown-menu a:hover { background: var(--grey-light); }
+    .navbar-right { display: flex; align-items: center; gap: 12px; }
+    .btn-nav-wa {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; background: #25D366; color: #fff;
+      font-size: 13px; font-weight: 600; border: none; border-radius: 6px;
       transition: background 0.3s;
     }
-    .navbar.scrolled {
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(10px);
-    }
-    .navbar-left {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-    }
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .navbar-logo img {
-      width: 55px;
-      height: 55px;
-      filter: invert(1) brightness(2);
-    }
-    .navbar-giama {
-      color: #fff;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 32px;
-    }
-    .nav-links a {
-      color: #fff;
-      font-size: 15px;
-      font-weight: 500;
-      transition: opacity 0.3s;
-    }
-    .nav-links a:hover { opacity: 0.7; }
-    .btn-nav-test-drive {
-      display: inline-flex;
-      align-items: center;
-      padding: 12px 28px;
-      border: 1.5px solid #fff;
-      color: #fff;
-      font-size: 15px;
-      font-weight: 500;
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-nav-test-drive:hover {
-      background: #fff;
-      color: #000;
-    }
+    .btn-nav-wa:hover { background: #1da851; }
+    .btn-nav-wa svg { width: 18px; height: 18px; fill: #fff; }
     .hamburger {
-      width: 30px;
-      height: 20px;
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      z-index: 1001;
+      width: 28px; height: 20px; display: none; flex-direction: column;
+      justify-content: space-between; cursor: pointer; z-index: 1001; background: none; border: none;
     }
-    .hamburger span {
-      display: block;
-      height: 2px;
-      width: 100%;
-      background: #fff;
-      transition: all 0.3s;
-    }
+    .hamburger span { display: block; height: 2px; width: 100%; background: #fff; transition: all 0.3s; }
     .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
     /* Mobile Menu */
     .mobile-menu {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: #fff;
-      z-index: 999;
-      padding: 100px 40px 40px;
-      transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--black); z-index: 999; padding: 90px 30px 40px;
+      transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
     }
     .mobile-menu.open { transform: translateX(0); }
     .mobile-menu a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid #e5e5e5;
-      font-size: 16px;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: #1B1B1B;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 16px; font-weight: 600; color: #fff;
     }
-    .mobile-menu a::after { content: '\203A'; font-size: 24px; }
+    .mobile-menu a::after { content: '\203A'; font-size: 24px; opacity: 0.5; }
+    .mobile-menu .mobile-wa {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 30px; padding: 14px; background: #25D366;
+      border-radius: 8px; font-weight: 700; font-size: 15px;
+    }
+    .mobile-menu .mobile-wa::after { display: none; }
 
-    /* ============ HERO SLIDER ============ */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 600px;
-      overflow: hidden;
-      background: #000;
-    }
-    .hero-slides {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+    /* ============ HERO CAROUSEL ============ */
+    .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; background: #000; }
     .hero-slide {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0; transition: opacity 1s ease; display: flex; align-items: center; justify-content: center;
     }
     .hero-slide.active { opacity: 1; }
     .hero-slide .slide-bg {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      position: relative;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover; background-position: center;
     }
     .hero-slide .slide-bg::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 40%;
-      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 100%);
     }
     .slide-content {
-      position: absolute;
-      bottom: 120px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      color: #fff;
-      z-index: 2;
+      position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%);
+      text-align: center; color: #fff; z-index: 2; width: 90%; max-width: 700px;
     }
-    .slide-content h2 {
-      font-size: 42px;
-      font-weight: 300;
-      letter-spacing: 8px;
-      text-transform: uppercase;
+    .slide-content .slide-tag {
+      display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 12px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
     }
-    .slide-content p {
-      font-size: 16px;
-      margin-top: 10px;
-      opacity: 0.8;
-    }
-
-    /* Slide backgrounds */
-    .hero-slide:nth-child(1) .slide-bg {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    }
-    .hero-slide:nth-child(2) .slide-bg {
-      background: linear-gradient(135deg, #0a1628 0%, #0f2440 50%, #162d50 100%);
-    }
-    .hero-slide:nth-child(3) .slide-bg {
-      background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 50%, #2d1b33 100%);
-    }
-
-    /* Hero car images */
-    .hero-car-img {
-      position: absolute;
-      bottom: 12%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 65%;
-      max-width: 750px;
-      height: auto;
-      z-index: 1;
-    }
-    /* Placeholder for slides without real images */
-    .placeholder-car {
-      position: absolute;
-      bottom: 15%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70%;
-      max-width: 800px;
-      height: 250px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px dashed rgba(255,255,255,0.15);
-    }
-    .placeholder-car span {
-      color: rgba(255,255,255,0.3);
-      font-size: 18px;
-      font-weight: 500;
-    }
-
-    /* Slider Controls */
-    .slider-controls {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      z-index: 10;
-    }
-    .slider-btn {
-      width: 50px;
-      height: 50px;
-      border: none;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(5px);
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .slide-tag.hybrid { background: var(--green-hybrid); color: #000; }
+    .slide-tag.electric { background: var(--blue-electric); color: #fff; }
+    .slide-content h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
+    .slide-content p { font-size: 18px; opacity: 0.85; margin-bottom: 10px; }
+    .slide-content .slide-price { font-size: 22px; font-weight: 700; margin-bottom: 24px; }
+    .slide-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: var(--red); color: #fff;
+      font-size: 14px; font-weight: 600; border: none; border-radius: 4px;
       transition: background 0.3s;
     }
-    .slider-btn:hover { background: rgba(255,255,255,0.3); }
-    .slider-thumbnails {
-      display: flex;
-      gap: 10px;
+    .btn-primary:hover { background: #a00f28; }
+    .btn-outline-white {
+      display: inline-flex; align-items: center; padding: 14px 32px;
+      border: 1.5px solid #fff; color: #fff; font-size: 14px; font-weight: 500;
+      background: transparent; border-radius: 4px; transition: all 0.3s;
     }
-    .slider-thumb {
-      width: 120px;
-      height: 70px;
-      border-radius: 4px;
-      overflow: hidden;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.3s;
-      border: 2px solid transparent;
-    }
-    .slider-thumb.active {
-      opacity: 1;
-      border-color: #FCA003;
-    }
-    .slider-thumb div {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-    }
-    .slider-thumb div {
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-    .slider-thumb:nth-child(1) div { background-color: #1a1a2e; background-image: url('JPG/mg3 interior4.jpg'); }
-    .slider-thumb:nth-child(2) div { background-color: #0f2440; background-image: url('JPG/mg3_exterior4.jpg'); }
-    .slider-thumb:nth-child(3) div { background-color: #1a1a2e; background-image: url('JPG/mg3_exterior3.jpg'); }
+    .btn-outline-white:hover { background: #fff; color: var(--black); }
 
-    /* ============ MODELOS SECTION ============ */
-    .modelos {
-      padding: 100px 110px 80px;
-      background: #fff;
-      position: relative;
+    /* Slider dots */
+    .slider-dots {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 10;
     }
-    .modelos-header {
-      margin-bottom: 60px;
+    .slider-dot {
+      width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff;
+      background: transparent; cursor: pointer; transition: all 0.3s; padding: 0;
     }
-    .modelos-header .subtitle {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #1B1B1B;
+    .slider-dot.active { background: var(--red); border-color: var(--red); }
+    .slider-arrows {
+      position: absolute; top: 50%; width: 100%; display: flex;
+      justify-content: space-between; padding: 0 20px; z-index: 10; transform: translateY(-50%);
     }
-    .modelos-header h2 {
-      font-size: clamp(32px, 5vw, 56px);
-      font-weight: 800;
-      line-height: 1.1;
-      color: #1B1B1B;
+    .slider-arrow {
+      width: 48px; height: 48px; border: none; background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(5px); color: #fff; font-size: 22px; cursor: pointer;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s;
     }
+    .slider-arrow:hover { background: rgba(255,255,255,0.3); }
 
-    /* Model Cards Grid */
-    .modelos-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
+    /* ============ SECTION COMMON ============ */
+    .section { padding: 100px 80px; }
+    .section-tag { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--red); margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+    .section-subtitle { font-size: 17px; color: #555; line-height: 1.7; max-width: 650px; margin-bottom: 50px; }
+
+    /* ============ MODELS GRID ============ */
+    .models-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
     }
     .model-card {
-      position: relative;
+      background: var(--grey-light); border-radius: 12px; padding: 30px 24px;
+      text-align: center; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
+      position: relative; overflow: hidden;
     }
-    .car-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 0;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 16px;
+    .model-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+    .model-card .card-tag {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 16px;
     }
-    .car-tag.hibrido { color: #15DB41; }
-    .car-tag svg { width: 16px; height: 16px; }
-    .model-image-wrapper {
-      width: 100%;
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-      position: relative;
+    .card-tag.hybrid { background: rgba(21,219,65,0.15); color: #0a8c25; }
+    .card-tag.electric { background: rgba(0,119,255,0.15); color: #005cc5; }
+    .model-card .card-img { height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .model-card .card-img img { max-height: 150px; width: auto; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15)); transition: transform 0.4s; }
+    .model-card:hover .card-img img { transform: scale(1.05); }
+    .model-card h3 { font-size: 18px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
+    .model-card .card-specs { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 14px; }
+    .model-card .card-price { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 16px; }
+    .model-card .card-price span { font-size: 12px; font-weight: 400; color: #999; }
+    .warranty-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; background: rgba(196,18,48,0.08); border-radius: 20px;
+      font-size: 11px; font-weight: 700; color: var(--red); margin-bottom: 16px;
     }
-    .model-image-wrapper img {
-      width: 100%;
-      height: auto;
-      max-height: 280px;
-      object-fit: contain;
-      transition: opacity 0.5s ease, transform 0.6s ease;
-      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.25));
+    .warranty-badge svg { width: 14px; height: 14px; fill: var(--red); }
+    .btn-ver-modelo {
+      display: inline-block; padding: 10px 24px; background: var(--black); color: #fff;
+      font-size: 13px; font-weight: 600; border: none; border-radius: 4px; transition: background 0.3s;
     }
-    #mg3-img {
-      transform: scale(1.25);
-    }
-    .model-card:hover .model-image-wrapper img {
-      transform: scale(1.03);
-    }
-    .model-card:hover #mg3-img {
-      transform: scale(1.28);
-    }
-    .model-card h3 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    .model-versions {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .version-badge {
-      display: inline-block;
-      padding: 5px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .version-badge.comfort {
-      background: #f0f0f0;
-      color: #333;
-    }
-    .version-badge.luxury {
-      background: #1B1B1B;
-      color: #fff;
-    }
-    .model-card .price {
-      font-size: 15px;
-      color: #666;
-      margin-bottom: 20px;
-    }
+    .btn-ver-modelo:hover { background: var(--red); }
 
-    /* Color Selector */
-    .color-selector {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
+    /* ============ ABOUT MG ============ */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-content p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 20px; }
+    .about-content strong { color: var(--black); }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+    .stat { text-align: center; }
+    .stat .stat-number { font-size: 36px; font-weight: 800; color: var(--red); }
+    .stat .stat-label { font-size: 13px; color: #666; margin-top: 4px; }
+    .about-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
-    .color-selector span {
-      font-size: 12px;
-      color: #999;
-      font-weight: 500;
+    .about-img-box {
+      border-radius: 12px; overflow: hidden; aspect-ratio: 1;
+      background-size: cover; background-position: center;
     }
-    .color-dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: border-color 0.3s, transform 0.2s;
-      position: relative;
-    }
-    .color-dot:hover { transform: scale(1.15); }
-    .color-dot.active { border-color: #1B1B1B; }
+    .about-img-box:first-child { grid-row: span 2; aspect-ratio: auto; }
 
-    .btn-cotizar {
-      display: inline-block;
-      padding: 12px 32px;
-      border: 1.5px solid #1B1B1B;
-      font-size: 14px;
-      font-weight: 500;
-      color: #1B1B1B;
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-cotizar:hover {
-      background: #1B1B1B;
-      color: #fff;
-    }
+    /* ============ CONCESIONARIO ============ */
+    .concesionario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .conc-info h3 { font-size: 22px; font-weight: 700; margin-bottom: 24px; }
+    .conc-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+    .conc-detail svg { width: 22px; height: 22px; fill: var(--red); flex-shrink: 0; margin-top: 2px; }
+    .conc-detail p { font-size: 15px; color: #555; line-height: 1.6; }
+    .conc-detail strong { color: var(--black); display: block; margin-bottom: 2px; }
+    .conc-map { border-radius: 12px; overflow: hidden; min-height: 400px; }
+    .conc-map iframe { width: 100%; height: 100%; border: 0; min-height: 400px; }
 
-    /* ============ HORIZONTAL CAR ANIMATION (Scroll-driven) ============ */
-    .car-drive-section {
-      position: relative;
-      height: 80vh;
-      overflow: hidden;
-      background: #f7f7f7;
-      display: flex;
-      align-items: center;
+    /* ============ TEST DRIVE / FORMS ============ */
+    .form-section { background: var(--grey-light); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .form-visual {
+      min-height: 400px; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      display: flex; align-items: center; justify-content: center; padding: 40px; position: relative;
     }
-    .car-drive-wrapper {
-      position: relative;
-      width: 100%;
-      height: 300px;
+    .form-visual img { max-width: 90%; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.4)); }
+    .form-visual .form-visual-text {
+      position: absolute; bottom: 40px; left: 40px; right: 40px; color: #fff;
     }
-    .driving-car {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 500px;
-      height: 200px;
-      transition: none;
-      will-change: left;
-      animation: car-bounce 0.5s ease-in-out infinite alternate;
+    .form-visual .form-visual-text h3 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .form-visual .form-visual-text p { font-size: 14px; opacity: 0.7; }
+    .form-box { padding: 20px 0; }
+    .form-box h3 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .form-box p.form-desc { font-size: 14px; color: #666; margin-bottom: 30px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-row.full { grid-template-columns: 1fr; }
+    .form-field label {
+      display: block; font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: #666; margin-bottom: 6px;
     }
-    @keyframes car-bounce {
-      0% { margin-top: 0; }
-      100% { margin-top: -2px; }
+    .form-field input, .form-field select, .form-field textarea {
+      width: 100%; padding: 12px 16px; border: 1.5px solid #ddd; border-radius: 6px;
+      font-size: 14px; background: #fff; transition: border-color 0.3s; outline: none;
     }
-    .driving-car img {
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
-      transform: scaleX(-1);
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--red); }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+    .btn-submit {
+      width: 100%; padding: 14px; background: var(--red); color: #fff;
+      font-size: 15px; font-weight: 700; border: none; border-radius: 6px;
+      margin-top: 8px; transition: background 0.3s; cursor: pointer;
     }
-    /* Motion blur trail */
-    .driving-car::before {
-      content: '';
-      position: absolute;
-      top: 20%;
-      left: -80px;
-      width: 80px;
-      height: 60%;
-      background: linear-gradient(to left, rgba(200,200,200,0.15), transparent);
-      filter: blur(8px);
-    }
+    .btn-submit:hover { background: #a00f28; }
 
-    .road-line {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: repeating-linear-gradient(90deg, #ccc 0px, #ccc 30px, transparent 30px, transparent 60px);
-      transform: translateY(120px);
+    /* ============ POSTVENTA ============ */
+    .postventa-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .pv-card {
+      padding: 40px 30px; border-radius: 12px; background: var(--grey-light);
+      text-align: center; transition: transform 0.3s;
     }
+    .pv-card:hover { transform: translateY(-4px); }
+    .pv-card svg { width: 48px; height: 48px; fill: var(--red); margin-bottom: 20px; }
+    .pv-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .pv-card p { font-size: 14px; color: #666; line-height: 1.7; }
 
-    /* ============ SOBRE MG ============ */
-    .sobre-mg {
-      padding: 100px 110px;
-      background: #fff;
+    /* ============ MODEL DETAIL MODAL ============ */
+    .model-modal {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 2000; background: #fff; overflow-y: auto;
+      transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
     }
-    .sobre-mg .subtitle {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 12px;
+    .model-modal.open { transform: translateY(0); }
+    .modal-close {
+      position: fixed; top: 20px; right: 30px; z-index: 2001;
+      width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,0.8);
+      color: #fff; border: none; font-size: 24px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.3s;
     }
-    .sobre-mg h2 {
-      font-size: clamp(32px, 5vw, 56px);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 50px;
-      max-width: 700px;
+    .modal-close:hover { background: var(--red); }
+    .modal-hero {
+      height: 70vh; min-height: 400px; display: flex; align-items: center;
+      justify-content: center; position: relative; overflow: hidden;
     }
-    .sobre-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+    .modal-hero .modal-bg {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
     }
-    .sobre-card {
-      position: relative;
-      height: 450px;
-      overflow: hidden;
-      cursor: pointer;
+    .modal-hero .modal-car {
+      position: relative; z-index: 2; max-width: 60%; max-height: 60%;
+      filter: drop-shadow(0 20px 60px rgba(0,0,0,0.4));
     }
-    .sobre-card .card-bg {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.6s ease;
+    .modal-hero .modal-info {
+      position: absolute; bottom: 40px; left: 50px; z-index: 3; color: #fff;
     }
-    .sobre-card:hover .card-bg { transform: scale(1.05); }
-    .sobre-card:nth-child(1) .card-bg {
-      background: linear-gradient(135deg, #8B0000 0%, #B22222 50%, #DC143C 100%);
-      background-image: url('ZS/diamond-red.png'), linear-gradient(135deg, #8B0000 0%, #B22222 50%, #DC143C 100%);
-      background-size: 70% auto, cover;
-      background-position: right center, center;
-      background-repeat: no-repeat;
-    }
-    .sobre-card:nth-child(2) .card-bg {
-      background-image: url('JPG/mg3_exterior7.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-    .sobre-card .card-overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 40px;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-      color: #fff;
-    }
-    .sobre-card .card-overlay p {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    .sobre-card .card-overlay strong { font-weight: 700; }
-    .btn-mas-info {
-      display: inline-block;
-      padding: 12px 28px;
-      border: 1.5px solid #fff;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s;
-      background: transparent;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-mas-info:hover {
-      background: #fff;
-      color: #1B1B1B;
-    }
+    .modal-hero .modal-info h1 { font-size: 42px; font-weight: 800; }
+    .modal-hero .modal-info p { font-size: 18px; opacity: 0.8; }
+    .modal-body { padding: 60px 80px; max-width: 1200px; margin: 0 auto; }
+    .modal-body h2 { font-size: 28px; font-weight: 800; margin-bottom: 30px; }
 
-    /* ============ TEST DRIVE ============ */
-    .test-drive {
-      position: relative;
-      padding: 120px 110px;
-      background: linear-gradient(135deg, #2c2c2c 0%, #444 50%, #555 100%);
-      color: #fff;
-      overflow: hidden;
-      min-height: 400px;
+    /* Color selector in modal */
+    .modal-colors { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
+    .modal-colors span { font-size: 14px; font-weight: 600; color: #666; }
+    .modal-color-dot {
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+      border: 3px solid transparent; transition: all 0.3s;
     }
-    .test-drive::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.4);
+    .modal-color-dot:hover { transform: scale(1.1); }
+    .modal-color-dot.active { border-color: var(--black); }
+
+    /* Specs tabs */
+    .specs-tabs { display: flex; gap: 0; border-bottom: 2px solid #eee; margin-bottom: 30px; flex-wrap: wrap; }
+    .spec-tab {
+      padding: 12px 24px; font-size: 14px; font-weight: 600; color: #999;
+      border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; transition: all 0.3s;
     }
-    .test-drive-content {
-      position: relative;
-      z-index: 2;
+    .spec-tab.active { color: var(--red); border-bottom-color: var(--red); }
+    .spec-panel { display: none; }
+    .spec-panel.active { display: block; }
+    .spec-table { width: 100%; border-collapse: collapse; }
+    .spec-table tr { border-bottom: 1px solid #eee; }
+    .spec-table td { padding: 14px 0; font-size: 14px; }
+    .spec-table td:first-child { font-weight: 600; color: var(--black); width: 40%; }
+    .spec-table td:last-child { color: #555; }
+
+    /* Version comparison */
+    .version-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+    .version-table th {
+      padding: 16px; font-size: 14px; font-weight: 700; text-transform: uppercase;
+      background: var(--black); color: #fff; text-align: center;
     }
-    .test-drive .subtitle {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      opacity: 0.9;
+    .version-table th:first-child { text-align: left; background: #333; }
+    .version-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid #eee; text-align: center; }
+    .version-table td:first-child { text-align: left; font-weight: 600; }
+    .version-table .price-row td { font-weight: 800; font-size: 16px; color: var(--red); background: var(--grey-light); }
+
+    /* Gallery */
+    .modal-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
+    .modal-gallery img { width: 100%; border-radius: 8px; aspect-ratio: 16/10; object-fit: cover; }
+
+    /* Warranty banner */
+    .warranty-banner {
+      display: flex; align-items: center; gap: 16px; padding: 24px 30px;
+      background: linear-gradient(135deg, var(--red), #8b0a1e); border-radius: 12px;
+      color: #fff; margin-bottom: 40px;
     }
-    .test-drive h2 {
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 400;
-      max-width: 500px;
-      line-height: 1.5;
-      margin-bottom: 30px;
-    }
-    .btn-test-drive {
-      display: inline-block;
-      padding: 14px 32px;
-      border: 1.5px solid #fff;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      background: transparent;
-      transition: all 0.3s;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-test-drive:hover {
-      background: #fff;
-      color: #333;
+    .warranty-banner svg { width: 40px; height: 40px; fill: #fff; flex-shrink: 0; }
+    .warranty-banner .wb-text h4 { font-size: 18px; font-weight: 700; }
+    .warranty-banner .wb-text p { font-size: 14px; opacity: 0.85; }
+    .modal-ctas { display: flex; gap: 16px; margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee; }
+
+    .price-note {
+      font-size: 12px; color: #999; margin-top: 10px; line-height: 1.5;
     }
 
     /* ============ FOOTER ============ */
-    .footer {
-      background: #1B1B1B;
-      color: #fff;
-      padding: 80px 110px 40px;
-    }
-    .footer-logo {
-      text-align: center;
-      margin-bottom: 70px;
-    }
-    .footer-logo img {
-      width: 80px;
-      height: 80px;
-      filter: invert(1) brightness(2);
-      margin: 0 auto;
-    }
-    .footer-columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 40px;
-      max-width: 900px;
-      margin: 0 auto 70px;
-    }
+    .footer { background: var(--black); color: #fff; padding: 80px 80px 30px; }
+    .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 40px; margin-bottom: 60px; }
+    .footer-brand .footer-logo-box { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-brand .footer-logo-box img { width: 50px; height: 50px; filter: invert(1) brightness(2); }
+    .footer-brand .footer-logo-box span { font-size: 18px; font-weight: 700; letter-spacing: 2px; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 280px; }
     .footer-col h4 {
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 24px;
-      color: #fff;
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; margin-bottom: 20px; color: rgba(255,255,255,0.4);
     }
-    .footer-col a {
-      display: block;
-      font-size: 14px;
-      color: rgba(255,255,255,0.6);
-      padding: 6px 0;
-      transition: color 0.3s;
-    }
+    .footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.7); padding: 5px 0; transition: color 0.3s; }
     .footer-col a:hover { color: #fff; }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.15);
-      padding-top: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .footer-bottom-links a {
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
-      transition: color 0.3s;
-      margin-right: 20px;
-    }
-    .footer-bottom-links a:hover { color: #fff; }
-    .footer-social {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .footer-social span {
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
-    }
+    .footer-social { display: flex; gap: 12px; margin-top: 16px; }
     .footer-social a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      color: rgba(255,255,255,0.6);
-      transition: color 0.3s;
+      width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s; padding: 0;
     }
-    .footer-social a:hover { color: #fff; }
-    .footer-social a svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
+    .footer-social a:hover { background: var(--red); }
+    .footer-social a svg { width: 16px; height: 16px; fill: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
     }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.35); }
+    .footer-legal { font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.6; margin-bottom: 20px; }
 
-    /* ============ WHATSAPP BUTTON ============ */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 900;
-      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
+    /* ============ WHATSAPP FLOAT ============ */
+    .whatsapp-float {
+      position: fixed; bottom: 24px; right: 24px; z-index: 900;
+      width: 60px; height: 60px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.3s;
     }
-    .whatsapp-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
-    }
-    .whatsapp-btn svg {
-      width: 32px;
-      height: 32px;
-      fill: #fff;
-    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 30px; height: 30px; fill: #fff; }
 
     /* ============ SCROLL ANIMATIONS ============ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-60px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(60px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ============ RESPONSIVE ============ */
     @media (max-width: 1200px) {
-      .modelos, .sobre-mg, .test-drive, .footer { padding-left: 60px; padding-right: 60px; }
-    }
-    @media (max-width: 1024px) {
-      .sobre-cards { grid-template-columns: 1fr 1fr; }
-      .modelos-grid { gap: 40px; }
+      .section { padding: 80px 40px; }
+      .models-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .modal-body { padding: 40px 30px; }
     }
     @media (max-width: 768px) {
-      .navbar { padding: 0 20px; height: 70px; }
-      .nav-links, .btn-nav-test-drive { display: none; }
+      .navbar { padding: 0 16px; height: 64px; }
+      .nav-links, .btn-nav-wa { display: none; }
       .hamburger { display: flex; }
-      .hero { min-height: 500px; }
-      .slide-content h2 { font-size: 28px; letter-spacing: 4px; }
-      .slider-thumb { width: 80px; height: 50px; }
-      .modelos, .sobre-mg, .test-drive, .footer { padding-left: 20px; padding-right: 20px; }
-      .modelos-grid { grid-template-columns: 1fr; gap: 50px; }
-      .sobre-cards { grid-template-columns: 1fr; }
-      .sobre-card { height: 350px; }
-      .footer-columns { grid-template-columns: 1fr; gap: 30px; }
+      .section { padding: 60px 20px; }
+      .models-grid { grid-template-columns: 1fr; }
+      .about-grid, .concesionario-grid, .form-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .postventa-cards { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 30px; }
+      .footer { padding: 50px 20px 24px; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
-      .car-drive-section { height: 60vh; }
-      .driving-car { width: 300px; height: 120px; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero { min-height: 500px; }
+      .slide-content { bottom: 100px; }
+      .slider-arrows { display: none; }
+      .modal-hero { height: 50vh; }
+      .modal-hero .modal-info { left: 20px; bottom: 20px; }
+      .modal-hero .modal-info h1 { font-size: 28px; }
+      .modal-gallery { grid-template-columns: 1fr 1fr; }
+      .modal-ctas { flex-direction: column; }
+      .modal-close { top: 12px; right: 16px; }
+      .version-table { font-size: 12px; }
+      .specs-tabs { gap: 0; }
+      .spec-tab { padding: 10px 14px; font-size: 12px; }
+    }
+    @media (max-width: 480px) {
+      .stat .stat-number { font-size: 28px; }
+      .model-card { padding: 24px 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ========== NAVBAR ========== -->
-  <nav class="navbar" id="navbar">
-    <div class="navbar-left">
-      <a href="#" class="navbar-logo">
-        <img src="Logo MG.png" alt="MG Motor">
-        <span class="navbar-giama">Giama</span>
-      </a>
-      <div class="nav-links">
-        <a href="#modelos">Modelos</a>
-        <a href="#sobre">Sobre MG</a>
-        <a href="#contacto">Contacto</a>
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <a href="#" class="navbar-logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
+      <img src="logo-mg.png" alt="MG Motor logo">
+      <span class="navbar-giama">GIAMA</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <button class="nav-drop-trigger">Modelos</button>
+        <div class="nav-dropdown-menu">
+          <a href="#" onclick="event.preventDefault();openModel('mg3')">MG3 Hybrid+</a>
+          <a href="#" onclick="event.preventDefault();openModel('zs')">MG ZS Hybrid+</a>
+          <a href="#" onclick="event.preventDefault();openModel('mg4')">MG4 Electric</a>
+          <a href="#" onclick="event.preventDefault();openModel('cyberster')">MG Cyberster</a>
+        </div>
       </div>
+      <a href="#concesionario">Concesionario</a>
+      <a href="#test-drive">Test Drive</a>
+      <a href="#contacto">Contacto</a>
     </div>
-    <div class="navbar-right">
-      <button class="btn-nav-test-drive" onclick="document.getElementById('test-drive').scrollIntoView({behavior:'smooth'})">Test Drive</button>
-      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </nav>
+  </div>
+  <div class="navbar-right">
+    <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" class="btn-nav-wa">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.789l4.94-1.567A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-2.115 0-4.09-.613-5.758-1.665l-.412-.251-2.934.931.881-2.848-.267-.424A9.72 9.72 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"/></svg>
+      Cotizar
+    </a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#modelos" onclick="toggleMenu()">Modelos</a>
-    <a href="#sobre" onclick="toggleMenu()">Sobre MG</a>
-    <a href="#test-drive" onclick="toggleMenu()">Test Drive</a>
-    <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#modelos" onclick="toggleMenu()">Modelos</a>
+  <a href="#concesionario" onclick="toggleMenu()">Concesionario</a>
+  <a href="#test-drive" onclick="toggleMenu()">Test Drive</a>
+  <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+  <a href="#sobre-mg" onclick="toggleMenu()">Sobre MG</a>
+  <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" class="mobile-wa" onclick="toggleMenu()">WhatsApp</a>
+</div>
+
+<!-- ========== HERO CAROUSEL ========== -->
+<section class="hero" id="hero">
+  <div class="hero-slide active" data-model="mg3">
+    <div class="slide-bg" style="background-image: url('JPG/mg3_exterior.jpg');"></div>
+    <img class="hero-car-img" src="MG3/rojo.png" alt="MG3 Hybrid rojo — concesionario GIAMA Mar del Plata" style="position:absolute;bottom:18%;left:50%;transform:translateX(-50%);width:55%;max-width:650px;z-index:2;">
+    <div class="slide-content">
+      <span class="slide-tag hybrid">Full Hybrid</span>
+      <h2>MG3 Hybrid+</h2>
+      <p>Tecnología Full Hybrid | 195 CV | 4.4 L/100 km</p>
+      <div class="slide-price">Desde USD 23.500*</div>
+      <div class="slide-ctas">
+        <button class="btn-primary" onclick="openModel('mg3')">Ver modelo</button>
+        <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-slide" data-model="zs">
+    <div class="slide-bg" style="background-image: url('JPG/mg3_exterior6.jpg'); background: linear-gradient(135deg, #0a1628, #0f2440, #162d50);"></div>
+    <img class="hero-car-img" src="ZS/diamond-red.png" alt="MG ZS Hybrid+ rojo — SUV híbrido GIAMA Mar del Plata" style="position:absolute;bottom:18%;left:50%;transform:translateX(-50%);width:55%;max-width:650px;z-index:2;">
+    <div class="slide-content">
+      <span class="slide-tag hybrid">Hybrid+</span>
+      <h2>MG ZS Hybrid+</h2>
+      <p>El SUV híbrido más equipado | 191 CV | 4.9 L/100 km</p>
+      <div class="slide-price">Desde USD 27.500*</div>
+      <div class="slide-ctas">
+        <button class="btn-primary" onclick="openModel('zs')">Ver modelo</button>
+        <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-slide" data-model="mg4">
+    <div class="slide-bg" style="background: linear-gradient(135deg, #0f3460, #1a1a2e, #162d50);"></div>
+    <div style="position:absolute;bottom:25%;left:50%;transform:translateX(-50%);width:60%;max-width:700px;height:200px;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;z-index:2;"><span style="color:rgba(255,255,255,0.3);font-size:16px;">Imagen MG4 - Placeholder</span></div>
+    <div class="slide-content">
+      <span class="slide-tag electric">100% Eléctrico</span>
+      <h2>MG4 Electric</h2>
+      <p>Hasta 520 km de autonomía | De 170 a 435 CV</p>
+      <div class="slide-price">Desde USD 31.700*</div>
+      <div class="slide-ctas">
+        <button class="btn-primary" onclick="openModel('mg4')">Ver modelo</button>
+        <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-slide" data-model="cyberster">
+    <div class="slide-bg" style="background: linear-gradient(135deg, #2d1b33, #1a1a2e, #0f3460);"></div>
+    <div style="position:absolute;bottom:25%;left:50%;transform:translateX(-50%);width:60%;max-width:700px;height:200px;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;z-index:2;"><span style="color:rgba(255,255,255,0.3);font-size:16px;">Imagen Cyberster - Placeholder</span></div>
+    <div class="slide-content">
+      <span class="slide-tag electric">100% Eléctrico</span>
+      <h2>MG Cyberster</h2>
+      <p>El roadster eléctrico de 502 CV | 0-100 en 3.7s</p>
+      <div class="slide-price">USD 130.000*</div>
+      <div class="slide-ctas">
+        <button class="btn-primary" onclick="openModel('cyberster')">Ver modelo</button>
+        <a href="#test-drive" class="btn-outline-white">Agendar Test Drive</a>
+      </div>
+    </div>
   </div>
 
-  <!-- ========== HERO SLIDER ========== -->
-  <section class="hero" id="hero">
-    <div class="hero-slides">
-      <div class="hero-slide active">
-        <div class="slide-bg" style="background-image: url('JPG/mg3 interior4.jpg'); background-size: cover; background-position: center;">
-        </div>
-        <div class="slide-content">
-          <h2>MG3 Hybrid</h2>
-          <p>Tecnología Full Hybrid con hasta 43,5 Km/L</p>
-        </div>
-      </div>
-      <div class="hero-slide">
-        <div class="slide-bg" style="background-image: url('JPG/mg3_exterior4.jpg'); background-size: cover; background-position: center;">
-        </div>
-        <div class="slide-content">
-          <h2>MG3 Hybrid</h2>
-          <p>Diseño que marca la diferencia</p>
-        </div>
-      </div>
-      <div class="hero-slide">
-        <div class="slide-bg" style="background-image: url('JPG/mg3_exterior3.jpg'); background-size: cover; background-position: center;">
-        </div>
-        <div class="slide-content">
-          <h2>MG3 Hybrid</h2>
-          <p>Compacto, eficiente y con estilo</p>
-        </div>
-      </div>
-    </div>
+  <div class="slider-arrows">
+    <button class="slider-arrow" onclick="prevSlide()">&#8592;</button>
+    <button class="slider-arrow" onclick="nextSlide()">&#8594;</button>
+  </div>
+  <div class="slider-dots">
+    <button class="slider-dot active" onclick="goToSlide(0)"></button>
+    <button class="slider-dot" onclick="goToSlide(1)"></button>
+    <button class="slider-dot" onclick="goToSlide(2)"></button>
+    <button class="slider-dot" onclick="goToSlide(3)"></button>
+  </div>
+</section>
 
-    <div class="slider-controls">
-      <button class="slider-btn" onclick="prevSlide()">&#8592;</button>
-      <div class="slider-thumbnails">
-        <div class="slider-thumb active" onclick="goToSlide(0)"><div></div></div>
-        <div class="slider-thumb" onclick="goToSlide(1)"><div></div></div>
-        <div class="slider-thumb" onclick="goToSlide(2)"><div></div></div>
-      </div>
-      <button class="slider-btn" onclick="nextSlide()">&#8594;</button>
-    </div>
-  </section>
+<!-- ========== MODELOS ========== -->
+<section class="section" id="modelos">
+  <p class="section-tag reveal">Modelos</p>
+  <h2 class="section-title reveal">Encontrá tu MG ideal</h2>
+  <p class="section-subtitle reveal">Desde hatchbacks híbridos hasta el roadster eléctrico más emocionante. Todos con garantía extendida líder en el segmento.</p>
 
-  <!-- ========== MODELOS ========== -->
-  <section class="modelos" id="modelos">
-    <div class="modelos-header reveal">
-      <p class="subtitle">Modelos</p>
-      <h2>¿Qué modelo MG te gusta?</h2>
+  <div class="models-grid">
+    <!-- MG3 -->
+    <div class="model-card reveal" onclick="openModel('mg3')">
+      <span class="card-tag hybrid">Full Hybrid</span>
+      <div class="card-img"><img src="MG3/rojo.png" alt="MG3 Hybrid+ rojo vista lateral"></div>
+      <h3>MG3 Hybrid+</h3>
+      <p class="card-specs">195 CV | 4.4 L/100 km | 6 airbags</p>
+      <div class="warranty-badge"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> 6 años de garantía</div>
+      <p class="card-price">Desde USD 23.500* <span>Comfort</span></p>
+      <button class="btn-ver-modelo">Ver modelo</button>
     </div>
+    <!-- ZS -->
+    <div class="model-card reveal" onclick="openModel('zs')">
+      <span class="card-tag hybrid">Hybrid+</span>
+      <div class="card-img"><img src="ZS/diamond-red.png" alt="MG ZS Hybrid+ rojo vista lateral"></div>
+      <h3>MG ZS Hybrid+</h3>
+      <p class="card-specs">191 CV | 4.9 L/100 km | SUV compacto</p>
+      <div class="warranty-badge"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> 6 años de garantía</div>
+      <p class="card-price">Desde USD 27.500* <span>Comfort</span></p>
+      <button class="btn-ver-modelo">Ver modelo</button>
+    </div>
+    <!-- MG4 -->
+    <div class="model-card reveal" onclick="openModel('mg4')">
+      <span class="card-tag electric">100% Eléctrico</span>
+      <div class="card-img"><div style="height:150px;display:flex;align-items:center;justify-content:center;background:rgba(0,119,255,0.05);border-radius:8px;border:2px dashed rgba(0,119,255,0.15);width:100%;"><span style="color:#999;font-size:13px;">Imagen MG4</span></div></div>
+      <h3>MG4 Electric</h3>
+      <p class="card-specs">Hasta 435 CV | 520 km autonomía | 4 versiones</p>
+      <div class="warranty-badge"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> 6 años de garantía</div>
+      <p class="card-price">Desde USD 31.700* <span>Standard</span></p>
+      <button class="btn-ver-modelo">Ver modelo</button>
+    </div>
+    <!-- Cyberster -->
+    <div class="model-card reveal" onclick="openModel('cyberster')">
+      <span class="card-tag electric">100% Eléctrico</span>
+      <div class="card-img"><div style="height:150px;display:flex;align-items:center;justify-content:center;background:rgba(0,119,255,0.05);border-radius:8px;border:2px dashed rgba(0,119,255,0.15);width:100%;"><span style="color:#999;font-size:13px;">Imagen Cyberster</span></div></div>
+      <h3>MG Cyberster</h3>
+      <p class="card-specs">502 CV | 0-100 en 3.7s | Roadster</p>
+      <div class="warranty-badge"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> 6 años de garantía</div>
+      <p class="card-price">USD 130.000* <span>A pedido</span></p>
+      <button class="btn-ver-modelo">Ver modelo</button>
+    </div>
+  </div>
+  <p class="price-note" style="text-align:center;margin-top:30px;">* Precios en USD. Sujetos a modificación sin previo aviso. Consultar condiciones vigentes en el concesionario.</p>
+</section>
 
-    <div class="modelos-grid">
-      <!-- MG3 Hybrid -->
-      <div class="model-card reveal" style="transition-delay: 0.1s">
-        <span class="car-tag hibrido">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
-          Híbridos
-        </span>
-        <div class="model-image-wrapper">
-          <img id="mg3-img" src="MG3/rojo.png" alt="MG3 Hybrid">
-        </div>
-        <div class="color-selector">
-          <span>Color:</span>
-          <div class="color-dot active" style="background:#CC2222" onclick="changeColor('mg3','MG3/rojo.png',this)" title="Rojo"></div>
-          <div class="color-dot" style="background:#1a1a1a" onclick="changeColor('mg3','MG3/negro.png',this)" title="Negro"></div>
-          <div class="color-dot" style="background:#fff;border-color:#ddd" onclick="changeColor('mg3','MG3/blanco.png',this)" title="Blanco"></div>
-          <div class="color-dot" style="background:#2266DD" onclick="changeColor('mg3','MG3/azul.png',this)" title="Azul"></div>
-          <div class="color-dot" style="background:#C0C0C0" onclick="changeColor('mg3','MG3/plata.png',this)" title="Plata"></div>
-          <div class="color-dot" style="background:#6B6B6B" onclick="changeColor('mg3','MG3/gris.png',this)" title="Gris"></div>
-          <div class="color-dot" style="background:#E8C820" onclick="changeColor('mg3','MG3/amarillo.png',this)" title="Amarillo"></div>
-        </div>
-        <h3>All New MG 3 Hybrid</h3>
-        <div class="model-versions">
-          <span class="version-badge comfort">Comfort</span>
-          <span class="version-badge luxury">Luxury</span>
-        </div>
-        <p class="price">Desde: USD 23.500*</p>
-        <button class="btn-cotizar">Cotizar</button>
+<!-- ========== SOBRE MG ========== -->
+<section class="section" id="sobre-mg" style="background:var(--grey-light);">
+  <p class="section-tag reveal">Sobre MG</p>
+  <h2 class="section-title reveal">Más de 100 años de historia británica</h2>
+  <div class="about-grid">
+    <div class="about-content reveal">
+      <p><strong>MG (Morris Garages)</strong> fue fundada en 1924 en Oxford, Inglaterra. Con más de 100 años de historia, la marca es ícono de autos deportivos y roadsters legendarios como el MGA, MGB y MGF.</p>
+      <p>Desde 2007 forma parte de <strong>SAIC Motor</strong>, uno de los grupos automotrices más grandes del mundo. Hoy mantiene su centro de diseño en Londres y combina la tradición británica con tecnología de vanguardia en movilidad híbrida y eléctrica.</p>
+      <p><strong>En Argentina:</strong> MG llegó en 2025 a través de <strong>Eximar</strong>, el mismo importador de Volvo, Jaguar, Land Rover y Geely. La red inicial cuenta con 10 concesionarios en todo el país.</p>
+      <p><strong>En Mar del Plata:</strong> <strong>GIAMA</strong>, con más de 40 años de trayectoria automotriz, es el concesionario oficial de MG en Mar del Plata y Tandil. Inauguración en noviembre 2025 en Gascón 3265.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-number">100+</div><div class="stat-label">Años de historia</div></div>
+        <div class="stat"><div class="stat-number">40+</div><div class="stat-label">Países</div></div>
+        <div class="stat"><div class="stat-number">6</div><div class="stat-label">Años de garantía</div></div>
       </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-img-box" style="background-image:url('JPG/mg3_exterior7.jpg');"></div>
+      <div class="about-img-box" style="background-image:url('JPG/mg3 interior.jpg');"></div>
+      <div class="about-img-box" style="background-image:url('ZS/diamond-red.png'); background-color:#f0f0f0; background-size:contain; background-repeat:no-repeat;"></div>
+    </div>
+  </div>
+</section>
 
-      <!-- MG ZS Hybrid+ -->
-      <div class="model-card reveal" style="transition-delay: 0.2s">
-        <span class="car-tag hibrido">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
-          Híbridos
-        </span>
-        <div class="model-image-wrapper">
-          <img id="zs-img" src="ZS/cosmic-silver.png" alt="MG ZS Hybrid+">
-        </div>
-        <div class="color-selector">
-          <span>Color:</span>
-          <div class="color-dot active" style="background:#C0C0C0" onclick="changeColor('zs','ZS/cosmic-silver.png',this)" title="Cosmic Silver"></div>
-          <div class="color-dot" style="background:#1a1a1a" onclick="changeColor('zs','ZS/black.png',this)" title="Black"></div>
-          <div class="color-dot" style="background:#fff;border-color:#ddd" onclick="changeColor('zs','ZS/white.png',this)" title="White"></div>
-          <div class="color-dot" style="background:#CC2222" onclick="changeColor('zs','ZS/diamond-red.png',this)" title="Diamond Red"></div>
-          <div class="color-dot" style="background:#2266DD" onclick="changeColor('zs','ZS/como-blue.png',this)" title="Como Blue"></div>
-          <div class="color-dot" style="background:#6B6B6B" onclick="changeColor('zs','ZS/hampstead-grey.png',this)" title="Hampstead Grey"></div>
-        </div>
-        <h3>All New MG ZS Hybrid+</h3>
-        <div class="model-versions">
-          <span class="version-badge comfort">Comfort</span>
-          <span class="version-badge luxury">Luxury</span>
-        </div>
-        <p class="price">Desde: USD 27.500*</p>
-        <button class="btn-cotizar">Cotizar</button>
+<!-- ========== CONCESIONARIO ========== -->
+<section class="section" id="concesionario">
+  <p class="section-tag reveal">Concesionario</p>
+  <h2 class="section-title reveal">Grupo GIAMA — Concesionario Oficial MG</h2>
+  <p class="section-subtitle reveal">Más de 40 años de experiencia en el mercado automotor argentino. Venta, postventa y financiación en Mar del Plata y Tandil.</p>
+  <div class="concesionario-grid">
+    <div class="conc-info reveal">
+      <div class="conc-detail">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <p><strong>Dirección</strong>Gascón 3265, Mar del Plata, Buenos Aires</p>
       </div>
+      <div class="conc-detail">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <p><strong>Teléfono</strong>+54 9 11 3134 7853</p>
+      </div>
+      <div class="conc-detail">
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        <p><strong>Horarios</strong>Lunes a Viernes 9 a 18 hs<br>Sábados 9 a 13 hs</p>
+      </div>
+      <div class="conc-detail">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <p><strong>Email</strong>info@giama.com.ar</p>
+      </div>
+      <div class="conc-detail">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <p><strong>Zona de cobertura</strong>Mar del Plata y Tandil</p>
+      </div>
+      <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" class="btn-primary" style="margin-top:20px;">
+        Contactar por WhatsApp
+      </a>
     </div>
-  </section>
+    <div class="conc-map reveal">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3143.5!2d-57.555!3d-38.005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDAzJzE4LjAiUyA1N8KwMzMnMTguMCJX!5e0!3m2!1ses!2sar!4v1" allowfullscreen loading="lazy" title="Mapa ubicación GIAMA MG Gascón 3265 Mar del Plata"></iframe>
+    </div>
+  </div>
+</section>
 
-  <!-- ========== CAR DRIVING ANIMATION ========== -->
-  <section class="car-drive-section" id="carDrive">
-    <div class="road-line"></div>
-    <div class="car-drive-wrapper">
-      <div class="driving-car" id="drivingCar">
-        <img src="ZS/black.png" alt="MG ZS en movimiento">
+<!-- ========== TEST DRIVE ========== -->
+<section class="section form-section" id="test-drive">
+  <p class="section-tag reveal">Test Drive</p>
+  <h2 class="section-title reveal">Agendá tu prueba de manejo</h2>
+  <div class="form-grid">
+    <div class="form-visual reveal">
+      <img src="MG3/azul.png" alt="MG3 Hybrid+ azul para test drive en GIAMA Mar del Plata">
+      <div class="form-visual-text">
+        <h3>Viví la experiencia MG</h3>
+        <p>Agendá tu test drive y conocé la tecnología híbrida y eléctrica de cerca</p>
       </div>
     </div>
-  </section>
-
-  <!-- ========== SOBRE MG ========== -->
-  <section class="sobre-mg" id="sobre">
-    <p class="subtitle reveal">Sobre MG</p>
-    <h2 class="reveal">Tenemos un futuro brillante por delante</h2>
-    <div class="sobre-cards">
-      <div class="sobre-card reveal-left">
-        <div class="card-bg"></div>
-        <div class="card-overlay">
-          <p>El <strong>ZS Hybrid+</strong> es un SUV híbrido Eco eficiente y moderno que combina estilo, confort y tecnología</p>
-          <button class="btn-mas-info">Más información</button>
+    <div class="form-box reveal">
+      <h3>Solicitar Test Drive</h3>
+      <p class="form-desc">Completá el formulario y nos pondremos en contacto para confirmar tu turno.</p>
+      <form id="testDriveForm" onsubmit="submitTestDrive(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="td-name">Nombre completo</label>
+            <input type="text" id="td-name" required placeholder="Tu nombre">
+          </div>
+          <div class="form-field">
+            <label for="td-phone">Teléfono</label>
+            <input type="tel" id="td-phone" required placeholder="+54 9 223...">
+          </div>
         </div>
-      </div>
-      <div class="sobre-card reveal-right">
-        <div class="card-bg"></div>
-        <div class="card-overlay">
-          <p>Conocé el nuevo <strong>MG3 híbrido</strong> Tecnología Full Hybrid con hasta 43,5 Km/L de rendimiento</p>
-          <button class="btn-mas-info">Más información</button>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="td-email">Email</label>
+            <input type="email" id="td-email" required placeholder="tu@email.com">
+          </div>
+          <div class="form-field">
+            <label for="td-model">Modelo de interés</label>
+            <select id="td-model" required>
+              <option value="">Seleccionar modelo</option>
+              <option value="MG3 Hybrid+">MG3 Hybrid+</option>
+              <option value="MG ZS Hybrid+">MG ZS Hybrid+</option>
+              <option value="MG4 Electric">MG4 Electric</option>
+              <option value="MG Cyberster">MG Cyberster</option>
+            </select>
+          </div>
         </div>
-      </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="td-date">Fecha preferida</label>
+            <input type="date" id="td-date" required>
+          </div>
+          <div class="form-field">
+            <label for="td-time">Horario</label>
+            <select id="td-time" required>
+              <option value="">Seleccionar</option>
+              <option value="Mañana">Mañana (9 a 13 hs)</option>
+              <option value="Tarde">Tarde (13 a 18 hs)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-field">
+            <label for="td-msg">Mensaje adicional (opcional)</label>
+            <textarea id="td-msg" placeholder="Algún dato que quieras agregar..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Solicitar Test Drive</button>
+      </form>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ========== TEST DRIVE ========== -->
-  <section class="test-drive" id="test-drive">
-    <div class="test-drive-content">
-      <p class="subtitle reveal">Test Drive</p>
-      <h2 class="reveal">Manejar un MG, la aventura que no te podés perder.</h2>
-      <button class="btn-test-drive reveal">¡Agendar Test Drive ahora!</button>
+<!-- ========== CONTACTO / COTIZACIÓN ========== -->
+<section class="section" id="contacto">
+  <p class="section-tag reveal">Contacto</p>
+  <h2 class="section-title reveal">Pedí tu cotización</h2>
+  <div class="form-grid">
+    <div class="form-box reveal">
+      <h3>Solicitar Cotización</h3>
+      <p class="form-desc">Contanos qué modelo te interesa y te enviaremos la mejor propuesta.</p>
+      <form id="quoteForm" onsubmit="submitQuote(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="q-name">Nombre completo</label>
+            <input type="text" id="q-name" required placeholder="Tu nombre">
+          </div>
+          <div class="form-field">
+            <label for="q-phone">Teléfono</label>
+            <input type="tel" id="q-phone" required placeholder="+54 9 223...">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="q-email">Email</label>
+            <input type="email" id="q-email" required placeholder="tu@email.com">
+          </div>
+          <div class="form-field">
+            <label for="q-model">Modelo</label>
+            <select id="q-model" required>
+              <option value="">Seleccionar modelo</option>
+              <option value="MG3 Hybrid+">MG3 Hybrid+</option>
+              <option value="MG ZS Hybrid+">MG ZS Hybrid+</option>
+              <option value="MG4 Electric">MG4 Electric</option>
+              <option value="MG Cyberster">MG Cyberster</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="q-version">Versión</label>
+            <select id="q-version">
+              <option value="">Seleccionar versión</option>
+              <option value="Comfort">Comfort</option>
+              <option value="Luxury">Luxury</option>
+              <option value="Otra">Otra / No sé</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="q-payment">Forma de pago</label>
+            <select id="q-payment">
+              <option value="">Seleccionar</option>
+              <option value="Contado">Contado</option>
+              <option value="Financiación">Financiación</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-field">
+            <label for="q-msg">Mensaje</label>
+            <textarea id="q-msg" placeholder="Contanos más sobre lo que buscás..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Solicitar Cotización</button>
+      </form>
     </div>
-  </section>
+    <div class="form-visual reveal">
+      <img src="ZS/como-blue.png" alt="MG ZS Hybrid+ azul — cotización GIAMA Mar del Plata">
+      <div class="form-visual-text">
+        <h3>Tu próximo MG te espera</h3>
+        <p>Consultá precios, versiones y condiciones de financiación</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer" id="contacto">
-    <div class="footer-logo">
-      <img src="Logo MG.png" alt="MG Motor">
+<!-- ========== POSTVENTA ========== -->
+<section class="section" id="postventa" style="background:var(--grey-light);">
+  <p class="section-tag reveal">Postventa</p>
+  <h2 class="section-title reveal">Servicio integral para tu MG</h2>
+  <p class="section-subtitle reveal">En GIAMA te acompañamos después de la compra con servicio técnico oficial, repuestos originales y la mejor atención.</p>
+  <div class="postventa-cards">
+    <div class="pv-card reveal">
+      <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+      <h4>Service Oficial</h4>
+      <p>Técnicos certificados por MG, equipamiento de última generación y mantenimiento según estándares de fábrica.</p>
     </div>
-    <div class="footer-columns">
-      <div class="footer-col">
-        <h4>Descubrí</h4>
-        <a href="#">Concesionarios</a>
-        <a href="#">Campañas y Recall</a>
-        <a href="#">Test Drive</a>
-      </div>
-      <div class="footer-col">
-        <h4>Acerca de MG</h4>
-        <a href="#">Quiénes somos</a>
-        <a href="#">MG Innovation</a>
-        <a href="#">MG News</a>
-        <a href="#">MG Awards</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contacto</h4>
-        <a href="#">Venta de Flotas MG</a>
-        <a href="#">Ser Concesionario MG</a>
-        <a href="tel:+5491131347853">Call Center: +54 9 11 3134 7853</a>
-      </div>
+    <div class="pv-card reveal">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+      <h4>Repuestos Originales</h4>
+      <p>Stock de repuestos originales MG con garantía. Pedidos especiales con tiempos de entrega competitivos.</p>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-links">
-        <a href="#">Política de Privacidad</a>
-        <a href="#">Bases Legales</a>
-        <a href="#">Lista de Precios</a>
-        <a href="#">Términos y Condiciones</a>
+    <div class="pv-card reveal">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      <h4>Garantía Extendida</h4>
+      <p>Hasta 6 años / 120.000 km en el vehículo y hasta 8 años / 160.000 km en baterías. Líder en el segmento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-box">
+        <img src="logo-mg.png" alt="MG Motor logo">
+        <span>GIAMA</span>
       </div>
+      <p>Concesionario oficial MG en Mar del Plata. Más de 40 años de trayectoria en el mercado automotor argentino.</p>
       <div class="footer-social">
-        <span>Síguenos</span>
-        <!-- Facebook -->
-        <a href="#" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        <!-- Instagram -->
-        <a href="#" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <!-- YouTube -->
-        <a href="#" aria-label="YouTube">
-          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-        <!-- LinkedIn -->
-        <a href="#" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <!-- TikTok -->
-        <a href="#" aria-label="TikTok">
-          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-        </a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
       </div>
     </div>
-  </footer>
+    <div class="footer-col">
+      <h4>Modelos</h4>
+      <a href="#" onclick="event.preventDefault();openModel('mg3')">MG3 Hybrid+</a>
+      <a href="#" onclick="event.preventDefault();openModel('zs')">MG ZS Hybrid+</a>
+      <a href="#" onclick="event.preventDefault();openModel('mg4')">MG4 Electric</a>
+      <a href="#" onclick="event.preventDefault();openModel('cyberster')">MG Cyberster</a>
+    </div>
+    <div class="footer-col">
+      <h4>GIAMA</h4>
+      <a href="#sobre-mg">Sobre MG</a>
+      <a href="#test-drive">Test Drive</a>
+      <a href="#postventa">Postventa</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="#">Gascón 3265, Mar del Plata</a>
+      <a href="tel:+5491131347853">+54 9 11 3134 7853</a>
+      <a href="https://wa.me/5491131347853" target="_blank">WhatsApp</a>
+      <a href="mailto:info@giama.com.ar">info@giama.com.ar</a>
+    </div>
+  </div>
+  <p class="footer-legal">Los precios expresados en dólares son referenciales y pueden variar. Consulte con el concesionario para valores actualizados. MG Argentina — Importado por Eximar.</p>
+  <div class="footer-bottom">
+    <p>&copy; 2026 GIAMA — Concesionario Oficial MG | Mar del Plata</p>
+    <p>Desarrollado con pasión en Argentina</p>
+  </div>
+</footer>
 
-  <!-- ========== WHATSAPP ========== -->
-  <a href="https://wa.me/5491131347853" target="_blank" class="whatsapp-btn">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.742 3.052 9.38L1.056 31.2l6.064-1.952A15.9 15.9 0 0016.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.34 22.608c-.39 1.1-1.932 2.012-3.176 2.278-.852.18-1.962.324-5.702-1.226-4.786-1.982-7.864-6.838-8.104-7.156-.228-.318-1.926-2.566-1.926-4.892s1.22-3.47 1.652-3.944c.432-.474.944-.592 1.258-.592.314 0 .63.002.904.016.29.016.68-.11 1.064.812.39.944 1.328 3.238 1.444 3.472.118.234.196.508.04.812-.158.318-.236.514-.472.79-.234.278-.494.62-.706.832-.234.234-.478.488-.206.96.274.47 1.216 2.006 2.61 3.25 1.792 1.6 3.304 2.096 3.774 2.33.472.234.746.196 1.022-.118.274-.314 1.178-1.374 1.492-1.846.314-.474.63-.39 1.062-.234.432.158 2.742 1.294 3.212 1.528.472.234.786.352.904.548.116.196.116 1.138-.274 2.238z"/>
-    </svg>
-  </a>
+<!-- ========== MODEL MODALS ========== -->
+<div class="model-modal" id="modal-mg3">
+  <button class="modal-close" onclick="closeModel('mg3')">&times;</button>
+  <div class="modal-hero">
+    <div class="modal-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);"></div>
+    <img class="modal-car" id="mg3-modal-img" src="MG3/rojo.png" alt="MG3 Hybrid+ — vista principal">
+    <div class="modal-info"><h1>MG3 Hybrid+</h1><p>Hatchback | Full Hybrid | 195 CV</p></div>
+  </div>
+  <div class="modal-body">
+    <div class="warranty-banner">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      <div class="wb-text"><h4>6 años / 120.000 km + 7 años / 140.000 km batería híbrida</h4><p>Garantía líder en el segmento para el vehículo y la batería</p></div>
+    </div>
 
-  <!-- ========== JAVASCRIPT ========== -->
-  <script>
-    // ===== NAVBAR SCROLL =====
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    <h2>Elegí tu color</h2>
+    <div class="modal-colors">
+      <span>Color:</span>
+      <div class="modal-color-dot active" style="background:#CC2222" onclick="changeModalColor('mg3','MG3/rojo.png',this)" title="Rojo"></div>
+      <div class="modal-color-dot" style="background:#1a1a1a" onclick="changeModalColor('mg3','MG3/negro.png',this)" title="Negro"></div>
+      <div class="modal-color-dot" style="background:#fff;border-color:#ddd" onclick="changeModalColor('mg3','MG3/blanco.png',this)" title="Blanco"></div>
+      <div class="modal-color-dot" style="background:#2266DD" onclick="changeModalColor('mg3','MG3/azul.png',this)" title="Azul"></div>
+      <div class="modal-color-dot" style="background:#C0C0C0" onclick="changeModalColor('mg3','MG3/plata.png',this)" title="Plata"></div>
+      <div class="modal-color-dot" style="background:#6B6B6B" onclick="changeModalColor('mg3','MG3/gris.png',this)" title="Gris"></div>
+      <div class="modal-color-dot" style="background:#E8C820" onclick="changeModalColor('mg3','MG3/amarillo.png',this)" title="Amarillo"></div>
+    </div>
 
-    // ===== MOBILE MENU =====
-    function toggleMenu() {
-      document.getElementById('hamburger').classList.toggle('active');
-      document.getElementById('mobileMenu').classList.toggle('open');
-      document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+    <h2>Especificaciones técnicas</h2>
+    <div class="specs-tabs" data-model="mg3">
+      <button class="spec-tab active" onclick="showTab('mg3',0,this)">Motor</button>
+      <button class="spec-tab" onclick="showTab('mg3',1,this)">Dimensiones</button>
+      <button class="spec-tab" onclick="showTab('mg3',2,this)">Seguridad</button>
+      <button class="spec-tab" onclick="showTab('mg3',3,this)">Confort</button>
+    </div>
+    <div class="spec-panels" data-model="mg3">
+      <div class="spec-panel active">
+        <table class="spec-table">
+          <tr><td>Motor</td><td>1.5L Hybrid + motor eléctrico</td></tr>
+          <tr><td>Potencia combinada</td><td>195 CV</td></tr>
+          <tr><td>Torque combinado</td><td>425 Nm</td></tr>
+          <tr><td>Consumo</td><td>4.4 L/100 km (hasta 43.5 km/L)</td></tr>
+          <tr><td>Transmisión</td><td>Automática e-CVT</td></tr>
+          <tr><td>Tipo</td><td>Full Hybrid (no requiere enchufe)</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Largo</td><td>4.113 mm</td></tr>
+          <tr><td>Ancho</td><td>1.797 mm</td></tr>
+          <tr><td>Alto</td><td>1.502 mm</td></tr>
+          <tr><td>Distancia entre ejes</td><td>2.570 mm</td></tr>
+          <tr><td>Baúl</td><td>293 litros</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Airbags</td><td>6 airbags</td></tr>
+          <tr><td>Control crucero adaptativo</td><td>Sí (ACC)</td></tr>
+          <tr><td>Freno autónomo de emergencia</td><td>Sí (AEB)</td></tr>
+          <tr><td>Asistente de carril</td><td>Sí (LKA)</td></tr>
+          <tr><td>Control de estabilidad</td><td>Sí (ESP)</td></tr>
+          <tr><td>Sensor de punto ciego</td><td>Sí (BSM)</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Climatizador</td><td>Automático</td></tr>
+          <tr><td>Pantalla central</td><td>Táctil multimedia</td></tr>
+          <tr><td>Tapizado (Luxury)</td><td>Cuero</td></tr>
+          <tr><td>Luces (Luxury)</td><td>Full LED</td></tr>
+          <tr><td>Cámara trasera</td><td>Sí</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h2 style="margin-top:40px;">Comparativa de versiones</h2>
+    <table class="version-table">
+      <tr><th></th><th>Comfort</th><th>Luxury</th></tr>
+      <tr><td>Motor</td><td>1.5L Hybrid 195 CV</td><td>1.5L Hybrid 195 CV</td></tr>
+      <tr><td>Airbags</td><td>6</td><td>6</td></tr>
+      <tr><td>ADAS (ACC, AEB, LKA)</td><td>Sí</td><td>Sí</td></tr>
+      <tr><td>Climatizador</td><td>Sí</td><td>Sí</td></tr>
+      <tr><td>Tapizado de cuero</td><td>No</td><td>Sí</td></tr>
+      <tr><td>Luces full LED</td><td>No</td><td>Sí</td></tr>
+      <tr class="price-row"><td>Precio</td><td>USD 23.500*</td><td>Consultar</td></tr>
+    </table>
+
+    <h2>Galería</h2>
+    <div class="modal-gallery">
+      <img src="JPG/mg3_exterior.jpg" alt="MG3 Hybrid+ exterior frontal">
+      <img src="JPG/mg3_exterior2.jpg" alt="MG3 Hybrid+ exterior lateral">
+      <img src="JPG/mg3_exterior3.jpg" alt="MG3 Hybrid+ exterior trasera">
+      <img src="JPG/mg3 interior.jpg" alt="MG3 Hybrid+ interior tablero">
+      <img src="JPG/mg3 interior2.jpg" alt="MG3 Hybrid+ interior asientos">
+      <img src="JPG/mg3 interior4.jpg" alt="MG3 Hybrid+ interior detalle">
+    </div>
+
+    <p class="price-note">* Precios en USD. Sujetos a modificación sin previo aviso. Consultar condiciones vigentes en el concesionario.</p>
+
+    <div class="modal-ctas">
+      <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20cotizar%20el%20MG3%20Hybrid+" target="_blank" class="btn-primary">Cotizar MG3</a>
+      <a href="#test-drive" class="btn-outline-white" style="border-color:var(--black);color:var(--black);" onclick="closeModel('mg3')">Agendar Test Drive</a>
+    </div>
+  </div>
+</div>
+
+<!-- ZS Modal -->
+<div class="model-modal" id="modal-zs">
+  <button class="modal-close" onclick="closeModel('zs')">&times;</button>
+  <div class="modal-hero">
+    <div class="modal-bg" style="background:linear-gradient(135deg,#0a1628,#0f2440,#162d50);"></div>
+    <img class="modal-car" id="zs-modal-img" src="ZS/diamond-red.png" alt="MG ZS Hybrid+ — vista principal">
+    <div class="modal-info"><h1>MG ZS Hybrid+</h1><p>SUV Compacto | Hybrid+ | 191 CV</p></div>
+  </div>
+  <div class="modal-body">
+    <div class="warranty-banner">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      <div class="wb-text"><h4>6 años / 120.000 km + 7 años / 140.000 km batería híbrida</h4><p>El SUV híbrido más vendido de Europa en 2024</p></div>
+    </div>
+    <h2>Elegí tu color</h2>
+    <div class="modal-colors">
+      <span>Color:</span>
+      <div class="modal-color-dot active" style="background:#CC2222" onclick="changeModalColor('zs','ZS/diamond-red.png',this)"></div>
+      <div class="modal-color-dot" style="background:#1a1a1a" onclick="changeModalColor('zs','ZS/black.png',this)"></div>
+      <div class="modal-color-dot" style="background:#fff;border-color:#ddd" onclick="changeModalColor('zs','ZS/white.png',this)"></div>
+      <div class="modal-color-dot" style="background:#C0C0C0" onclick="changeModalColor('zs','ZS/cosmic-silver.png',this)"></div>
+      <div class="modal-color-dot" style="background:#2266DD" onclick="changeModalColor('zs','ZS/como-blue.png',this)"></div>
+      <div class="modal-color-dot" style="background:#6B6B6B" onclick="changeModalColor('zs','ZS/hampstead-grey.png',this)"></div>
+    </div>
+    <h2>Especificaciones técnicas</h2>
+    <div class="specs-tabs" data-model="zs">
+      <button class="spec-tab active" onclick="showTab('zs',0,this)">Motor</button>
+      <button class="spec-tab" onclick="showTab('zs',1,this)">Dimensiones</button>
+      <button class="spec-tab" onclick="showTab('zs',2,this)">Seguridad</button>
+      <button class="spec-tab" onclick="showTab('zs',3,this)">Confort</button>
+    </div>
+    <div class="spec-panels" data-model="zs">
+      <div class="spec-panel active">
+        <table class="spec-table">
+          <tr><td>Motor</td><td>1.5L + 2 motores eléctricos</td></tr>
+          <tr><td>Potencia combinada</td><td>191 CV</td></tr>
+          <tr><td>Torque combinado</td><td>425 Nm</td></tr>
+          <tr><td>Consumo</td><td>4.9 L/100 km</td></tr>
+          <tr><td>Transmisión</td><td>CVT automática</td></tr>
+          <tr><td>0-100 km/h</td><td>8.7 segundos</td></tr>
+          <tr><td>Velocidad máxima</td><td>170 km/h</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Categoría</td><td>SUV Compacto</td></tr>
+          <tr><td>Tracción</td><td>Delantera (FWD)</td></tr>
+          <tr><td>Baúl</td><td>Generoso, versatil</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Airbags</td><td>6 airbags</td></tr>
+          <tr><td>Paquete ADAS</td><td>Completo</td></tr>
+          <tr><td>Control crucero adaptativo</td><td>Sí</td></tr>
+          <tr><td>Freno autónomo</td><td>Sí</td></tr>
+          <tr><td>Asistente de carril</td><td>Sí</td></tr>
+          <tr><td>Control de estabilidad</td><td>Sí</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Pantallas</td><td>Pantalla multimedia + panel digital grandes</td></tr>
+          <tr><td>Climatizador</td><td>Automático</td></tr>
+          <tr><td>Conectividad</td><td>Apple CarPlay / Android Auto</td></tr>
+        </table>
+      </div>
+    </div>
+    <h2 style="margin-top:40px;">Comparativa de versiones</h2>
+    <table class="version-table">
+      <tr><th></th><th>Comfort</th><th>Luxury</th></tr>
+      <tr><td>Motor</td><td>1.5L Hybrid 191 CV</td><td>1.5L Hybrid 191 CV</td></tr>
+      <tr><td>Airbags</td><td>6</td><td>6</td></tr>
+      <tr><td>ADAS completo</td><td>Sí</td><td>Sí</td></tr>
+      <tr><td>Pantalla multimedia</td><td>Sí</td><td>Sí</td></tr>
+      <tr class="price-row"><td>Precio</td><td>USD 27.500*</td><td>USD 29.900*</td></tr>
+    </table>
+    <p class="price-note">* Precios en USD. Sujetos a modificación sin previo aviso.</p>
+    <div class="modal-ctas">
+      <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20cotizar%20el%20MG%20ZS%20Hybrid+" target="_blank" class="btn-primary">Cotizar ZS</a>
+      <a href="#test-drive" class="btn-outline-white" style="border-color:var(--black);color:var(--black);" onclick="closeModel('zs')">Agendar Test Drive</a>
+    </div>
+  </div>
+</div>
+
+<!-- MG4 Modal -->
+<div class="model-modal" id="modal-mg4">
+  <button class="modal-close" onclick="closeModel('mg4')">&times;</button>
+  <div class="modal-hero">
+    <div class="modal-bg" style="background:linear-gradient(135deg,#0f3460,#1a1a2e,#162d50);"></div>
+    <div class="modal-info"><h1>MG4 Electric</h1><p>Hatchback | 100% Eléctrico | Hasta 435 CV</p></div>
+  </div>
+  <div class="modal-body">
+    <div class="warranty-banner">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      <div class="wb-text"><h4>6 años / 120.000 km + 8 años / 160.000 km batería</h4><p>Beneficios fiscales por vehículo eléctrico (exención arancelaria)</p></div>
+    </div>
+    <h2>Especificaciones técnicas</h2>
+    <div class="specs-tabs" data-model="mg4">
+      <button class="spec-tab active" onclick="showTab('mg4',0,this)">Motor</button>
+      <button class="spec-tab" onclick="showTab('mg4',1,this)">Autonomía</button>
+      <button class="spec-tab" onclick="showTab('mg4',2,this)">Dimensiones</button>
+    </div>
+    <div class="spec-panels" data-model="mg4">
+      <div class="spec-panel active">
+        <table class="spec-table">
+          <tr><td>Tipo</td><td>100% Eléctrico</td></tr>
+          <tr><td>Potencia</td><td>De 170 a 435 CV (según versión)</td></tr>
+          <tr><td>Tracción</td><td>Simple o integral (AWD)</td></tr>
+          <tr><td>Versiones</td><td>4 disponibles</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Autonomía mínima</td><td>350 km</td></tr>
+          <tr><td>Autonomía máxima</td><td>520 km</td></tr>
+          <tr><td>Carga rápida</td><td>Sí (DC)</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Largo</td><td>~4.300 mm</td></tr>
+          <tr><td>Categoría</td><td>Hatchback eléctrico</td></tr>
+        </table>
+      </div>
+    </div>
+    <h2 style="margin-top:40px;">Precios</h2>
+    <p style="font-size:18px;font-weight:700;color:var(--red);margin-bottom:10px;">Desde USD 31.700*</p>
+    <p class="price-note">* Precios en USD. Sujetos a modificación sin previo aviso. 4 versiones disponibles, consultar equipamiento de cada una.</p>
+    <div class="modal-ctas">
+      <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20cotizar%20el%20MG4%20Electric" target="_blank" class="btn-primary">Cotizar MG4</a>
+      <a href="#test-drive" class="btn-outline-white" style="border-color:var(--black);color:var(--black);" onclick="closeModel('mg4')">Agendar Test Drive</a>
+    </div>
+  </div>
+</div>
+
+<!-- Cyberster Modal -->
+<div class="model-modal" id="modal-cyberster">
+  <button class="modal-close" onclick="closeModel('cyberster')">&times;</button>
+  <div class="modal-hero">
+    <div class="modal-bg" style="background:linear-gradient(135deg,#2d1b33,#1a1a2e,#0f3460);"></div>
+    <div class="modal-info"><h1>MG Cyberster</h1><p>Roadster | 100% Eléctrico | 502 CV</p></div>
+  </div>
+  <div class="modal-body">
+    <div class="warranty-banner">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      <div class="wb-text"><h4>6 años / 120.000 km + 8 años / 160.000 km batería</h4><p>La nave insignia de MG — a pedido</p></div>
+    </div>
+    <h2>Especificaciones técnicas</h2>
+    <div class="specs-tabs" data-model="cyberster">
+      <button class="spec-tab active" onclick="showTab('cyberster',0,this)">Motor</button>
+      <button class="spec-tab" onclick="showTab('cyberster',1,this)">Batería</button>
+      <button class="spec-tab" onclick="showTab('cyberster',2,this)">Equipamiento</button>
+      <button class="spec-tab" onclick="showTab('cyberster',3,this)">Dimensiones</button>
+    </div>
+    <div class="spec-panels" data-model="cyberster">
+      <div class="spec-panel active">
+        <table class="spec-table">
+          <tr><td>Motores</td><td>2 eléctricos (delantero 201 CV + trasero 335 CV)</td></tr>
+          <tr><td>Potencia total</td><td>502 CV</td></tr>
+          <tr><td>Torque</td><td>725 Nm</td></tr>
+          <tr><td>0-100 km/h</td><td>3.7 segundos</td></tr>
+          <tr><td>Velocidad máxima</td><td>208 km/h</td></tr>
+          <tr><td>Tracción</td><td>Integral (AWD)</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Batería</td><td>77 kWh iones de litio</td></tr>
+          <tr><td>Autonomía</td><td>446 km (WLTP)</td></tr>
+          <tr><td>Carga rápida (10-80%)</td><td>38 minutos</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Puertas</td><td>Tipo tijera</td></tr>
+          <tr><td>Capota</td><td>Lona eléctrica (abre en 10 seg)</td></tr>
+          <tr><td>Plazas</td><td>2</td></tr>
+          <tr><td>Llantas</td><td>20 pulgadas</td></tr>
+          <tr><td>Frenos</td><td>Brembo</td></tr>
+          <tr><td>Airbags</td><td>6</td></tr>
+          <tr><td>Cámara</td><td>360 grados</td></tr>
+          <tr><td>Audio</td><td>Bose</td></tr>
+          <tr><td>Pantalla central</td><td>7" táctil</td></tr>
+          <tr><td>Tablero digital</td><td>10.25"</td></tr>
+        </table>
+      </div>
+      <div class="spec-panel">
+        <table class="spec-table">
+          <tr><td>Baúl</td><td>249 litros</td></tr>
+          <tr><td>Versión</td><td>Deluxe AWD (única)</td></tr>
+        </table>
+      </div>
+    </div>
+    <h2 style="margin-top:40px;">Precio</h2>
+    <p style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:10px;">USD 130.000*</p>
+    <p style="font-size:14px;color:#666;margin-bottom:10px;">Versión única: Deluxe AWD — A pedido</p>
+    <p class="price-note">* Precio en USD. Sujeto a modificación sin previo aviso.</p>
+    <div class="modal-ctas">
+      <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20el%20MG%20Cyberster" target="_blank" class="btn-primary">Consultar Cyberster</a>
+      <a href="#test-drive" class="btn-outline-white" style="border-color:var(--black);color:var(--black);" onclick="closeModel('cyberster')">Agendar Test Drive</a>
+    </div>
+  </div>
+</div>
+
+<!-- ========== WHATSAPP FLOAT ========== -->
+<a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.742 3.052 9.38L1.056 31.2l6.064-1.952A15.9 15.9 0 0016.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.34 22.608c-.39 1.1-1.932 2.012-3.176 2.278-.852.18-1.962.324-5.702-1.226-4.786-1.982-7.864-6.838-8.104-7.156-.228-.318-1.926-2.566-1.926-4.892s1.22-3.47 1.652-3.944c.432-.474.944-.592 1.258-.592.314 0 .63.002.904.016.29.016.68-.11 1.064.812.39.944 1.328 3.238 1.444 3.472.118.234.196.508.04.812-.158.318-.236.514-.472.79-.234.278-.494.62-.706.832-.234.234-.478.488-.206.96.274.47 1.216 2.006 2.61 3.25 1.792 1.6 3.304 2.096 3.774 2.33.472.234.746.196 1.022-.118.274-.314 1.178-1.374 1.492-1.846.314-.474.63-.39 1.062-.234.432.158 2.742 1.294 3.212 1.528.472.234.786.352.904.548.116.196.116 1.138-.274 2.238z"/></svg>
+</a>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+  // ===== MOBILE MENU =====
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('active');
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+  }
+
+  // ===== HERO SLIDER =====
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  let slideInterval;
+
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+  function nextSlide() { goToSlide(currentSlide + 1); resetInterval(); }
+  function prevSlide() { goToSlide(currentSlide - 1); resetInterval(); }
+  function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 6000); }
+  slideInterval = setInterval(nextSlide, 6000);
+
+  // ===== MODEL MODALS =====
+  function openModel(model) {
+    const modal = document.getElementById('modal-' + model);
+    if (modal) {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      modal.scrollTop = 0;
     }
-
-    // ===== HERO SLIDER =====
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hero-slide');
-    const thumbs = document.querySelectorAll('.slider-thumb');
-    let slideInterval;
-
-    function goToSlide(n) {
-      slides[currentSlide].classList.remove('active');
-      thumbs[currentSlide].classList.remove('active');
-      currentSlide = (n + slides.length) % slides.length;
-      slides[currentSlide].classList.add('active');
-      thumbs[currentSlide].classList.add('active');
+  }
+  function closeModel(model) {
+    const modal = document.getElementById('modal-' + model);
+    if (modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
     }
-    function nextSlide() { goToSlide(currentSlide + 1); resetInterval(); }
-    function prevSlide() { goToSlide(currentSlide - 1); resetInterval(); }
-    function resetInterval() {
-      clearInterval(slideInterval);
-      slideInterval = setInterval(nextSlide, 5000);
-    }
-    slideInterval = setInterval(nextSlide, 5000);
+  }
 
-    // ===== COLOR SELECTOR =====
-    function changeColor(model, src, dot) {
-      const img = document.getElementById(model === 'zs' ? 'zs-img' : 'mg3-img');
+  // ===== MODAL COLOR SELECTOR =====
+  function changeModalColor(model, src, dot) {
+    const img = document.getElementById(model + '-modal-img');
+    if (img) {
       img.style.opacity = '0';
-      setTimeout(() => {
-        img.src = src;
-        img.style.opacity = '1';
-      }, 250);
-      dot.parentElement.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-      dot.classList.add('active');
+      setTimeout(() => { img.src = src; img.style.opacity = '1'; }, 300);
     }
+    dot.parentElement.querySelectorAll('.modal-color-dot').forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+  }
 
-    // ===== DRIVING CAR SCROLL ANIMATION =====
-    const carDriveSection = document.getElementById('carDrive');
-    const drivingCar = document.getElementById('drivingCar');
-
-    function updateDrivingCar() {
-      if (!carDriveSection || !drivingCar) return;
-      const rect = carDriveSection.getBoundingClientRect();
-      const sectionHeight = rect.height;
-      const viewportHeight = window.innerHeight;
-      const scrollProgress = Math.max(0, Math.min(1,
-        (viewportHeight - rect.top) / (viewportHeight + sectionHeight)
-      ));
-      const startX = -500;
-      const endX = window.innerWidth + 100;
-      const currentX = startX + (endX - startX) * scrollProgress;
-      drivingCar.style.left = currentX + 'px';
-    }
-
-    window.addEventListener('scroll', updateDrivingCar);
-    updateDrivingCar();
-
-    // ===== SCROLL REVEAL ANIMATIONS =====
-    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    revealElements.forEach(el => observer.observe(el));
-
-    // ===== SMOOTH SCROLL FOR NAV LINKS =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
+  // ===== SPEC TABS =====
+  function showTab(model, index, btn) {
+    const panels = document.querySelector('.spec-panels[data-model="' + model + '"]');
+    const tabs = document.querySelector('.specs-tabs[data-model="' + model + '"]');
+    if (!panels || !tabs) return;
+    panels.querySelectorAll('.spec-panel').forEach((p, i) => {
+      p.classList.toggle('active', i === index);
     });
-  </script>
+    tabs.querySelectorAll('.spec-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+  }
+
+  // ===== FORM SUBMISSIONS (WhatsApp) =====
+  function submitTestDrive(e) {
+    e.preventDefault();
+    const name = document.getElementById('td-name').value;
+    const phone = document.getElementById('td-phone').value;
+    const model = document.getElementById('td-model').value;
+    const date = document.getElementById('td-date').value;
+    const time = document.getElementById('td-time').value;
+    const msg = document.getElementById('td-msg').value;
+    const text = encodeURIComponent(
+      'Hola, quiero agendar un test drive.\n' +
+      'Nombre: ' + name + '\n' +
+      'Teléfono: ' + phone + '\n' +
+      'Modelo: ' + model + '\n' +
+      'Fecha: ' + date + '\n' +
+      'Horario: ' + time +
+      (msg ? '\nMensaje: ' + msg : '')
+    );
+    window.open('https://wa.me/5491131347853?text=' + text, '_blank');
+  }
+
+  function submitQuote(e) {
+    e.preventDefault();
+    const name = document.getElementById('q-name').value;
+    const phone = document.getElementById('q-phone').value;
+    const model = document.getElementById('q-model').value;
+    const version = document.getElementById('q-version').value;
+    const payment = document.getElementById('q-payment').value;
+    const msg = document.getElementById('q-msg').value;
+    const text = encodeURIComponent(
+      'Hola, quiero cotizar un MG.\n' +
+      'Nombre: ' + name + '\n' +
+      'Teléfono: ' + phone + '\n' +
+      'Modelo: ' + model + '\n' +
+      'Versión: ' + version + '\n' +
+      'Forma de pago: ' + payment +
+      (msg ? '\nMensaje: ' + msg : '')
+    );
+    window.open('https://wa.me/5491131347853?text=' + text, '_blank');
+  }
+
+  // ===== SCROLL REVEAL =====
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+
+  // ===== SMOOTH SCROLL =====
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const t = document.querySelector(href);
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Close modal on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.model-modal.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
