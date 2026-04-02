@@ -313,7 +313,7 @@ export default function HomePage() {
         <h2 className="section-title reveal">Todo lo que necesitás saber</h2>
         <div className="faq-list">
           {FAQ_ITEMS.map((item, i) => (
-            <div className={`faq-item reveal${openFaq === i ? ' open' : ''}`} key={i}>
+            <div className={`faq-item${openFaq === i ? ' open' : ''}`} key={i}>
               <button className="faq-question" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
                 <span>{item.q}</span>
                 <svg viewBox="0 0 24 24" className="faq-chevron"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
