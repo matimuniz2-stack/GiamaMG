@@ -39,6 +39,15 @@ export default function LeadForm({ tipo }) {
     }
 
     try {
+      // reCAPTCHA v3 token
+      let recaptchaToken = ''
+      if (typeof window !== 'undefined' && window.grecaptcha) {
+        try {
+          recaptchaToken = await window.grecaptcha.execute('6LcBwKMsAAAAALC_0gAjBr_G6d51WaP9VZIymlO1', { action: 'submit_lead' })
+        } catch { /* si falla reCAPTCHA, enviamos sin token */ }
+      }
+      data.recaptchaToken = recaptchaToken
+
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -9,7 +9,7 @@ export const viewport = {
 }
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://giama-mg.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://giamamg.com'),
   title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
   description: 'Concesionario oficial MG en Mar del Plata. MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa. Grupo GIAMA, más de 40 años en el mercado automotor.',
   keywords: 'MG, GIAMA, concesionario, Mar del Plata, MG3, ZS, híbrido, test drive',
@@ -41,9 +41,9 @@ const jsonLd = {
   '@type': 'AutoDealer',
   name: 'GIAMA - Concesionario Oficial MG',
   description: 'Concesionario oficial MG en Mar del Plata. Venta de vehículos híbridos MG3 y ZS.',
-  url: 'https://giama-mg.vercel.app',
-  logo: 'https://giama-mg.vercel.app/logo-mg.png',
-  image: 'https://giama-mg.vercel.app/logo-mg.png',
+  url: 'https://giamamg.com',
+  logo: 'https://giamamg.com/logo-mg.png',
+  image: 'https://giamamg.com/logo-mg.png',
   telephone: '+5491131347853',
   email: 'info@giamamg.com.ar',
   address: {
@@ -154,6 +154,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         {children}
+        {/* reCAPTCHA v3 */}
+        <Script src="https://www.google.com/recaptcha/api.js?render=6LcBwKMsAAAAALC_0gAjBr_G6d51WaP9VZIymlO1" strategy="afterInteractive" />
         {/* Google Analytics 4 — afterInteractive to avoid blocking render */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-6FBP1JPWE9" strategy="afterInteractive" />
         <Script id="ga4-init" strategy="afterInteractive">{`

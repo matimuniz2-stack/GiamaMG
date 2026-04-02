@@ -37,7 +37,7 @@ export async function POST(request) {
     // CSRF: validate origin
     const origin = request.headers.get('origin')
     const allowedOrigins = [
-      process.env.NEXT_PUBLIC_SITE_URL || 'https://giama-mg.vercel.app',
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://giamamg.com',
       'http://localhost:3000',
     ]
     if (origin && !allowedOrigins.some((o) => origin.startsWith(o))) {
@@ -52,7 +52,27 @@ export async function POST(request) {
 
     const body = await request.json()
 
-    const { nombre, email, telefono, modelo, tipo, version, formaPago, fecha, horario, mensaje } = body
+    const { nombre, email, telefono, modelo, tipo, version, formaPago, fecha, horario, mensaje, recaptchaToken } = body
+
+    // reCAPTCHA v3 verification
+    if (process.env.RECAPTCHA_SECRET_KEY) {
+      if (!recaptchaToken) {
+        return NextResponse.json({ error: 'Verificación de seguridad fallida' }, { status: 400 })
+      }
+      try {
+        const recaptchaRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+        })
+        const recaptchaData = await recaptchaRes.json()
+        if (!recaptchaData.success || recaptchaData.score < 0.5) {
+          return NextResponse.json({ error: 'Verificación de seguridad fallida' }, { status: 403 })
+        }
+      } catch (recaptchaErr) {
+        console.error('reCAPTCHA verify error:', recaptchaErr)
+      }
+    }
 
     // Validate required fields
     if (!nombre || !email || !telefono || !modelo || !tipo) {

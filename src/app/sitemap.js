@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/data/posts'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://giama-mg.vercel.app'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://giamamg.com'
 
 export default function sitemap() {
   const posts = getAllPosts().map((post) => ({
