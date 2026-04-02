@@ -40,11 +40,22 @@ export default function LeadForm({ tipo }) {
       if (res.ok) {
         setStatus('success')
         form.reset()
-        // Meta Pixel conversion events
-        if (typeof window !== 'undefined' && window.fbq) {
-          window.fbq('track', 'Lead', { content_name: data.modelo, content_category: tipo })
-          if (tipo === 'test-drive') {
-            window.fbq('track', 'Schedule', { content_name: data.modelo })
+        // Conversion tracking
+        if (typeof window !== 'undefined') {
+          // Meta Pixel
+          if (window.fbq) {
+            window.fbq('track', 'Lead', { content_name: data.modelo, content_category: tipo })
+            if (tipo === 'test-drive') {
+              window.fbq('track', 'Schedule', { content_name: data.modelo })
+            }
+          }
+          // Google Analytics 4
+          if (window.gtag) {
+            window.gtag('event', 'generate_lead', {
+              event_category: tipo,
+              event_label: data.modelo,
+              value: tipo === 'test-drive' ? 1 : 2,
+            })
           }
         }
         setTimeout(() => setStatus('idle'), 5000)
