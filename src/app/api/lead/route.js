@@ -14,8 +14,30 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_RE = /^[\d\s+\-()]{7,20}$/
 const MAX_LEN = 500
 
+// Simple rate limiter (per serverless instance)
+const rateMap = new Map()
+const RATE_WINDOW = 60_000 // 1 minute
+const RATE_LIMIT = 5 // max 5 requests per IP per minute
+
+function isRateLimited(ip) {
+  const now = Date.now()
+  const entry = rateMap.get(ip)
+  if (!entry || now - entry.start > RATE_WINDOW) {
+    rateMap.set(ip, { start: now, count: 1 })
+    return false
+  }
+  entry.count++
+  return entry.count > RATE_LIMIT
+}
+
 export async function POST(request) {
   try {
+    // Rate limiting
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+    if (isRateLimited(ip)) {
+      return NextResponse.json({ error: 'Demasiados intentos. Esperá un momento.' }, { status: 429 })
+    }
+
     const body = await request.json()
 
     const { nombre, email, telefono, modelo, tipo, version, formaPago, fecha, horario, mensaje } = body

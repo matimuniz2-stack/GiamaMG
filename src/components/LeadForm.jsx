@@ -2,9 +2,17 @@
 
 import { useState } from 'react'
 
+const VERSIONES = {
+  'MG3 Hybrid+': ['Comfort', 'Luxury'],
+  'MG ZS Hybrid+': ['Comfort', 'Luxury'],
+}
+
 export default function LeadForm({ tipo }) {
   const [status, setStatus] = useState('idle') // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('')
+  const [modelo, setModelo] = useState('')
+
+  const versiones = VERSIONES[modelo] || []
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,6 +48,7 @@ export default function LeadForm({ tipo }) {
       if (res.ok) {
         setStatus('success')
         form.reset()
+        setModelo('')
         // Conversion tracking
         if (typeof window !== 'undefined') {
           // Meta Pixel
@@ -90,7 +99,7 @@ export default function LeadForm({ tipo }) {
           </div>
           <div className="form-field">
             <label htmlFor="td-modelo">Modelo de interés</label>
-            <select id="td-modelo" name="modelo" required>
+            <select id="td-modelo" name="modelo" required value={modelo} onChange={(e) => setModelo(e.target.value)}>
               <option value="">Seleccionar modelo</option>
               <option value="MG3 Hybrid+">MG3 Hybrid+</option>
               <option value="MG ZS Hybrid+">MG ZS Hybrid+</option>
@@ -146,7 +155,7 @@ export default function LeadForm({ tipo }) {
         </div>
         <div className="form-field">
           <label htmlFor="q-modelo">Modelo</label>
-          <select id="q-modelo" name="modelo" required>
+          <select id="q-modelo" name="modelo" required value={modelo} onChange={(e) => setModelo(e.target.value)}>
             <option value="">Seleccionar modelo</option>
             <option value="MG3 Hybrid+">MG3 Hybrid+</option>
             <option value="MG ZS Hybrid+">MG ZS Hybrid+</option>
@@ -156,10 +165,11 @@ export default function LeadForm({ tipo }) {
       <div className="form-row">
         <div className="form-field">
           <label htmlFor="q-version">Versión</label>
-          <select id="q-version" name="version">
-            <option value="">Seleccionar versión</option>
-            <option value="Comfort">Comfort</option>
-            <option value="Luxury">Luxury</option>
+          <select id="q-version" name="version" disabled={!modelo}>
+            <option value="">{modelo ? 'Seleccionar versión' : 'Elegí un modelo primero'}</option>
+            {versiones.map((v) => (
+              <option key={v} value={v}>{v}</option>
+            ))}
             <option value="Otra">Otra / No sé</option>
           </select>
         </div>
