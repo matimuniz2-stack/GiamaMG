@@ -3,9 +3,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import Link from 'next/link'
 import Navbar from './Navbar'
 import HeroSlider from './HeroSlider'
 import LeadForm from './LeadForm'
+import { TESTIMONIALS } from '@/data/testimonials'
 
 const ModelModal = dynamic(() => import('./ModelModal'), { ssr: false })
 const Lightbox = dynamic(() => import('./Lightbox'), { ssr: false })
@@ -307,6 +309,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ========== TESTIMONIOS ========== */}
+      <section className="section" id="testimonios">
+        <p className="section-tag reveal">Testimonios</p>
+        <h2 className="section-title reveal">Lo que dicen nuestros clientes</h2>
+        <div className="testimonials-grid">
+          {TESTIMONIALS.map((t, i) => (
+            <div className="testimonial-card reveal" key={i}>
+              <div className="testimonial-stars">{'★'.repeat(t.rating)}</div>
+              <p className="testimonial-text">&ldquo;{t.text}&rdquo;</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">{t.name.charAt(0)}</div>
+                <div>
+                  <strong>{t.name}</strong>
+                  <span>{t.vehicle}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ========== FAQ ========== */}
       <section className="section" id="faq">
         <p className="section-tag reveal">Preguntas Frecuentes</p>
@@ -350,6 +373,7 @@ export default function HomePage() {
             <a href="#test-drive">Test Drive</a>
             <a href="#postventa">Postventa</a>
             <a href="#contacto">Contacto</a>
+            <Link href="/blog">Blog</Link>
           </div>
           <div className="footer-col">
             <h4>Contacto</h4>

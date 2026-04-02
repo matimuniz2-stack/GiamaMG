@@ -36,6 +36,7 @@ export default function Navbar({ openModal }) {
             <a href="#sobre-mg">Sobre MG</a>
             <a href="#test-drive">Test Drive</a>
             <a href="#contacto">Contacto</a>
+            <a href="/blog">Blog</a>
           </div>
         </div>
         <div className="navbar-right">
@@ -58,6 +59,7 @@ export default function Navbar({ openModal }) {
         <a href="#sobre-mg" onClick={closeMenu}>Sobre MG</a>
         <a href="#test-drive" onClick={closeMenu}>Test Drive</a>
         <a href="#contacto" onClick={closeMenu}>Contacto</a>
+        <a href="/blog" onClick={closeMenu}>Blog</a>
         <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" rel="noopener noreferrer" className="mobile-wa" onClick={closeMenu}>WhatsApp</a>
       </div>
     </>
