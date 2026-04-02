@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
     description: 'MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa en Mar del Plata.',
-    images: ['/logo-mg.png'],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'GIAMA - Concesionario Oficial MG' }],
     type: 'website',
     locale: 'es_AR',
   },
@@ -27,7 +27,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
     description: 'MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa en Mar del Plata.',
-    images: ['/logo-mg.png'],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'GIAMA - Concesionario Oficial MG' }],
   },
   icons: {
     icon: '/logo-mg.png',
@@ -43,7 +43,7 @@ const jsonLd = {
   description: 'Concesionario oficial MG en Mar del Plata. Venta de vehículos híbridos MG3 y ZS.',
   url: 'https://giamamg.com',
   logo: 'https://giamamg.com/logo-mg.png',
-  image: 'https://giamamg.com/logo-mg.png',
+  image: 'https://giamamg.com/og-image.png',
   telephone: '+5491131347853',
   email: 'info@giamamg.com.ar',
   address: {
