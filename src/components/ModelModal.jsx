@@ -67,7 +67,7 @@ const MODELS = {
     heroStyle: { background: "url('/ZS/Portada.jpg') center/cover no-repeat" },
     bgGradient: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.3) 100%)',
     defaultImg: '/ZS/Colores/MG-ZS-HEV-RED.jpg',
-    hideCarOnHero: false,
+    hideCarOnHero: true,
     warranty: '6 años / 120.000 km + 7 años / 140.000 km batería híbrida',
     warrantySub: 'El SUV híbrido más vendido de Europa en 2024',
     colors: [
