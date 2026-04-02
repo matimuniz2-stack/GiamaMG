@@ -109,7 +109,7 @@ export default function LeadForm({ tipo }) {
         <div className="form-row">
           <div className="form-field">
             <label htmlFor="td-fecha">Fecha preferida</label>
-            <input type="date" id="td-fecha" name="fecha" required />
+            <input type="date" id="td-fecha" name="fecha" required min={new Date().toISOString().split('T')[0]} />
           </div>
           <div className="form-field">
             <label htmlFor="td-horario">Horario</label>

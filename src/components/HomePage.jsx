@@ -146,25 +146,25 @@ export default function HomePage() {
         <p className="section-subtitle reveal">Tecnología híbrida de última generación con garantía extendida líder en el segmento.</p>
 
         <div className="models-grid">
-          <div className="model-card reveal" onClick={() => openModal('mg3')}>
+          <Link href="/modelos/mg3" className="model-card reveal">
             <span className="card-tag hybrid">Full Hybrid</span>
             <div className="card-img"><Image src="/img/mg3-icon.webp" alt="MG3 Hybrid+" width={400} height={250} /></div>
             <h3>MG3 Hybrid+</h3>
             <p className="card-specs">195 CV | 4.4 L/100 km</p>
-            <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} /> 6 años de garantía</div>
+            <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} aria-hidden="true" /> 6 años de garantía</div>
             <p className="card-price">Desde USD 23.500* <span>Comfort</span></p>
-            <button className="btn-ver-modelo">Ver modelo</button>
-          </div>
+            <span className="btn-ver-modelo">Ver modelo</span>
+          </Link>
 
-          <div className="model-card reveal" onClick={() => openModal('zs')}>
+          <Link href="/modelos/zs" className="model-card reveal">
             <span className="card-tag hybrid">Hybrid+</span>
             <div className="card-img"><Image src="/img/zs-icon.png" alt="MG ZS Hybrid+" width={400} height={250} /></div>
             <h3>MG ZS Hybrid+</h3>
             <p className="card-specs">191 CV | 4.9 L/100 km</p>
-            <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} /> 6 años de garantía</div>
+            <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} aria-hidden="true" /> 6 años de garantía</div>
             <p className="card-price">Desde USD 27.500* <span>Comfort</span></p>
-            <button className="btn-ver-modelo">Ver modelo</button>
-          </div>
+            <span className="btn-ver-modelo">Ver modelo</span>
+          </Link>
         </div>
         <p className="price-note" style={{textAlign:'center',marginTop:30}}>* Precios en USD. Sujetos a modificación sin previo aviso. Consultar condiciones vigentes en el concesionario.</p>
       </section>
@@ -233,7 +233,7 @@ export default function HomePage() {
             <div className="conc-detail"><MapIcon /><p><strong>Dirección</strong><br />Gascón 3265, Mar del Plata, Buenos Aires</p></div>
             <div className="conc-detail"><PhoneIcon /><p><strong>Teléfono</strong><br /><a href="tel:+5491131347853">+54 9 11 3134 7853</a></p></div>
             <div className="conc-detail"><ClockIcon /><p><strong>Horarios</strong><br />Lunes a Viernes 9 a 18 hs<br />Sábados 9 a 13 hs</p></div>
-            <div className="conc-detail"><EmailIcon /><p><strong>Email</strong><br /><a href="mailto:ventas@mg.com">ventas@mg.com</a></p></div>
+            <div className="conc-detail"><EmailIcon /><p><strong>Email</strong><br /><a href="mailto:info@giamamg.com.ar">info@giamamg.com.ar</a></p></div>
             <div className="conc-detail"><GlobeIcon /><p><strong>Zona de cobertura</strong><br />Mar del Plata</p></div>
             <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{marginTop:20}}>
               Contactar por WhatsApp
@@ -304,7 +304,7 @@ export default function HomePage() {
           <div className="pv-card reveal">
             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
             <h4>Garantía Extendida</h4>
-            <p>Hasta 6 años / 120.000 km en el vehículo y hasta 8 años / 160.000 km en baterías. Líder en el segmento.</p>
+            <p>Hasta 6 años / 120.000 km en el vehículo y hasta 7 años / 140.000 km en batería híbrida. Líder en el segmento.</p>
           </div>
         </div>
       </section>
@@ -337,7 +337,7 @@ export default function HomePage() {
         <div className="faq-list">
           {FAQ_ITEMS.map((item, i) => (
             <div className={`faq-item${openFaq === i ? ' open' : ''}`} key={i}>
-              <button className="faq-question" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+              <button className="faq-question" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}>
                 <span>{item.q}</span>
                 <svg viewBox="0 0 24 24" className="faq-chevron"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
               </button>
@@ -364,8 +364,8 @@ export default function HomePage() {
           </div>
           <div className="footer-col">
             <h4>Modelos</h4>
-            <a href="#" onClick={(e) => { e.preventDefault(); openModal('mg3') }}>MG3 Hybrid+</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); openModal('zs') }}>MG ZS Hybrid+</a>
+            <Link href="/modelos/mg3">MG3 Hybrid+</Link>
+            <Link href="/modelos/zs">MG ZS Hybrid+</Link>
           </div>
           <div className="footer-col">
             <h4>GIAMA</h4>
@@ -380,7 +380,7 @@ export default function HomePage() {
             <a href="https://maps.google.com/?q=Gascón+3265+Mar+del+Plata" target="_blank" rel="noopener noreferrer">Gascón 3265, Mar del Plata</a>
             <a href="tel:+5491131347853">+54 9 11 3134 7853</a>
             <a href="https://wa.me/5491131347853" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-            <a href="mailto:ventas@mg.com">ventas@mg.com</a>
+            <a href="mailto:info@giamamg.com.ar">info@giamamg.com.ar</a>
           </div>
         </div>
         <p className="footer-legal">Los precios expresados en dólares son referenciales y pueden variar. Consulte con el concesionario para valores actualizados. MG Argentina — Importado por Eximar.</p>

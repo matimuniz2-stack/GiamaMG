@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import Image from 'next/image'
 
 const slides = [
-  { img: '/img/hero/KV-1.jpg' },
-  { img: '/img/hero/Leopard eye headlights.jpg' },
-  { img: '/img/hero/Front grille.jpg' },
+  { img: '/img/hero/KV-1.jpg', alt: 'MG3 Hybrid+ — vista frontal en Mar del Plata' },
+  { img: '/img/hero/Leopard eye headlights.jpg', alt: 'MG3 Hybrid+ — faros LED Leopard Eye' },
+  { img: '/img/hero/Front grille.jpg', alt: 'MG3 Hybrid+ — parrilla frontal detalle' },
 ]
 
 export default function HeroSlider() {
@@ -37,13 +38,16 @@ export default function HeroSlider() {
     <section className="hero" id="hero">
       {slides.map((slide, i) => (
         <div key={i} className={`hero-slide ${i === current ? 'active' : ''}`}>
-          <div
-            className="slide-bg"
-            style={{
-              backgroundImage: `url('${slide.img}')`,
-              animation: i === current ? 'heroZoom 12s ease-out forwards' : 'none',
-            }}
-          />
+          <div className="slide-bg" style={{ animation: i === current ? 'heroZoom 12s ease-out forwards' : 'none' }}>
+            <Image
+              src={slide.img}
+              alt={slide.alt}
+              fill
+              sizes="100vw"
+              style={{ objectFit: 'cover' }}
+              priority={i === 0}
+            />
+          </div>
         </div>
       ))}
       <div className="hero-content">
@@ -61,7 +65,7 @@ export default function HeroSlider() {
       </div>
       <div className="hero-dots">
         {slides.map((_, i) => (
-          <button key={i} className={`hero-dot ${i === current ? 'active' : ''}`} onClick={() => handleDotClick(i)} />
+          <button key={i} className={`hero-dot ${i === current ? 'active' : ''}`} onClick={() => handleDotClick(i)} aria-label={`Slide ${i + 1}`} />
         ))}
       </div>
     </section>

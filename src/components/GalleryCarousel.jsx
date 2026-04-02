@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useCallback } from 'react'
+import Image from 'next/image'
 
 export default function GalleryCarousel({ images, title }) {
   const [current, setCurrent] = useState(0)
@@ -19,7 +20,6 @@ export default function GalleryCarousel({ images, title }) {
   const next = useCallback(() => go(current + 1), [current, go])
   const prev = useCallback(() => go(current - 1), [current, go])
 
-  // Touch/mouse drag
   const handleDragStart = (e) => {
     setIsDragging(true)
     setStartX(e.type === 'touchstart' ? e.touches[0].clientX : e.clientX)
@@ -39,7 +39,6 @@ export default function GalleryCarousel({ images, title }) {
     else setTranslateX(0)
   }
 
-  // Keyboard nav when focused
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowRight') next()
     if (e.key === 'ArrowLeft') prev()
@@ -74,7 +73,16 @@ export default function GalleryCarousel({ images, title }) {
           >
             {images.map((img, i) => (
               <div className="carousel-slide" key={i}>
-                <img src={img.src} alt={img.alt} draggable={false} />
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={900}
+                  height={563}
+                  sizes="(max-width: 768px) 100vw, 900px"
+                  style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '16/10' }}
+                  draggable={false}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
               </div>
             ))}
           </div>
@@ -85,12 +93,10 @@ export default function GalleryCarousel({ images, title }) {
         </button>
       </div>
 
-      {/* Counter */}
       <div className="carousel-counter">
         {current + 1} / {total}
       </div>
 
-      {/* Dots */}
       <div className="carousel-dots">
         {images.map((_, i) => (
           <button

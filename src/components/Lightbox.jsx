@@ -11,10 +11,10 @@ export default function Lightbox({ lightbox, setLightbox }) {
 
   return (
     <div className="lightbox open" onClick={close}>
-      <button className="lightbox-close" onClick={close}>&times;</button>
-      <button className="lightbox-nav lightbox-prev" onClick={(e) => { e.stopPropagation(); nav(-1) }}>&larr;</button>
+      <button className="lightbox-close" onClick={close} aria-label="Cerrar">&times;</button>
+      <button className="lightbox-nav lightbox-prev" onClick={(e) => { e.stopPropagation(); nav(-1) }} aria-label="Anterior">&larr;</button>
       <img src={lightbox.images[lightbox.index]} alt="Galería MG" onClick={(e) => e.stopPropagation()} />
-      <button className="lightbox-nav lightbox-next" onClick={(e) => { e.stopPropagation(); nav(1) }}>&rarr;</button>
+      <button className="lightbox-nav lightbox-next" onClick={(e) => { e.stopPropagation(); nav(1) }} aria-label="Siguiente">&rarr;</button>
     </div>
   )
 }

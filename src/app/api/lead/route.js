@@ -13,6 +13,8 @@ function escapeHtml(str) {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_RE = /^[\d\s+\-()]{7,20}$/
 const MAX_LEN = 500
+const ALLOWED_MODELS = ['MG3 Hybrid+', 'MG ZS Hybrid+']
+const ALLOWED_TYPES = ['test-drive', 'cotizacion']
 
 // Simple rate limiter (per serverless instance)
 const rateMap = new Map()
@@ -32,6 +34,16 @@ function isRateLimited(ip) {
 
 export async function POST(request) {
   try {
+    // CSRF: validate origin
+    const origin = request.headers.get('origin')
+    const allowedOrigins = [
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://giama-mg.vercel.app',
+      'http://localhost:3000',
+    ]
+    if (origin && !allowedOrigins.some((o) => origin.startsWith(o))) {
+      return NextResponse.json({ error: 'Origen no permitido' }, { status: 403 })
+    }
+
     // Rate limiting
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
     if (isRateLimited(ip)) {
@@ -45,6 +57,14 @@ export async function POST(request) {
     // Validate required fields
     if (!nombre || !email || !telefono || !modelo || !tipo) {
       return NextResponse.json({ error: 'Faltan campos requeridos' }, { status: 400 })
+    }
+
+    // Validate allowed values
+    if (!ALLOWED_MODELS.includes(modelo)) {
+      return NextResponse.json({ error: 'Modelo inválido' }, { status: 400 })
+    }
+    if (!ALLOWED_TYPES.includes(tipo)) {
+      return NextResponse.json({ error: 'Tipo inválido' }, { status: 400 })
     }
 
     // Validate formats
@@ -78,7 +98,7 @@ export async function POST(request) {
     // 1. SEND EMAIL via Resend
     // ──────────────────────────────────────────────
     if (process.env.RESEND_API_KEY) {
-      const emailTo = process.env.EMAIL_TO || 'ventas@mg.com'
+      const emailTo = process.env.EMAIL_TO || 'info@giamamg.com.ar'
 
       const subject = tipo === 'test-drive'
         ? `Nuevo Test Drive - ${escapeHtml(modelo)} - ${escapeHtml(nombre)}`
@@ -129,31 +149,21 @@ export async function POST(request) {
     }
 
     // ──────────────────────────────────────────────
-    // 2. CRM INTEGRATION (ready to plug in)
+    // 2. CRM WEBHOOK (plug in your URL)
     // ──────────────────────────────────────────────
-    // When you choose a CRM, add the API call here:
-    //
-    // if (process.env.CRM_API_KEY) {
-    //   await fetch('https://api.hubspot.com/crm/v3/objects/contacts', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Authorization': `Bearer ${process.env.CRM_API_KEY}`,
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       properties: {
-    //         firstname: lead.nombre,
-    //         email: lead.email,
-    //         phone: lead.telefono,
-    //         hs_lead_status: 'NEW',
-    //         lead_source: lead.origen,
-    //         // custom properties...
-    //       }
-    //     }),
-    //   })
+    // if (process.env.CRM_WEBHOOK_URL) {
+    //   try {
+    //     await fetch(process.env.CRM_WEBHOOK_URL, {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify(lead),
+    //     })
+    //   } catch (crmErr) {
+    //     console.error('CRM webhook error:', crmErr)
+    //   }
     // }
 
-    return NextResponse.json({ ok: true, lead })
+    return NextResponse.json({ ok: true })
 
   } catch (err) {
     console.error('API /lead error:', err)

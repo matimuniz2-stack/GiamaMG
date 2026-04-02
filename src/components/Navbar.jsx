@@ -28,8 +28,8 @@ export default function Navbar({ openModal }) {
             <div className="nav-dropdown">
               <button className="nav-drop-trigger">Modelos</button>
               <div className="nav-dropdown-menu">
-                <a href="#" onClick={(e) => { e.preventDefault(); openModal('mg3') }}>MG3 Hybrid+</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); openModal('zs') }}>MG ZS Hybrid+</a>
+                <a href="/modelos/mg3">MG3 Hybrid+</a>
+                <a href="/modelos/zs">MG ZS Hybrid+</a>
               </div>
             </div>
             <a href="#concesionario">Concesionario</a>
@@ -53,8 +53,8 @@ export default function Navbar({ openModal }) {
       {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a href="#modelos" onClick={closeMenu}>Modelos</a>
-        <a href="#" className="mobile-sub" onClick={(e) => { e.preventDefault(); closeMenu(); openModal('mg3') }} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG3 Hybrid+</a>
-        <a href="#" className="mobile-sub" onClick={(e) => { e.preventDefault(); closeMenu(); openModal('zs') }} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG ZS Hybrid+</a>
+        <a href="/modelos/mg3" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG3 Hybrid+</a>
+        <a href="/modelos/zs" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG ZS Hybrid+</a>
         <a href="#concesionario" onClick={closeMenu}>Concesionario</a>
         <a href="#sobre-mg" onClick={closeMenu}>Sobre MG</a>
         <a href="#test-drive" onClick={closeMenu}>Test Drive</a>

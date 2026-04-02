@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import GalleryCarousel from './GalleryCarousel'
 import { MODELS } from '@/data/models'
 
@@ -30,20 +31,22 @@ export default function ModelModal({ model, isOpen, onClose, onOpenLightbox }) {
     }, 300)
   }
 
-  const getGalleryImages = (gallery) => gallery.map(g => g.src)
-
   return (
     <div className={`model-modal ${isOpen ? 'open' : ''}`} ref={modalRef}>
-      <button className="modal-close" onClick={onClose}>&times;</button>
+      <button className="modal-close" onClick={onClose} aria-label="Cerrar">&times;</button>
 
       <div className="modal-hero" style={data.heroStyle}>
         <div className="modal-bg" style={{ background: data.bgGradient }} />
-        <img
-          className="modal-car"
-          src={carImg}
-          alt={`${data.name} — vista principal`}
-          style={{ display: data.hideCarOnHero ? 'none' : 'block', opacity: imgOpacity, transition: 'opacity 0.3s' }}
-        />
+        {!data.hideCarOnHero && (
+          <Image
+            className="modal-car"
+            src={carImg}
+            alt={`${data.name} — vista principal`}
+            width={600}
+            height={400}
+            style={{ opacity: imgOpacity, transition: 'opacity 0.3s' }}
+          />
+        )}
         <div className="modal-info">
           <h1>{data.name}</h1>
           <p>{data.subtitle}</p>
@@ -53,7 +56,7 @@ export default function ModelModal({ model, isOpen, onClose, onOpenLightbox }) {
       <div className="modal-body">
         {/* Warranty */}
         <div className="warranty-banner">
-          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
           <div className="wb-text">
             <h4>{data.warranty}</h4>
             <p>{data.warrantySub}</p>
@@ -63,21 +66,24 @@ export default function ModelModal({ model, isOpen, onClose, onOpenLightbox }) {
         {/* Colors */}
         <h2>Elegí tu color</h2>
         <div className="color-showcase">
-          <img
+          <Image
             src={carImg}
             alt={`${data.name} — ${data.colors[activeColor]?.name}`}
-            style={{ opacity: imgOpacity, transition: 'opacity 0.3s' }}
+            width={600}
+            height={400}
+            sizes="(max-width: 768px) 100vw, 600px"
+            style={{ opacity: imgOpacity, transition: 'opacity 0.3s', maxWidth: '80%', height: 'auto' }}
           />
         </div>
         <div className="modal-colors">
           <span>Color: <strong>{data.colors[activeColor]?.name}</strong></span>
           {data.colors.map((c, i) => (
-            <div
+            <button
               key={i}
               className={`modal-color-dot ${i === activeColor ? 'active' : ''}`}
               style={{ background: c.color, borderColor: i === activeColor ? 'var(--black)' : (c.border || 'transparent') }}
               onClick={() => changeColor(i)}
-              title={c.name}
+              aria-label={`Color ${c.name}`}
             />
           ))}
         </div>
@@ -132,12 +138,12 @@ export default function ModelModal({ model, isOpen, onClose, onOpenLightbox }) {
         {/* Ficha download */}
         {data.hasFicha && (
           <div className="ficha-download">
-            <img src="/img/ficha-preview.png" alt="Ficha técnica MG3 Hybrid+ preview" />
+            <Image src="/img/ficha-preview.png" alt="Ficha técnica MG3 Hybrid+ preview" width={200} height={280} />
             <div className="ficha-download-info">
               <h4>Ficha Técnica MG3 Hybrid+</h4>
               <p>Descargá la ficha técnica completa con todas las especificaciones, dimensiones y equipamiento de cada versión.</p>
               <a href="/img/MG3-Ficha-Tecnica.pdf" download className="btn-download">
-                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                 Descargar PDF
               </a>
             </div>

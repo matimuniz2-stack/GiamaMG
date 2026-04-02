@@ -103,8 +103,8 @@ input, select, textarea { font-family: var(--font); }
 .hero-slide.active { opacity: 1; }
 .hero-slide .slide-bg {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  background-size: cover; background-position: center;
   animation: heroZoom 12s ease-out forwards;
+  overflow: hidden;
 }
 @keyframes heroZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
 .hero-slide .slide-bg::after {
@@ -402,6 +402,7 @@ input, select, textarea { font-family: var(--font); }
 .modal-color-dot {
   width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
   border: 3px solid transparent; transition: all 0.3s;
+  padding: 0; outline: none;
 }
 .modal-color-dot:hover { transform: scale(1.1); }
 .modal-color-dot.active { border-color: var(--black); }
@@ -596,7 +597,7 @@ input, select, textarea { font-family: var(--font); }
   font-size: 16px; font-weight: 700; flex-shrink: 0;
 }
 .testimonial-author strong { display: block; font-size: 14px; color: var(--black); }
-.testimonial-author span { font-size: 12px; color: #999; }
+.testimonial-author span { font-size: 12px; color: #666; }
 
 /* ============ FAQ ============ */
 .faq-list { max-width: 800px; }
@@ -821,4 +822,13 @@ input, select, textarea { font-family: var(--font); }
   .stat .stat-number { font-size: 28px; }
   .model-card { padding: 24px 16px; }
   .about-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+  .tl-item { opacity: 1; transform: none; }
+  .tl-item .tl-content { opacity: 1; transform: none; }
+  .hero-slide .slide-bg { animation: none !important; }
 }
