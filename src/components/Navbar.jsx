@@ -20,7 +20,7 @@ export default function Navbar({ openModal }) {
     <>
       <nav className="navbar">
         <div className="navbar-left">
-          <a href="#" className="navbar-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+          <a href="/" className="navbar-logo">
             <Image src="/logo-mg.png" alt="MG Motor logo" width={48} height={48} priority />
             <span className="navbar-giama">GIAMA</span>
           </a>
