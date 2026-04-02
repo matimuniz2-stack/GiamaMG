@@ -45,7 +45,7 @@ const jsonLd = {
   logo: 'https://giamamg.com/logo-mg.png',
   image: 'https://giamamg.com/og-image.png',
   telephone: '+5491131347853',
-  email: 'info@giamamg.com.ar',
+  email: 'autos.mg.ventas@giama.com.ar',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Gascón 3265',

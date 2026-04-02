@@ -233,7 +233,7 @@ export default function HomePage() {
             <div className="conc-detail"><MapIcon /><p><strong>Dirección</strong><br />Gascón 3265, Mar del Plata, Buenos Aires</p></div>
             <div className="conc-detail"><PhoneIcon /><p><strong>Teléfono</strong><br /><a href="tel:+5491131347853">+54 9 11 3134 7853</a></p></div>
             <div className="conc-detail"><ClockIcon /><p><strong>Horarios</strong><br />Lunes a Viernes 9 a 18 hs<br />Sábados 9 a 13 hs</p></div>
-            <div className="conc-detail"><EmailIcon /><p><strong>Email</strong><br /><a href="mailto:info@giamamg.com.ar">info@giamamg.com.ar</a></p></div>
+            <div className="conc-detail"><EmailIcon /><p><strong>Email</strong><br /><a href="mailto:autos.mg.ventas@giama.com.ar">autos.mg.ventas@giama.com.ar</a></p></div>
             <div className="conc-detail"><GlobeIcon /><p><strong>Zona de cobertura</strong><br />Mar del Plata</p></div>
             <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{marginTop:20}}>
               Contactar por WhatsApp
@@ -381,7 +381,7 @@ export default function HomePage() {
             <a href="https://maps.google.com/?q=Gascón+3265+Mar+del+Plata" target="_blank" rel="noopener noreferrer">Gascón 3265, Mar del Plata</a>
             <a href="tel:+5491131347853">+54 9 11 3134 7853</a>
             <a href="https://wa.me/5491131347853" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-            <a href="mailto:info@giamamg.com.ar">info@giamamg.com.ar</a>
+            <a href="mailto:autos.mg.ventas@giama.com.ar">autos.mg.ventas@giama.com.ar</a>
           </div>
         </div>
         <p className="footer-legal">Los precios expresados en dólares son referenciales y pueden variar. Consulte con el concesionario para valores actualizados. MG Argentina — Importado por Eximar.</p>

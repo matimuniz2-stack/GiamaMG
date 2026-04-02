@@ -118,7 +118,7 @@ export async function POST(request) {
     // 1. SEND EMAIL via Resend
     // ──────────────────────────────────────────────
     if (process.env.RESEND_API_KEY) {
-      const emailTo = process.env.EMAIL_TO || 'info@giamamg.com.ar'
+      const emailTo = process.env.EMAIL_TO || 'autos.mg.ventas@giama.com.ar'
 
       const subject = tipo === 'test-drive'
         ? `Nuevo Test Drive - ${escapeHtml(modelo)} - ${escapeHtml(nombre)}`
