@@ -658,6 +658,11 @@ input, select, textarea { font-family: var(--font); }
   .tl-item:not(.visible):nth-child(even) .tl-content { transform: translateY(20px); }
 }
 
+/* ============ MODEL PAGE (standalone) ============ */
+.model-page { padding-top: 72px; }
+.model-page .modal-hero { position: relative; height: 60vh; min-height: 400px; }
+.model-page .modal-body h2 { margin-top: 40px; }
+
 /* ============ SCROLL ANIMATIONS ============ */
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
