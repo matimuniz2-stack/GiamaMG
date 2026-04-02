@@ -1,11 +1,14 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import Navbar from './Navbar'
 import HeroSlider from './HeroSlider'
-import ModelModal from './ModelModal'
-import Lightbox from './Lightbox'
 import LeadForm from './LeadForm'
+
+const ModelModal = dynamic(() => import('./ModelModal'), { ssr: false })
+const Lightbox = dynamic(() => import('./Lightbox'), { ssr: false })
 
 // SVG icons as components
 const ShieldIcon = ({ className, style }) => (
@@ -107,7 +110,7 @@ export default function HomePage() {
         <div className="models-grid">
           <div className="model-card reveal" onClick={() => openModal('mg3')}>
             <span className="card-tag hybrid">Full Hybrid</span>
-            <div className="card-img"><img src="/img/mg3-icon.webp" alt="MG3 Hybrid+" /></div>
+            <div className="card-img"><Image src="/img/mg3-icon.webp" alt="MG3 Hybrid+" width={400} height={250} /></div>
             <h3>MG3 Hybrid+</h3>
             <p className="card-specs">195 CV | 4.4 L/100 km</p>
             <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} /> 6 años de garantía</div>
@@ -117,7 +120,7 @@ export default function HomePage() {
 
           <div className="model-card reveal" onClick={() => openModal('zs')}>
             <span className="card-tag hybrid">Hybrid+</span>
-            <div className="card-img"><img src="/img/zs-icon.png" alt="MG ZS Hybrid+" /></div>
+            <div className="card-img"><Image src="/img/zs-icon.png" alt="MG ZS Hybrid+" width={400} height={250} /></div>
             <h3>MG ZS Hybrid+</h3>
             <p className="card-specs">191 CV | 4.9 L/100 km</p>
             <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} /> 6 años de garantía</div>
@@ -154,7 +157,7 @@ export default function HomePage() {
             { year: '2024', img: '/img/history/cyberster.jpg', alt: 'MG Cyberster, 2024', title: 'Cyberster — El futuro es ahora', desc: 'MG presenta el Cyberster, un roadster 100% eléctrico que rinde homenaje al legado deportivo de la marca con tecnología del siglo XXI.' },
           ].map((item) => (
             <div className="timeline-item" key={item.year}>
-              <div className="timeline-img"><img src={item.img} alt={item.alt} loading="lazy" /></div>
+              <div className="timeline-img"><Image src={item.img} alt={item.alt} width={600} height={400} loading="lazy" /></div>
               <div className="timeline-year">{item.year}</div>
               <div className="timeline-content">
                 <h3>{item.title}</h3>
@@ -175,9 +178,9 @@ export default function HomePage() {
             </div>
           </div>
           <div className="giama-imgs">
-            <img src="/img/hero/KV-2.jpg" alt="MG3 Hybrid+ — vista profesional" loading="lazy" />
-            <img src="/img/mg3-interior/Steering Wheel.jpg" alt="MG3 interior — volante" loading="lazy" />
-            <img src="/img/mg3-lux/Wheels.jpg" alt="MG3 — llantas de diseño" loading="lazy" />
+            <Image src="/img/hero/KV-2.jpg" alt="MG3 Hybrid+ — vista profesional" width={400} height={300} loading="lazy" />
+            <Image src="/img/mg3-interior/Steering Wheel.jpg" alt="MG3 interior — volante" width={400} height={300} loading="lazy" />
+            <Image src="/img/mg3-lux/Wheels.jpg" alt="MG3 — llantas de diseño" width={400} height={300} loading="lazy" />
           </div>
         </div>
       </section>
@@ -273,7 +276,7 @@ export default function HomePage() {
         <div className="footer-top">
           <div className="footer-brand">
             <div className="footer-logo-box">
-              <img src="/logo-mg.png" alt="MG Motor logo" />
+              <Image src="/logo-mg.png" alt="MG Motor logo" width={48} height={48} />
               <span>GIAMA</span>
             </div>
             <p>Concesionario oficial MG en Mar del Plata. Más de 40 años de trayectoria en el mercado automotor argentino.</p>

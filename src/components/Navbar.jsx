@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function Navbar({ openModal }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -20,7 +21,7 @@ export default function Navbar({ openModal }) {
       <nav className="navbar">
         <div className="navbar-left">
           <a href="#" className="navbar-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-            <img src="/logo-mg.png" alt="MG Motor logo" />
+            <Image src="/logo-mg.png" alt="MG Motor logo" width={48} height={48} priority />
             <span className="navbar-giama">GIAMA</span>
           </a>
           <div className="nav-links">
