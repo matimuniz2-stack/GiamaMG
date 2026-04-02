@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://giama-mg.vercel.app/sitemap.xml

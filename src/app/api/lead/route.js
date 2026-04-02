@@ -1,5 +1,19 @@
 import { NextResponse } from 'next/server'
 
+function escapeHtml(str) {
+  if (!str) return ''
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const PHONE_RE = /^[\d\s+\-()]{7,20}$/
+const MAX_LEN = 500
+
 export async function POST(request) {
   try {
     const body = await request.json()
@@ -9,6 +23,17 @@ export async function POST(request) {
     // Validate required fields
     if (!nombre || !email || !telefono || !modelo || !tipo) {
       return NextResponse.json({ error: 'Faltan campos requeridos' }, { status: 400 })
+    }
+
+    // Validate formats
+    if (!EMAIL_RE.test(email)) {
+      return NextResponse.json({ error: 'Email inválido' }, { status: 400 })
+    }
+    if (!PHONE_RE.test(telefono)) {
+      return NextResponse.json({ error: 'Teléfono inválido' }, { status: 400 })
+    }
+    if (nombre.length > MAX_LEN || email.length > MAX_LEN || (mensaje && mensaje.length > 2000)) {
+      return NextResponse.json({ error: 'Datos demasiado largos' }, { status: 400 })
     }
 
     // Build lead object for CRM
@@ -34,21 +59,25 @@ export async function POST(request) {
       const emailTo = process.env.EMAIL_TO || 'ventas@mg.com'
 
       const subject = tipo === 'test-drive'
-        ? `Nuevo Test Drive - ${modelo} - ${nombre}`
-        : `Nueva Cotización - ${modelo} - ${nombre}`
+        ? `Nuevo Test Drive - ${escapeHtml(modelo)} - ${escapeHtml(nombre)}`
+        : `Nueva Cotización - ${escapeHtml(modelo)} - ${escapeHtml(nombre)}`
+
+      const row = (label, value) => value
+        ? `<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">${label}</td><td style="padding:8px;border-bottom:1px solid #eee;">${escapeHtml(value)}</td></tr>`
+        : ''
 
       const htmlBody = `
         <h2>${tipo === 'test-drive' ? 'Solicitud de Test Drive' : 'Solicitud de Cotización'}</h2>
         <table style="border-collapse:collapse;width:100%;max-width:500px;">
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Nombre</td><td style="padding:8px;border-bottom:1px solid #eee;">${nombre}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;">${email}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Teléfono</td><td style="padding:8px;border-bottom:1px solid #eee;">${telefono}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Modelo</td><td style="padding:8px;border-bottom:1px solid #eee;">${modelo}</td></tr>
-          ${version ? `<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Versión</td><td style="padding:8px;border-bottom:1px solid #eee;">${version}</td></tr>` : ''}
-          ${formaPago ? `<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Forma de pago</td><td style="padding:8px;border-bottom:1px solid #eee;">${formaPago}</td></tr>` : ''}
-          ${fecha ? `<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Fecha preferida</td><td style="padding:8px;border-bottom:1px solid #eee;">${fecha}</td></tr>` : ''}
-          ${horario ? `<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Horario</td><td style="padding:8px;border-bottom:1px solid #eee;">${horario}</td></tr>` : ''}
-          ${mensaje ? `<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Mensaje</td><td style="padding:8px;border-bottom:1px solid #eee;">${mensaje}</td></tr>` : ''}
+          ${row('Nombre', nombre)}
+          ${row('Email', email)}
+          ${row('Teléfono', telefono)}
+          ${row('Modelo', modelo)}
+          ${row('Versión', version)}
+          ${row('Forma de pago', formaPago)}
+          ${row('Fecha preferida', fecha)}
+          ${row('Horario', horario)}
+          ${row('Mensaje', mensaje)}
         </table>
         <br>
         <p style="color:#999;font-size:12px;">Lead generado desde web-giama el ${new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' })}</p>
