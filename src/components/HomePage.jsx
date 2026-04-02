@@ -250,7 +250,7 @@ export default function HomePage() {
         <p className="section-tag reveal">Test Drive</p>
         <h2 className="section-title reveal">Agendá tu prueba de manejo</h2>
         <div className="form-grid">
-          <div className="form-visual reveal" style={{background:"url('/img/test-drive-bg.jpg') center/cover no-repeat",padding:0}}>
+          <div className="form-visual reveal" style={{background:"url('/img/test-drive-bg.webp') center/cover no-repeat",padding:0}}>
             <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 50%)',borderRadius:12}} />
             <div className="form-visual-text" style={{zIndex:1}}>
               <h3>Viví la experiencia MG</h3>
@@ -275,7 +275,7 @@ export default function HomePage() {
             <p className="form-desc">Contanos qué modelo te interesa y te enviaremos la mejor propuesta.</p>
             <LeadForm tipo="cotizacion" />
           </div>
-          <div className="form-visual reveal" style={{background:"url('/img/cotizacion-bg.jpg') center/cover no-repeat",padding:0}}>
+          <div className="form-visual reveal" style={{background:"url('/img/cotizacion-bg.webp') center/cover no-repeat",padding:0}}>
             <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 50%)',borderRadius:12}} />
             <div className="form-visual-text" style={{zIndex:1}}>
               <h3>Tu próximo MG te espera</h3>

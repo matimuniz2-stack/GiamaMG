@@ -138,7 +138,7 @@ export default function ModelModal({ model, isOpen, onClose, onOpenLightbox }) {
         {/* Ficha download */}
         {data.hasFicha && (
           <div className="ficha-download">
-            <Image src="/img/ficha-preview.png" alt="Ficha técnica MG3 Hybrid+ preview" width={200} height={280} />
+            <Image src="/img/ficha-preview.webp" alt="Ficha técnica MG3 Hybrid+ preview" width={200} height={280} />
             <div className="ficha-download-info">
               <h4>Ficha Técnica MG3 Hybrid+</h4>
               <p>Descargá la ficha técnica completa con todas las especificaciones, dimensiones y equipamiento de cada versión.</p>

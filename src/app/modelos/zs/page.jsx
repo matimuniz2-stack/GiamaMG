@@ -28,7 +28,7 @@ const jsonLd = {
   '@type': 'Product',
   name: data.name,
   description: data.description,
-  image: `https://giama-mg.vercel.app${data.exteriorGallery[0].src}`,
+  image: `${process.env.NEXT_PUBLIC_SITE_URL}${data.exteriorGallery[0].src}`,
   brand: { '@type': 'Brand', name: 'MG Motor' },
   offers: [
     {

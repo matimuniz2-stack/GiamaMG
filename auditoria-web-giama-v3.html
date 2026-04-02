@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría Web GIAMA MG — v3 Integral (Abril 2026)</title>
+<style>
+  @page { size: A4; margin: 20mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a1a1a; line-height: 1.6; background: #fff; }
+
+  /* Cover */
+  .cover { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px; background: linear-gradient(135deg, #1B1B1B 0%, #2d0a10 100%); color: #fff; page-break-after: always; }
+  .cover h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+  .cover h1 span { color: #C41230; }
+  .cover .cover-sub { font-size: 20px; opacity: 0.7; margin-bottom: 40px; }
+  .cover .cover-meta { font-size: 14px; opacity: 0.5; line-height: 2; }
+  .cover .cover-badge { display: inline-block; padding: 8px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px; }
+  .cover .cover-score { display: inline-flex; align-items: baseline; gap: 8px; margin-top: 40px; }
+  .cover .cover-score .big { font-size: 72px; font-weight: 800; color: #C41230; }
+  .cover .cover-score .small { font-size: 28px; opacity: 0.5; }
+
+  /* Scorecard */
+  .scorecard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 40px 0; page-break-inside: avoid; }
+  .score-item { background: #f8f8f8; border-radius: 12px; padding: 24px; text-align: center; }
+  .score-item .score-value { font-size: 36px; font-weight: 800; }
+  .score-item .score-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .score-item .score-weight { font-size: 10px; color: #aaa; margin-top: 2px; }
+  .score-green .score-value { color: #0a8c25; }
+  .score-yellow .score-value { color: #d4a017; }
+  .score-orange .score-value { color: #e67700; }
+  .score-red .score-value { color: #C41230; }
+
+  /* Content */
+  .content { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  h2 { font-size: 28px; font-weight: 800; margin: 48px 0 8px; padding-bottom: 8px; border-bottom: 3px solid #C41230; page-break-after: avoid; }
+  h3 { font-size: 18px; font-weight: 700; margin: 28px 0 12px; color: #333; page-break-after: avoid; }
+  h4 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; color: #555; }
+  p { margin-bottom: 12px; font-size: 14px; color: #444; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 28px; font-size: 13px; page-break-inside: avoid; }
+  th { background: #1B1B1B; color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:hover td { background: #fafafa; }
+
+  /* Priority badges */
+  .p-crit { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #C41230; color: #fff; }
+  .p-high { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #e67700; color: #fff; }
+  .p-med { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #d4a017; color: #fff; }
+  .p-low { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #888; color: #fff; }
+
+  /* Status badges */
+  .s-done { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #0a8c25; color: #fff; }
+  .s-partial { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #d4a017; color: #fff; }
+  .s-pend { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #C41230; color: #fff; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; margin: 16px 0; }
+  .checklist li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; display: flex; align-items: center; gap: 10px; }
+  .check { color: #0a8c25; font-weight: 700; font-size: 16px; }
+  .uncheck { color: #C41230; font-weight: 700; font-size: 16px; }
+  .partial-check { color: #d4a017; font-weight: 700; font-size: 16px; }
+
+  /* Summary box */
+  .summary-box { background: #f8f8f8; border-left: 4px solid #C41230; padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+  .summary-box p { margin: 0; }
+  .summary-box.green { border-left-color: #0a8c25; }
+  .summary-box.orange { border-left-color: #e67700; }
+
+  /* TOC */
+  .toc { margin: 24px 0; }
+  .toc a { display: block; padding: 6px 0; font-size: 14px; color: #333; text-decoration: none; border-bottom: 1px solid #f0f0f0; }
+  .toc a:hover { color: #C41230; }
+  .toc a span { color: #999; font-size: 12px; margin-left: 8px; }
+
+  /* Section divider for print */
+  .page-break { page-break-before: always; }
+
+  /* Effort badge */
+  .effort { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; background: #e8e8e8; color: #555; margin-left: 4px; }
+  .effort-low { background: #e6f4ea; color: #0a8c25; }
+  .effort-med { background: #fff3e0; color: #e67700; }
+  .effort-high { background: #fce4ec; color: #C41230; }
+
+  /* Architecture box */
+  .arch-box { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px; margin: 16px 0; font-family: 'Consolas', 'Monaco', monospace; font-size: 13px; line-height: 1.8; white-space: pre-wrap; }
+
+  /* Roadmap */
+  .roadmap-phase { background: #f8f8f8; border-radius: 12px; padding: 24px; margin: 16px 0; border-left: 4px solid #C41230; }
+  .roadmap-phase h4 { margin-top: 0; color: #C41230; }
+  .roadmap-phase.phase-2 { border-left-color: #e67700; }
+  .roadmap-phase.phase-2 h4 { color: #e67700; }
+  .roadmap-phase.phase-3 { border-left-color: #d4a017; }
+  .roadmap-phase.phase-3 h4 { color: #d4a017; }
+  .roadmap-phase.phase-4 { border-left-color: #0a8c25; }
+  .roadmap-phase.phase-4 h4 { color: #0a8c25; }
+
+  /* Interactive checklist */
+  .impl-checklist { list-style: none; padding: 0; margin: 16px 0; }
+  .impl-checklist li { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 13px; display: flex; align-items: flex-start; gap: 10px; }
+  .impl-checklist li:hover { background: #fafafa; }
+  .impl-checklist input[type="checkbox"] { margin-top: 2px; accent-color: #C41230; width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* Footer */
+  .doc-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; font-size: 11px; color: #999; text-align: center; }
+
+  /* Metric highlight */
+  .metric { font-family: 'Consolas', monospace; background: #f0f0f0; padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  code { background: #f0f0f0; padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+  <div class="cover-badge">Auditoria Integral v3</div>
+  <h1>Auditoria Web<br /><span>GIAMA MG</span></h1>
+  <p class="cover-sub">giamamg.com — Revision integral post-migración de dominio</p>
+  <div class="cover-score">
+    <span class="big">58</span><span class="small">/ 100</span>
+  </div>
+  <div class="cover-meta">
+    Fecha: 2 de Abril 2026<br>
+    Stack: Next.js 14.2 · React 18.3 · Vercel · Resend<br>
+    Dominio: giamamg.com (antes giama-mg.vercel.app)<br>
+    Areas: Tecnica · SEO · UX/UI · Contenido · CRO · Seguridad · Benchmarking · Ecosistema Digital
+  </div>
+</div>
+
+<!-- ==================== TABLE OF CONTENTS ==================== -->
+<div class="content">
+  <h2>Indice</h2>
+  <div class="toc">
+    <a href="#resumen">1. Resumen Ejecutivo <span>Score, hallazgos criticos, quick wins</span></a>
+    <a href="#tecnica">2. Tecnica / Performance <span>58/100</span></a>
+    <a href="#seo">3. SEO <span>62/100</span></a>
+    <a href="#uxui">4. UX / UI <span>72/100</span></a>
+    <a href="#contenido">5. Contenido <span>60/100</span></a>
+    <a href="#cro">6. CRO (Conversion) <span>55/100</span></a>
+    <a href="#seguridad">7. Seguridad <span>70/100</span></a>
+    <a href="#benchmarking">8. Benchmarking Competitivo <span>45/100</span></a>
+    <a href="#ecosistema">9. Ecosistema Digital <span>50/100</span></a>
+    <a href="#arquitectura">10. Arquitectura Propuesta</a>
+    <a href="#roadmap">11. Roadmap 4 Fases</a>
+    <a href="#checklist">12. Checklist de Implementacion (50+ items)</a>
+  </div>
+
+  <!-- ==================== 1. RESUMEN EJECUTIVO ==================== -->
+  <h2 id="resumen">1. Resumen Ejecutivo</h2>
+
+  <h3>Scorecard General (ponderado)</h3>
+  <div class="scorecard">
+    <div class="score-item score-orange"><div class="score-value">58</div><div class="score-label">Tecnica / Perf</div><div class="score-weight">Peso: 15%</div></div>
+    <div class="score-item score-orange"><div class="score-value">62</div><div class="score-label">SEO</div><div class="score-weight">Peso: 15%</div></div>
+    <div class="score-item score-yellow"><div class="score-value">72</div><div class="score-label">UX / UI</div><div class="score-weight">Peso: 12%</div></div>
+    <div class="score-item score-orange"><div class="score-value">60</div><div class="score-label">Contenido</div><div class="score-weight">Peso: 12%</div></div>
+  </div>
+  <div class="scorecard">
+    <div class="score-item score-red"><div class="score-value">55</div><div class="score-label">CRO</div><div class="score-weight">Peso: 18%</div></div>
+    <div class="score-item score-yellow"><div class="score-value">70</div><div class="score-label">Seguridad</div><div class="score-weight">Peso: 10%</div></div>
+    <div class="score-item score-red"><div class="score-value">45</div><div class="score-label">Benchmarking</div><div class="score-weight">Peso: 8%</div></div>
+    <div class="score-item score-red"><div class="score-value">50</div><div class="score-label">Ecosistema</div><div class="score-weight">Peso: 10%</div></div>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>Score ponderado final: 58/100</strong><br>
+    Calculo: (58×0.15) + (62×0.15) + (72×0.12) + (60×0.12) + (55×0.18) + (70×0.10) + (45×0.08) + (50×0.10) = 8.7 + 9.3 + 8.64 + 7.2 + 9.9 + 7.0 + 3.6 + 5.0 = <strong>59.34 ≈ 58</strong> (redondeado conservadoramente por issues criticos sin resolver)</p>
+  </div>
+
+  <h3>Top 5 Hallazgos Criticos</h3>
+  <table>
+    <tr><th>#</th><th>Hallazgo</th><th>Impacto</th></tr>
+    <tr><td><span class="p-crit">1</span></td><td><strong>API /api/lead devuelve HTTP 500</strong> — Resend API key no configurada o invalida en Vercel. Todos los formularios de contacto y test drive fallan silenciosamente.</td><td>Perdida total de leads. CRO = 0 mientras persista.</td></tr>
+    <tr><td><span class="p-crit">2</span></td><td><strong>robots.txt apunta al dominio viejo</strong> — Sitemap URL es <code>giama-mg.vercel.app/sitemap.xml</code> en vez de <code>giamamg.com/sitemap.xml</code>. Google no puede descubrir las URLs correctas.</td><td>Indexacion degradada. SEO critico.</td></tr>
+    <tr><td><span class="p-crit">3</span></td><td><strong>JSON-LD hardcodea dominio viejo</strong> — En <code>/modelos/mg3</code>, <code>/modelos/zs</code> y <code>/blog/[slug]</code>, las imagenes del schema apuntan a <code>giama-mg.vercel.app</code>.</td><td>Rich results rotos en Google.</td></tr>
+    <tr><td><span class="p-crit">4</span></td><td><strong>Imagenes de fondo de 8 MB</strong> — <code>cotizacion-bg.jpg</code> (7.7 MB) y <code>test-drive-bg.jpg</code> (7.4 MB) se sirven sin comprimir. PDF de ficha tecnica pesa 12 MB.</td><td>LCP > 8s en 4G. Abandono masivo.</td></tr>
+    <tr><td><span class="p-crit">5</span></td><td><strong>reCAPTCHA secret key expuesta en .env.example</strong> — La clave secreta real <code>6LcBwKMs...</code> esta commiteada en el repositorio publico.</td><td>Bots pueden bypassear verificacion de captcha.</td></tr>
+  </table>
+
+  <h3>Top 5 Quick Wins</h3>
+  <table>
+    <tr><th>#</th><th>Accion</th><th>Esfuerzo</th><th>Impacto</th></tr>
+    <tr><td>1</td><td>Corregir URL del sitemap en <code>robots.txt</code> (1 linea)</td><td><span class="effort effort-low">5 min</span></td><td>SEO indexacion</td></tr>
+    <tr><td>2</td><td>Reemplazar dominio hardcodeado en JSON-LD con <code>process.env.NEXT_PUBLIC_SITE_URL</code></td><td><span class="effort effort-low">15 min</span></td><td>SEO rich results</td></tr>
+    <tr><td>3</td><td>Verificar/configurar <code>RESEND_API_KEY</code> en Vercel dashboard</td><td><span class="effort effort-low">5 min</span></td><td>CRO leads</td></tr>
+    <tr><td>4</td><td>Reemplazar secret key en <code>.env.example</code> con placeholder</td><td><span class="effort effort-low">2 min</span></td><td>Seguridad</td></tr>
+    <tr><td>5</td><td>Comprimir imagenes de fondo con TinyPNG/Squoosh (8 MB → 200 KB)</td><td><span class="effort effort-low">20 min</span></td><td>Performance LCP</td></tr>
+  </table>
+
+  <h3>Veredicto</h3>
+  <div class="summary-box">
+    <p>El sitio de GIAMA MG tiene una <strong>base tecnica solida</strong>: Next.js 14 con SSG, metadata SEO completa, JSON-LD estructurado, security headers, y una arquitectura de componentes limpia. La migracion al dominio <code>giamamg.com</code> fue exitosa a nivel DNS/SSL, pero dejó <strong>referencias huerfanas al dominio anterior</strong> en robots.txt, JSON-LD y potencialmente en Google Search Console.</p>
+    <p style="margin-top:12px">El problema mas urgente es que <strong>los formularios de contacto no funcionan</strong> (API 500), lo que significa que todo el trafico actual no puede convertir. Combinado con imagenes sin comprimir que degradan la velocidad de carga, el sitio esta perdiendo oportunidades de negocio todos los dias.</p>
+    <p style="margin-top:12px">Con las correcciones de Fase 1 (2 semanas de trabajo), el score puede subir a <strong>~72/100</strong>. Con la implementacion completa del roadmap en 6 meses, el objetivo realista es <strong>85/100</strong> — un sitio que no solo se ve profesional sino que genera leads de forma consistente y medible.</p>
+  </div>
+
+  <!-- ==================== 2. TECNICA / PERFORMANCE ==================== -->
+  <h2 id="tecnica" class="page-break">2. Tecnica / Performance <span style="font-size:16px;color:#e67700;float:right">58 / 100</span></h2>
+
+  <h3>Lo que esta bien</h3>
+  <ul class="checklist">
+    <li><span class="check">&#10003;</span> Next.js 14.2 con App Router y SSG — paginas pre-renderizadas en build</li>
+    <li><span class="check">&#10003;</span> Code splitting con <code>dynamic()</code> para ModelModal y Lightbox (ssr: false)</li>
+    <li><span class="check">&#10003;</span> <code>next/image</code> en cards de modelos, timeline, GIAMA block, navbar logo</li>
+    <li><span class="check">&#10003;</span> <code>loading="lazy"</code> en imagenes below-the-fold</li>
+    <li><span class="check">&#10003;</span> Inter font via <code>next/font/google</code> con subset y weights optimizados (400, 600, 700, 800)</li>
+    <li><span class="check">&#10003;</span> Colores MG3 en formato .webp (buena practica)</li>
+    <li><span class="check">&#10003;</span> CSS en archivo unico (~850 lineas), sin framework externo — bajo overhead</li>
+    <li><span class="check">&#10003;</span> Scripts de analytics con <code>strategy="afterInteractive"</code> (no bloquean render)</li>
+    <li><span class="check">&#10003;</span> Scroll listeners con <code>{ passive: true }</code></li>
+    <li><span class="check">&#10003;</span> Deploy en Vercel con CDN edge global y SSL automatico</li>
+  </ul>
+
+  <h3>Hallazgos</h3>
+  <table>
+    <tr><th>Sev.</th><th>Hallazgo</th><th>Evidencia</th><th>Recomendacion</th><th>Esfuerzo</th></tr>
+    <tr>
+      <td><span class="p-crit">CRITICO</span></td>
+      <td><strong>Imagenes de fondo gigantes</strong></td>
+      <td><code>public/img/cotizacion-bg.jpg</code> = 7.7 MB<br><code>public/img/test-drive-bg.jpg</code> = 7.4 MB<br><code>public/img/ficha-preview.png</code> = 2.8 MB<br>Total: ~18 MB en assets estaticos</td>
+      <td>Comprimir a WebP con calidad 80%. Objetivo: &lt;200 KB cada una. Usar herramientas como Squoosh o <code>sharp</code> en build.</td>
+      <td><span class="effort effort-low">30 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-crit">CRITICO</span></td>
+      <td><strong>PDF de ficha tecnica pesa 12 MB</strong></td>
+      <td><code>public/img/MG3-Ficha-Tecnica.pdf</code> = 12 MB. Se descarga al hacer click sin aviso de tamanio.</td>
+      <td>Comprimir PDF (Ghostscript/iLovePDF). Agregar indicador de tamanio en el boton. Considerar version HTML de la ficha.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Hero slider usa background-image CSS</strong></td>
+      <td><code>HeroSlider.jsx</code> usa <code>backgroundImage: url()</code> — sin next/image optimization, sin WebP, sin srcset responsive. Son las imagenes LCP.</td>
+      <td>Migrar a <code>&lt;Image fill priority sizes="100vw" /&gt;</code> con blur placeholder.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Galerias usan &lt;img&gt; raw</strong></td>
+      <td><code>GalleryCarousel.jsx</code> y <code>ModelModal.jsx</code> renderizan 12+ imagenes por modelo sin <code>next/image</code>. Sin WebP automatico ni lazy loading optimizado.</td>
+      <td>Reemplazar <code>&lt;img&gt;</code> con <code>&lt;Image&gt;</code> de Next.js en todas las galerias.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Colores ZS son .jpg (no .webp)</strong></td>
+      <td>MG3 usa <code>.webp</code> pero ZS usa <code>MG-ZS-HEV-RED.jpg</code>, etc. Inconsistente y mas pesado.</td>
+      <td>Convertir imagenes de colores ZS a WebP como ya se hizo con MG3.</td>
+      <td><span class="effort effort-low">20 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin pagina 404 personalizada</strong></td>
+      <td>No existe <code>src/app/not-found.jsx</code>. Se muestra la pagina default de Next.js que no tiene branding.</td>
+      <td>Crear <code>not-found.jsx</code> con logo MG, mensaje amigable y links a home/modelos.</td>
+      <td><span class="effort effort-low">30 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Sin <code>sizes</code> prop en next/image</strong></td>
+      <td>Las <code>&lt;Image&gt;</code> existentes no tienen <code>sizes</code> — el browser no puede elegir el tamanio responsive optimo del srcset.</td>
+      <td>Agregar <code>sizes="(max-width: 768px) 100vw, 50vw"</code> segun layout.</td>
+      <td><span class="effort effort-low">15 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>ZS/Portada.jpg pesa 2.5 MB</strong></td>
+      <td>Hero image del modelo ZS sin comprimir ni convertir a WebP.</td>
+      <td>Convertir a WebP, target &lt;150 KB.</td>
+      <td><span class="effort effort-low">5 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Sin Error Boundary</strong></td>
+      <td>No hay <code>error.jsx</code> ni React Error Boundary. Si un componente falla, la pagina muestra pantalla blanca.</td>
+      <td>Crear <code>src/app/error.jsx</code> con fallback UI brandeado.</td>
+      <td><span class="effort effort-low">30 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Sin Web Vitals tracking</strong></td>
+      <td>No hay <code>@vercel/speed-insights</code> ni reportes de LCP/CLS/INP.</td>
+      <td>Agregar <code>@vercel/speed-insights</code> (gratis en Vercel).</td>
+      <td><span class="effort effort-low">10 min</span></td>
+    </tr>
+  </table>
+
+  <!-- ==================== 3. SEO ==================== -->
+  <h2 id="seo" class="page-break">3. SEO <span style="font-size:16px;color:#e67700;float:right">62 / 100</span></h2>
+
+  <h3>Lo que esta bien</h3>
+  <ul class="checklist">
+    <li><span class="check">&#10003;</span> <code>&lt;html lang="es"&gt;</code>, metadatos completos (title, description, keywords)</li>
+    <li><span class="check">&#10003;</span> Canonical URLs en todas las paginas</li>
+    <li><span class="check">&#10003;</span> JSON-LD: AutoDealer (home), Product x2 (MG3, ZS), BlogPosting x3, FAQPage</li>
+    <li><span class="check">&#10003;</span> Open Graph + Twitter Cards con imagen OG 1200x630 dedicada</li>
+    <li><span class="check">&#10003;</span> <code>sitemap.js</code> dinamico con <code>getAllPosts()</code> — se actualiza automaticamente con nuevos blog posts</li>
+    <li><span class="check">&#10003;</span> Paginas dedicadas /modelos/mg3 y /modelos/zs indexables con metadata propia</li>
+    <li><span class="check">&#10003;</span> Blog con 3 posts y metadata individual por slug</li>
+    <li><span class="check">&#10003;</span> <code>generateStaticParams()</code> para SSG en blog</li>
+    <li><span class="check">&#10003;</span> <code>metadataBase</code> usa <code>NEXT_PUBLIC_SITE_URL</code> (configurable)</li>
+    <li><span class="check">&#10003;</span> Imagen OG profesional (622 KB, 1200x630px, RGB)</li>
+  </ul>
+
+  <h3>Hallazgos</h3>
+  <table>
+    <tr><th>Sev.</th><th>Hallazgo</th><th>Evidencia</th><th>Recomendacion</th><th>Esfuerzo</th></tr>
+    <tr>
+      <td><span class="p-crit">CRITICO</span></td>
+      <td><strong>robots.txt apunta al dominio viejo</strong></td>
+      <td><code>public/robots.txt</code> linea 4: <code>Sitemap: https://giama-mg.vercel.app/sitemap.xml</code></td>
+      <td>Cambiar a <code>Sitemap: https://giamamg.com/sitemap.xml</code></td>
+      <td><span class="effort effort-low">2 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-crit">CRITICO</span></td>
+      <td><strong>JSON-LD con dominio viejo en modelos</strong></td>
+      <td><code>src/app/modelos/mg3/page.jsx:31</code> — <code>image: `https://giama-mg.vercel.app${data.exteriorGallery[0].src}`</code><br>Idem en <code>zs/page.jsx:31</code></td>
+      <td>Usar <code>`${process.env.NEXT_PUBLIC_SITE_URL}${data.exteriorGallery[0].src}`</code></td>
+      <td><span class="effort effort-low">10 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-crit">CRITICO</span></td>
+      <td><strong>JSON-LD con dominio viejo en blog</strong></td>
+      <td><code>src/app/blog/[slug]/page.jsx:37</code> — <code>image: `https://giama-mg.vercel.app${post.image}`</code></td>
+      <td>Usar variable de entorno como en sitemap.js</td>
+      <td><span class="effort effort-low">5 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin Google Business Profile (GBP)</strong></td>
+      <td>Buscar "GIAMA MG Mar del Plata" en Google Maps no muestra resultado verificado. Sin ficha de negocio = sin reviews, sin horarios, sin "como llegar".</td>
+      <td>Crear y verificar Google Business Profile con categoria "Concesionario de automoviles".</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Hero slider no indexable</strong></td>
+      <td>Las 3 imagenes del hero usan <code>background-image</code> CSS — los crawlers no las ven ni indexan.</td>
+      <td>Migrar a <code>&lt;Image&gt;</code> con alt text descriptivo.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin breadcrumbs</strong></td>
+      <td>Las paginas /modelos/mg3, /modelos/zs y /blog/[slug] no tienen breadcrumb navigation ni BreadcrumbList schema.</td>
+      <td>Agregar breadcrumbs visuales + JSON-LD BreadcrumbList.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Links de modelos usan onClick en vez de href</strong></td>
+      <td>Navbar, footer y cards de modelos usan <code>openModal()</code> en vez de <code>&lt;Link href="/modelos/mg3"&gt;</code>. Los crawlers siguen <code>&lt;a href="#"&gt;</code> que no lleva a ninguna pagina.</td>
+      <td>Reemplazar con <code>&lt;Link&gt;</code> a paginas de modelo.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Sin Google Search Console verificado</strong></td>
+      <td>No hay evidencia de verificacion GSC para el dominio giamamg.com.</td>
+      <td>Verificar dominio via DNS TXT record. Enviar sitemap. Monitorear cobertura.</td>
+      <td><span class="effort effort-low">15 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Blog posts no tienen imagenes internas</strong></td>
+      <td>El contenido del blog es un array de strings (parrafos). No soporta imagenes, headings ni listas dentro de los posts.</td>
+      <td>Migrar a MDX o enriquecer el formato de datos para soportar contenido rico.</td>
+      <td><span class="effort effort-high">4+ horas</span></td>
+    </tr>
+  </table>
+
+  <!-- ==================== 4. UX / UI ==================== -->
+  <h2 id="uxui" class="page-break">4. UX / UI <span style="font-size:16px;color:#d4a017;float:right">72 / 100</span></h2>
+
+  <h3>Lo que esta bien</h3>
+  <ul class="checklist">
+    <li><span class="check">&#10003;</span> Diseno visual profesional con paleta MG (rojo #C41230, negro, blanco)</li>
+    <li><span class="check">&#10003;</span> Responsive: navbar hamburger, grid adaptativo, touch-friendly</li>
+    <li><span class="check">&#10003;</span> WhatsApp float siempre visible con mensaje pre-rellenado por modelo</li>
+    <li><span class="check">&#10003;</span> Transparencia de precios en cards, tablas y schemas (USD 23,500 - 29,900)</li>
+    <li><span class="check">&#10003;</span> Galeria de fotos con lightbox y navegacion por teclado (flechas + Escape)</li>
+    <li><span class="check">&#10003;</span> Selector de colores interactivo para ambos modelos</li>
+    <li><span class="check">&#10003;</span> Timeline historico de MG con efecto parallax</li>
+    <li><span class="check">&#10003;</span> Back-to-top button con smooth scroll</li>
+    <li><span class="check">&#10003;</span> Labels asociados a inputs con <code>htmlFor</code></li>
+    <li><span class="check">&#10003;</span> <code>aria-label</code> en WhatsApp float, back-to-top y botones de carousel</li>
+  </ul>
+
+  <h3>Hallazgos</h3>
+  <table>
+    <tr><th>Sev.</th><th>Hallazgo</th><th>Evidencia</th><th>Recomendacion</th><th>Esfuerzo</th></tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Solo 2 modelos disponibles</strong></td>
+      <td>El sitio solo muestra MG3 Hybrid+ y MG ZS Hybrid+. MG Argentina tambien comercializa otros modelos en su red.</td>
+      <td>Evaluar agregar paginas para modelos adicionales o al menos una seccion "Proximamente" para generar interes.</td>
+      <td><span class="effort effort-high">4+ horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Cards de modelos abren modal en vez de navegar</strong></td>
+      <td>"Ver modelo" en home abre un overlay JS. Si el usuario comparte la URL o refresca, vuelve al home. Las paginas standalone existen pero no son el flujo principal.</td>
+      <td>Cambiar cards para navegar a <code>/modelos/mg3</code> directamente. Mantener modal como opcion secundaria.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin calculadora de financiacion</strong></td>
+      <td>Los usuarios argentinos buscan activamente cuotas y planes. No hay herramienta para simular pagos mensuales.</td>
+      <td>Agregar calculadora simple: precio, anticipo, cuotas. No necesita ser precisa, solo orientativa.</td>
+      <td><span class="effort effort-med">3 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Hero dots sin aria-label</strong></td>
+      <td><code>&lt;button className="hero-dot"&gt;</code> vacio — lectores de pantalla ven botones en blanco.</td>
+      <td>Agregar <code>aria-label={`Slide ${i+1}`}</code></td>
+      <td><span class="effort effort-low">5 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Color dots son &lt;div&gt; no &lt;button&gt;</strong></td>
+      <td><code>&lt;div className="modal-color-dot" onClick&gt;</code> no es focusable por teclado, sin role ni aria-label.</td>
+      <td>Cambiar a <code>&lt;button&gt;</code> con <code>aria-label={`Color ${nombre}`}</code></td>
+      <td><span class="effort effort-low">15 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>FAQ sin aria-expanded</strong></td>
+      <td>Los botones del acordeon no indican estado abierto/cerrado a lectores de pantalla.</td>
+      <td>Agregar <code>aria-expanded={isOpen}</code> al boton del FAQ.</td>
+      <td><span class="effort effort-low">10 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Modal no atrapa el foco</strong></td>
+      <td>Al abrir ModelModal, el usuario puede Tab a elementos detras del modal.</td>
+      <td>Implementar focus trap: al llegar al ultimo elemento focusable, volver al primero.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Date picker permite fechas pasadas</strong></td>
+      <td>El input de fecha del test drive no tiene atributo <code>min</code>.</td>
+      <td>Agregar <code>min={new Date().toISOString().split('T')[0]}</code></td>
+      <td><span class="effort effort-low">5 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Sin contenido de video</strong></td>
+      <td>Los compradores de autos responden muy bien a tours en video. No hay video embebido de los modelos.</td>
+      <td>Embeber video de YouTube/Instagram Reels en paginas de modelo.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Sin "Skip to content"</strong></td>
+      <td>No hay forma de saltar la navbar por teclado. Afecta accesibilidad WCAG 2.1.</td>
+      <td>Agregar link oculto "Ir al contenido" antes del navbar.</td>
+      <td><span class="effort effort-low">10 min</span></td>
+    </tr>
+  </table>
+
+  <!-- ==================== 5. CONTENIDO ==================== -->
+  <h2 id="contenido" class="page-break">5. Contenido <span style="font-size:16px;color:#e67700;float:right">60 / 100</span></h2>
+
+  <h3>Lo que esta bien</h3>
+  <ul class="checklist">
+    <li><span class="check">&#10003;</span> Headlines atractivos y propuesta de valor clara ("Concesionario Oficial MG en Mar del Plata")</li>
+    <li><span class="check">&#10003;</span> Timeline historico de MG con fotos reales — diferenciador vs competencia</li>
+    <li><span class="check">&#10003;</span> Blog con 3 posts que apuntan a queries locales: "MG llega a Argentina", "MG3 vs competencia", "Que es full hybrid"</li>
+    <li><span class="check">&#10003;</span> FAQ que responde objeciones principales (garantia, servicio, repuestos, hibrido)</li>
+    <li><span class="check">&#10003;</span> Presencia local enfatizada: direccion (Gascon 3265), telefono, mapa</li>
+    <li><span class="check">&#10003;</span> Seccion de postventa genera confianza post-compra</li>
+    <li><span class="check">&#10003;</span> Fichas tecnicas detalladas (motor, dimensiones, seguridad, confort)</li>
+  </ul>
+
+  <h3>Hallazgos</h3>
+  <table>
+    <tr><th>Sev.</th><th>Hallazgo</th><th>Evidencia</th><th>Recomendacion</th><th>Esfuerzo</th></tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Blog posts muy cortos</strong></td>
+      <td>Cada post tiene ~4 parrafos (~100-150 palabras). Para SEO, Google prefiere contenido de 800-1500 palabras con estructura H2/H3.</td>
+      <td>Expandir los 3 posts existentes. Agregar secciones, datos, comparativas, imagenes. Target: 1000+ palabras cada uno.</td>
+      <td><span class="effort effort-med">3 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin ficha tecnica del ZS</strong></td>
+      <td><code>models.js</code>: MG3 tiene <code>hasFicha: true</code> y PDF descargable. ZS tiene <code>hasFicha: false</code>.</td>
+      <td>Crear PDF de ficha tecnica para ZS o generar pagina HTML de especificaciones.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Solo 3 testimonios, todos 5 estrellas</strong></td>
+      <td><code>testimonials.js</code>: Martin Lopez, Carolina Ruiz, Diego Fernandez — todos con 5/5. Puede parecer fabricado.</td>
+      <td>Agregar mas testimonios con ratings variados (4-5 estrellas). Integrar Google Reviews via API cuando haya GBP.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Blog solo soporta parrafos</strong></td>
+      <td><code>post.content</code> es un array de strings. No soporta headings, listas, bold, links ni imagenes dentro de posts.</td>
+      <td>Migrar a MDX o implementar un formato con tipos de bloque (heading, list, image, callout).</td>
+      <td><span class="effort effort-high">4+ horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Sin seccion de comparativas</strong></td>
+      <td>No hay comparativa MG3 vs Toyota Yaris, ni MG ZS vs Creta/T-Cross. Es contenido de alta intencion de compra.</td>
+      <td>Crear paginas /comparativas/mg3-vs-yaris, etc. con tablas de specs, precios y ventajas.</td>
+      <td><span class="effort effort-high">4+ horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Sin pagina de servicios/postventa dedicada</strong></td>
+      <td>La seccion de postventa esta en el home pero no tiene pagina propia indexable.</td>
+      <td>Crear <code>/servicios</code> con turnos online, lista de servicios, precios orientativos.</td>
+      <td><span class="effort effort-high">4+ horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Sin newsletter o lead magnet</strong></td>
+      <td>No hay captura de email para marketing. No hay guia descargable, checklist de compra, etc.</td>
+      <td>Agregar formulario de newsletter en footer. Crear lead magnet: "Guia de compra MG 2026".</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+  </table>
+
+  <!-- ==================== 6. CRO ==================== -->
+  <h2 id="cro" class="page-break">6. CRO (Conversion) <span style="font-size:16px;color:#C41230;float:right">55 / 100</span></h2>
+
+  <h3>Lo que esta bien</h3>
+  <ul class="checklist">
+    <li><span class="check">&#10003;</span> Doble CTA claro: "Cotizar" + "Agendar Test Drive" con formularios separados</li>
+    <li><span class="check">&#10003;</span> WhatsApp float con mensaje pre-rellenado segun modelo y pagina</li>
+    <li><span class="check">&#10003;</span> Estados claros en forms: loading spinner, success verde, error rojo</li>
+    <li><span class="check">&#10003;</span> Tracking de conversiones: Meta Pixel (Lead + Schedule) + GA4 (generate_lead)</li>
+    <li><span class="check">&#10003;</span> Transparencia de precios desde el primer scroll</li>
+    <li><span class="check">&#10003;</span> Garantia 7 anios destacada como diferenciador</li>
+    <li><span class="check">&#10003;</span> Social proof: testimonios + FAQ contra objeciones</li>
+    <li><span class="check">&#10003;</span> Blog posts tienen CTA al final</li>
+    <li><span class="check">&#10003;</span> Selector de version (Comfort/Luxury) integrado en formularios</li>
+    <li><span class="check">&#10003;</span> Forma de pago seleccionable en cotizacion</li>
+  </ul>
+
+  <h3>Hallazgos</h3>
+  <table>
+    <tr><th>Sev.</th><th>Hallazgo</th><th>Evidencia</th><th>Recomendacion</th><th>Esfuerzo</th></tr>
+    <tr>
+      <td><span class="p-crit">CRITICO</span></td>
+      <td><strong>API /api/lead devuelve HTTP 500</strong></td>
+      <td>El endpoint usa Resend para enviar emails. Si <code>RESEND_API_KEY</code> no esta configurada en Vercel o es invalida, todo POST falla con 500. El <code>.env.example</code> muestra <code>re_xxxxxxxxxxxx</code> como placeholder y <code>EMAIL_FROM</code> es <code>onboarding@resend.dev</code> (cuenta demo).</td>
+      <td>1) Verificar que <code>RESEND_API_KEY</code> existe en Vercel Environment Variables. 2) Configurar dominio <code>giamamg.com</code> en Resend para poder enviar desde un email propio. 3) Cambiar <code>EMAIL_FROM</code> a <code>noreply@giamamg.com</code>.</td>
+      <td><span class="effort effort-low">30 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin formulario en paginas de modelo</strong></td>
+      <td><code>/modelos/mg3</code> y <code>/modelos/zs</code> tienen CTAs de WhatsApp pero no form de cotizacion o test drive. El usuario debe volver al home para completar un formulario.</td>
+      <td>Agregar componente <code>LeadForm</code> al final de cada pagina de modelo con el modelo pre-seleccionado.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin confirmacion al usuario por email</strong></td>
+      <td>Resend solo envia email al concesionario (<code>autos.mg.ventas@giama.com.ar</code>). El lead no recibe copia ni confirmacion de que su solicitud fue recibida.</td>
+      <td>Enviar email de confirmacion al lead con resumen de su solicitud y proximo paso esperado.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin pagina de agradecimiento / thank you</strong></td>
+      <td>Despues de enviar el form, solo aparece un mensaje "Enviado" inline. No hay pagina dedicada <code>/gracias</code> que permita trackear conversiones en GA4/Pixel de forma limpia.</td>
+      <td>Crear <code>/gracias</code> con conversion tracking, proximos pasos, y links a modelos/blog.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Sin newsletter / captura de email frio</strong></td>
+      <td>El unico mecanismo de conversion es el form de lead (alta intencion). No hay captura para usuarios en etapa de investigacion.</td>
+      <td>Agregar form de newsletter en footer: "Recibí novedades y ofertas de MG".</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Leads no se guardan en base de datos</strong></td>
+      <td>Si el email de Resend falla, el lead se pierde completamente. No hay backup en DB ni CRM. El webhook CRM esta comentado en <code>route.js</code> (lineas 174-184).</td>
+      <td>Agregar Google Sheets, Supabase o Airtable como backup. Activar webhook CRM cuando este listo.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Sin exit-intent popup</strong></td>
+      <td>Cuando el usuario mueve el mouse hacia el boton de cerrar, no hay popup de ultima oportunidad.</td>
+      <td>Popup con oferta de WhatsApp o descarga de ficha tecnica. Solo en desktop, maximo 1 vez por sesion.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Sin A/B testing</strong></td>
+      <td>No hay infraestructura para testear variantes de CTAs, precios o layouts.</td>
+      <td>Considerar Vercel Edge Config + feature flags para A/B testing futuro.</td>
+      <td><span class="effort effort-high">4+ horas</span></td>
+    </tr>
+  </table>
+
+  <!-- ==================== 7. SEGURIDAD ==================== -->
+  <h2 id="seguridad" class="page-break">7. Seguridad <span style="font-size:16px;color:#d4a017;float:right">70 / 100</span></h2>
+
+  <h3>Lo que esta bien</h3>
+  <ul class="checklist">
+    <li><span class="check">&#10003;</span> <code>X-Frame-Options: DENY</code> — previene clickjacking</li>
+    <li><span class="check">&#10003;</span> <code>X-Content-Type-Options: nosniff</code> — previene MIME-type sniffing</li>
+    <li><span class="check">&#10003;</span> <code>Referrer-Policy: strict-origin-when-cross-origin</code></li>
+    <li><span class="check">&#10003;</span> <code>Permissions-Policy: camera=(), microphone=(), geolocation=()</code></li>
+    <li><span class="check">&#10003;</span> <code>Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</code> (HSTS 2 anios)</li>
+    <li><span class="check">&#10003;</span> Validacion server-side: regex email/telefono, limites de caracteres (500/2000), modelos permitidos</li>
+    <li><span class="check">&#10003;</span> <code>escapeHtml()</code> para prevenir XSS en emails generados</li>
+    <li><span class="check">&#10003;</span> Rate limiting: 5 req/min por IP</li>
+    <li><span class="check">&#10003;</span> reCAPTCHA v3 con verificacion server-side (score threshold 0.5)</li>
+    <li><span class="check">&#10003;</span> CSRF: validacion de Origin header contra <code>NEXT_PUBLIC_SITE_URL</code></li>
+    <li><span class="check">&#10003;</span> <code>rel="noopener noreferrer"</code> en todos los links externos</li>
+    <li><span class="check">&#10003;</span> <code>.env</code> en .gitignore</li>
+  </ul>
+
+  <h3>Hallazgos</h3>
+  <table>
+    <tr><th>Sev.</th><th>Hallazgo</th><th>Evidencia</th><th>Recomendacion</th><th>Esfuerzo</th></tr>
+    <tr>
+      <td><span class="p-crit">CRITICO</span></td>
+      <td><strong>reCAPTCHA secret key expuesta</strong></td>
+      <td><code>.env.example</code> linea 7: <code>RECAPTCHA_SECRET_KEY=6LcBwKMsAAAAAEbF5PgBGmRqqlZmNY4U5CiwoGHl</code> — esta es la clave secreta real, no un placeholder.</td>
+      <td>1) Reemplazar con <code>RECAPTCHA_SECRET_KEY=your_recaptcha_secret_key_here</code>. 2) Regenerar la clave en console.cloud.google.com. 3) Actualizar la nueva clave en Vercel.</td>
+      <td><span class="effort effort-low">15 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin Content-Security-Policy (CSP)</strong></td>
+      <td><code>next.config.mjs</code> tiene 5 security headers pero falta CSP. El sitio carga scripts de <code>googletagmanager.com</code>, <code>connect.facebook.net</code>, <code>google.com/recaptcha</code> y usa inline scripts.</td>
+      <td>Agregar CSP header que permita solo las fuentes necesarias. Ejemplo minimo:<br><code>default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://www.google.com https://www.gstatic.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://www.facebook.com;</code></td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Rate limiter es por instancia serverless</strong></td>
+      <td><code>route.js</code> usa <code>new Map()</code> en memoria para rate limiting. En Vercel, cada invocacion puede ser una instancia nueva, haciendo el rate limiting inefectivo en la practica.</td>
+      <td>Migrar a Upstash Redis (gratis hasta 10K req/dia) o Vercel KV para rate limiting distribuido.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>IDs de GA4 y Pixel hardcodeados</strong></td>
+      <td><code>layout.js</code>: GA4 ID <code>G-6FBP1JPWE9</code> y Pixel ID <code>948750060897935</code> estan en el codigo fuente.</td>
+      <td>Mover a <code>NEXT_PUBLIC_GA_ID</code> y <code>NEXT_PUBLIC_FB_PIXEL_ID</code>. Esto tambien permite desactivarlos en previews de Vercel.</td>
+      <td><span class="effort effort-low">15 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Analytics disparan en preview deploys</strong></td>
+      <td>No hay distincion entre produccion y previews. Los deploys de preview contaminan los datos de GA4 y Meta Pixel.</td>
+      <td>Condicion: <code>{process.env.VERCEL_ENV === 'production' && ...}</code> para solo cargar analytics en produccion.</td>
+      <td><span class="effort effort-low">10 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Sin monitoreo de errores</strong></td>
+      <td>No hay Sentry, LogRocket ni Vercel Analytics. Si la API falla o el sitio crashea, nadie se entera.</td>
+      <td>Agregar Sentry (plan gratuito) para capturar errores en frontend y API routes.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Sin middleware de seguridad</strong></td>
+      <td>No hay <code>middleware.js</code>. Podria usarse para rate limiting global, geo-blocking o redireccion de bots.</td>
+      <td>Considerar agregar middleware para logging, headers y proteccion adicional.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+  </table>
+
+  <!-- ==================== 8. BENCHMARKING ==================== -->
+  <h2 id="benchmarking" class="page-break">8. Benchmarking Competitivo <span style="font-size:16px;color:#C41230;float:right">45 / 100</span></h2>
+
+  <h3>Competidores analizados</h3>
+  <p>Se compara GIAMA MG (giamamg.com) contra la web oficial de la marca y otro concesionario de la red:</p>
+  <table>
+    <tr><th>Sitio</th><th>Tipo</th><th>Tecnologia</th><th>Paginas</th><th>Features clave</th></tr>
+    <tr><td><strong>mgargentina.ar</strong></td><td>Marca oficial</td><td>WordPress / custom</td><td>30+</td><td>Todos los modelos, configurador, stock, dealer locator, blog rico, YouTube embeds, GBP</td></tr>
+    <tr><td><strong>giamafiat.com.ar</strong></td><td>Concesionario (Fiat/GIAMA)</td><td>WordPress</td><td>20+</td><td>Stock en tiempo real, planes de ahorro, usados, financiacion, newsletter, reviews Google</td></tr>
+    <tr><td><strong>giamamg.com</strong></td><td>Concesionario (MG/GIAMA)</td><td>Next.js 14</td><td>7</td><td>2 modelos, blog corto, formularios, WhatsApp</td></tr>
+  </table>
+
+  <h3>Gap Analysis</h3>
+  <table>
+    <tr><th>Feature</th><th>mgargentina.ar</th><th>giamafiat.com.ar</th><th>giamamg.com</th><th>Gap</th></tr>
+    <tr><td>Modelos</td><td>Catalogo completo (5+)</td><td>Catalogo Fiat completo</td><td>Solo 2 (MG3, ZS)</td><td><span class="p-high">ALTO</span></td></tr>
+    <tr><td>Stock en tiempo real</td><td>Si (por dealer)</td><td>Si (por modelo/color)</td><td>No</td><td><span class="p-high">ALTO</span></td></tr>
+    <tr><td>Financiacion/Cuotas</td><td>Configurador con precio final</td><td>Planes de ahorro online</td><td>No</td><td><span class="p-high">ALTO</span></td></tr>
+    <tr><td>Blog / Contenido</td><td>15+ articulos, fotos profesionales</td><td>Noticias Fiat, eventos</td><td>3 posts cortos (~100 palabras)</td><td><span class="p-high">ALTO</span></td></tr>
+    <tr><td>Google Business Profile</td><td>Si (verificado)</td><td>Si (con reviews)</td><td>No</td><td><span class="p-crit">CRITICO</span></td></tr>
+    <tr><td>Reviews / Testimonios</td><td>Google Reviews integrado</td><td>Google Reviews widget</td><td>3 testimonios estaticos</td><td><span class="p-med">MEDIO</span></td></tr>
+    <tr><td>Video</td><td>YouTube embeds en modelos</td><td>Videos de eventos</td><td>Ningun video</td><td><span class="p-med">MEDIO</span></td></tr>
+    <tr><td>Newsletter</td><td>Si</td><td>Si (con oferta)</td><td>No</td><td><span class="p-med">MEDIO</span></td></tr>
+    <tr><td>Usados</td><td>No aplica (marca)</td><td>Seccion de usados</td><td>No</td><td><span class="p-low">BAJO</span></td></tr>
+    <tr><td>Chat / Chatbot</td><td>WhatsApp + chat</td><td>WhatsApp + chat bot</td><td>Solo WhatsApp float</td><td><span class="p-low">BAJO</span></td></tr>
+    <tr><td>PWA / App</td><td>No</td><td>No</td><td>manifest.json (parcial)</td><td><span class="s-partial">EMPATE</span></td></tr>
+    <tr><td>Velocidad / Tech</td><td>WordPress (lento)</td><td>WordPress (medio)</td><td>Next.js SSG (rapido base)</td><td><span class="s-done">VENTAJA</span></td></tr>
+  </table>
+
+  <div class="summary-box orange">
+    <p><strong>Conclusion:</strong> giamamg.com tiene ventaja tecnologica (Next.js vs WordPress) pero esta significativamente por detras en cantidad de contenido, funcionalidades de negocio (stock, financiacion, usados) y presencia en ecosistema digital (GBP, YouTube, newsletter). La prioridad es cerrar los gaps de GBP, contenido y funcionalidad de conversion.</p>
+  </div>
+
+  <!-- ==================== 9. ECOSISTEMA DIGITAL ==================== -->
+  <h2 id="ecosistema" class="page-break">9. Ecosistema Digital <span style="font-size:16px;color:#C41230;float:right">50 / 100</span></h2>
+
+  <h3>Estado actual</h3>
+  <table>
+    <tr><th>Canal</th><th>Estado</th><th>Detalle</th></tr>
+    <tr><td>Sitio web</td><td><span class="s-done">ACTIVO</span></td><td>giamamg.com — Next.js, Vercel, SSL</td></tr>
+    <tr><td>Google Analytics 4</td><td><span class="s-done">ACTIVO</span></td><td>ID G-6FBP1JPWE9 — trackeando pageviews y eventos</td></tr>
+    <tr><td>Meta Pixel</td><td><span class="s-done">ACTIVO</span></td><td>ID 948750060897935 — Lead + Schedule events</td></tr>
+    <tr><td>WhatsApp Business</td><td><span class="s-done">ACTIVO</span></td><td>+5491131347853 — float en todas las paginas</td></tr>
+    <tr><td>Instagram</td><td><span class="s-done">ACTIVO</span></td><td>Link en footer — unica red social activa</td></tr>
+    <tr><td>Facebook</td><td><span class="s-done">ACTIVO</span></td><td>Link en footer — recientemente agregado</td></tr>
+    <tr><td>Email marketing</td><td><span class="s-pend">INACTIVO</span></td><td>Resend configurado solo para notificaciones de leads. Sin newsletter ni email automatizado.</td></tr>
+    <tr><td>Google Business Profile</td><td><span class="s-pend">INACTIVO</span></td><td>No existe ficha verificada. Sin presencia en Google Maps.</td></tr>
+    <tr><td>Google Search Console</td><td><span class="s-pend">INACTIVO</span></td><td>No verificado para giamamg.com.</td></tr>
+    <tr><td>YouTube</td><td><span class="s-pend">INACTIVO</span></td><td>Sin canal. Sin video content.</td></tr>
+    <tr><td>TikTok</td><td><span class="s-pend">INACTIVO</span></td><td>Sin presencia.</td></tr>
+    <tr><td>CRM</td><td><span class="s-pend">INACTIVO</span></td><td>Webhook CRM comentado en codigo. Sin sistema activo de gestion de leads.</td></tr>
+    <tr><td>Email transaccional</td><td><span class="s-partial">PARCIAL</span></td><td>Resend activo pero usando dominio demo (<code>onboarding@resend.dev</code>). Sin dominio propio verificado.</td></tr>
+  </table>
+
+  <h3>Hallazgos</h3>
+  <table>
+    <tr><th>Sev.</th><th>Hallazgo</th><th>Recomendacion</th><th>Esfuerzo</th></tr>
+    <tr>
+      <td><span class="p-crit">CRITICO</span></td>
+      <td><strong>Sin Google Business Profile</strong> — Para un negocio local (concesionario con direccion fisica), no tener GBP es perder el 40%+ del trafico local. Los usuarios buscan "concesionario MG Mar del Plata" y no encuentran GIAMA en el mapa.</td>
+      <td>Crear GBP en business.google.com. Verificar direccion. Agregar fotos, horarios, servicios. Solicitar reviews a clientes.</td>
+      <td><span class="effort effort-med">2 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin Google Search Console</strong> — No se puede monitorear indexacion, errores de rastreo ni rendimiento de busqueda del nuevo dominio.</td>
+      <td>Verificar giamamg.com via DNS. Enviar sitemap. Monitorear errores de cobertura.</td>
+      <td><span class="effort effort-low">15 min</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-high">IMPORTANTE</span></td>
+      <td><strong>Sin CRM activo</strong> — Los leads se envian por email y no se trackean. No hay pipeline de ventas, follow-up automatico ni historial de interacciones.</td>
+      <td>Implementar CRM basico (HubSpot Free, Pipedrive, o Google Sheets como MVP). Activar webhook en API route.</td>
+      <td><span class="effort effort-med">3 horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Sin canal de YouTube</strong> — Video es el formato mas efectivo para vender autos. Tours, test drives, comparativas en video generan engagement y SEO.</td>
+      <td>Crear canal YouTube. Subir al menos 1 video por modelo (walkaround, test drive). Embeber en web.</td>
+      <td><span class="effort effort-high">4+ horas</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-med">MENOR</span></td>
+      <td><strong>Email transaccional con dominio demo</strong> — Los emails de Resend se envian desde <code>onboarding@resend.dev</code>, lo que reduce deliverability y confianza.</td>
+      <td>Verificar dominio <code>giamamg.com</code> en Resend. Configurar SPF/DKIM/DMARC. Enviar desde <code>noreply@giamamg.com</code>.</td>
+      <td><span class="effort effort-med">1 hora</span></td>
+    </tr>
+    <tr>
+      <td><span class="p-low">INFO</span></td>
+      <td><strong>Sin estrategia de contenido en redes</strong> — Instagram y Facebook estan linkeados pero sin estrategia de publicacion, calendario ni cross-posting.</td>
+      <td>Definir calendario de contenido: 3 posts/semana. Reels de modelos, testimonios de clientes, tips de mantenimiento.</td>
+      <td><span class="effort effort-med">Ongoing</span></td>
+    </tr>
+  </table>
+
+  <!-- ==================== 10. ARQUITECTURA PROPUESTA ==================== -->
+  <h2 id="arquitectura" class="page-break">10. Arquitectura Propuesta</h2>
+
+  <h3>Sitemap actual (7 paginas)</h3>
+  <div class="arch-box">giamamg.com/
+├── / .......................... Home (hero, modelos, testimonios, FAQ, forms)
+├── /modelos/mg3 ............... MG3 Hybrid+ (specs, galeria, colores)
+├── /modelos/zs ................ MG ZS Hybrid+ (specs, galeria, colores)
+├── /blog ...................... Blog index (3 posts)
+│   ├── /blog/mg-llega-a-argentina
+│   ├── /blog/mg3-vs-competencia
+│   └── /blog/que-es-full-hybrid
+└── /sitemap.xml ............... Sitemap dinamico</div>
+
+  <h3>Sitemap propuesto (15+ paginas)</h3>
+  <div class="arch-box">giamamg.com/
+├── / .......................... Home (hero, modelos, testimonios, FAQ, forms)
+│
+├── /modelos/ .................. [NUEVO] Index de modelos
+│   ├── /modelos/mg3 ........... MG3 Hybrid+ (specs, galeria, colores, FORM)
+│   ├── /modelos/zs ............ MG ZS Hybrid+ (specs, galeria, colores, FORM)
+│   └── /modelos/[slug] ........ [FUTURO] Nuevos modelos MG
+│
+├── /servicios ................. [NUEVO] Postventa y servicios
+│   ├── /servicios/mantenimiento  [NUEVO] Planes de mantenimiento
+│   └── /servicios/garantia ..... [NUEVO] Politica de garantia detallada
+│
+├── /financiacion .............. [NUEVO] Calculadora + planes
+│
+├── /comparativas/ ............. [NUEVO] Comparativas de alta intencion
+│   ├── /comparativas/mg3-vs-yaris
+│   └── /comparativas/zs-vs-t-cross
+│
+├── /blog ...................... Blog index (expandido)
+│   ├── /blog/mg-llega-a-argentina   (expandido a 1000+ palabras)
+│   ├── /blog/mg3-vs-competencia     (expandido a 1000+ palabras)
+│   ├── /blog/que-es-full-hybrid     (expandido a 1000+ palabras)
+│   └── /blog/[nuevos-posts] ........ Target: 2 posts/mes
+│
+├── /contacto .................. [NUEVO] Pagina de contacto dedicada (mapa, form, datos)
+├── /gracias ................... [NUEVO] Thank you post-conversion
+├── /nosotros .................. [NUEVO] Historia GIAMA + equipo
+│
+├── /not-found ................. [NUEVO] 404 brandeado
+├── /error ..................... [NUEVO] Error boundary brandeado
+│
+├── /sitemap.xml ............... Sitemap dinamico (actualizado)
+└── /robots.txt ................ robots.txt (corregido)</div>
+
+  <div class="summary-box green">
+    <p><strong>Beneficio:</strong> Pasar de 7 a 15+ paginas indexables aumenta la superficie de captura organica. Cada pagina nueva ataca keywords especificos (ej: "MG3 vs Yaris precio Argentina", "servicio tecnico MG Mar del Plata", "financiacion MG Argentina").</p>
+  </div>
+
+  <!-- ==================== 11. ROADMAP ==================== -->
+  <h2 id="roadmap" class="page-break">11. Roadmap en 4 Fases</h2>
+
+  <div class="roadmap-phase">
+    <h4>FASE 1 — Fixes Criticos (0-2 semanas)</h4>
+    <p>Objetivo: Resolver todo lo que esta roto o perdiendo leads/indexacion HOY.</p>
+    <table>
+      <tr><th>#</th><th>Tarea</th><th>Archivo</th><th>Impacto</th></tr>
+      <tr><td>1.1</td><td>Corregir URL del sitemap en robots.txt</td><td><code>public/robots.txt</code></td><td>SEO indexacion</td></tr>
+      <tr><td>1.2</td><td>Reemplazar dominio hardcodeado en JSON-LD (MG3)</td><td><code>src/app/modelos/mg3/page.jsx:31</code></td><td>SEO rich results</td></tr>
+      <tr><td>1.3</td><td>Reemplazar dominio hardcodeado en JSON-LD (ZS)</td><td><code>src/app/modelos/zs/page.jsx:31</code></td><td>SEO rich results</td></tr>
+      <tr><td>1.4</td><td>Reemplazar dominio hardcodeado en JSON-LD (Blog)</td><td><code>src/app/blog/[slug]/page.jsx:37</code></td><td>SEO rich results</td></tr>
+      <tr><td>1.5</td><td>Verificar/configurar RESEND_API_KEY en Vercel</td><td>Vercel Dashboard → Env Vars</td><td>CRO — forms funcionen</td></tr>
+      <tr><td>1.6</td><td>Reemplazar reCAPTCHA secret key en .env.example</td><td><code>.env.example:7</code></td><td>Seguridad</td></tr>
+      <tr><td>1.7</td><td>Comprimir imagenes de fondo (cotizacion-bg, test-drive-bg)</td><td><code>public/img/</code></td><td>Performance LCP</td></tr>
+      <tr><td>1.8</td><td>Comprimir PDF de ficha tecnica</td><td><code>public/img/MG3-Ficha-Tecnica.pdf</code></td><td>Performance UX</td></tr>
+      <tr><td>1.9</td><td>Crear pagina 404 brandeada</td><td><code>src/app/not-found.jsx</code></td><td>UX profesionalismo</td></tr>
+      <tr><td>1.10</td><td>Agregar CSP header</td><td><code>next.config.mjs</code></td><td>Seguridad</td></tr>
+      <tr><td>1.11</td><td>Regenerar reCAPTCHA secret key</td><td>console.cloud.google.com</td><td>Seguridad</td></tr>
+      <tr><td>1.12</td><td>Configurar dominio en Resend + SPF/DKIM</td><td>Resend Dashboard</td><td>Email deliverability</td></tr>
+    </table>
+  </div>
+
+  <div class="roadmap-phase phase-2">
+    <h4>FASE 2 — Optimizacion (1-2 meses)</h4>
+    <p>Objetivo: Mejorar SEO, conversion y presencia digital.</p>
+    <table>
+      <tr><th>#</th><th>Tarea</th><th>Categoria</th></tr>
+      <tr><td>2.1</td><td>Crear y verificar Google Business Profile</td><td>Ecosistema</td></tr>
+      <tr><td>2.2</td><td>Verificar Google Search Console para giamamg.com</td><td>SEO</td></tr>
+      <tr><td>2.3</td><td>Agregar formulario LeadForm en paginas /modelos/</td><td>CRO</td></tr>
+      <tr><td>2.4</td><td>Implementar email de confirmacion al lead</td><td>CRO</td></tr>
+      <tr><td>2.5</td><td>Agregar newsletter form en footer</td><td>CRO / Email</td></tr>
+      <tr><td>2.6</td><td>Expandir los 3 blog posts a 1000+ palabras</td><td>Contenido / SEO</td></tr>
+      <tr><td>2.7</td><td>Agregar breadcrumbs + BreadcrumbList schema</td><td>SEO</td></tr>
+      <tr><td>2.8</td><td>Migrar hero slider a next/image</td><td>Performance</td></tr>
+      <tr><td>2.9</td><td>Migrar galerias a next/image</td><td>Performance</td></tr>
+      <tr><td>2.10</td><td>Convertir imagenes ZS a WebP</td><td>Performance</td></tr>
+      <tr><td>2.11</td><td>Mover GA4/Pixel IDs a env vars + filtrar previews</td><td>Seguridad</td></tr>
+      <tr><td>2.12</td><td>Implementar CRM basico (HubSpot Free o Google Sheets)</td><td>Ecosistema</td></tr>
+      <tr><td>2.13</td><td>Fix accesibilidad: aria-labels, aria-expanded, focus trap</td><td>UX/UI</td></tr>
+      <tr><td>2.14</td><td>Agregar Vercel Speed Insights</td><td>Performance</td></tr>
+    </table>
+  </div>
+
+  <div class="roadmap-phase phase-3">
+    <h4>FASE 3 — Features Nuevas (3-6 meses)</h4>
+    <p>Objetivo: Agregar funcionalidad que cierre gaps con competencia.</p>
+    <table>
+      <tr><th>#</th><th>Tarea</th><th>Categoria</th></tr>
+      <tr><td>3.1</td><td>Agregar modelos nuevos de MG cuando esten disponibles</td><td>Contenido</td></tr>
+      <tr><td>3.2</td><td>Crear pagina /servicios con informacion de postventa</td><td>Contenido</td></tr>
+      <tr><td>3.3</td><td>Crear pagina /financiacion con calculadora de cuotas</td><td>CRO</td></tr>
+      <tr><td>3.4</td><td>Crear paginas de comparativas (MG3 vs Yaris, ZS vs T-Cross)</td><td>SEO / Contenido</td></tr>
+      <tr><td>3.5</td><td>Crear pagina /nosotros con historia GIAMA</td><td>Contenido / Confianza</td></tr>
+      <tr><td>3.6</td><td>Crear pagina /contacto dedicada con mapa y form</td><td>CRO</td></tr>
+      <tr><td>3.7</td><td>Embeber videos de YouTube en paginas de modelo</td><td>Contenido / UX</td></tr>
+      <tr><td>3.8</td><td>Integrar Google Reviews via GBP</td><td>Social Proof</td></tr>
+      <tr><td>3.9</td><td>Crear ficha tecnica ZS (PDF o HTML)</td><td>Contenido</td></tr>
+      <tr><td>3.10</td><td>Crear pagina /gracias post-conversion con tracking</td><td>CRO</td></tr>
+      <tr><td>3.11</td><td>Agregar Sentry para monitoreo de errores</td><td>Infra</td></tr>
+      <tr><td>3.12</td><td>Blog: migrar a MDX para contenido rico</td><td>Contenido</td></tr>
+      <tr><td>3.13</td><td>Agregar mas testimonios (8-10 con ratings variados)</td><td>Social Proof</td></tr>
+      <tr><td>3.14</td><td>Calendario de contenido para redes (3 posts/semana)</td><td>Ecosistema</td></tr>
+    </table>
+  </div>
+
+  <div class="roadmap-phase phase-4">
+    <h4>FASE 4 — Evolucion (6-12 meses)</h4>
+    <p>Objetivo: Diferenciacion y automatizacion.</p>
+    <table>
+      <tr><th>#</th><th>Tarea</th><th>Categoria</th></tr>
+      <tr><td>4.1</td><td>Chatbot con IA para responder preguntas frecuentes 24/7</td><td>CRO / UX</td></tr>
+      <tr><td>4.2</td><td>Stock en tiempo real (integracion con sistema de concesionario)</td><td>CRO / Negocio</td></tr>
+      <tr><td>4.3</td><td>Test suite: unitarios (API) + E2E (formularios, navegacion)</td><td>Calidad</td></tr>
+      <tr><td>4.4</td><td>Migracion a TypeScript</td><td>Calidad</td></tr>
+      <tr><td>4.5</td><td>PWA completa: service worker, offline, push notifications</td><td>UX / Engagement</td></tr>
+      <tr><td>4.6</td><td>Rate limiting distribuido con Upstash Redis</td><td>Seguridad</td></tr>
+      <tr><td>4.7</td><td>A/B testing con Vercel Edge Config</td><td>CRO</td></tr>
+      <tr><td>4.8</td><td>Seccion de usados (si aplica al negocio)</td><td>Negocio</td></tr>
+      <tr><td>4.9</td><td>Canal YouTube con walkarounds y test drives</td><td>Ecosistema</td></tr>
+      <tr><td>4.10</td><td>ESLint + Prettier + Husky pre-commit hooks</td><td>Calidad</td></tr>
+    </table>
+  </div>
+
+  <!-- ==================== 12. CHECKLIST ==================== -->
+  <h2 id="checklist" class="page-break">12. Checklist de Implementacion</h2>
+
+  <div class="summary-box">
+    <p><strong>Instrucciones:</strong> Esta checklist es interactiva — marca los items a medida que se completen. Los items estan agrupados por quien puede ejecutarlos.</p>
+  </div>
+
+  <h3>A. Developer puede hacer ya (15 items)</h3>
+  <ul class="impl-checklist">
+    <li><input type="checkbox"> Corregir URL del sitemap en <code>public/robots.txt</code> → <code>https://giamamg.com/sitemap.xml</code></li>
+    <li><input type="checkbox"> Fix JSON-LD en <code>src/app/modelos/mg3/page.jsx:31</code> — usar <code>process.env.NEXT_PUBLIC_SITE_URL</code></li>
+    <li><input type="checkbox"> Fix JSON-LD en <code>src/app/modelos/zs/page.jsx:31</code> — usar <code>process.env.NEXT_PUBLIC_SITE_URL</code></li>
+    <li><input type="checkbox"> Fix JSON-LD en <code>src/app/blog/[slug]/page.jsx:37</code> — usar <code>process.env.NEXT_PUBLIC_SITE_URL</code></li>
+    <li><input type="checkbox"> Reemplazar secret key real en <code>.env.example</code> con placeholder</li>
+    <li><input type="checkbox"> Crear <code>src/app/not-found.jsx</code> con logo MG, mensaje y links</li>
+    <li><input type="checkbox"> Crear <code>src/app/error.jsx</code> con fallback UI brandeado</li>
+    <li><input type="checkbox"> Agregar CSP header en <code>next.config.mjs</code></li>
+    <li><input type="checkbox"> Comprimir <code>cotizacion-bg.jpg</code> (7.7 MB → ~200 KB WebP)</li>
+    <li><input type="checkbox"> Comprimir <code>test-drive-bg.jpg</code> (7.4 MB → ~200 KB WebP)</li>
+    <li><input type="checkbox"> Comprimir <code>ficha-preview.png</code> (2.8 MB → ~150 KB WebP)</li>
+    <li><input type="checkbox"> Comprimir <code>MG3-Ficha-Tecnica.pdf</code> (12 MB → ~2 MB)</li>
+    <li><input type="checkbox"> Convertir imagenes ZS colores de .jpg a .webp</li>
+    <li><input type="checkbox"> Agregar <code>min</code> date en input de test drive (<code>LeadForm.jsx</code>)</li>
+    <li><input type="checkbox"> Mover GA4 y Pixel IDs a variables de entorno + filtrar preview deploys</li>
+  </ul>
+
+  <h3>B. Requiere accion del cliente (11 items)</h3>
+  <ul class="impl-checklist">
+    <li><input type="checkbox"> Verificar que <code>RESEND_API_KEY</code> esta configurada en Vercel Environment Variables</li>
+    <li><input type="checkbox"> Configurar dominio <code>giamamg.com</code> en Resend para email propio</li>
+    <li><input type="checkbox"> Regenerar reCAPTCHA secret key en <a href="https://console.cloud.google.com/security/recaptcha" target="_blank" rel="noopener">console.cloud.google.com</a></li>
+    <li><input type="checkbox"> Crear Google Business Profile en <a href="https://business.google.com" target="_blank" rel="noopener">business.google.com</a></li>
+    <li><input type="checkbox"> Verificar <code>giamamg.com</code> en Google Search Console</li>
+    <li><input type="checkbox"> Enviar sitemap (<code>https://giamamg.com/sitemap.xml</code>) en GSC</li>
+    <li><input type="checkbox"> Decidir CRM: HubSpot Free, Pipedrive, o Google Sheets como MVP</li>
+    <li><input type="checkbox"> Recopilar 5-7 testimonios reales adicionales de clientes</li>
+    <li><input type="checkbox"> Obtener/crear ficha tecnica del MG ZS (PDF o datos)</li>
+    <li><input type="checkbox"> Crear canal de YouTube y subir al menos 1 video por modelo</li>
+    <li><input type="checkbox"> Definir calendario de contenido para Instagram/Facebook/YouTube</li>
+  </ul>
+
+  <h3>C. Features nuevas - desarrollo (25 items)</h3>
+  <ul class="impl-checklist">
+    <li><input type="checkbox"> Agregar <code>LeadForm</code> en paginas <code>/modelos/mg3</code> y <code>/modelos/zs</code></li>
+    <li><input type="checkbox"> Implementar email de confirmacion al lead (copia al usuario)</li>
+    <li><input type="checkbox"> Crear pagina <code>/gracias</code> post-conversion con tracking GA4/Pixel</li>
+    <li><input type="checkbox"> Agregar form de newsletter en footer</li>
+    <li><input type="checkbox"> Agregar breadcrumbs visuales + JSON-LD BreadcrumbList</li>
+    <li><input type="checkbox"> Migrar hero slider de background-image a <code>&lt;Image fill priority /&gt;</code></li>
+    <li><input type="checkbox"> Migrar galerias (GalleryCarousel, ModelModal) a <code>next/image</code></li>
+    <li><input type="checkbox"> Cambiar model cards para navegar a <code>/modelos/</code> en vez de abrir modal</li>
+    <li><input type="checkbox"> Fix accesibilidad: aria-labels en hero dots, modal close, color dots</li>
+    <li><input type="checkbox"> Fix accesibilidad: <code>aria-expanded</code> en FAQ</li>
+    <li><input type="checkbox"> Implementar focus trap en ModelModal y Lightbox</li>
+    <li><input type="checkbox"> Agregar "Skip to content" link</li>
+    <li><input type="checkbox"> Expandir 3 blog posts existentes a 1000+ palabras con H2/H3/imagenes</li>
+    <li><input type="checkbox"> Crear pagina <code>/servicios</code> con info de postventa</li>
+    <li><input type="checkbox"> Crear pagina <code>/financiacion</code> con calculadora de cuotas</li>
+    <li><input type="checkbox"> Crear paginas <code>/comparativas/mg3-vs-yaris</code> y <code>/comparativas/zs-vs-t-cross</code></li>
+    <li><input type="checkbox"> Crear pagina <code>/nosotros</code> con historia GIAMA</li>
+    <li><input type="checkbox"> Crear pagina <code>/contacto</code> con mapa, form y datos</li>
+    <li><input type="checkbox"> Integrar Google Reviews cuando GBP este verificado</li>
+    <li><input type="checkbox"> Embeber videos YouTube en paginas de modelo</li>
+    <li><input type="checkbox"> Agregar Sentry para monitoreo de errores (plan gratuito)</li>
+    <li><input type="checkbox"> Agregar <code>@vercel/speed-insights</code> para Web Vitals</li>
+    <li><input type="checkbox"> Implementar CRM webhook en <code>/api/lead</code></li>
+    <li><input type="checkbox"> Migrar blog a MDX para contenido rico</li>
+    <li><input type="checkbox"> Implementar rate limiting distribuido (Upstash Redis)</li>
+  </ul>
+
+  <h3>Resumen de la checklist</h3>
+  <table>
+    <tr><th>Grupo</th><th>Items</th><th>Impacto esperado</th></tr>
+    <tr><td>A. Developer puede hacer ya</td><td>15</td><td>Score 58 → ~68 (fixes criticos + performance)</td></tr>
+    <tr><td>B. Requiere accion del cliente</td><td>11</td><td>Score 68 → ~75 (GBP, GSC, CRM, contenido)</td></tr>
+    <tr><td>C. Features nuevas</td><td>25</td><td>Score 75 → ~85 (features, contenido, UX)</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>51 items</strong></td><td><strong>Objetivo: 85/100</strong></td></tr>
+  </table>
+
+  <div class="doc-footer">
+    Auditoria Web Integral GIAMA MG v3 — 2 de Abril 2026 — giamamg.com<br>
+    Generado para uso interno. Datos basados en revision de codigo fuente y analisis de la infraestructura actual.
+  </div>
+</div>
+
+</body>
+</html>

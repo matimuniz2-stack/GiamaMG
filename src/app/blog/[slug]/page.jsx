@@ -34,7 +34,7 @@ export default function BlogPost({ params }) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    image: `https://giama-mg.vercel.app${post.image}`,
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}${post.image}`,
     datePublished: post.date,
     author: { '@type': 'Organization', name: post.author },
     publisher: { '@type': 'Organization', name: 'GIAMA - Concesionario Oficial MG' },

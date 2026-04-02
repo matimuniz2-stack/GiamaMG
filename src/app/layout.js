@@ -155,37 +155,45 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         {children}
         {/* reCAPTCHA v3 */}
-        <Script src="https://www.google.com/recaptcha/api.js?render=6LcBwKMsAAAAALC_0gAjBr_G6d51WaP9VZIymlO1" strategy="afterInteractive" />
-        {/* Google Analytics 4 — afterInteractive to avoid blocking render */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-6FBP1JPWE9" strategy="afterInteractive" />
-        <Script id="ga4-init" strategy="afterInteractive">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-6FBP1JPWE9');
-        `}</Script>
-        {/* Meta Pixel — afterInteractive */}
-        <Script id="fb-pixel" strategy="afterInteractive">{`
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '948750060897935');
-          fbq('track', 'PageView');
-        `}</Script>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=948750060897935&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
+        <Script src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`} strategy="afterInteractive" />
+        {/* Google Analytics 4 — only in production */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} strategy="afterInteractive" />
+            <Script id="ga4-init" strategy="afterInteractive">{`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+            `}</Script>
+          </>
+        )}
+        {/* Meta Pixel — only in production */}
+        {process.env.NEXT_PUBLIC_FB_PIXEL_ID && (
+          <>
+            <Script id="fb-pixel" strategy="afterInteractive">{`
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '${process.env.NEXT_PUBLIC_FB_PIXEL_ID}');
+              fbq('track', 'PageView');
+            `}</Script>
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: 'none' }}
+                src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_FB_PIXEL_ID}&ev=PageView&noscript=1`}
+                alt=""
+              />
+            </noscript>
+          </>
+        )}
       </body>
     </html>
   )

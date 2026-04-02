@@ -43,7 +43,7 @@ export default function LeadForm({ tipo }) {
       let recaptchaToken = ''
       if (typeof window !== 'undefined' && window.grecaptcha) {
         try {
-          recaptchaToken = await window.grecaptcha.execute('6LcBwKMsAAAAALC_0gAjBr_G6d51WaP9VZIymlO1', { action: 'submit_lead' })
+          recaptchaToken = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: 'submit_lead' })
         } catch { /* si falla reCAPTCHA, enviamos sin token */ }
       }
       data.recaptchaToken = recaptchaToken
