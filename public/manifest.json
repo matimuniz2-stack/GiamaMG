@@ -1,0 +1,21 @@
+{
+  "name": "GIAMA - Concesionario Oficial MG",
+  "short_name": "GIAMA MG",
+  "description": "Concesionario oficial MG en Mar del Plata. MG3 Hybrid+ y ZS Hybrid+.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#C41230",
+  "icons": [
+    {
+      "src": "/logo-mg.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-mg.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

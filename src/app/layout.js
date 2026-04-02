@@ -3,6 +3,10 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], weight: ['400','600','700','800'] })
 
+export const viewport = {
+  themeColor: '#C41230',
+}
+
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://giama-mg.vercel.app'),
   title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
@@ -26,7 +30,9 @@ export const metadata = {
   },
   icons: {
     icon: '/logo-mg.png',
+    apple: '/logo-mg.png',
   },
+  manifest: '/manifest.json',
 }
 
 const jsonLd = {
@@ -77,6 +83,61 @@ const jsonLd = {
   priceRange: 'USD 23,500 - USD 29,900',
 }
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '¿Qué garantía tienen los vehículos MG?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Todos los vehículos MG cuentan con 6 años o 120.000 km de garantía en el vehículo y hasta 7 años o 140.000 km en la batería híbrida.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Los MG Hybrid+ necesitan enchufe?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Tanto el MG3 Hybrid+ como el MG ZS Hybrid+ son Full Hybrid. La batería se recarga sola con el motor de combustión y la frenada regenerativa.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Dónde se encuentra el concesionario GIAMA?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'GIAMA se encuentra en Gascón 3265, Mar del Plata, Buenos Aires. Horario: lunes a viernes de 9 a 18 hs, sábados de 9 a 13 hs.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cómo puedo agendar un test drive?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Podés agendar tu test drive completando el formulario en la web, contactando por WhatsApp al +54 9 11 3134 7853 o acercándote al concesionario.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Qué formas de pago aceptan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Aceptamos pago de contado y ofrecemos opciones de financiación. Contactanos para conocer las condiciones vigentes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿MG tiene servicio de postventa en Argentina?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sí. GIAMA cuenta con servicio técnico oficial MG con técnicos certificados, repuestos originales y mantenimiento según estándares de fábrica.',
+      },
+    },
+  ],
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
@@ -84,6 +145,10 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
         {/* Google Analytics 4 */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FBP1JPWE9" />
