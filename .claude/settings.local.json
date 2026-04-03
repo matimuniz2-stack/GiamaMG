@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/matim/OneDrive/Escritorio/Proyectos/PagMG -type f -name *.md)",
+      "Bash(grep -E \"\\\\.\\(html|css|js|json|md\\)$\")"
+    ]
+  }
+}

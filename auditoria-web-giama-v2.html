@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría Web GIAMA MG — v2 (Abril 2026)</title>
+<style>
+  @page { size: A4; margin: 20mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a1a1a; line-height: 1.6; background: #fff; }
+
+  /* Cover */
+  .cover { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px; background: linear-gradient(135deg, #1B1B1B 0%, #2d0a10 100%); color: #fff; page-break-after: always; }
+  .cover h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+  .cover h1 span { color: #C41230; }
+  .cover .cover-sub { font-size: 20px; opacity: 0.7; margin-bottom: 40px; }
+  .cover .cover-meta { font-size: 14px; opacity: 0.5; line-height: 2; }
+  .cover .cover-badge { display: inline-block; padding: 8px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px; }
+
+  /* Scorecard */
+  .scorecard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 40px 0; page-break-inside: avoid; }
+  .score-item { background: #f8f8f8; border-radius: 12px; padding: 24px; text-align: center; }
+  .score-item .score-value { font-size: 36px; font-weight: 800; }
+  .score-item .score-label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .score-green .score-value { color: #0a8c25; }
+  .score-yellow .score-value { color: #d4a017; }
+  .score-orange .score-value { color: #e67700; }
+  .score-red .score-value { color: #C41230; }
+
+  /* Content */
+  .content { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  h2 { font-size: 28px; font-weight: 800; margin: 48px 0 8px; padding-bottom: 8px; border-bottom: 3px solid #C41230; page-break-after: avoid; }
+  h3 { font-size: 18px; font-weight: 700; margin: 28px 0 12px; color: #333; page-break-after: avoid; }
+  p { margin-bottom: 12px; font-size: 14px; color: #444; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 28px; font-size: 13px; page-break-inside: avoid; }
+  th { background: #1B1B1B; color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:hover td { background: #fafafa; }
+
+  /* Priority badges */
+  .p-crit { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #C41230; color: #fff; }
+  .p-high { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #e67700; color: #fff; }
+  .p-med { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #d4a017; color: #fff; }
+  .p-low { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #888; color: #fff; }
+
+  /* Status badges */
+  .s-done { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #0a8c25; color: #fff; }
+  .s-partial { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #d4a017; color: #fff; }
+  .s-pend { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #C41230; color: #fff; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; margin: 16px 0; }
+  .checklist li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; display: flex; align-items: center; gap: 10px; }
+  .check { color: #0a8c25; font-weight: 700; font-size: 16px; }
+  .uncheck { color: #C41230; font-weight: 700; font-size: 16px; }
+  .partial-check { color: #d4a017; font-weight: 700; font-size: 16px; }
+
+  /* Summary box */
+  .summary-box { background: #f8f8f8; border-left: 4px solid #C41230; padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+  .summary-box p { margin: 0; }
+
+  /* Section divider for print */
+  .page-break { page-break-before: always; }
+
+  /* Footer */
+  .doc-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; font-size: 11px; color: #999; text-align: center; }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+  <div class="cover-badge">Auditoría Técnica v2</div>
+  <h1>Auditoría Web<br /><span>GIAMA MG</span></h1>
+  <p class="cover-sub">giama-mg.vercel.app — Segunda revisión integral</p>
+  <div class="cover-meta">
+    Fecha: 2 de Abril 2026<br>
+    Stack: Next.js 14 · React 18 · Vercel<br>
+    Áreas: SEO · Performance · Seguridad · Accesibilidad · UX/CRO · Código · Contenido · Infraestructura
+  </div>
+</div>
+
+<!-- ==================== SCORECARD ==================== -->
+<div class="content">
+  <h2>Scorecard General</h2>
+  <p>Puntuación por área sobre 10. Refleja el estado actual post-implementación de la auditoría v1.</p>
+
+  <div class="scorecard">
+    <div class="score-item score-green"><div class="score-value">8.5</div><div class="score-label">SEO</div></div>
+    <div class="score-item score-yellow"><div class="score-value">6.5</div><div class="score-label">Performance</div></div>
+    <div class="score-item score-yellow"><div class="score-value">7.0</div><div class="score-label">Seguridad</div></div>
+    <div class="score-item score-yellow"><div class="score-value">6.0</div><div class="score-label">Accesibilidad</div></div>
+  </div>
+  <div class="scorecard">
+    <div class="score-item score-green"><div class="score-value">8.0</div><div class="score-label">UX / CRO</div></div>
+    <div class="score-item score-yellow"><div class="score-value">6.5</div><div class="score-label">Código</div></div>
+    <div class="score-item score-yellow"><div class="score-value">7.0</div><div class="score-label">Contenido</div></div>
+    <div class="score-item score-orange"><div class="score-value">5.5</div><div class="score-label">Infraestructura</div></div>
+  </div>
+
+  <!-- ==================== A. SEO ==================== -->
+  <h2>A. SEO</h2>
+
+  <h3>Lo que está bien</h3>
+  <ul class="checklist">
+    <li><span class="check">✓</span> <code>&lt;html lang="es"&gt;</code>, metadatos completos (title, description, keywords)</li>
+    <li><span class="check">✓</span> Canonical URLs en todas las páginas</li>
+    <li><span class="check">✓</span> JSON-LD: AutoDealer, Product (x2), FAQPage, BlogPosting (x3)</li>
+    <li><span class="check">✓</span> Open Graph + Twitter Cards en cada ruta</li>
+    <li><span class="check">✓</span> robots.txt + sitemap.xml con todas las URLs</li>
+    <li><span class="check">✓</span> Páginas dedicadas /modelos/mg3 y /modelos/zs indexables</li>
+    <li><span class="check">✓</span> Blog con 3 posts y metadata individual</li>
+    <li><span class="check">✓</span> <code>generateStaticParams()</code> para SSG en blog</li>
+  </ul>
+
+  <h3>Pendiente</h3>
+  <table>
+    <tr><th>Prioridad</th><th>Problema</th><th>Detalle</th></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Hero slider no indexable</td><td>Las 3 imágenes del hero usan <code>background-image</code> CSS — los crawlers no las ven. Migrar a <code>&lt;Image&gt;</code> con alt text.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Links de modelos usan onClick en vez de href</td><td>Navbar, footer y cards de modelos usan <code>openModal()</code> en vez de <code>&lt;Link href="/modelos/mg3"&gt;</code>. Los crawlers siguen <code>&lt;a href="#"&gt;</code> que no lleva a ningún lado.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sitemap estático</td><td>Cada post nuevo requiere editar manualmente <code>sitemap.xml</code>. Usar <code>sitemap.js</code> de Next.js para generarlo dinámicamente.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>metadataBase hardcodeado</td><td>Apunta a <code>giama-mg.vercel.app</code>. Cuando se configure un dominio propio, hay que actualizar esto.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Imagen OG es el logo</td><td>Reemplazar por imagen 1200x630 con branding y foto de vehículo para mejor compartido en redes.</td></tr>
+  </table>
+
+  <!-- ==================== B. PERFORMANCE ==================== -->
+  <h2 class="page-break">B. Performance</h2>
+
+  <h3>Lo que está bien</h3>
+  <ul class="checklist">
+    <li><span class="check">✓</span> Code splitting con <code>dynamic()</code> para ModelModal y Lightbox</li>
+    <li><span class="check">✓</span> <code>next/image</code> en cards de modelos, timeline, GIAMA block, navbar logo</li>
+    <li><span class="check">✓</span> <code>loading="lazy"</code> en imágenes below-the-fold</li>
+    <li><span class="check">✓</span> <code>priority</code> en logo del navbar</li>
+    <li><span class="check">✓</span> Inter font vía <code>next/font/google</code> con subset y weights optimizados</li>
+    <li><span class="check">✓</span> Colores MG3 en formato .webp</li>
+    <li><span class="check">✓</span> CSS en archivo único (~850 líneas), sin framework externo</li>
+  </ul>
+
+  <h3>Pendiente</h3>
+  <table>
+    <tr><th>Prioridad</th><th>Problema</th><th>Detalle</th></tr>
+    <tr><td><span class="p-crit">CRÍTICA</span></td><td>Hero slider: background-image sin optimizar</td><td>3 JPGs (KV-1.jpg, Leopard eye headlights.jpg, Front grille.jpg) se cargan a resolución completa como fondos CSS. Sin Next.js image optimization, sin WebP, sin srcset responsive. Son las imágenes LCP (above-the-fold).</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Galerías usan <code>&lt;img&gt;</code> raw</td><td>GalleryCarousel y ModelModal renderizan imágenes de galería (12+ por modelo) sin <code>next/image</code>. Sin WebP automático, sin lazy loading de Next.js.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>TimelineSection usa <code>&lt;img&gt;</code> raw</td><td>5 imágenes históricas + parallax scroll listener sin optimización de imagen.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Colores ZS son .jpg</td><td>MG3 usa .webp pero ZS usa JPG full (MG-ZS-HEV-RED.jpg, etc.). Inconsistente.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>GA4 y Meta Pixel bloquean render</td><td>Scripts en <code>&lt;head&gt;</code> con <code>dangerouslySetInnerHTML</code>. Migrar a <code>next/script</code> con <code>strategy="afterInteractive"</code>.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sin <code>sizes</code> en next/image</td><td>Las <code>&lt;Image&gt;</code> no tienen prop <code>sizes</code>, el browser no puede elegir el tamaño responsive óptimo.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>PNGs viejos en /public/MG3/ y /public/ZS/</td><td>Archivos obsoletos (amarillo.png, negro.png, black.png, etc.) siguen en el repo. Peso muerto.</td></tr>
+  </table>
+
+  <!-- ==================== C. SEGURIDAD ==================== -->
+  <h2 class="page-break">C. Seguridad</h2>
+
+  <h3>Lo que está bien</h3>
+  <ul class="checklist">
+    <li><span class="check">✓</span> Headers: X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy, Permissions-Policy</li>
+    <li><span class="check">✓</span> Validación server-side: regex email/teléfono, límite de caracteres</li>
+    <li><span class="check">✓</span> <code>escapeHtml()</code> para prevenir XSS en emails</li>
+    <li><span class="check">✓</span> Rate limiting (5 req/min por IP)</li>
+    <li><span class="check">✓</span> <code>.env</code> en .gitignore con <code>.env.example</code> sin secretos</li>
+    <li><span class="check">✓</span> <code>rel="noopener noreferrer"</code> en todos los links externos</li>
+  </ul>
+
+  <h3>Pendiente</h3>
+  <table>
+    <tr><th>Prioridad</th><th>Problema</th><th>Detalle</th></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Sin Content-Security-Policy (CSP)</td><td>El sitio carga scripts de googletagmanager.com, connect.facebook.net y usa inline scripts. Un CSP protegería contra scripts inyectados.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Rate limiter es por instancia serverless</td><td><code>rateMap</code> es un Map() en memoria. En Vercel cada invocación puede ser una instancia nueva, haciendo el rate limiting inefectivo. Usar Upstash Redis o Vercel KV.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Sin protección CSRF</td><td>Cualquier sitio puede hacer POST a /api/lead. Agregar verificación de <code>Origin</code> header.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Falta header Strict-Transport-Security</td><td>Agregar HSTS para forzar HTTPS.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>API devuelve el lead completo</td><td><code>return { ok: true, lead }</code> expone datos internos (timestamp, origen). Devolver solo <code>{ ok: true }</code>.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>IDs de GA4 y Pixel hardcodeados</td><td>Mover a variables de entorno <code>NEXT_PUBLIC_GA_ID</code> y <code>NEXT_PUBLIC_FB_PIXEL_ID</code>.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Sin CAPTCHA en formularios</td><td>Bots pueden enviar leads. Agregar reCAPTCHA v3 o Cloudflare Turnstile (requiere dominio propio).</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Campo modelo sin validar contra valores permitidos</td><td>Un atacante puede enviar nombres de modelo arbitrarios. Validar contra <code>['MG3 Hybrid+', 'MG ZS Hybrid+']</code>.</td></tr>
+  </table>
+
+  <!-- ==================== D. ACCESIBILIDAD ==================== -->
+  <h2 class="page-break">D. Accesibilidad</h2>
+
+  <h3>Lo que está bien</h3>
+  <ul class="checklist">
+    <li><span class="check">✓</span> <code>lang="es"</code>, estructura semántica (<code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;footer&gt;</code>)</li>
+    <li><span class="check">✓</span> Labels asociados a inputs con <code>htmlFor</code></li>
+    <li><span class="check">✓</span> aria-label en WhatsApp float y back-to-top</li>
+    <li><span class="check">✓</span> Navegación por teclado: Escape cierra modales, flechas navegan lightbox/carousel</li>
+    <li><span class="check">✓</span> aria-label en botones de carousel</li>
+  </ul>
+
+  <h3>Pendiente</h3>
+  <table>
+    <tr><th>Prioridad</th><th>Problema</th><th>Detalle</th></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Hero dots sin aria-label</td><td><code>&lt;button className="hero-dot"&gt;</code> vacío — lectores de pantalla ven botones en blanco. Agregar <code>aria-label={`Slide ${i+1}`}</code>.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Botón cerrar modal sin aria-label</td><td>El &times; de ModelModal y Lightbox no tiene <code>aria-label="Cerrar"</code>.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Dots de colores son &lt;div&gt; no &lt;button&gt;</td><td><code>&lt;div className="modal-color-dot" onClick&gt;</code> no es focusable por teclado, sin role ni aria-label.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Model cards usan &lt;div onClick&gt;</td><td>No son focusables por teclado. Tab no los alcanza, Enter no los activa. Usar <code>&lt;button&gt;</code> o <code>&lt;a&gt;</code>.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>FAQ sin aria-expanded</td><td>Los botones del acordeón no indican estado abierto/cerrado. Agregar <code>aria-expanded</code>.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Modal no atrapa el foco</td><td>Al abrir ModelModal, el usuario puede Tab a elementos detrás del modal. Implementar focus trap.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sin "Skip to content"</td><td>No hay forma de saltar la navbar por teclado.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>SVGs decorativos sin aria-hidden</td><td>SVGs de iconos (shield, map, phone, etc.) generan ruido en lectores de pantalla. Agregar <code>aria-hidden="true"</code>.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Contraste insuficiente en testimonios</td><td><code>.testimonial-author span</code> usa <code>#999</code> sobre <code>#f5f5f5</code> = ratio 2.85:1 (falla WCAG AA).</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Sin prefers-reduced-motion</td><td>Muchas animaciones (hero zoom, scroll reveal, parallax) sin acomodación para usuarios sensibles al movimiento.</td></tr>
+  </table>
+
+  <!-- ==================== E. UX/CRO ==================== -->
+  <h2 class="page-break">E. UX / CRO</h2>
+
+  <h3>Lo que está bien</h3>
+  <ul class="checklist">
+    <li><span class="check">✓</span> Doble CTA claro: "Cotizar" (WhatsApp) + "Agendar Test Drive" (formulario)</li>
+    <li><span class="check">✓</span> WhatsApp float siempre visible con mensaje pre-rellenado por modelo</li>
+    <li><span class="check">✓</span> Dos formularios separados (test drive vs cotización) con campos apropiados</li>
+    <li><span class="check">✓</span> Estados claros en forms: loading, success, error</li>
+    <li><span class="check">✓</span> Tracking de conversiones: Meta Pixel (Lead + Schedule) + GA4 (generate_lead)</li>
+    <li><span class="check">✓</span> Transparencia de precios en cards, tablas y schemas</li>
+    <li><span class="check">✓</span> Garantía destacada como diferenciador</li>
+    <li><span class="check">✓</span> Social proof: testimonios con ratings + FAQ contra objeciones</li>
+    <li><span class="check">✓</span> Back-to-top button</li>
+    <li><span class="check">✓</span> Blog con CTAs al final de cada post</li>
+  </ul>
+
+  <h3>Pendiente</h3>
+  <table>
+    <tr><th>Prioridad</th><th>Problema</th><th>Detalle</th></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Cards de modelos abren modal en vez de navegar</td><td>"Ver modelo" abre un overlay JS. Si el usuario comparte la URL o refresca, vuelve al home. Las páginas standalone existen pero no son el flujo principal.</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Sin formulario en páginas de modelo</td><td>/modelos/mg3 y /modelos/zs tienen CTAs de WhatsApp pero no tienen form de cotización o test drive. El usuario debe volver al home.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Date picker permite fechas pasadas</td><td>El input de fecha del test drive no tiene atributo <code>min</code>. Se puede seleccionar ayer.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sin confirmación al usuario</td><td>Resend solo envía email al concesionario. Falta enviar una copia/confirmación al email del usuario.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Footer: links de modelos abren modal</td><td>Mismo problema que el navbar — deberían ser links a /modelos/mg3 y /modelos/zs.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Solo 3 testimonios, todos 5 estrellas</td><td>Puede parecer fabricado. Agregar más con ratings variados (4-5) o integrar Google Reviews.</td></tr>
+  </table>
+
+  <!-- ==================== F. CÓDIGO ==================== -->
+  <h2 class="page-break">F. Calidad de Código</h2>
+
+  <h3>Lo que está bien</h3>
+  <ul class="checklist">
+    <li><span class="check">✓</span> Componentes bien separados: HomePage, Navbar, HeroSlider, LeadForm, ModelModal, ModelPageClient, GalleryCarousel, Lightbox, TimelineSection</li>
+    <li><span class="check">✓</span> Capa de datos separada: models.js, testimonials.js, posts/</li>
+    <li><span class="check">✓</span> Alias <code>@/</code> configurado en jsconfig.json</li>
+    <li><span class="check">✓</span> <code>useCallback</code> para prevenir re-renders innecesarios</li>
+    <li><span class="check">✓</span> Dynamic imports para componentes pesados</li>
+    <li><span class="check">✓</span> Scroll listeners con <code>{ passive: true }</code></li>
+    <li><span class="check">✓</span> CSS custom properties para theming</li>
+  </ul>
+
+  <h3>Pendiente</h3>
+  <table>
+    <tr><th>Prioridad</th><th>Problema</th><th>Detalle</th></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Código duplicado: ModelModal ↔ ModelPageClient</td><td>Ambos renderizan contenido casi idéntico (hero, warranty, colores, specs, versiones, galería, CTAs). Extraer un componente <code>ModelDetail</code> compartido.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sin TypeScript</td><td>Todo el código es JavaScript plano. TypeScript previene errores de props, campos faltantes y shapes de API.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>SVGs inline duplicados</td><td>WhatsApp SVG aparece en Navbar, HomePage y ModelPageClient. Shield icon en varios lugares. Extraer a un archivo <code>icons.js</code>.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sin Error Boundary</td><td>Si un componente falla, la página entera crashea con pantalla blanca. Agregar React Error Boundary.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sin tests</td><td>Zero tests unitarios, de integración o E2E. Al menos testear la API route (validación) y envío de formulario.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sin linting ni formateo</td><td>No hay .eslintrc ni prettier config. Agregar ESLint + Prettier para consistencia.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Manipulación directa del DOM</td><td><code>document.body.style.overflow</code> y <code>document.querySelectorAll('.reveal')</code> en componentes React. Usar refs y estado.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Blog solo soporta párrafos</td><td><code>post.content</code> es un array de strings. No soporta headings, listas, bold, links ni imágenes dentro de posts. Considerar MDX.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Sin páginas 404 ni error custom</td><td>Next.js muestra las páginas default. Crear <code>not-found.jsx</code> y <code>error.jsx</code> con branding.</td></tr>
+  </table>
+
+  <!-- ==================== G. CONTENIDO ==================== -->
+  <h2 class="page-break">G. Contenido / Marketing</h2>
+
+  <h3>Lo que está bien</h3>
+  <ul class="checklist">
+    <li><span class="check">✓</span> Headlines atractivos y propuesta de valor clara</li>
+    <li><span class="check">✓</span> Timeline histórico de MG con fotos reales</li>
+    <li><span class="check">✓</span> Blog con 3 posts que apuntan a queries locales de búsqueda</li>
+    <li><span class="check">✓</span> FAQ que responde objeciones principales del comprador</li>
+    <li><span class="check">✓</span> Presencia local enfatizada: dirección en múltiples lugares</li>
+    <li><span class="check">✓</span> Sección de postventa genera confianza post-compra</li>
+  </ul>
+
+  <h3>Pendiente</h3>
+  <table>
+    <tr><th>Prioridad</th><th>Problema</th><th>Detalle</th></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Solo Instagram como red social</td><td>Sin Facebook, YouTube ni TikTok. Los compradores argentinos usan mucho Facebook Marketplace e Instagram.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Posts del blog muy cortos</td><td>Cada post tiene ~4 párrafos (~100 palabras). Para SEO, los posts deberían tener 800-1500 palabras con H2/H3, links internos e imágenes.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Email del footer dice ventas@mg.com</td><td>Parece placeholder. El .env.example muestra info@giamamg.com.ar. Actualizar el email visible.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Garantía inconsistente</td><td>Postventa dice "8 años / 160.000 km en baterías" pero el resto del sitio dice "7 años / 140.000 km". Verificar y unificar.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Sin contenido de video</td><td>Los compradores de autos responden bien a tours en video. Considerar embeber YouTube en páginas de modelo.</td></tr>
+  </table>
+
+  <!-- ==================== H. INFRAESTRUCTURA ==================== -->
+  <h2>H. Infraestructura</h2>
+
+  <h3>Lo que está bien</h3>
+  <ul class="checklist">
+    <li><span class="check">✓</span> Vercel: CI/CD automático en push, CDN edge, SSL</li>
+    <li><span class="check">✓</span> manifest.json configurado (PWA-ready)</li>
+    <li><span class="check">✓</span> theme_color y viewport configurados</li>
+    <li><span class="check">✓</span> Variables de entorno separadas (.env para secretos)</li>
+    <li><span class="check">✓</span> Resend para notificaciones de leads</li>
+    <li><span class="check">✓</span> GA4 + Meta Pixel para tracking</li>
+  </ul>
+
+  <h3>Pendiente</h3>
+  <table>
+    <tr><th>Prioridad</th><th>Problema</th><th>Detalle</th></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Sin monitoreo de errores</td><td>Sin Sentry, LogRocket ni Vercel Analytics. Si la API falla o el sitio crashea, nadie se entera. Agregar Sentry (plan gratuito).</td></tr>
+    <tr><td><span class="p-high">ALTA</span></td><td>Sin dominio propio</td><td>El sitio corre en giama-mg.vercel.app. Para un negocio real necesita dominio propio (giamamg.com o giamamg.com.ar).</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Leads no se guardan en base de datos</td><td>Si el email de Resend falla, el lead se pierde. No hay DB ni CRM. Al menos agregar Google Sheets, Supabase o Airtable como backup.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>Sin Web Vitals tracking</td><td>Agregar <code>@vercel/speed-insights</code> o <code>web-vitals</code> para monitorear LCP/CLS/INP.</td></tr>
+    <tr><td><span class="p-med">MEDIA</span></td><td>GA4 y Pixel disparan en preview deploys</td><td>No hay distinción entre producción y previews de Vercel. Contamina los datos de analytics.</td></tr>
+    <tr><td><span class="p-low">BAJA</span></td><td>Manifest usa misma imagen para 192x192 y 512x512</td><td>Deberían ser archivos de diferente resolución.</td></tr>
+  </table>
+
+  <!-- ==================== PLAN DE ACCIÓN ==================== -->
+  <h2 class="page-break">Plan de Acción Priorizado</h2>
+
+  <div class="summary-box">
+    <p><strong>Nota:</strong> Los items marcados como "Requiere acción del cliente" necesitan datos o cuentas que solo el propietario puede proveer.</p>
+  </div>
+
+  <h3>Fase 1 — Implementable ahora (código)</h3>
+  <table>
+    <tr><th>#</th><th>Acción</th><th>Impacto</th></tr>
+    <tr><td>1</td><td>Migrar hero slider a next/image con fill + priority</td><td>Performance LCP + SEO imágenes</td></tr>
+    <tr><td>2</td><td>Links de modelos → href a /modelos/ en vez de openModal()</td><td>SEO crawling + UX compartido</td></tr>
+    <tr><td>3</td><td>Agregar formulario en páginas /modelos/</td><td>CRO — no perder leads</td></tr>
+    <tr><td>4</td><td>Migrar galerías/carousel a next/image</td><td>Performance</td></tr>
+    <tr><td>5</td><td>Protección CSRF (validar Origin header)</td><td>Seguridad</td></tr>
+    <tr><td>6</td><td>No devolver lead completo en respuesta API</td><td>Seguridad</td></tr>
+    <tr><td>7</td><td>Aria-labels: hero dots, modal close, color dots, model cards</td><td>Accesibilidad</td></tr>
+    <tr><td>8</td><td>FAQ: agregar aria-expanded</td><td>Accesibilidad</td></tr>
+    <tr><td>9</td><td>Min date en test drive = hoy</td><td>UX</td></tr>
+    <tr><td>10</td><td>Mover GA4/Pixel a next/script afterInteractive</td><td>Performance</td></tr>
+    <tr><td>11</td><td>Agregar HSTS header</td><td>Seguridad</td></tr>
+    <tr><td>12</td><td>Corregir email del footer + garantía inconsistente</td><td>Contenido</td></tr>
+    <tr><td>13</td><td>Contraste testimonios (#999 → #666)</td><td>Accesibilidad</td></tr>
+    <tr><td>14</td><td>prefers-reduced-motion</td><td>Accesibilidad</td></tr>
+    <tr><td>15</td><td>Validar modelo contra valores permitidos en API</td><td>Seguridad</td></tr>
+    <tr><td>16</td><td>Sitemap dinámico con sitemap.js</td><td>SEO</td></tr>
+  </table>
+
+  <h3>Fase 2 — Requiere acción del cliente</h3>
+  <table>
+    <tr><th>#</th><th>Acción</th><th>Qué se necesita</th></tr>
+    <tr><td>17</td><td>Dominio propio</td><td>Comprar giamamg.com o giamamg.com.ar</td></tr>
+    <tr><td>18</td><td>reCAPTCHA / Turnstile</td><td>Requiere dominio configurado</td></tr>
+    <tr><td>19</td><td>Google Search Console</td><td>Registrar y verificar sitio</td></tr>
+    <tr><td>20</td><td>Webhook CRM</td><td>URL del webhook cuando esté creado</td></tr>
+    <tr><td>21</td><td>Imagen OG profesional</td><td>Diseño 1200x630 con branding</td></tr>
+    <tr><td>22</td><td>Sentry (monitoreo)</td><td>Crear cuenta gratis, obtener DSN</td></tr>
+    <tr><td>23</td><td>Redes sociales adicionales</td><td>Crear cuentas Facebook/YouTube</td></tr>
+    <tr><td>24</td><td>Verificar datos de garantía correctos</td><td>Confirmar 7 vs 8 años batería</td></tr>
+    <tr><td>25</td><td>Confirmar email correcto para footer</td><td>ventas@mg.com vs info@giamamg.com.ar</td></tr>
+  </table>
+
+  <h3>Fase 3 — Mejoras incrementales</h3>
+  <table>
+    <tr><th>#</th><th>Acción</th><th>Categoría</th></tr>
+    <tr><td>26</td><td>Deduplicar ModelModal ↔ ModelPageClient</td><td>Código</td></tr>
+    <tr><td>27</td><td>Extraer SVGs a icons.js</td><td>Código</td></tr>
+    <tr><td>28</td><td>React Error Boundary</td><td>Código</td></tr>
+    <tr><td>29</td><td>Migrar a TypeScript</td><td>Código</td></tr>
+    <tr><td>30</td><td>ESLint + Prettier</td><td>Código</td></tr>
+    <tr><td>31</td><td>Página 404 custom</td><td>UX</td></tr>
+    <tr><td>32</td><td>Blog: soporte MDX para contenido rico</td><td>Contenido</td></tr>
+    <tr><td>33</td><td>Vercel Speed Insights</td><td>Infra</td></tr>
+    <tr><td>34</td><td>Tests (API route + forms)</td><td>Código</td></tr>
+    <tr><td>35</td><td>Focus trap en modal</td><td>Accesibilidad</td></tr>
+    <tr><td>36</td><td>Skip to content link</td><td>Accesibilidad</td></tr>
+  </table>
+
+  <div class="doc-footer">
+    Auditoría Web GIAMA MG v2 — Abril 2026 — Generado para uso interno
+  </div>
+</div>
+
+</body>
+</html>

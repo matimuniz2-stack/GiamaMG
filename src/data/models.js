@@ -64,7 +64,7 @@ export const MODELS = {
     slug: 'zs',
     subtitle: 'SUV Compacto | Hybrid+ | 191 CV',
     description: 'El MG ZS Hybrid+ es un SUV compacto con motor 1.5L y 2 motores eléctricos de 191 CV. Consumo de 4.9 L/100 km. El SUV híbrido más vendido de Europa en 2024.',
-    heroStyle: { background: "url('/ZS/Portada.jpg') center/cover no-repeat" },
+    heroStyle: { background: "url('/ZS/Portada.webp') center/cover no-repeat" },
     bgGradient: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.3) 100%)',
     defaultImg: '/ZS/Colores/MG-ZS-HEV-RED.webp',
     hideCarOnHero: true,

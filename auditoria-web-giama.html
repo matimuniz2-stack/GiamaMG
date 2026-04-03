@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría Web — GIAMA MG</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --red: #C41230;
+    --red-light: #fef2f4;
+    --black: #1B1B1B;
+    --white: #ffffff;
+    --grey-50: #fafafa;
+    --grey-100: #f5f5f5;
+    --grey-200: #e5e5e5;
+    --grey-400: #a3a3a3;
+    --grey-500: #737373;
+    --grey-600: #525252;
+    --grey-700: #404040;
+    --green: #16a34a;
+    --green-light: #f0fdf4;
+    --yellow: #ca8a04;
+    --yellow-light: #fefce8;
+    --blue: #2563eb;
+    --blue-light: #eff6ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 20mm 18mm;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--black);
+    background: var(--white);
+    font-size: 11px;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ─── COVER PAGE ─── */
+  .cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, var(--black) 0%, #2a1015 50%, var(--red) 100%);
+    color: white;
+    page-break-after: always;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: rgba(196,18,48,0.15);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -40%;
+    left: -20%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(196,18,48,0.1);
+  }
+  .cover-content { position: relative; z-index: 1; }
+  .cover-badge {
+    display: inline-block;
+    padding: 6px 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: rgba(255,255,255,0.8);
+  }
+  .cover h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .cover h1 span { color: var(--red); filter: brightness(1.6); }
+  .cover-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 50px;
+    max-width: 500px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+  .cover-meta strong { color: rgba(255,255,255,0.8); font-weight: 600; }
+  .cover-line {
+    width: 60px;
+    height: 3px;
+    background: var(--red);
+    margin: 0 auto 30px;
+    border-radius: 2px;
+  }
+  .cover-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    z-index: 1;
+  }
+
+  /* ─── TABLE OF CONTENTS ─── */
+  .toc {
+    page-break-after: always;
+    padding: 40px 0;
+  }
+  .toc h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: var(--black);
+  }
+  .toc-list { list-style: none; }
+  .toc-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--grey-200);
+    font-size: 13px;
+  }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-section {
+    font-weight: 700;
+    color: var(--red);
+    margin-right: 12px;
+    min-width: 24px;
+  }
+  .toc-title { font-weight: 500; flex: 1; }
+  .toc-page { color: var(--grey-500); font-weight: 600; font-size: 12px; }
+  .toc-sub { padding-left: 36px; font-size: 12px; color: var(--grey-600); }
+  .toc-sub .toc-section { color: var(--grey-400); font-weight: 500; }
+
+  /* ─── GLOBAL STYLES ─── */
+  .page-break { page-break-before: always; }
+
+  h2.section-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--black);
+    margin: 0 0 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2.section-title .section-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--red);
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .section-subtitle {
+    font-size: 12px;
+    color: var(--grey-500);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--grey-100);
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    margin: 24px 0 12px;
+  }
+  h3.numbered {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h3 .h3-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    background: var(--red-light);
+    color: var(--red);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--grey-700);
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  p { margin-bottom: 8px; color: var(--grey-700); }
+
+  /* ─── SCORE CARD ─── */
+  .score-hero {
+    background: linear-gradient(135deg, var(--black), #2a1015);
+    color: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .score-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .score-num { font-size: 36px; font-weight: 900; line-height: 1; }
+  .score-of { font-size: 11px; color: rgba(255,255,255,0.5); }
+  .score-text h3 { color: white; margin: 0 0 6px; font-size: 16px; }
+  .score-text p { color: rgba(255,255,255,0.7); margin: 0; font-size: 12px; }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .score-card {
+    background: var(--grey-50);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid var(--grey-200);
+  }
+  .score-card-num {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--black);
+  }
+  .score-card-num.red { color: var(--red); }
+  .score-card-num.yellow { color: var(--yellow); }
+  .score-card-num.green { color: var(--green); }
+  .score-card-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--grey-500);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-top: 4px;
+  }
+  .score-card-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--grey-200);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .score-card-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .bar-red { background: var(--red); }
+  .bar-yellow { background: var(--yellow); }
+  .bar-green { background: var(--green); }
+
+  /* ─── FINDINGS BOXES ─── */
+  .finding-box {
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+  }
+  .finding-critical {
+    background: var(--red-light);
+    border-color: var(--red);
+  }
+  .finding-warning {
+    background: var(--yellow-light);
+    border-color: var(--yellow);
+  }
+  .finding-good {
+    background: var(--green-light);
+    border-color: var(--green);
+  }
+  .finding-info {
+    background: var(--blue-light);
+    border-color: var(--blue);
+  }
+  .finding-box strong {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .finding-box p { margin: 0; font-size: 11px; color: var(--grey-700); }
+
+  .finding-critical strong { color: var(--red); }
+  .finding-warning strong { color: var(--yellow); }
+  .finding-good strong { color: var(--green); }
+  .finding-info strong { color: var(--blue); }
+
+  /* ─── NUMBERED LIST ─── */
+  .numbered-list {
+    list-style: none;
+    counter-reset: item;
+  }
+  .numbered-list li {
+    counter-increment: item;
+    padding: 10px 0 10px 36px;
+    position: relative;
+    border-bottom: 1px solid var(--grey-100);
+    font-size: 11px;
+    color: var(--grey-700);
+  }
+  .numbered-list li::before {
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 22px;
+    height: 22px;
+    background: var(--red);
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .numbered-list li strong { color: var(--black); }
+
+  /* ─── TABLES ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 11px;
+  }
+  thead th {
+    background: var(--black);
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  thead th:first-child { border-radius: 6px 0 0 0; }
+  thead th:last-child { border-radius: 0 6px 0 0; }
+  tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--grey-200);
+    color: var(--grey-700);
+  }
+  tbody tr:nth-child(even) { background: var(--grey-50); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-yellow { background: var(--yellow-light); color: var(--yellow); }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+
+  /* ─── CHECKLIST ─── */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 11px;
+    color: var(--grey-700);
+    border-bottom: 1px solid var(--grey-100);
+  }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--grey-400);
+    border-radius: 3px;
+  }
+
+  /* ─── TWO COLUMNS ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .col-box {
+    background: var(--grey-50);
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid var(--grey-200);
+  }
+  .col-box h4 { margin-top: 0; }
+  .col-box ul { list-style: none; padding: 0; }
+  .col-box ul li {
+    padding: 4px 0;
+    font-size: 11px;
+    color: var(--grey-700);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .icon-check { color: var(--green); font-weight: 700; }
+  .icon-cross { color: var(--red); font-weight: 700; }
+  .icon-warn { color: var(--yellow); font-weight: 700; }
+
+  /* ─── PHASE BOX ─── */
+  .phase-box {
+    border: 1px solid var(--grey-200);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .phase-header {
+    background: var(--black);
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .phase-num {
+    background: var(--red);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .phase-title { font-weight: 700; font-size: 13px; }
+  .phase-period { font-size: 10px; color: rgba(255,255,255,0.5); margin-left: auto; }
+  .phase-body { padding: 0; }
+
+  .phase-body table { margin: 0; }
+  .phase-body thead th {
+    background: var(--grey-100);
+    color: var(--grey-700);
+    border-radius: 0;
+    font-size: 9px;
+  }
+
+  /* ─── CODE BLOCK ─── */
+  .code-block {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 10px;
+    line-height: 1.7;
+    margin: 12px 0;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .code-block .comment { color: #6c7086; }
+  .code-block .string { color: #a6e3a1; }
+  .code-block .key { color: #89b4fa; }
+
+  /* ─── VERDICT ─── */
+  .verdict {
+    background: linear-gradient(135deg, var(--black), #2a1015);
+    color: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 24px;
+  }
+  .verdict h3 { color: white; margin-top: 0; font-size: 16px; }
+  .verdict p { color: rgba(255,255,255,0.8); font-size: 12px; line-height: 1.7; }
+  .verdict .highlight { color: var(--red); filter: brightness(1.8); font-weight: 700; }
+
+  /* ─── ARCHITECTURE ─── */
+  .arch-tree {
+    background: var(--grey-50);
+    border: 1px solid var(--grey-200);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--grey-700);
+  }
+  .arch-tree .folder { color: var(--blue); font-weight: 600; }
+  .arch-tree .desc { color: var(--grey-500); font-style: italic; }
+
+  /* ─── PRINT ─── */
+  @media print {
+    body { font-size: 10px; }
+    .cover { height: auto; min-height: 100vh; }
+    .no-break { page-break-inside: avoid; }
+    .score-grid { grid-template-columns: repeat(4, 1fr); }
+    .two-col { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ COVER ═══════════════════════════ -->
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-badge">Documento Confidencial</div>
+    <div class="cover-line"></div>
+    <h1>Auditor&iacute;a Web<br><span>Profesional</span></h1>
+    <p class="cover-sub">giama-mg.vercel.app &mdash; Concesionario Oficial MG en Mar del Plata</p>
+    <div class="cover-meta">
+      <div><strong>Fecha</strong><br>2 de abril de 2026</div>
+      <div><strong>Stack</strong><br>Next.js 14 / React 18 / Vercel</div>
+      <div><strong>Puntaje</strong><br>58 / 100</div>
+    </div>
+  </div>
+  <div class="cover-footer">Auditor&iacute;a integral: Rendimiento, SEO, UX/UI, Contenido, CRO, Seguridad, Benchmarking, Ecosistema Digital</div>
+</div>
+
+<!-- ═══════════════════════════ TABLE OF CONTENTS ═══════════════════════════ -->
+<div class="toc">
+  <h2>Contenido</h2>
+  <ul class="toc-list">
+    <li><span class="toc-section">A</span><span class="toc-title">Resumen Ejecutivo</span></li>
+    <li class="toc-sub"><span class="toc-section">&bull;</span><span class="toc-title">Puntaje general y scorecard por secci&oacute;n</span></li>
+    <li class="toc-sub"><span class="toc-section">&bull;</span><span class="toc-title">Top 5 hallazgos cr&iacute;ticos / Top 5 quick wins</span></li>
+    <li><span class="toc-section">B</span><span class="toc-title">Hallazgos por Secci&oacute;n</span></li>
+    <li class="toc-sub"><span class="toc-section">1</span><span class="toc-title">Rendimiento T&eacute;cnico</span></li>
+    <li class="toc-sub"><span class="toc-section">2</span><span class="toc-title">SEO</span></li>
+    <li class="toc-sub"><span class="toc-section">3</span><span class="toc-title">UX / UI</span></li>
+    <li class="toc-sub"><span class="toc-section">4</span><span class="toc-title">Contenido</span></li>
+    <li class="toc-sub"><span class="toc-section">5</span><span class="toc-title">CRO &mdash; Conversi&oacute;n</span></li>
+    <li class="toc-sub"><span class="toc-section">6</span><span class="toc-title">Seguridad</span></li>
+    <li class="toc-sub"><span class="toc-section">7</span><span class="toc-title">Benchmarking Competitivo</span></li>
+    <li class="toc-sub"><span class="toc-section">8</span><span class="toc-title">Ecosistema Digital</span></li>
+    <li><span class="toc-section">C</span><span class="toc-title">Plan de Acci&oacute;n Priorizado (4 Fases)</span></li>
+    <li><span class="toc-section">D</span><span class="toc-title">Propuesta de Arquitectura Web Ideal</span></li>
+    <li><span class="toc-section">E</span><span class="toc-title">Checklist de Implementaci&oacute;n</span></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════ A) RESUMEN EJECUTIVO ═══════════════════════════ -->
+<h2 class="section-title"><span class="section-letter">A</span> Resumen Ejecutivo</h2>
+<p class="section-subtitle">Visi&oacute;n general del estado del sitio y hallazgos principales</p>
+
+<div class="score-hero">
+  <div class="score-circle">
+    <span class="score-num">58</span>
+    <span class="score-of">/ 100</span>
+  </div>
+  <div class="score-text">
+    <h3>Puntaje General</h3>
+    <p>Base visual y t&eacute;cnica s&oacute;lida, pero operando al 30% de su potencial. Problemas fundamentales en arquitectura SEO, medici&oacute;n y seguridad de formularios.</p>
+  </div>
+</div>
+
+<div class="score-grid">
+  <div class="score-card no-break">
+    <div class="score-card-num yellow">55</div>
+    <div class="score-card-label">Rendimiento</div>
+    <div class="score-card-bar"><div class="score-card-bar-fill bar-yellow" style="width:55%"></div></div>
+  </div>
+  <div class="score-card no-break">
+    <div class="score-card-num red">35</div>
+    <div class="score-card-label">SEO</div>
+    <div class="score-card-bar"><div class="score-card-bar-fill bar-red" style="width:35%"></div></div>
+  </div>
+  <div class="score-card no-break">
+    <div class="score-card-num green">78</div>
+    <div class="score-card-label">UX / UI</div>
+    <div class="score-card-bar"><div class="score-card-bar-fill bar-green" style="width:78%"></div></div>
+  </div>
+  <div class="score-card no-break">
+    <div class="score-card-num yellow">62</div>
+    <div class="score-card-label">Contenido</div>
+    <div class="score-card-bar"><div class="score-card-bar-fill bar-yellow" style="width:62%"></div></div>
+  </div>
+  <div class="score-card no-break">
+    <div class="score-card-num yellow">50</div>
+    <div class="score-card-label">CRO</div>
+    <div class="score-card-bar"><div class="score-card-bar-fill bar-yellow" style="width:50%"></div></div>
+  </div>
+  <div class="score-card no-break">
+    <div class="score-card-num red">40</div>
+    <div class="score-card-label">Seguridad</div>
+    <div class="score-card-bar"><div class="score-card-bar-fill bar-red" style="width:40%"></div></div>
+  </div>
+  <div class="score-card no-break">
+    <div class="score-card-num yellow">55</div>
+    <div class="score-card-label">Benchmarking</div>
+    <div class="score-card-bar"><div class="score-card-bar-fill bar-yellow" style="width:55%"></div></div>
+  </div>
+  <div class="score-card no-break">
+    <div class="score-card-num red">30</div>
+    <div class="score-card-label">Ecosistema</div>
+    <div class="score-card-bar"><div class="score-card-bar-fill bar-red" style="width:30%"></div></div>
+  </div>
+</div>
+
+<div class="two-col no-break">
+  <div>
+    <h4>Top 5 Hallazgos Cr&iacute;ticos</h4>
+    <ol class="numbered-list">
+      <li><strong>SPA sin rutas = SEO muerto.</strong> Los modelos se abren como modales, no como p&aacute;ginas. Google no puede indexar contenido individual de MG3 ni ZS.</li>
+      <li><strong>Cero anal&iacute;ticas.</strong> No hay GA4, GTM, Meta Pixel, ni ning&uacute;n tracking. Se opera completamente a ciegas.</li>
+      <li><strong>Formularios sin protecci&oacute;n anti-bot.</strong> Sin CAPTCHA, sin rate limiting, sin sanitizaci&oacute;n. Vector de XSS en emails.</li>
+      <li><strong>Sin robots.txt ni sitemap.xml.</strong> Google no tiene gu&iacute;a para crawlear. Indexaci&oacute;n pr&aacute;cticamente nula.</li>
+      <li><strong>Sin datos estructurados (Schema.org).</strong> Sin JSON-LD para LocalBusiness, AutoDealer ni Product. Sin rich snippets.</li>
+    </ol>
+  </div>
+  <div>
+    <h4>Top 5 Quick Wins (&lt; 1 d&iacute;a c/u)</h4>
+    <ol class="numbered-list">
+      <li><strong>robots.txt + sitemap.xml</strong> en /public/ &mdash; 15 min, impacto SEO inmediato.</li>
+      <li><strong>Google Analytics 4 + Meta Pixel</strong> &mdash; 30 min. Empez&aacute;s a medir hoy.</li>
+      <li><strong>JSON-LD LocalBusiness</strong> en layout.js &mdash; 20 min. Aparec&eacute;s en Google Maps.</li>
+      <li><strong>Migrar &lt;img&gt; a next/image</strong> &mdash; 15 im&aacute;genes, 1-2 horas. WebP autom&aacute;tico + lazy loading.</li>
+      <li><strong>Canonical URL + Twitter Cards</strong> en layout.js &mdash; 10 min.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ B) HALLAZGOS POR SECCION ═══════════════════════════ -->
+<div class="page-break"></div>
+<h2 class="section-title"><span class="section-letter">B</span> Hallazgos por Secci&oacute;n</h2>
+<p class="section-subtitle">An&aacute;lisis detallado de cada &aacute;rea auditada</p>
+
+<!-- ─── B1: RENDIMIENTO ─── -->
+<h3 class="numbered"><span class="h3-num">1</span> Rendimiento T&eacute;cnico <span class="badge badge-yellow">55/100</span></h3>
+
+<div class="two-col" style="margin-bottom:16px">
+  <div class="col-box">
+    <h4>Fortalezas</h4>
+    <ul>
+      <li><span class="icon-check">&#10003;</span> TTFB excelente: ~205ms (Vercel edge)</li>
+      <li><span class="icon-check">&#10003;</span> HTML ultra liviano: 52KB</li>
+      <li><span class="icon-check">&#10003;</span> Bundle m&iacute;nimo: 4 dependencias</li>
+      <li><span class="icon-check">&#10003;</span> Sin bibliotecas UI pesadas</li>
+      <li><span class="icon-check">&#10003;</span> will-change optimizado en CSS</li>
+      <li><span class="icon-check">&#10003;</span> Passive event listeners para scroll</li>
+      <li><span class="icon-check">&#10003;</span> Maps iframe con loading="lazy"</li>
+    </ul>
+  </div>
+  <div class="col-box">
+    <h4>Problemas</h4>
+    <ul>
+      <li><span class="icon-cross">&#10007;</span> CERO uso de next/image (15 &lt;img&gt; nativos)</li>
+      <li><span class="icon-cross">&#10007;</span> Sin code splitting / dynamic imports</li>
+      <li><span class="icon-cross">&#10007;</span> Sin React.memo ni useMemo (0 usos)</li>
+      <li><span class="icon-cross">&#10007;</span> Hero carga 3 imgs full-res como bg CSS</li>
+      <li><span class="icon-cross">&#10007;</span> next.config.mjs completamente vac&iacute;o</li>
+      <li><span class="icon-cross">&#10007;</span> Inter font carga 7 pesos (solo usa 3-4)</li>
+      <li><span class="icon-cross">&#10007;</span> ZS usa JPG en vez de WebP</li>
+    </ul>
+  </div>
+</div>
+
+<div class="finding-box finding-critical no-break">
+  <strong>Impacto cr&iacute;tico: Im&aacute;genes sin optimizar</strong>
+  <p>Para un sitio automotor donde las im&aacute;genes SON el producto, no usar next/image significa: sin conversi&oacute;n WebP/AVIF, sin srcset responsive, sin optimizaci&oacute;n server-side, sin priority hints. LCP estimado &gt;3s.</p>
+</div>
+
+<!-- ─── B2: SEO ─── -->
+<div class="page-break"></div>
+<h3 class="numbered"><span class="h3-num">2</span> SEO <span class="badge badge-red">35/100</span></h3>
+
+<div class="two-col" style="margin-bottom:16px">
+  <div class="col-box">
+    <h4>Presente</h4>
+    <ul>
+      <li><span class="icon-check">&#10003;</span> Title tag correcto y descriptivo</li>
+      <li><span class="icon-check">&#10003;</span> Meta description con keywords</li>
+      <li><span class="icon-check">&#10003;</span> OpenGraph (title, desc, image, locale es_AR)</li>
+      <li><span class="icon-check">&#10003;</span> &lt;html lang="es"&gt;</li>
+      <li><span class="icon-check">&#10003;</span> Alt text en todas las im&aacute;genes (15/15)</li>
+      <li><span class="icon-check">&#10003;</span> HTML sem&aacute;ntico (nav, section, footer)</li>
+    </ul>
+  </div>
+  <div class="col-box">
+    <h4>Ausente</h4>
+    <ul>
+      <li><span class="icon-cross">&#10007;</span> robots.txt &mdash; 404</li>
+      <li><span class="icon-cross">&#10007;</span> sitemap.xml &mdash; 404</li>
+      <li><span class="icon-cross">&#10007;</span> Canonical URL</li>
+      <li><span class="icon-cross">&#10007;</span> JSON-LD / Schema.org (0 marcado)</li>
+      <li><span class="icon-cross">&#10007;</span> Google Search Console</li>
+      <li><span class="icon-cross">&#10007;</span> P&aacute;ginas por modelo (SPA = 1 URL)</li>
+      <li><span class="icon-cross">&#10007;</span> OG image profesional (solo logo)</li>
+      <li><span class="icon-cross">&#10007;</span> Blog / contenido indexable fresco</li>
+    </ul>
+  </div>
+</div>
+
+<div class="finding-box finding-critical no-break">
+  <strong>Problema #1: Arquitectura SPA = muerte SEO</strong>
+  <p>Todo el sitio vive en una sola URL (/). Los modelos MG3 y ZS se abren como modales JavaScript, no como p&aacute;ginas. Google no puede indexar contenido modal. Alguien buscando "MG3 precio Mar del Plata" NO va a encontrar este sitio.</p>
+</div>
+
+<!-- ─── B3: UX/UI ─── -->
+<h3 class="numbered"><span class="h3-num">3</span> UX / UI <span class="badge badge-green">78/100</span></h3>
+
+<div class="two-col" style="margin-bottom:16px">
+  <div class="col-box">
+    <h4>Fortalezas</h4>
+    <ul>
+      <li><span class="icon-check">&#10003;</span> Dise&ntilde;o visual premium, coherente con MG</li>
+      <li><span class="icon-check">&#10003;</span> Hero slider cinematogr&aacute;fico (12s zoom)</li>
+      <li><span class="icon-check">&#10003;</span> Navbar fija con backdrop blur</li>
+      <li><span class="icon-check">&#10003;</span> Mobile menu full-screen con cubic-bezier</li>
+      <li><span class="icon-check">&#10003;</span> Touch drag en carouseles</li>
+      <li><span class="icon-check">&#10003;</span> Keyboard nav (flechas, Escape)</li>
+      <li><span class="icon-check">&#10003;</span> Tipograf&iacute;a fluida con clamp()</li>
+      <li><span class="icon-check">&#10003;</span> 51 aria-labels &mdash; buena accesibilidad</li>
+      <li><span class="icon-check">&#10003;</span> WhatsApp flotante siempre visible</li>
+    </ul>
+  </div>
+  <div class="col-box">
+    <h4>Mejorables</h4>
+    <ul>
+      <li><span class="icon-warn">!</span> Links sociales rotos (apuntan a #)</li>
+      <li><span class="icon-warn">!</span> Sin breadcrumbs en modales</li>
+      <li><span class="icon-warn">!</span> Mensaje de &eacute;xito poco visible en forms</li>
+      <li><span class="icon-warn">!</span> Sin bot&oacute;n "volver arriba" en mobile</li>
+      <li><span class="icon-warn">!</span> Contraste #999 sobre blanco = 2.85:1 (m&iacute;n WCAG: 4.5:1)</li>
+      <li><span class="icon-warn">!</span> Falta breakpoint 1024px (tablets landscape)</li>
+      <li><span class="icon-warn">!</span> Sin loading visual al abrir modal de modelo</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ─── B4: CONTENIDO ─── -->
+<h3 class="numbered"><span class="h3-num">4</span> Contenido <span class="badge badge-yellow">62/100</span></h3>
+
+<div class="finding-box finding-good no-break">
+  <strong>Lo bueno</strong>
+  <p>Tono premium consistente. Datos t&eacute;cnicos completos. Precios visibles (MG3 desde USD 23,500, ZS desde USD 27,500). Timeline hist&oacute;rico de MG. Garant&iacute;a 5 a&ntilde;os / 150,000 km destacada. Localizaci&oacute;n argentina correcta.</p>
+</div>
+<div class="finding-box finding-warning no-break">
+  <strong>Faltantes cr&iacute;ticos</strong>
+  <p>Sin comparativas con competencia (Toyota, Chery). Sin testimonios de clientes. Sin secci&oacute;n de financiaci&oacute;n detallada (cuotas, planes, tasas). Sin FAQ. Sin blog/noticias. Email ventas@mg.com parece placeholder.</p>
+</div>
+
+<!-- ─── B5: CRO ─── -->
+<div class="page-break"></div>
+<h3 class="numbered"><span class="h3-num">5</span> CRO &mdash; Conversi&oacute;n <span class="badge badge-yellow">50/100</span></h3>
+
+<div class="two-col" style="margin-bottom:16px">
+  <div class="col-box">
+    <h4>Fortalezas</h4>
+    <ul>
+      <li><span class="icon-check">&#10003;</span> 2 formularios diferenciados (test drive + cotizaci&oacute;n)</li>
+      <li><span class="icon-check">&#10003;</span> WhatsApp: 8 puntos de entrada al chat</li>
+      <li><span class="icon-check">&#10003;</span> Mensajes pre-armados para WA por contexto</li>
+      <li><span class="icon-check">&#10003;</span> CTAs claros en hero</li>
+      <li><span class="icon-check">&#10003;</span> Bot&oacute;n se deshabilita durante env&iacute;o</li>
+    </ul>
+  </div>
+  <div class="col-box">
+    <h4>Oportunidades perdidas</h4>
+    <ul>
+      <li><span class="icon-cross">&#10007;</span> Sin tracking de conversiones</li>
+      <li><span class="icon-cross">&#10007;</span> Sin urgencia ni escasez</li>
+      <li><span class="icon-cross">&#10007;</span> Sin social proof / testimonios</li>
+      <li><span class="icon-cross">&#10007;</span> Sin lead magnet (ficha descargable)</li>
+      <li><span class="icon-cross">&#10007;</span> Sin chat en vivo on-site</li>
+      <li><span class="icon-cross">&#10007;</span> Sin retargeting (Meta Pixel / Google Ads)</li>
+      <li><span class="icon-cross">&#10007;</span> Versiones gen&eacute;ricas (no se adaptan al modelo)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ─── B6: SEGURIDAD ─── -->
+<h3 class="numbered"><span class="h3-num">6</span> Seguridad <span class="badge badge-red">40/100</span></h3>
+
+<div class="finding-box finding-good no-break">
+  <strong>Bien implementado</strong>
+  <p>HSTS habilitado. API retorna 405 en GET. rel="noopener noreferrer" en links externos. API keys en env vars server-side. Bundle m&iacute;nimo sin vulnerabilidades conocidas.</p>
+</div>
+<div class="finding-box finding-critical no-break">
+  <strong>Vulnerabilidades detectadas</strong>
+  <p>Sin Content-Security-Policy (CSP). Sin X-Frame-Options (clickjacking). Inyecci&oacute;n HTML directa en emails del API (XSS). Sin CAPTCHA en formularios. Sin rate limiting en /api/lead. Sin validaci&oacute;n de formato server-side (email, tel&eacute;fono). Sin CSRF tokens.</p>
+</div>
+
+<!-- ─── B7: BENCHMARKING ─── -->
+<h3 class="numbered"><span class="h3-num">7</span> Benchmarking Competitivo <span class="badge badge-yellow">55/100</span></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>GIAMA MG</th>
+      <th>Concesionarios Top AR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>P&aacute;ginas por modelo</td><td><span class="badge badge-red">No (modales)</span></td><td><span class="badge badge-green">S&iacute; (URL dedicada)</span></td></tr>
+    <tr><td>Configurador de veh&iacute;culo</td><td><span class="badge badge-red">No</span></td><td><span class="badge badge-green">S&iacute;</span></td></tr>
+    <tr><td>Financiaci&oacute;n detallada</td><td><span class="badge badge-red">No</span></td><td><span class="badge badge-green">S&iacute; (simulador)</span></td></tr>
+    <tr><td>Stock disponible</td><td><span class="badge badge-red">No</span></td><td><span class="badge badge-green">S&iacute;</span></td></tr>
+    <tr><td>Chat en vivo</td><td><span class="badge badge-yellow">Solo WhatsApp</span></td><td><span class="badge badge-green">Chat + WA</span></td></tr>
+    <tr><td>Blog / Novedades</td><td><span class="badge badge-red">No</span></td><td><span class="badge badge-green">S&iacute;</span></td></tr>
+    <tr><td>Google Reviews</td><td><span class="badge badge-red">No</span></td><td><span class="badge badge-green">S&iacute;</span></td></tr>
+    <tr><td>Dise&ntilde;o visual</td><td><span class="badge badge-green">Muy bueno</span></td><td><span class="badge badge-yellow">Variable</span></td></tr>
+    <tr><td>Performance</td><td><span class="badge badge-green">Excelente</span></td><td><span class="badge badge-yellow">Variable</span></td></tr>
+    <tr><td>Mobile UX</td><td><span class="badge badge-green">Muy bueno</span></td><td><span class="badge badge-yellow">Variable</span></td></tr>
+  </tbody>
+</table>
+
+<!-- ─── B8: ECOSISTEMA ─── -->
+<h3 class="numbered"><span class="h3-num">8</span> Ecosistema Digital <span class="badge badge-red">30/100</span></h3>
+
+<table>
+  <thead>
+    <tr><th>Componente</th><th>Estado</th><th>Impacto</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Google Analytics 4</td><td><span class="badge badge-red">No instalado</span></td><td>Sin m&eacute;tricas de tr&aacute;fico</td></tr>
+    <tr><td>Google Tag Manager</td><td><span class="badge badge-red">No instalado</span></td><td>Sin gesti&oacute;n de tags</td></tr>
+    <tr><td>Meta Pixel</td><td><span class="badge badge-red">No instalado</span></td><td>Sin retargeting social</td></tr>
+    <tr><td>Google Ads tag</td><td><span class="badge badge-red">No instalado</span></td><td>Sin tracking de campa&ntilde;as</td></tr>
+    <tr><td>CRM (HubSpot)</td><td><span class="badge badge-yellow">Template listo, no activado</span></td><td>Sin pipeline automatizado</td></tr>
+    <tr><td>Email marketing</td><td><span class="badge badge-yellow">Solo notificaciones internas</span></td><td>Sin nurturing de leads</td></tr>
+    <tr><td>Chat en vivo</td><td><span class="badge badge-red">No</span></td><td>Leads perdidos en tiempo real</td></tr>
+    <tr><td>Google Search Console</td><td><span class="badge badge-red">No configurado</span></td><td>Sin monitoreo de indexaci&oacute;n</td></tr>
+    <tr><td>PWA / Manifest</td><td><span class="badge badge-red">No</span></td><td>No instalable</td></tr>
+    <tr><td>Favicons completos</td><td><span class="badge badge-yellow">Solo logo.png</span></td><td>Branding incompleto</td></tr>
+  </tbody>
+</table>
+
+<div class="finding-box finding-critical no-break" style="margin-top:12px">
+  <strong>Impacto real</strong>
+  <p>No sab&eacute;s cu&aacute;nta gente visita el sitio, qu&eacute; modelos generan m&aacute;s inter&eacute;s, ni cu&aacute;ntos abandonan el formulario. Si pag&aacute;s publicidad digital, no pod&eacute;s optimizar las campa&ntilde;as porque no ten&eacute;s datos de conversi&oacute;n. No pod&eacute;s hacer remarketing a visitantes que no convirtieron.</p>
+</div>
+
+<!-- ═══════════════════════════ C) PLAN DE ACCION ═══════════════════════════ -->
+<div class="page-break"></div>
+<h2 class="section-title"><span class="section-letter">C</span> Plan de Acci&oacute;n Priorizado</h2>
+<p class="section-subtitle">4 fases ordenadas por impacto y urgencia</p>
+
+<!-- FASE 1 -->
+<div class="phase-box no-break">
+  <div class="phase-header">
+    <span class="phase-num">1</span>
+    <span class="phase-title">Fundacional &mdash; URGENTE</span>
+    <span class="phase-period">Semana 1&ndash;2</span>
+  </div>
+  <div class="phase-body">
+    <table>
+      <thead><tr><th>#</th><th>Acci&oacute;n</th><th>Impacto</th><th>Esfuerzo</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Instalar GA4 + GTM</td><td>Empezar a medir todo</td><td>1 hora</td></tr>
+        <tr><td>2</td><td>Instalar Meta Pixel</td><td>Habilitar retargeting</td><td>30 min</td></tr>
+        <tr><td>3</td><td>Crear robots.txt + sitemap.xml</td><td>SEO b&aacute;sico funcional</td><td>15 min</td></tr>
+        <tr><td>4</td><td>Agregar JSON-LD LocalBusiness + AutoDealer</td><td>Rich snippets en Google</td><td>1 hora</td></tr>
+        <tr><td>5</td><td>Agregar canonical URL en metadata</td><td>Evitar duplicados</td><td>10 min</td></tr>
+        <tr><td>6</td><td>Agregar reCAPTCHA v3 a formularios</td><td>Prevenir spam de bots</td><td>2 horas</td></tr>
+        <tr><td>7</td><td>Sanitizar inputs en API (escapar HTML)</td><td>Cerrar vector de XSS</td><td>1 hora</td></tr>
+        <tr><td>8</td><td>Configurar security headers (CSP, X-Frame)</td><td>Seguridad b&aacute;sica</td><td>1 hora</td></tr>
+        <tr><td>9</td><td>Dar de alta Google Search Console</td><td>Monitorear indexaci&oacute;n</td><td>30 min</td></tr>
+        <tr><td>10</td><td>Verificar email de destino real</td><td>Que los leads lleguen</td><td>10 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- FASE 2 -->
+<div class="phase-box no-break">
+  <div class="phase-header">
+    <span class="phase-num">2</span>
+    <span class="phase-title">SEO &amp; Arquitectura</span>
+    <span class="phase-period">Semana 3&ndash;4</span>
+  </div>
+  <div class="phase-body">
+    <table>
+      <thead><tr><th>#</th><th>Acci&oacute;n</th><th>Impacto</th><th>Esfuerzo</th></tr></thead>
+      <tbody>
+        <tr><td>11</td><td>Crear rutas /modelos/mg3 y /modelos/zs</td><td>SEO de modelos, indexaci&oacute;n</td><td>1 d&iacute;a</td></tr>
+        <tr><td>12</td><td>Migrar &lt;img&gt; a next/image</td><td>Performance, LCP, CWV</td><td>3 horas</td></tr>
+        <tr><td>13</td><td>Optimizar Inter font (400, 600, 700)</td><td>-80KB de fonts</td><td>10 min</td></tr>
+        <tr><td>14</td><td>dynamic() para ModelModal</td><td>Code splitting</td><td>30 min</td></tr>
+        <tr><td>15</td><td>JSON-LD Product por modelo (precio, specs)</td><td>Rich snippets de producto</td><td>2 horas</td></tr>
+        <tr><td>16</td><td>Crear OG image profesional 1200x630</td><td>Compartir en redes</td><td>1 hora</td></tr>
+        <tr><td>17</td><td>Completar links reales de redes sociales</td><td>Credibilidad, tr&aacute;fico</td><td>30 min</td></tr>
+        <tr><td>18</td><td>Rate limiting en /api/lead</td><td>Prevenir abuso</td><td>2 horas</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- FASE 3 -->
+<div class="phase-box no-break">
+  <div class="phase-header">
+    <span class="phase-num">3</span>
+    <span class="phase-title">CRO &amp; Contenido</span>
+    <span class="phase-period">Semana 5&ndash;8</span>
+  </div>
+  <div class="phase-body">
+    <table>
+      <thead><tr><th>#</th><th>Acci&oacute;n</th><th>Impacto</th><th>Esfuerzo</th></tr></thead>
+      <tbody>
+        <tr><td>19</td><td>Secci&oacute;n FAQ con schema FAQPage</td><td>SEO + resolver objeciones</td><td>1 d&iacute;a</td></tr>
+        <tr><td>20</td><td>Testimonios de clientes</td><td>Social proof</td><td>1 d&iacute;a</td></tr>
+        <tr><td>21</td><td>Simulador de financiaci&oacute;n b&aacute;sico</td><td>Calificar leads</td><td>2-3 d&iacute;as</td></tr>
+        <tr><td>22</td><td>Formulario din&aacute;mico (versiones seg&uacute;n modelo)</td><td>UX del formulario</td><td>2 horas</td></tr>
+        <tr><td>23</td><td>Eventos de conversi&oacute;n en GA4</td><td>Medir funnel real</td><td>3 horas</td></tr>
+        <tr><td>24</td><td>Comparativas con competencia</td><td>Content marketing + SEO</td><td>1 d&iacute;a</td></tr>
+        <tr><td>25</td><td>Activar CRM HubSpot</td><td>Pipeline automatizado</td><td>1 d&iacute;a</td></tr>
+        <tr><td>26</td><td>Chat en vivo (Tidio / Tawk.to)</td><td>Captura en tiempo real</td><td>2 horas</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- FASE 4 -->
+<div class="phase-box no-break">
+  <div class="phase-header">
+    <span class="phase-num">4</span>
+    <span class="phase-title">Escalamiento</span>
+    <span class="phase-period">Mes 2&ndash;3</span>
+  </div>
+  <div class="phase-body">
+    <table>
+      <thead><tr><th>#</th><th>Acci&oacute;n</th><th>Impacto</th><th>Esfuerzo</th></tr></thead>
+      <tbody>
+        <tr><td>27</td><td>Blog de contenido (novedades, tips h&iacute;bridos)</td><td>SEO org&aacute;nico long-tail</td><td>Ongoing</td></tr>
+        <tr><td>28</td><td>Configurador de veh&iacute;culo interactivo</td><td>Engagement diferencial</td><td>1-2 sem</td></tr>
+        <tr><td>29</td><td>Stock real / unidades disponibles</td><td>Urgencia + leads calificados</td><td>1 semana</td></tr>
+        <tr><td>30</td><td>PWA con manifest.json</td><td>Instalable, offline</td><td>1 d&iacute;a</td></tr>
+        <tr><td>31</td><td>Email marketing automatizado</td><td>Conversi&oacute;n de leads fr&iacute;os</td><td>1 semana</td></tr>
+        <tr><td>32</td><td>A/B testing en CTAs y formularios</td><td>Optimizaci&oacute;n continua</td><td>Ongoing</td></tr>
+        <tr><td>33</td><td>Google Ads conversion tracking</td><td>SEM optimizado</td><td>3 horas</td></tr>
+        <tr><td>34</td><td>P&aacute;gina de usados / plan canje</td><td>Nuevo funnel</td><td>1-2 sem</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ D) ARQUITECTURA IDEAL ═══════════════════════════ -->
+<div class="page-break"></div>
+<h2 class="section-title"><span class="section-letter">D</span> Propuesta de Arquitectura Web Ideal</h2>
+<p class="section-subtitle">Estructura de URLs y stack t&eacute;cnico recomendado</p>
+
+<h4>Estructura de URLs recomendada</h4>
+<div class="arch-tree">
+<span class="folder">/</span>                            <span class="desc">&rarr; Home (hero + resumen + CTAs)</span>
+<span class="folder">/modelos/mg3-hybrid</span>          <span class="desc">&rarr; P&aacute;gina completa MG3</span>
+<span class="folder">/modelos/zs-hybrid</span>           <span class="desc">&rarr; P&aacute;gina completa ZS</span>
+<span class="folder">/test-drive</span>                  <span class="desc">&rarr; Formulario con calendario</span>
+<span class="folder">/cotizacion</span>                  <span class="desc">&rarr; Formulario con simulador</span>
+<span class="folder">/concesionario</span>               <span class="desc">&rarr; Ubicaci&oacute;n, horarios, equipo</span>
+<span class="folder">/postventa</span>                   <span class="desc">&rarr; Servicios, turnos, garant&iacute;a</span>
+<span class="folder">/financiacion</span>                <span class="desc">&rarr; Planes, cuotas, requisitos</span>
+<span class="folder">/blog</span>                        <span class="desc">&rarr; Art&iacute;culos y novedades</span>
+<span class="folder">/blog/[slug]</span>                 <span class="desc">&rarr; Art&iacute;culo individual</span>
+<span class="folder">/faq</span>                         <span class="desc">&rarr; Preguntas frecuentes</span>
+<span class="folder">/contacto</span>                    <span class="desc">&rarr; Datos, mapa, formulario</span>
+</div>
+
+<h4 style="margin-top:20px">Stack t&eacute;cnico recomendado</h4>
+<table>
+  <thead><tr><th>Componente</th><th>Tecnolog&iacute;a</th><th>Estado</th></tr></thead>
+  <tbody>
+    <tr><td>Framework</td><td>Next.js 14 (App Router)</td><td><span class="badge badge-green">Ya implementado</span></td></tr>
+    <tr><td>Im&aacute;genes</td><td>next/image</td><td><span class="badge badge-red">Migrar</span></td></tr>
+    <tr><td>Analytics</td><td>Vercel Analytics + GA4 + GTM</td><td><span class="badge badge-red">Instalar</span></td></tr>
+    <tr><td>CRM</td><td>HubSpot Free</td><td><span class="badge badge-yellow">Template listo</span></td></tr>
+    <tr><td>Anti-bot</td><td>reCAPTCHA v3 / Turnstile</td><td><span class="badge badge-red">Instalar</span></td></tr>
+    <tr><td>Email</td><td>Resend</td><td><span class="badge badge-green">Ya implementado</span></td></tr>
+    <tr><td>Sitemap</td><td>next-sitemap</td><td><span class="badge badge-red">Instalar</span></td></tr>
+    <tr><td>Chat</td><td>Tidio / Tawk.to (free tier)</td><td><span class="badge badge-red">Instalar</span></td></tr>
+  </tbody>
+</table>
+
+<h4 style="margin-top:20px">Security headers recomendados (next.config.mjs)</h4>
+<div class="code-block"><span class="key">const</span> nextConfig = {
+  <span class="key">async</span> headers() {
+    <span class="key">return</span> [{
+      source: <span class="string">'/(.*)'</span>,
+      headers: [
+        { key: <span class="string">'X-Frame-Options'</span>,        value: <span class="string">'DENY'</span> },
+        { key: <span class="string">'X-Content-Type-Options'</span>, value: <span class="string">'nosniff'</span> },
+        { key: <span class="string">'Referrer-Policy'</span>,        value: <span class="string">'strict-origin-when-cross-origin'</span> },
+        { key: <span class="string">'Permissions-Policy'</span>,     value: <span class="string">'camera=(), microphone=()'</span> },
+      ],
+    }]
+  },
+}</div>
+
+<!-- ═══════════════════════════ E) CHECKLIST ═══════════════════════════ -->
+<div class="page-break"></div>
+<h2 class="section-title"><span class="section-letter">E</span> Checklist de Implementaci&oacute;n</h2>
+<p class="section-subtitle">Lista completa de tareas para seguimiento</p>
+
+<h4>Fase 1 &mdash; Fundacional (Semana 1&ndash;2)</h4>
+<ul class="checklist">
+  <li>Instalar GA4 (tag en layout.js o v&iacute;a GTM)</li>
+  <li>Instalar GTM container</li>
+  <li>Instalar Meta Pixel</li>
+  <li>Crear /public/robots.txt</li>
+  <li>Crear /public/sitemap.xml</li>
+  <li>Agregar canonical URL en metadata de layout.js</li>
+  <li>Agregar JSON-LD LocalBusiness en layout.js</li>
+  <li>Agregar reCAPTCHA v3 a LeadForm.jsx</li>
+  <li>Escapar HTML en template de email (route.js)</li>
+  <li>Agregar security headers en next.config.mjs</li>
+  <li>Dar de alta Google Search Console</li>
+  <li>Verificar que EMAIL_TO apunte al email real</li>
+  <li>Verificar n&uacute;mero de WhatsApp (c&oacute;digo de &aacute;rea 11 vs 223)</li>
+</ul>
+
+<h4>Fase 2 &mdash; SEO &amp; Performance (Semana 3&ndash;4)</h4>
+<ul class="checklist">
+  <li>Crear ruta /modelos/mg3-hybrid como p&aacute;gina real</li>
+  <li>Crear ruta /modelos/zs-hybrid como p&aacute;gina real</li>
+  <li>Migrar 15 &lt;img&gt; a next/image con width, height y priority</li>
+  <li>Reducir pesos de Inter font a 400, 600, 700</li>
+  <li>Agregar dynamic() para ModelModal (code splitting)</li>
+  <li>Agregar JSON-LD Product con precio para cada modelo</li>
+  <li>Crear OG image profesional de 1200x630px</li>
+  <li>Completar URLs reales de redes sociales en footer</li>
+  <li>Agregar rate limiting middleware en /api/lead</li>
+  <li>Agregar validaci&oacute;n de formato email y tel&eacute;fono en server</li>
+</ul>
+
+<h4>Fase 3 &mdash; CRO &amp; Contenido (Semana 5&ndash;8)</h4>
+<ul class="checklist">
+  <li>Crear secci&oacute;n FAQ con schema FAQPage</li>
+  <li>Agregar testimonios de clientes</li>
+  <li>Implementar simulador de financiaci&oacute;n</li>
+  <li>Hacer formulario din&aacute;mico (versiones seg&uacute;n modelo)</li>
+  <li>Configurar eventos de conversi&oacute;n en GA4</li>
+  <li>Activar integraci&oacute;n HubSpot CRM</li>
+  <li>Instalar chat en vivo (Tidio / Tawk.to)</li>
+  <li>Agregar bot&oacute;n "volver arriba" en mobile</li>
+</ul>
+
+<h4>Fase 4 &mdash; Escalamiento (Mes 2&ndash;3)</h4>
+<ul class="checklist">
+  <li>Lanzar blog con primer art&iacute;culo</li>
+  <li>Implementar configurador de veh&iacute;culo</li>
+  <li>Agregar secci&oacute;n de stock real</li>
+  <li>Crear PWA con manifest.json</li>
+  <li>Configurar email marketing automatizado</li>
+  <li>Implementar A/B testing</li>
+  <li>Configurar Google Ads conversion tracking</li>
+  <li>Crear secci&oacute;n de usados / plan canje</li>
+  <li>Mejorar contraste de textos grises (#999 &rarr; #666 m&iacute;nimo)</li>
+  <li>Agregar apple-touch-icon, favicon.ico y favicons completos</li>
+</ul>
+
+<!-- ═══════════════════════════ VEREDICTO FINAL ═══════════════════════════ -->
+<div class="verdict" style="margin-top:30px">
+  <h3>Veredicto Final</h3>
+  <p>El sitio tiene una base visual y t&eacute;cnica s&oacute;lida &mdash; el dise&ntilde;o es premium, el c&oacute;digo est&aacute; limpio, y el performance de carga es bueno. Pero est&aacute; operando al <span class="highlight">30% de su potencial</span>.</p>
+  <p style="margin-top:10px">Los problemas fundamentales son de <span class="highlight">arquitectura</span> (SPA sin rutas = SEO inexistente), de <span class="highlight">ecosistema digital</span> (cero medici&oacute;n, cero automatizaci&oacute;n, cero retargeting) y de <span class="highlight">seguridad</span> (formularios expuestos).</p>
+  <p style="margin-top:10px">La prioridad absoluta es: <span class="highlight">medir</span> (analytics), <span class="highlight">indexar</span> (SEO/rutas), y <span class="highlight">proteger</span> (seguridad de formularios). Sin esas tres patas, el sitio es una vitrina bonita en un callej&oacute;n donde nadie pasa.</p>
+</div>
+
+<div style="text-align:center; margin-top:40px; padding:20px; color:var(--grey-400); font-size:10px; border-top:1px solid var(--grey-200);">
+  Auditor&iacute;a generada el 2 de abril de 2026 &bull; giama-mg.vercel.app &bull; Documento confidencial
+</div>
+
+</body>
+</html>
