@@ -8,6 +8,7 @@ import HeroSlider from './HeroSlider'
 import LeadForm from './LeadForm'
 import TimelineSection from './TimelineSection'
 import { TESTIMONIALS } from '@/data/testimonials'
+import { CONTACT, WHATSAPP_LINKS } from '@/data/constants'
 
 // SVG icons as components
 const ShieldIcon = ({ className, style }) => (
@@ -127,11 +128,11 @@ export default function HomePage() {
         <div className="concesionario-grid">
           <div className="conc-info reveal">
             <div className="conc-detail"><MapIcon /><p><strong>Dirección</strong><br />Gascón 3265, Mar del Plata, Buenos Aires</p></div>
-            <div className="conc-detail"><PhoneIcon /><p><strong>Teléfono</strong><br /><a href="tel:+5491131347853">+54 9 11 3134 7853</a></p></div>
+            <div className="conc-detail"><PhoneIcon /><p><strong>Teléfono</strong><br /><a href={`tel:${CONTACT.phone}`}>{CONTACT.whatsappDisplay}</a></p></div>
             <div className="conc-detail"><ClockIcon /><p><strong>Horarios</strong><br />Lunes a Viernes 9 a 18 hs<br />Sábados 9 a 13 hs</p></div>
-            <div className="conc-detail"><EmailIcon /><p><strong>Email</strong><br /><a href="mailto:autos.mg.ventas@giama.com.ar">autos.mg.ventas@giama.com.ar</a></p></div>
+            <div className="conc-detail"><EmailIcon /><p><strong>Email</strong><br /><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p></div>
             <div className="conc-detail"><GlobeIcon /><p><strong>Zona de cobertura</strong><br />Mar del Plata</p></div>
-            <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{marginTop:20}}>
+            <a href={WHATSAPP_LINKS.general} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{marginTop:20}}>
               Contactar por WhatsApp
             </a>
           </div>
@@ -274,10 +275,10 @@ export default function HomePage() {
           </div>
           <div className="footer-col">
             <h4>Contacto</h4>
-            <a href="https://maps.google.com/?q=Gascón+3265+Mar+del+Plata" target="_blank" rel="noopener noreferrer">Gascón 3265, Mar del Plata</a>
-            <a href="tel:+5491131347853">+54 9 11 3134 7853</a>
-            <a href="https://wa.me/5491131347853" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-            <a href="mailto:autos.mg.ventas@giama.com.ar">autos.mg.ventas@giama.com.ar</a>
+            <a href={`https://maps.google.com/?q=${CONTACT.mapsQuery}`} target="_blank" rel="noopener noreferrer">{CONTACT.addressShort}</a>
+            <a href={`tel:${CONTACT.phone}`}>{CONTACT.whatsappDisplay}</a>
+            <a href={WHATSAPP_LINKS.general} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
           </div>
         </div>
         <p className="footer-legal">Los precios expresados en dólares son referenciales y pueden variar. Consulte con el concesionario para valores actualizados. MG Argentina — Importado por Eximar.</p>
@@ -288,7 +289,7 @@ export default function HomePage() {
       </footer>
 
       {/* ========== WHATSAPP FLOAT ========== */}
-      <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" rel="noopener noreferrer" className="whatsapp-float" aria-label="Contactar por WhatsApp">
+      <a href={WHATSAPP_LINKS.general} target="_blank" rel="noopener noreferrer" className="whatsapp-float" aria-label="Contactar por WhatsApp">
         <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.742 3.052 9.38L1.056 31.2l6.064-1.952A15.9 15.9 0 0016.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.34 22.608c-.39 1.1-1.932 2.012-3.176 2.278-.852.18-1.962.324-5.702-1.226-4.786-1.982-7.864-6.838-8.104-7.156-.228-.318-1.926-2.566-1.926-4.892s1.22-3.47 1.652-3.944c.432-.474.944-.592 1.258-.592.314 0 .63.002.904.016.29.016.68-.11 1.064.812.39.944 1.328 3.238 1.444 3.472.118.234.196.508.04.812-.158.318-.236.514-.472.79-.234.278-.494.62-.706.832-.234.234-.478.488-.206.96.274.47 1.216 2.006 2.61 3.25 1.792 1.6 3.304 2.096 3.774 2.33.472.234.746.196 1.022-.118.274-.314 1.178-1.374 1.492-1.846.314-.474.63-.39 1.062-.234.432.158 2.742 1.294 3.212 1.528.472.234.786.352.904.548.116.196.116 1.138-.274 2.238z"/></svg>
       </a>
 

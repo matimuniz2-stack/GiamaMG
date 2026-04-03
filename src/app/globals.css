@@ -788,6 +788,21 @@ input, select, textarea { font-family: var(--font); }
   .about-stats { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* ============ FOCUS VISIBLE ============ */
+.carousel-dot:focus-visible,
+.hero-dot:focus-visible,
+.spec-tab:focus-visible,
+.faq-question:focus-visible,
+.modal-color-dot:focus-visible,
+.btn-primary:focus-visible,
+.btn-outline-white:focus-visible,
+.btn-submit:focus-visible,
+.btn-ver-modelo:focus-visible,
+.btn-nav-wa:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
 /* ============ REDUCED MOTION ============ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }

@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
     description: 'MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa en Mar del Plata.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'GIAMA - Concesionario Oficial MG' }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'GIAMA - Concesionario Oficial MG' }],
     type: 'website',
     locale: 'es_AR',
   },
@@ -27,7 +27,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
     description: 'MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa en Mar del Plata.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'GIAMA - Concesionario Oficial MG' }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'GIAMA - Concesionario Oficial MG' }],
   },
   icons: {
     icon: '/logo-mg.png',
@@ -43,7 +43,7 @@ const jsonLd = {
   description: 'Concesionario oficial MG en Mar del Plata. Venta de vehículos híbridos MG3 y ZS.',
   url: 'https://giamamg.com',
   logo: 'https://giamamg.com/logo-mg.png',
-  image: 'https://giamamg.com/og-image.png',
+  image: 'https://giamamg.com/og-image.jpg',
   telephone: '+5491131347853',
   email: 'autos.mg.ventas@giama.com.ar',
   address: {
@@ -160,29 +160,13 @@ export default function RootLayout({ children }) {
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} strategy="afterInteractive" />
-            <Script id="ga4-init" strategy="afterInteractive">{`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-            `}</Script>
+            <Script id="ga4-init" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}');` }} />
           </>
         )}
         {/* Meta Pixel — only in production */}
         {process.env.NEXT_PUBLIC_FB_PIXEL_ID && (
           <>
-            <Script id="fb-pixel" strategy="afterInteractive">{`
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '${process.env.NEXT_PUBLIC_FB_PIXEL_ID}');
-              fbq('track', 'PageView');
-            `}</Script>
+            <Script id="fb-pixel" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${process.env.NEXT_PUBLIC_FB_PIXEL_ID}');fbq('track','PageView');` }} />
             <noscript>
               <img
                 height="1"

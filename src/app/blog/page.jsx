@@ -9,9 +9,14 @@ export const metadata = {
   alternates: { canonical: '/blog' },
   openGraph: {
     title: 'Blog | GIAMA MG',
-    description: 'Novedades sobre MG, tecnología híbrida y el mercado automotor.',
+    description: 'Novedades, comparativas y guías sobre MG, tecnología híbrida y el mercado automotor argentino.',
     type: 'website',
     locale: 'es_AR',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | GIAMA MG',
+    description: 'Novedades, comparativas y guías sobre MG, tecnología híbrida y el mercado automotor argentino.',
   },
 }
 

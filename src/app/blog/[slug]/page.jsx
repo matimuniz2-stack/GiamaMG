@@ -22,6 +22,12 @@ export function generateMetadata({ params }) {
       type: 'article',
       locale: 'es_AR',
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
   }
 }
 

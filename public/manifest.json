@@ -8,7 +8,7 @@
   "theme_color": "#C41230",
   "icons": [
     {
-      "src": "/logo-mg.png",
+      "src": "/logo-mg-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
