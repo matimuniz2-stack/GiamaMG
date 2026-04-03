@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
+import { CONTACT } from '@/data/constants'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], weight: ['400','600','700','800'] })
@@ -44,8 +45,8 @@ const jsonLd = {
   url: 'https://giamamg.com',
   logo: 'https://giamamg.com/logo-mg.png',
   image: 'https://giamamg.com/og-image.jpg',
-  telephone: '+5491131347853',
-  email: 'autos.mg.ventas@giama.com.ar',
+  telephone: CONTACT.phone,
+  email: CONTACT.email,
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Gascón 3265',
@@ -117,7 +118,7 @@ const faqJsonLd = {
       name: '¿Cómo puedo agendar un test drive?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Podés agendar tu test drive completando el formulario en la web, contactando por WhatsApp al +54 9 11 3134 7853 o acercándote al concesionario.',
+        text: `Podés agendar tu test drive completando el formulario en la web, contactando por WhatsApp al ${CONTACT.whatsappDisplay} o acercándote al concesionario.`,
       },
     },
     {

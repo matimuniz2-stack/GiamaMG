@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { CONTACT } from '@/data/constants'
 
 function escapeHtml(str) {
   if (!str) return ''
@@ -186,10 +187,10 @@ export async function POST(request) {
                 }
               </p>
               <p style="color:#333;line-height:1.6;margin-top:16px;">Si tenés alguna consulta, no dudes en escribirnos por WhatsApp:</p>
-              <a href="https://wa.me/5491131347853" style="display:inline-block;background:#25D366;color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;margin-top:8px;">Escribinos por WhatsApp</a>
+              <a href="https://wa.me/${CONTACT.whatsapp}" style="display:inline-block;background:#25D366;color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;margin-top:8px;">Escribinos por WhatsApp</a>
             </div>
             <div style="background:#f5f5f5;padding:16px 24px;font-size:12px;color:#999;text-align:center;">
-              GIAMA — Concesionario Oficial MG<br>Gascón 3265, Mar del Plata
+              GIAMA — Concesionario Oficial MG<br>${CONTACT.addressShort}
             </div>
           </div>
         `

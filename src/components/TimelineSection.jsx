@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { CONTACT } from '@/data/constants'
 
 const timelineData = [
   { year: '1924', img: '/img/history/Old No 1.jpg', alt: 'Old Number One — el primer MG, 1924', title: 'Old Number One', desc: 'Cecil Kimber crea el primer MG en Oxford. Nace una leyenda del automovilismo deportivo británico que marcaría la historia para siempre.' },
@@ -196,7 +197,7 @@ export default function TimelineSection() {
           <p><strong>GIAMA</strong>, con más de 40 años de trayectoria en el mercado automotor, es el concesionario oficial de MG en <strong>Mar del Plata</strong>.</p>
           <div className="giama-highlight">
             <svg viewBox="0 0 24 24" style={{ width: 24, height: 24, fill: 'var(--red)', flexShrink: 0 }}><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
-            <p>Gascón 3265, Mar del Plata</p>
+            <p>{CONTACT.addressShort}</p>
           </div>
         </div>
         <div className="giama-imgs">
