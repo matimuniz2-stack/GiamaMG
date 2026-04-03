@@ -54,7 +54,7 @@ export const MODELS = {
       { src: '/MG3/Interior/Back Seat.webp', alt: 'MG3 asientos traseros' },
       { src: '/MG3/Interior/Door Panel-1.webp', alt: 'MG3 panel de puerta' },
     ],
-    hasFicha: true,
+    hasFicha: false,
     cotizarText: 'Hola,%20quiero%20cotizar%20el%20MG3%20Hybrid+',
     cotizarLabel: 'Cotizar MG3',
     priceFrom: 'USD 23.500',
