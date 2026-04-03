@@ -192,8 +192,8 @@ export default function TimelineSection() {
       {/* GIAMA block */}
       <div className="giama-block reveal">
         <div>
-          <h3>MG llega a Argentina con GIAMA</h3>
-          <p>En 2025, MG desembarca en Argentina a través de <strong>Eximar</strong>, el mismo importador de Volvo, Jaguar, Land Rover y Geely, con una red inicial de 10 concesionarios en todo el país.</p>
+          <h3>MG llega a Mar del Plata con GIAMA</h3>
+          <p>En 2025, MG desembarca en Mar del Plata a través de <strong>Eximar</strong>, el mismo importador de Volvo, Jaguar, Land Rover y Geely, con una red inicial de 10 concesionarios en todo el país.</p>
           <p><strong>GIAMA</strong>, con más de 40 años de trayectoria en el mercado automotor, es el concesionario oficial de MG en <strong>Mar del Plata</strong>.</p>
           <div className="giama-highlight">
             <svg viewBox="0 0 24 24" style={{ width: 24, height: 24, fill: 'var(--red)', flexShrink: 0 }}><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
@@ -201,7 +201,6 @@ export default function TimelineSection() {
           </div>
         </div>
         <div className="giama-imgs">
-          <img src="/img/hero/KV-2.jpg" alt="MG3 Hybrid+ — vista profesional" loading="lazy" />
           <img src="/img/mg3-interior/Steering Wheel.jpg" alt="MG3 interior — volante" loading="lazy" />
           <img src="/img/mg3-lux/Wheels.jpg" alt="MG3 — llantas de diseño" loading="lazy" />
         </div>
