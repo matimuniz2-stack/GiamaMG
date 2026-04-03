@@ -1,16 +1,13 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
-import dynamic from 'next/dynamic'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navbar from './Navbar'
 import HeroSlider from './HeroSlider'
 import LeadForm from './LeadForm'
+import TimelineSection from './TimelineSection'
 import { TESTIMONIALS } from '@/data/testimonials'
-
-const ModelModal = dynamic(() => import('./ModelModal'), { ssr: false })
-const Lightbox = dynamic(() => import('./Lightbox'), { ssr: false })
 
 // SVG icons as components
 const ShieldIcon = ({ className, style }) => (
@@ -63,8 +60,6 @@ const FAQ_ITEMS = [
 ]
 
 export default function HomePage() {
-  const [activeModal, setActiveModal] = useState(null) // null | 'mg3' | 'zs'
-  const [lightbox, setLightbox] = useState({ open: false, images: [], index: 0 })
   const [showBackTop, setShowBackTop] = useState(false)
   const [openFaq, setOpenFaq] = useState(null)
 
@@ -78,17 +73,6 @@ export default function HomePage() {
     return () => obs.disconnect()
   }, [])
 
-
-  // Timeline reveal
-  useEffect(() => {
-    const items = document.querySelectorAll('.timeline-item')
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible') })
-    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' })
-    items.forEach(el => obs.observe(el))
-    return () => obs.disconnect()
-  }, [])
-
   // Back to top visibility
   useEffect(() => {
     const onScroll = () => setShowBackTop(window.scrollY > 500)
@@ -96,46 +80,9 @@ export default function HomePage() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close modal on Escape
-  useEffect(() => {
-    const handler = (e) => {
-      if (e.key === 'Escape') {
-        if (lightbox.open) {
-          setLightbox(prev => ({ ...prev, open: false }))
-        } else if (activeModal) {
-          setActiveModal(null)
-          document.body.style.overflow = ''
-        }
-      }
-      if (e.key === 'ArrowRight' && lightbox.open) {
-        setLightbox(prev => ({ ...prev, index: (prev.index + 1) % prev.images.length }))
-      }
-      if (e.key === 'ArrowLeft' && lightbox.open) {
-        setLightbox(prev => ({ ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length }))
-      }
-    }
-    document.addEventListener('keydown', handler)
-    return () => document.removeEventListener('keydown', handler)
-  }, [activeModal, lightbox.open])
-
-  const openModal = useCallback((model) => {
-    setActiveModal(model)
-    document.body.style.overflow = 'hidden'
-  }, [])
-
-  const closeModal = useCallback(() => {
-    setActiveModal(null)
-    document.body.style.overflow = ''
-  }, [])
-
-  const openLightbox = useCallback((imgSrc, galleryImages) => {
-    const index = galleryImages.indexOf(imgSrc)
-    setLightbox({ open: true, images: galleryImages, index: index >= 0 ? index : 0 })
-  }, [])
-
   return (
     <>
-      <Navbar openModal={openModal} />
+      <Navbar />
 
       <HeroSlider />
 
@@ -170,58 +117,7 @@ export default function HomePage() {
       </section>
 
       {/* ========== SOBRE MG / HISTORIA ========== */}
-      <section className="section" id="sobre-mg" style={{background:'var(--grey-light)'}}>
-        <p className="section-tag reveal">Sobre MG</p>
-        <h2 className="section-title reveal">Más de 100 años de historia británica</h2>
-        <div className="about-intro reveal">
-          <p><strong>MG (Morris Garages)</strong> fue fundada en 1924 en Oxford, Inglaterra. Desde entonces, la marca se convirtió en ícono de autos deportivos y roadsters legendarios, combinando diseño británico con ingeniería de vanguardia.</p>
-          <p>Hoy, como parte de <strong>SAIC Motor</strong>, MG mantiene su centro de diseño en Londres y lidera la transición hacia la movilidad híbrida y eléctrica en más de 40 países.</p>
-        </div>
-
-        <div className="about-stats reveal">
-          <div className="stat"><div className="stat-number">1924</div><div className="stat-label">Fundación en Oxford</div></div>
-          <div className="stat"><div className="stat-number">100+</div><div className="stat-label">Años de historia</div></div>
-          <div className="stat"><div className="stat-number">40+</div><div className="stat-label">Países</div></div>
-          <div className="stat"><div className="stat-number">6</div><div className="stat-label">Años de garantía</div></div>
-        </div>
-
-        <h3 className="timeline-title reveal">Un siglo de pasión automotriz</h3>
-        <div className="timeline">
-          {[
-            { year: '1924', img: '/img/history/Old No 1.jpg', alt: 'Old Number One — el primer MG, 1924', title: 'Old Number One', desc: 'Cecil Kimber crea el primer MG en Oxford. Nace una leyenda del automovilismo deportivo británico que marcaría la historia para siempre.' },
-            { year: '1930s', img: '/img/history/Auto MG ANT.jpg', alt: 'MG en competición, años 1930', title: 'Espíritu de competición', desc: 'MG domina las pistas europeas. Sus autos de carrera se convierten en ícono de velocidad, estableciendo récords mundiales y ganando seguidores en todo el mundo.' },
-            { year: '1950s', img: '/img/history/AutoCasa.jpg', alt: 'MGA Roadster clásico, años 1950', title: 'MGA — Elegancia atemporal', desc: 'El MGA redefine el roadster. Líneas aerodinámicas y pura elegancia británica lo convierten en uno de los autos más deseados de la época.' },
-            { year: '1960s', img: '/img/history/antiguo4.jpg', alt: 'MGB GT, años 1960', title: 'MGB — Un clásico inmortal', desc: 'Con más de 500.000 unidades producidas, el MGB se convierte en el auto deportivo británico más exitoso de la historia. Un verdadero ícono cultural.' },
-            { year: '2024', img: '/img/history/cyberster.jpg', alt: 'MG Cyberster, 2024', title: 'Cyberster — El futuro es ahora', desc: 'MG presenta el Cyberster, un roadster 100% eléctrico que rinde homenaje al legado deportivo de la marca con tecnología del siglo XXI.' },
-          ].map((item) => (
-            <div className="timeline-item" key={item.year}>
-              <div className="timeline-img"><Image src={item.img} alt={item.alt} width={600} height={400} loading="lazy" /></div>
-              <div className="timeline-year">{item.year}</div>
-              <div className="timeline-content">
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="giama-block reveal">
-          <div>
-            <h3>MG llega a Argentina con GIAMA</h3>
-            <p>En 2025, MG desembarca en Argentina a través de <strong>Eximar</strong>, el mismo importador de Volvo, Jaguar, Land Rover y Geely, con una red inicial de 10 concesionarios en todo el país.</p>
-            <p><strong>GIAMA</strong>, con más de 40 años de trayectoria en el mercado automotor, es el concesionario oficial de MG en <strong>Mar del Plata</strong>.</p>
-            <div className="giama-highlight">
-              <svg viewBox="0 0 24 24" style={{width:24,height:24,fill:'var(--red)',flexShrink:0}}><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-              <p>Gascón 3265, Mar del Plata</p>
-            </div>
-          </div>
-          <div className="giama-imgs">
-            <Image src="/img/hero/KV-2.jpg" alt="MG3 Hybrid+ — vista profesional" width={400} height={300} loading="lazy" />
-            <Image src="/img/mg3-interior/Steering Wheel.jpg" alt="MG3 interior — volante" width={400} height={300} loading="lazy" />
-            <Image src="/img/mg3-lux/Wheels.jpg" alt="MG3 — llantas de diseño" width={400} height={300} loading="lazy" />
-          </div>
-        </div>
-      </section>
+      <TimelineSection />
 
       {/* ========== CONCESIONARIO ========== */}
       <section className="section" id="concesionario">
@@ -391,17 +287,10 @@ export default function HomePage() {
         </div>
       </footer>
 
-      {/* ========== MODEL MODALS ========== */}
-      <ModelModal model="mg3" isOpen={activeModal === 'mg3'} onClose={closeModal} onOpenLightbox={openLightbox} />
-      <ModelModal model="zs" isOpen={activeModal === 'zs'} onClose={closeModal} onOpenLightbox={openLightbox} />
-
       {/* ========== WHATSAPP FLOAT ========== */}
       <a href="https://wa.me/5491131347853?text=Hola,%20quiero%20información%20sobre%20MG" target="_blank" rel="noopener noreferrer" className="whatsapp-float" aria-label="Contactar por WhatsApp">
         <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.742 3.052 9.38L1.056 31.2l6.064-1.952A15.9 15.9 0 0016.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.34 22.608c-.39 1.1-1.932 2.012-3.176 2.278-.852.18-1.962.324-5.702-1.226-4.786-1.982-7.864-6.838-8.104-7.156-.228-.318-1.926-2.566-1.926-4.892s1.22-3.47 1.652-3.944c.432-.474.944-.592 1.258-.592.314 0 .63.002.904.016.29.016.68-.11 1.064.812.39.944 1.328 3.238 1.444 3.472.118.234.196.508.04.812-.158.318-.236.514-.472.79-.234.278-.494.62-.706.832-.234.234-.478.488-.206.96.274.47 1.216 2.006 2.61 3.25 1.792 1.6 3.304 2.096 3.774 2.33.472.234.746.196 1.022-.118.274-.314 1.178-1.374 1.492-1.846.314-.474.63-.39 1.062-.234.432.158 2.742 1.294 3.212 1.528.472.234.786.352.904.548.116.196.116 1.138-.274 2.238z"/></svg>
       </a>
-
-      {/* ========== LIGHTBOX ========== */}
-      <Lightbox lightbox={lightbox} setLightbox={setLightbox} />
 
       {/* ========== BACK TO TOP ========== */}
       <button

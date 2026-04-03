@@ -348,31 +348,13 @@ input, select, textarea { font-family: var(--font); }
 .pv-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
 .pv-card p { font-size: 14px; color: #666; line-height: 1.7; }
 
-/* ============ MODEL DETAIL MODAL ============ */
-.model-modal {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 2000; background: #fff; overflow-y: auto;
-  transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
-}
-.model-modal.open { transform: translateY(0); }
-.modal-close {
-  position: fixed; top: 20px; right: 30px; z-index: 2001;
-  width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,0.8);
-  color: #fff; border: none; font-size: 24px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; transition: background 0.3s;
-}
-.modal-close:hover { background: var(--red); }
+/* ============ MODEL DETAIL ============ */
 .modal-hero {
   height: 70vh; min-height: 400px; display: flex; align-items: center;
   justify-content: center; position: relative; overflow: hidden;
 }
 .modal-hero .modal-bg {
   position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-}
-.modal-hero .modal-car {
-  position: relative; z-index: 2; max-width: 60%; max-height: 60%;
-  filter: drop-shadow(0 20px 60px rgba(0,0,0,0.4));
-  transition: opacity 0.3s;
 }
 .modal-hero .modal-info {
   position: absolute; bottom: 40px; left: 50px; z-index: 3; color: #fff;
@@ -504,30 +486,6 @@ input, select, textarea { font-family: var(--font); }
 }
 .btn-download:hover { background: var(--red); }
 .btn-download svg { width: 16px; height: 16px; fill: #fff; }
-
-/* Lightbox */
-.lightbox {
-  display: none; position: fixed; inset: 0; z-index: 3000;
-  background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
-}
-.lightbox.open { display: flex; }
-.lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 8px; object-fit: contain; }
-.lightbox-close {
-  position: absolute; top: 20px; right: 30px;
-  width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.1);
-  color: #fff; border: none; font-size: 28px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
-.lightbox-close:hover { background: var(--red); }
-.lightbox-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.1);
-  color: #fff; border: none; font-size: 22px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
-.lightbox-nav:hover { background: rgba(255,255,255,0.25); }
-.lightbox-prev { left: 20px; }
-.lightbox-next { right: 20px; }
 
 /* Warranty banner */
 .warranty-banner {
@@ -718,6 +676,15 @@ input, select, textarea { font-family: var(--font); }
 .model-page .modal-hero { position: relative; height: 60vh; min-height: 400px; }
 .model-page .modal-body h2 { margin-top: 40px; }
 
+/* Breadcrumbs */
+.breadcrumbs { background: var(--black); padding: 12px 40px; }
+.breadcrumbs ol { display: flex; align-items: center; gap: 8px; list-style: none; font-size: 13px; }
+.breadcrumbs li { color: rgba(255,255,255,0.5); }
+.breadcrumbs li a { color: rgba(255,255,255,0.7); transition: color 0.2s; }
+.breadcrumbs li a:hover { color: #fff; }
+.breadcrumbs li + li::before { content: '/'; margin-right: 8px; color: rgba(255,255,255,0.3); }
+.breadcrumbs li[aria-current="page"] { color: #fff; font-weight: 500; }
+
 /* ============ BLOG ============ */
 .blog-page { min-height: 100vh; }
 .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -793,10 +760,7 @@ input, select, textarea { font-family: var(--font); }
   .modal-hero { height: 50vh; }
   .modal-hero .modal-info { left: 20px; bottom: 20px; }
   .modal-hero .modal-info h1 { font-size: 28px; }
-  .modal-gallery { grid-template-columns: 1fr 1fr; }
-  .modal-gallery .gallery-wide { grid-column: span 2; }
   .modal-ctas { flex-direction: column; }
-  .modal-close { top: 12px; right: 16px; }
   .version-table { font-size: 12px; }
   .specs-tabs { gap: 0; }
   .spec-tab { padding: 10px 14px; font-size: 12px; }

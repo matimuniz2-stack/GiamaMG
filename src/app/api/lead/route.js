@@ -40,7 +40,7 @@ export async function POST(request) {
       process.env.NEXT_PUBLIC_SITE_URL || 'https://giamamg.com',
       'http://localhost:3000',
     ]
-    if (origin && !allowedOrigins.some((o) => origin.startsWith(o))) {
+    if (origin && !allowedOrigins.includes(origin)) {
       return NextResponse.json({ error: 'Origen no permitido' }, { status: 403 })
     }
 
@@ -166,22 +166,53 @@ export async function POST(request) {
       } catch (emailErr) {
         console.error('Error sending email:', emailErr)
       }
-    }
 
-    // ──────────────────────────────────────────────
-    // 2. CRM WEBHOOK (plug in your URL)
-    // ──────────────────────────────────────────────
-    // if (process.env.CRM_WEBHOOK_URL) {
-    //   try {
-    //     await fetch(process.env.CRM_WEBHOOK_URL, {
-    //       method: 'POST',
-    //       headers: { 'Content-Type': 'application/json' },
-    //       body: JSON.stringify(lead),
-    //     })
-    //   } catch (crmErr) {
-    //     console.error('CRM webhook error:', crmErr)
-    //   }
-    // }
+      // ──────────────────────────────────────────────
+      // 2. CONFIRMATION EMAIL to the lead
+      // ──────────────────────────────────────────────
+      try {
+        const confirmHtml = `
+          <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+            <div style="background:#1B1B1B;padding:24px;text-align:center;">
+              <img src="${process.env.NEXT_PUBLIC_SITE_URL || 'https://giamamg.com'}/logo-mg.png" alt="MG Motor" width="48" height="48" style="display:inline-block;" />
+              <span style="color:#fff;font-size:20px;font-weight:700;margin-left:12px;vertical-align:middle;">GIAMA</span>
+            </div>
+            <div style="padding:32px 24px;">
+              <h2 style="color:#1B1B1B;margin-bottom:16px;">¡Gracias por tu consulta, ${escapeHtml(nombre)}!</h2>
+              <p style="color:#333;line-height:1.6;">
+                ${tipo === 'test-drive'
+                  ? `Recibimos tu solicitud de <strong>Test Drive</strong> para el <strong>${escapeHtml(modelo)}</strong>. Nos vamos a comunicar con vos a la brevedad para confirmar tu turno.`
+                  : `Recibimos tu solicitud de <strong>cotización</strong> para el <strong>${escapeHtml(modelo)}</strong>. Te vamos a enviar la mejor propuesta a la brevedad.`
+                }
+              </p>
+              <p style="color:#333;line-height:1.6;margin-top:16px;">Si tenés alguna consulta, no dudes en escribirnos por WhatsApp:</p>
+              <a href="https://wa.me/5491131347853" style="display:inline-block;background:#25D366;color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;margin-top:8px;">Escribinos por WhatsApp</a>
+            </div>
+            <div style="background:#f5f5f5;padding:16px 24px;font-size:12px;color:#999;text-align:center;">
+              GIAMA — Concesionario Oficial MG<br>Gascón 3265, Mar del Plata
+            </div>
+          </div>
+        `
+
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: process.env.EMAIL_FROM || 'GIAMA Web <noreply@giamamg.com>',
+            to: [email],
+            subject: tipo === 'test-drive'
+              ? `Confirmación de Test Drive — ${escapeHtml(modelo)} | GIAMA`
+              : `Confirmación de Cotización — ${escapeHtml(modelo)} | GIAMA`,
+            html: confirmHtml,
+          }),
+        })
+      } catch (confirmErr) {
+        console.error('Error sending confirmation email:', confirmErr)
+      }
+    }
 
     return NextResponse.json({ ok: true })
 

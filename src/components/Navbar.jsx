@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
-export default function Navbar({ openModal }) {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const toggleMenu = () => {
