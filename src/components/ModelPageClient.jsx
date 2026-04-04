@@ -13,7 +13,7 @@ export default function ModelPageClient({ model }) {
   const [carImg, setCarImg] = useState(data.defaultImg)
   const [activeColor, setActiveColor] = useState(0)
   const [activeTab, setActiveTab] = useState(0)
-  const [imgOpacity, setImgOpacity] = useState(1)
+  const [slideState, setSlideState] = useState('center')
 
   useEffect(() => {
     const srcs = [
@@ -28,12 +28,16 @@ export default function ModelPageClient({ model }) {
   }, [data])
 
   const changeColor = (index) => {
-    setImgOpacity(0)
+    if (index === activeColor) return
+    setSlideState('exit')
     setTimeout(() => {
       setCarImg(data.colors[index].src)
       setActiveColor(index)
-      setImgOpacity(1)
-    }, 150)
+      setSlideState('enter')
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setSlideState('center'))
+      })
+    }, 250)
   }
 
   return (
@@ -99,7 +103,8 @@ export default function ModelPageClient({ model }) {
             width={960}
             height={540}
             sizes="(max-width: 768px) 100vw, 960px"
-            style={{ opacity: imgOpacity, transition: 'opacity 0.15s', width: '100%', height: 'auto' }}
+            className={`color-slide color-slide--${slideState}`}
+            style={{ width: '100%', height: 'auto' }}
             priority
           />
         </div>
