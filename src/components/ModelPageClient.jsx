@@ -84,10 +84,11 @@ export default function ModelPageClient({ model }) {
           <Image
             src={carImg}
             alt={`${data.name} — ${data.colors[activeColor]?.name}`}
-            width={600}
-            height={400}
-            sizes="(max-width: 768px) 100vw, 600px"
-            style={{ opacity: imgOpacity, transition: 'opacity 0.3s', maxWidth: '80%', height: 'auto' }}
+            width={960}
+            height={540}
+            sizes="(max-width: 768px) 100vw, 960px"
+            style={{ opacity: imgOpacity, transition: 'opacity 0.3s', width: '100%', height: 'auto' }}
+            priority
           />
         </div>
         <div className="modal-colors">
