@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import GalleryCarousel from './GalleryCarousel'
@@ -15,13 +15,20 @@ export default function ModelPageClient({ model }) {
   const [activeTab, setActiveTab] = useState(0)
   const [imgOpacity, setImgOpacity] = useState(1)
 
+  useEffect(() => {
+    data.colors.forEach((c) => {
+      const img = new window.Image()
+      img.src = c.src
+    })
+  }, [data.colors])
+
   const changeColor = (index) => {
     setImgOpacity(0)
     setTimeout(() => {
       setCarImg(data.colors[index].src)
       setActiveColor(index)
       setImgOpacity(1)
-    }, 300)
+    }, 150)
   }
 
   return (
@@ -87,7 +94,7 @@ export default function ModelPageClient({ model }) {
             width={960}
             height={540}
             sizes="(max-width: 768px) 100vw, 960px"
-            style={{ opacity: imgOpacity, transition: 'opacity 0.3s', width: '100%', height: 'auto' }}
+            style={{ opacity: imgOpacity, transition: 'opacity 0.15s', width: '100%', height: 'auto' }}
             priority
           />
         </div>
