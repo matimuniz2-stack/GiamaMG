@@ -16,11 +16,16 @@ export default function ModelPageClient({ model }) {
   const [imgOpacity, setImgOpacity] = useState(1)
 
   useEffect(() => {
-    data.colors.forEach((c) => {
+    const srcs = [
+      ...data.colors.map((c) => c.src),
+      ...data.exteriorGallery.map((g) => g.src),
+      ...data.interiorGallery.map((g) => g.src),
+    ]
+    srcs.forEach((src) => {
       const img = new window.Image()
-      img.src = c.src
+      img.src = src
     })
-  }, [data.colors])
+  }, [data])
 
   const changeColor = (index) => {
     setImgOpacity(0)
