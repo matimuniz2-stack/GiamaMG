@@ -364,23 +364,24 @@ input, select, textarea { font-family: var(--font); }
 .modal-body { padding: 60px 80px; max-width: 1200px; margin: 0 auto; }
 .modal-body h2 { font-size: 28px; font-weight: 800; margin-bottom: 30px; }
 
-/* Color showcase */
+/* Color section (image + description side by side) */
+.color-section {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
+  margin-bottom: 40px;
+}
 .color-showcase {
-  display: flex; align-items: center; justify-content: center;
-  padding: 40px 20px 20px; margin-bottom: 20px;
-  overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 20px 0; overflow: hidden;
 }
 .color-showcase img {
   width: 100%; max-height: 480px; height: auto;
   object-fit: contain;
 }
-.color-slide { will-change: transform, opacity; }
-.color-slide--center { transform: translateX(0); opacity: 1; transition: transform 0.3s ease, opacity 0.3s ease; }
-.color-slide--exit { transform: translateX(-100%); opacity: 0; transition: transform 0.25s ease-in, opacity 0.25s ease-in; }
-.color-slide--enter { transform: translateX(100%); opacity: 0; transition: none; }
+.color-description h3 { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+.color-description p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 14px; }
 @media (max-width: 768px) {
+  .color-section { grid-template-columns: 1fr; gap: 20px; }
   .color-showcase img { max-height: 260px; }
-  .color-showcase { padding: 24px 10px 10px; }
 }
 
 /* Color selector in modal */

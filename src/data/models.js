@@ -10,6 +10,7 @@ export const MODELS = {
     hideCarOnHero: true,
     warranty: '6 años / 120.000 km + 7 años / 140.000 km batería híbrida',
     warrantySub: 'Garantía líder en el segmento para el vehículo y la batería',
+    colorDescription: 'El MG3 Hybrid+ es un hatchback full hybrid que combina un motor 1.5L con tecnología híbrida de 195 CV y un consumo de solo 4.4 L/100 km, sin necesidad de enchufe. Con diseño deportivo, conectividad de última generación y un completo paquete de seguridad MG Pilot, es la opción inteligente para la ciudad.',
     colors: [
       { color: '#CC2222', src: '/MG3/Colores/MG3-rojo.webp', name: 'Rojo' },
       { color: '#1a1a1a', src: '/MG3/Colores/MG3-negro.webp', name: 'Negro' },
@@ -71,6 +72,7 @@ export const MODELS = {
     hideCarOnHero: true,
     warranty: '6 años / 120.000 km + 7 años / 140.000 km batería híbrida',
     warrantySub: 'El SUV híbrido más vendido de Europa en 2024',
+    colorDescription: 'El All New MG ZS HEV es un SUV híbrido que marca un nuevo estándar en movilidad eficiente y conectada. A diferencia de los híbridos convencionales, es un full hybrid: puede desplazarse en modo 100% eléctrico hasta ciertas velocidades, entregando mayor eficiencia y una experiencia de conducción más fluida y silenciosa.\n\nCon un torque combinado de 465 Nm, ofrece un equilibrio óptimo entre rendimiento, eficiencia energética y compromiso ambiental. A todo esto se suma un diseño renovado, conectividad de última generación y un completo paquete de seguridad MG Pilot.',
     colors: [
       { color: '#CC2222', src: '/ZS/Colores/MG-ZS-HEV-RED.webp', name: 'Rojo' },
       { color: '#1a1a1a', src: '/ZS/Colores/MG-ZS-HEV-BLACK.webp', name: 'Negro' },

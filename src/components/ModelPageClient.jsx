@@ -89,29 +89,39 @@ export default function ModelPageClient({ model }) {
 
         {/* Colors */}
         <h2>Elegí tu color</h2>
-        <div className="color-showcase">
-          <Image
-            src={carImg}
-            alt={`${data.name} — ${data.colors[activeColor]?.name}`}
-            width={960}
-            height={540}
-            sizes="(max-width: 768px) 100vw, 960px"
-            className={`color-slide color-slide--${slideState}`}
-            style={{ width: '100%', height: 'auto' }}
-            priority
-          />
-        </div>
-        <div className="modal-colors">
-          <span>Color: <strong>{data.colors[activeColor]?.name}</strong></span>
-          {data.colors.map((c, i) => (
-            <button
-              key={i}
-              className={`modal-color-dot ${i === activeColor ? 'active' : ''}`}
-              style={{ background: c.color, borderColor: i === activeColor ? 'var(--black)' : (c.border || 'transparent') }}
-              onClick={() => changeColor(i)}
-              aria-label={`Color ${c.name}`}
+        <div className="color-section">
+          <div className="color-showcase">
+            <Image
+              src={carImg}
+              alt={`${data.name} — ${data.colors[activeColor]?.name}`}
+              width={960}
+              height={540}
+              sizes="(max-width: 768px) 100vw, 600px"
+              className={`color-slide color-slide--${slideState}`}
+              style={{ width: '100%', height: 'auto' }}
+              priority
             />
-          ))}
+            <div className="modal-colors">
+              <span>Color: <strong>{data.colors[activeColor]?.name}</strong></span>
+              {data.colors.map((c, i) => (
+                <button
+                  key={i}
+                  className={`modal-color-dot ${i === activeColor ? 'active' : ''}`}
+                  style={{ background: c.color, borderColor: i === activeColor ? 'var(--black)' : (c.border || 'transparent') }}
+                  onClick={() => changeColor(i)}
+                  aria-label={`Color ${c.name}`}
+                />
+              ))}
+            </div>
+          </div>
+          {data.colorDescription && (
+            <div className="color-description">
+              <h3>{data.name}</h3>
+              {data.colorDescription.split('\n\n').map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Specs */}
