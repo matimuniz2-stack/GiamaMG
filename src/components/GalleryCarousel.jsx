@@ -47,7 +47,7 @@ export default function GalleryCarousel({ images, title }) {
   return (
     <div className="carousel-wrapper">
       {title && <p className="gallery-section-title">{title}</p>}
-      <div className="carousel" tabIndex={0} onKeyDown={handleKeyDown}>
+      <div className="carousel" tabIndex={0} onKeyDown={handleKeyDown} role="region" aria-label={`Galería ${title || ''}`}>
         <div className="carousel-viewport">
         <button className="carousel-btn carousel-prev" onClick={prev} aria-label="Anterior">
           <svg viewBox="0 0 24 24" width="24" height="24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/></svg>

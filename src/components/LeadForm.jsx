@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const VERSIONES = {
   'MG3 Hybrid+': ['Comfort', 'Luxury'],
@@ -11,8 +11,15 @@ export default function LeadForm({ tipo }) {
   const [status, setStatus] = useState('idle') // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('')
   const [modelo, setModelo] = useState('')
+  const resetTimerRef = useRef(null)
 
   const versiones = VERSIONES[modelo] || []
+
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current)
+    }
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -76,7 +83,7 @@ export default function LeadForm({ tipo }) {
             })
           }
         }
-        setTimeout(() => setStatus('idle'), 5000)
+        resetTimerRef.current = setTimeout(() => setStatus('idle'), 5000)
       } else {
         const err = await res.json()
         setErrorMsg(err.error || 'Error al enviar')

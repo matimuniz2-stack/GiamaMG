@@ -24,6 +24,10 @@ const RATE_LIMIT = 5 // max 5 requests per IP per minute
 
 function isRateLimited(ip) {
   const now = Date.now()
+  // Cleanup expired entries
+  for (const [key, val] of rateMap) {
+    if (now - val.start > RATE_WINDOW) rateMap.delete(key)
+  }
   const entry = rateMap.get(ip)
   if (!entry || now - entry.start > RATE_WINDOW) {
     rateMap.set(ip, { start: now, count: 1 })

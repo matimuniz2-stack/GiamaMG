@@ -53,47 +53,32 @@ export default function TimelineSection() {
   const [statsVisible, setStatsVisible] = useState(false)
   const [itemProgress, setItemProgress] = useState(timelineData.map(() => 0))
 
-  // Animated timeline line fill on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!timelineRef.current || !lineRef.current) return
-
-      const rect = timelineRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-      const timelineTop = rect.top
-      const timelineHeight = rect.height
-
-      // Calculate how much of the timeline has been scrolled past
-      const scrolled = windowHeight - timelineTop
-      const totalScrollable = timelineHeight + windowHeight * 0.5
-      const progress = Math.min(Math.max(scrolled / totalScrollable, 0), 1)
-
-      lineRef.current.style.height = `${progress * 100}%`
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Track individual item scroll progress for grayscale/parallax
+  // Animated timeline line fill + individual item scroll progress (combined)
   useEffect(() => {
     const items = document.querySelectorAll('.tl-item')
 
     const handleScroll = () => {
       const windowHeight = window.innerHeight
-      const newProgress = []
 
+      // Timeline line fill
+      if (timelineRef.current && lineRef.current) {
+        const rect = timelineRef.current.getBoundingClientRect()
+        const scrolled = windowHeight - rect.top
+        const totalScrollable = rect.height + windowHeight * 0.5
+        const progress = Math.min(Math.max(scrolled / totalScrollable, 0), 1)
+        lineRef.current.style.height = `${progress * 100}%`
+      }
+
+      // Item progress for grayscale/parallax
+      const newProgress = []
       items.forEach((item) => {
         const rect = item.getBoundingClientRect()
         const center = rect.top + rect.height / 2
-        // 0 = not visible, 1 = centered in viewport
         const distFromCenter = Math.abs(center - windowHeight / 2)
         const maxDist = windowHeight / 2 + rect.height / 2
         const progress = Math.max(1 - distFromCenter / maxDist, 0)
         newProgress.push(progress)
       })
-
       setItemProgress(newProgress)
     }
 
