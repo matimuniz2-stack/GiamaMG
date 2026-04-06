@@ -678,7 +678,7 @@ input, select, textarea { font-family: var(--font); }
 
 /* ============ MODEL PAGE (standalone) ============ */
 .model-page { padding-top: 72px; }
-.model-page .modal-hero { position: relative; height: 100vh; min-height: 500px; }
+.model-page .modal-hero { position: relative; height: 80vh; min-height: 400px; }
 .model-page .modal-body h2 { margin-top: 40px; }
 
 /* Breadcrumbs */
