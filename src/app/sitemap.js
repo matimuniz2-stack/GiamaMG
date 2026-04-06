@@ -2,8 +2,9 @@ import { getAllPosts } from '@/data/posts'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://giamamg.com'
 
-export default function sitemap() {
-  const posts = getAllPosts().map((post) => ({
+export default async function sitemap() {
+  const allPosts = await getAllPosts()
+  const posts = allPosts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: post.date,
     changeFrequency: 'monthly',

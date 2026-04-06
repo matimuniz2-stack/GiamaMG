@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import { getAllPosts } from '@/data/posts'
 
+export const revalidate = 60
+
 export const metadata = {
   title: 'Blog | GIAMA — Concesionario Oficial MG en Mar del Plata',
   description: 'Novedades, comparativas y guías sobre MG, tecnología híbrida y el mercado automotor argentino.',
@@ -20,8 +22,8 @@ export const metadata = {
   },
 }
 
-export default function BlogPage() {
-  const posts = getAllPosts()
+export default async function BlogPage() {
+  const posts = await getAllPosts()
 
   return (
     <div className="blog-page">

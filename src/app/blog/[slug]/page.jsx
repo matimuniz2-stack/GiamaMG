@@ -4,12 +4,16 @@ import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import { getAllPosts, getPostBySlug } from '@/data/posts'
 
-export function generateStaticParams() {
-  return getAllPosts().map((post) => ({ slug: post.slug }))
+export const revalidate = 60
+export const dynamicParams = true
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map((post) => ({ slug: post.slug }))
 }
 
-export function generateMetadata({ params }) {
-  const post = getPostBySlug(params.slug)
+export async function generateMetadata({ params }) {
+  const post = await getPostBySlug(params.slug)
   if (!post) return {}
   return {
     title: `${post.title} | Blog GIAMA MG`,
@@ -31,8 +35,8 @@ export function generateMetadata({ params }) {
   }
 }
 
-export default function BlogPost({ params }) {
-  const post = getPostBySlug(params.slug)
+export default async function BlogPost({ params }) {
+  const post = await getPostBySlug(params.slug)
   if (!post) notFound()
 
   const jsonLd = {
@@ -40,7 +44,7 @@ export default function BlogPost({ params }) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    image: `${process.env.NEXT_PUBLIC_SITE_URL}${post.image}`,
+    image: post.image,
     datePublished: post.date,
     author: { '@type': 'Organization', name: post.author },
     publisher: { '@type': 'Organization', name: 'GIAMA - Concesionario Oficial MG' },

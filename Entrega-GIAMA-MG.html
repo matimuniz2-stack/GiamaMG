@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrega Sitio Web — GIAMA MG</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a1a; line-height: 1.7; background: #fff; }
+    .page { max-width: 800px; margin: 0 auto; padding: 60px 50px; }
+    .page-break { page-break-after: always; }
+
+    /* Header */
+    .header { text-align: center; padding: 40px 0 50px; border-bottom: 3px solid #C41230; margin-bottom: 40px; }
+    .header img { width: 70px; margin-bottom: 16px; }
+    .header h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
+    .header p { font-size: 15px; color: #666; }
+    .header .date { font-size: 13px; color: #999; margin-top: 8px; }
+
+    /* Sections */
+    h2 { font-size: 20px; font-weight: 700; color: #C41230; margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee; }
+    h3 { font-size: 16px; font-weight: 700; margin: 20px 0 8px; }
+    p, li { font-size: 14px; color: #333; }
+    ul { padding-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 6px; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+    th { text-align: left; background: #f5f5f5; padding: 10px 14px; font-weight: 600; font-size: 13px; }
+    td { padding: 10px 14px; border-bottom: 1px solid #eee; }
+
+    /* Credential box */
+    .cred-box { background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 10px; padding: 24px; margin: 16px 0 24px; }
+    .cred-box h3 { margin-top: 0; }
+    .cred-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+    .cred-row:last-child { border-bottom: none; }
+    .cred-label { font-weight: 600; font-size: 13px; color: #666; }
+    .cred-value { font-size: 14px; font-weight: 600; color: #1a1a1a; font-family: monospace; }
+
+    /* Note box */
+    .note { background: #FFF8E1; border-left: 4px solid #FFB300; padding: 14px 18px; border-radius: 6px; margin: 16px 0; font-size: 13px; }
+
+    /* Footer */
+    .footer { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #999; }
+
+    @media print {
+      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .page { padding: 30px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <!-- PORTADA -->
+  <div class="header">
+    <img src="https://giamamg.com/logo-mg.png" alt="MG Logo">
+    <h1>Entrega de Sitio Web</h1>
+    <p>GIAMA — Concesionario Oficial MG en Mar del Plata</p>
+    <p class="date">Abril 2026</p>
+  </div>
+
+  <!-- RESUMEN -->
+  <h2>1. Resumen del Proyecto</h2>
+  <p>Desarrollo de sitio web institucional para el concesionario oficial MG en Mar del Plata. El sitio incluye presentación de modelos, formularios de contacto, blog administrable y todas las integraciones necesarias para medir resultados y proteger formularios.</p>
+
+  <table>
+    <tr><th>Dominio</th><td>giamamg.com</td></tr>
+    <tr><th>Hosting</th><td>Vercel (plan gratuito)</td></tr>
+    <tr><th>Tecnología</th><td>Next.js 14 / React</td></tr>
+    <tr><th>Repositorio</th><td>github.com/matimuniz2-stack/GiamaMG</td></tr>
+  </table>
+
+  <!-- CONTENIDO -->
+  <h2>2. Contenido del Sitio</h2>
+
+  <h3>Página Principal</h3>
+  <ul>
+    <li>Hero con slider de 3 imágenes</li>
+    <li>Sección de modelos con precios y acceso directo</li>
+    <li>Historia de MG con timeline interactivo</li>
+    <li>Datos del concesionario (dirección, horarios, contacto)</li>
+    <li>Mapa de Google Maps embebido</li>
+    <li>Formulario de Test Drive</li>
+    <li>Formulario de Cotización</li>
+    <li>Sección de Postventa</li>
+    <li>Testimonios de clientes</li>
+    <li>Preguntas frecuentes (FAQ)</li>
+    <li>Footer completo con datos de contacto</li>
+    <li>Botón flotante de WhatsApp</li>
+  </ul>
+
+  <h3>Páginas de Modelos (MG3 y ZS)</h3>
+  <ul>
+    <li>Hero con imagen a pantalla completa</li>
+    <li>Selector de colores con descripción del modelo</li>
+    <li>Especificaciones técnicas con pestañas</li>
+    <li>Comparativa de versiones (Comfort vs Luxury)</li>
+    <li>Galería exterior e interior con carousel</li>
+    <li>Formulario de cotización integrado</li>
+    <li>Botones de WhatsApp con mensajes pre-armados</li>
+    <li>Breadcrumbs para navegación</li>
+  </ul>
+
+  <h3>Blog</h3>
+  <ul>
+    <li>Listado de artículos con tarjetas</li>
+    <li>Páginas individuales de cada artículo</li>
+    <li>Panel de administración para crear, editar y eliminar artículos (ver sección 5)</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <!-- INTEGRACIONES -->
+  <h2>3. Integraciones</h2>
+
+  <table>
+    <tr><th>Integración</th><th>Descripción</th></tr>
+    <tr><td>Google Analytics (GA4)</td><td>Medición de tráfico y conversiones. Tracking de formularios enviados.</td></tr>
+    <tr><td>Facebook Pixel (Meta)</td><td>Tracking de eventos Lead y Schedule para campañas publicitarias.</td></tr>
+    <tr><td>reCAPTCHA v3</td><td>Protección antispam en formularios. Validación invisible.</td></tr>
+    <tr><td>Resend (Email)</td><td>Envío de emails al recibir formularios. Notificación al concesionario + confirmación al cliente.</td></tr>
+    <tr><td>WhatsApp</td><td>Botón flotante + botones de cotización con mensajes pre-armados por modelo.</td></tr>
+    <tr><td>Google Maps</td><td>Mapa del concesionario embebido en la sección de contacto.</td></tr>
+  </table>
+
+  <!-- SEO -->
+  <h2>4. SEO y Rendimiento</h2>
+  <ul>
+    <li>Metadata SEO en cada página (títulos y descripciones únicos)</li>
+    <li>Sitemap.xml generado automáticamente</li>
+    <li>Robots.txt configurado</li>
+    <li>Schema markup (JSON-LD) para AutoDealer y FAQ</li>
+    <li>Imágenes optimizadas en formato WebP</li>
+    <li>Favicon con logo de MG</li>
+    <li>Sitio responsive (adaptado a celular, tablet y desktop)</li>
+  </ul>
+
+  <!-- ADMIN -->
+  <h2>5. Panel de Administración del Blog</h2>
+  <p>El sitio incluye un panel de administración protegido con contraseña para gestionar los artículos del blog. No se necesitan conocimientos técnicos para usarlo.</p>
+
+  <div class="cred-box">
+    <h3>Acceso al Panel</h3>
+    <div class="cred-row">
+      <span class="cred-label">URL</span>
+      <span class="cred-value">giamamg.com/admin</span>
+    </div>
+    <div class="cred-row">
+      <span class="cred-label">Contraseña</span>
+      <span class="cred-value">(configurar en Vercel: ADMIN_PASSWORD)</span>
+    </div>
+  </div>
+
+  <h3>Cómo publicar un artículo</h3>
+  <ol style="padding-left: 20px; margin-bottom: 16px;">
+    <li style="margin-bottom: 8px;">Ingresar a <strong>giamamg.com/admin</strong> con la contraseña</li>
+    <li style="margin-bottom: 8px;">Hacer clic en <strong>"+ Nuevo artículo"</strong></li>
+    <li style="margin-bottom: 8px;">Completar el formulario:
+      <ul style="margin-top: 6px;">
+        <li><strong>Título:</strong> nombre del artículo</li>
+        <li><strong>Extracto:</strong> resumen corto que aparece en la tarjeta del blog</li>
+        <li><strong>Imagen:</strong> subir una foto de portada</li>
+        <li><strong>Contenido:</strong> escribir el texto separando cada párrafo con una línea en blanco</li>
+        <li><strong>Autor:</strong> nombre (por defecto "GIAMA")</li>
+        <li><strong>Fecha:</strong> fecha de publicación</li>
+      </ul>
+    </li>
+    <li style="margin-bottom: 8px;">Hacer clic en <strong>"Publicar artículo"</strong></li>
+  </ol>
+  <p>El artículo aparece en el blog en menos de 1 minuto.</p>
+
+  <h3>Editar o eliminar un artículo</h3>
+  <p>Desde el panel, cada artículo tiene botones para <strong>Ver</strong>, <strong>Editar</strong> o <strong>Eliminar</strong>.</p>
+
+  <div class="page-break"></div>
+
+  <!-- SETUP EN VERCEL -->
+  <h2>6. Configuración Inicial en Vercel</h2>
+  <p>Para que el panel de administración del blog funcione, se necesita configurar lo siguiente una única vez desde el dashboard de Vercel:</p>
+
+  <h3>Paso 1: Crear base de datos Postgres</h3>
+  <ol style="padding-left: 20px; margin-bottom: 16px;">
+    <li style="margin-bottom: 6px;">Ir a <strong>Vercel Dashboard > Storage > Create Database > Postgres</strong></li>
+    <li style="margin-bottom: 6px;">Conectar la base al proyecto GIAMA</li>
+    <li style="margin-bottom: 6px;">Ir a la pestaña <strong>"Query"</strong> y ejecutar el SQL del archivo <strong>setup-db.sql</strong></li>
+  </ol>
+
+  <h3>Paso 2: Crear almacenamiento de imágenes (Blob)</h3>
+  <ol style="padding-left: 20px; margin-bottom: 16px;">
+    <li style="margin-bottom: 6px;">Ir a <strong>Vercel Dashboard > Storage > Create Store > Blob</strong></li>
+    <li style="margin-bottom: 6px;">Conectar al proyecto GIAMA</li>
+  </ol>
+
+  <h3>Paso 3: Agregar variables de entorno</h3>
+  <p>Ir a <strong>Settings > Environment Variables</strong> del proyecto y agregar:</p>
+  <table>
+    <tr><th>Variable</th><th>Descripción</th></tr>
+    <tr><td>ADMIN_PASSWORD</td><td>Contraseña para el panel admin (elegir una segura)</td></tr>
+    <tr><td>ADMIN_SECRET</td><td>Clave secreta para firmar sesiones (cadena de 32+ caracteres)</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Importante:</strong> Después de agregar las variables y crear la base de datos, hacer un nuevo deploy del proyecto para que los cambios tomen efecto.
+  </div>
+
+  <!-- VARIABLES -->
+  <h2>7. Variables de Entorno Configuradas</h2>
+  <table>
+    <tr><th>Variable</th><th>Estado</th></tr>
+    <tr><td>NEXT_PUBLIC_GA_ID</td><td>Configurada</td></tr>
+    <tr><td>NEXT_PUBLIC_FB_PIXEL_ID</td><td>Configurada</td></tr>
+    <tr><td>NEXT_PUBLIC_RECAPTCHA_SITE_KEY</td><td>Configurada</td></tr>
+    <tr><td>RECAPTCHA_SECRET_KEY</td><td>Configurada</td></tr>
+    <tr><td>RESEND_API_KEY</td><td>Configurada</td></tr>
+    <tr><td>EMAIL_FROM</td><td>Configurada</td></tr>
+    <tr><td>EMAIL_TO</td><td>Configurada</td></tr>
+    <tr><td>NEXT_PUBLIC_SITE_URL</td><td>Configurada</td></tr>
+    <tr><td>ADMIN_PASSWORD</td><td>Pendiente de configurar</td></tr>
+    <tr><td>ADMIN_SECRET</td><td>Pendiente de configurar</td></tr>
+    <tr><td>POSTGRES_* (auto)</td><td>Se genera al crear la base</td></tr>
+    <tr><td>BLOB_READ_WRITE_TOKEN (auto)</td><td>Se genera al crear el Blob</td></tr>
+  </table>
+
+  <!-- CONTACTO -->
+  <h2>8. Soporte</h2>
+  <p>Para consultas técnicas, modificaciones o actualizaciones del sitio, contactar al desarrollador.</p>
+
+  <div class="footer">
+    <p>Documento generado para la entrega del proyecto GIAMA MG — Abril 2026</p>
+  </div>
+</div>
+
+</body>
+</html>
