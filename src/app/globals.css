@@ -48,8 +48,9 @@ input, select, textarea { font-family: var(--font); }
 }
 .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
 .nav-dropdown-menu a {
-  display: block; padding: 10px 20px; font-size: 14px; color: var(--black); transition: background 0.2s;
+  display: flex; align-items: center; gap: 12px; padding: 10px 20px; font-size: 14px; color: var(--black); transition: background 0.2s;
 }
+.nav-dropdown-menu a img { width: 60px; height: auto; object-fit: contain; }
 .nav-dropdown-menu a:hover { background: var(--grey-light); }
 .navbar-right { display: flex; align-items: center; gap: 12px; }
 .btn-nav-wa {

@@ -2,10 +2,12 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { WHATSAPP_LINKS } from '@/data/constants'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const toggleMenu = () => {
     setMenuOpen(prev => !prev)
@@ -21,16 +23,22 @@ export default function Navbar() {
     <>
       <nav className="navbar">
         <div className="navbar-left">
-          <a href="/" className="navbar-logo">
+          <Link href="/" className="navbar-logo">
             <Image src="/logo-mg.png" alt="MG Motor logo" width={48} height={48} priority />
             <span className="navbar-giama">GIAMA</span>
-          </a>
+          </Link>
           <div className="nav-links">
-            <div className="nav-dropdown">
-              <button className="nav-drop-trigger">Modelos</button>
-              <div className="nav-dropdown-menu">
-                <a href="/modelos/mg3">MG3 Hybrid+</a>
-                <a href="/modelos/zs">MG ZS Hybrid+</a>
+            <div className="nav-dropdown" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
+              <button className="nav-drop-trigger" aria-haspopup="true" aria-expanded={dropdownOpen}>Modelos</button>
+              <div className="nav-dropdown-menu" role="menu">
+                <a href="/modelos/mg3" role="menuitem">
+                  <Image src="/img/mg3-icon.webp" alt="" width={80} height={45} />
+                  MG3 Hybrid+
+                </a>
+                <a href="/modelos/zs" role="menuitem">
+                  <Image src="/img/zs-icon.webp" alt="" width={80} height={45} />
+                  MG ZS Hybrid+
+                </a>
               </div>
             </div>
             <a href="#concesionario">Concesionario</a>
