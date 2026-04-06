@@ -179,7 +179,7 @@ input, select, textarea { font-family: var(--font); }
 /* ============ MODELS GRID ============ */
 .models-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-  max-width: 560px; margin: 0;
+  max-width: 900px; margin: 0;
 }
 .model-card {
   background: var(--grey-light); border-radius: 12px; padding: 24px 20px;
