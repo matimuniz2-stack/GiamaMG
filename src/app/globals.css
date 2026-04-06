@@ -678,7 +678,7 @@ input, select, textarea { font-family: var(--font); }
 
 /* ============ MODEL PAGE (standalone) ============ */
 .model-page { padding-top: 72px; }
-.model-page .modal-hero { position: relative; height: 60vh; min-height: 400px; }
+.model-page .modal-hero { position: relative; height: 100vh; min-height: 500px; }
 .model-page .modal-body h2 { margin-top: 40px; }
 
 /* Breadcrumbs */
@@ -762,7 +762,7 @@ input, select, textarea { font-family: var(--font); }
   .hero-content { padding: 0 24px 90px; }
   .hero-dots { right: 24px; bottom: 24px; }
   .hero-scroll { display: none; }
-  .modal-hero { height: 50vh; }
+  .modal-hero { height: 70vh; }
   .modal-hero .modal-info { left: 20px; bottom: 20px; }
   .modal-hero .modal-info h1 { font-size: 28px; }
   .modal-ctas { flex-direction: column; }

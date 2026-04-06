@@ -29,15 +29,8 @@ export default function ModelPageClient({ model }) {
 
   const changeColor = (index) => {
     if (index === activeColor) return
-    setSlideState('exit')
-    setTimeout(() => {
-      setCarImg(data.colors[index].src)
-      setActiveColor(index)
-      setSlideState('enter')
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setSlideState('center'))
-      })
-    }, 250)
+    setCarImg(data.colors[index].src)
+    setActiveColor(index)
   }
 
   return (
