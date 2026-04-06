@@ -361,12 +361,12 @@ input, select, textarea { font-family: var(--font); }
 }
 .modal-hero .modal-info h1 { font-size: 42px; font-weight: 800; }
 .modal-hero .modal-info p { font-size: 18px; opacity: 0.8; }
-.modal-body { padding: 60px 80px; max-width: 1200px; margin: 0 auto; }
+.modal-body { padding: 60px 80px; max-width: 1500px; margin: 0 auto; }
 .modal-body h2 { font-size: 28px; font-weight: 800; margin-bottom: 30px; }
 
 /* Color section (image + description side by side) */
 .color-section {
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: center;
   margin-bottom: 40px;
 }
 .color-showcase {
@@ -374,11 +374,11 @@ input, select, textarea { font-family: var(--font); }
   padding: 20px 0; overflow: hidden;
 }
 .color-showcase img {
-  width: 100%; max-height: 480px; height: auto;
+  width: 100%; max-height: 550px; height: auto;
   object-fit: contain;
 }
-.color-description h3 { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
-.color-description p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 14px; }
+.color-description h3 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
+.color-description p { font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 16px; }
 @media (max-width: 768px) {
   .color-section { grid-template-columns: 1fr; gap: 20px; }
   .color-showcase img { max-height: 260px; }
