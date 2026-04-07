@@ -41,10 +41,10 @@ export default function Navbar() {
                 </a>
               </div>
             </div>
-            <a href="#concesionario">Concesionario</a>
-            <a href="#sobre-mg">Sobre MG</a>
-            <a href="#test-drive">Test Drive</a>
-            <a href="#contacto">Contacto</a>
+            <a href="/#concesionario">Concesionario</a>
+            <a href="/#sobre-mg">Sobre MG</a>
+            <a href="/#test-drive">Test Drive</a>
+            <a href="/#contacto">Contacto</a>
             <a href="/blog">Blog</a>
           </div>
         </div>
@@ -61,13 +61,13 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="#modelos" onClick={closeMenu}>Modelos</a>
+        <a href="/#modelos" onClick={closeMenu}>Modelos</a>
         <a href="/modelos/mg3" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG3 Hybrid+</a>
         <a href="/modelos/zs" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG ZS Hybrid+</a>
-        <a href="#concesionario" onClick={closeMenu}>Concesionario</a>
-        <a href="#sobre-mg" onClick={closeMenu}>Sobre MG</a>
-        <a href="#test-drive" onClick={closeMenu}>Test Drive</a>
-        <a href="#contacto" onClick={closeMenu}>Contacto</a>
+        <a href="/#concesionario" onClick={closeMenu}>Concesionario</a>
+        <a href="/#sobre-mg" onClick={closeMenu}>Sobre MG</a>
+        <a href="/#test-drive" onClick={closeMenu}>Test Drive</a>
+        <a href="/#contacto" onClick={closeMenu}>Contacto</a>
         <a href="/blog" onClick={closeMenu}>Blog</a>
         <a href={WHATSAPP_LINKS.general} target="_blank" rel="noopener noreferrer" className="mobile-wa" onClick={closeMenu}>WhatsApp</a>
       </div>
