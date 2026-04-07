@@ -127,11 +127,12 @@ export default function HomePage() {
         <p className="section-subtitle reveal">Más de 40 años de experiencia en el mercado automotor argentino. Venta, postventa y financiación en Mar del Plata.</p>
         <div className="concesionario-grid">
           <div className="conc-info reveal">
-            <div className="conc-detail"><MapIcon /><p><strong>Dirección</strong><br />Gascón 3265, Mar del Plata, Buenos Aires</p></div>
-            <div className="conc-detail"><PhoneIcon /><p><strong>Teléfono</strong><br /><a href={`tel:${CONTACT.phone}`}>{CONTACT.whatsappDisplay}</a></p></div>
+            <div className="conc-detail"><MapIcon /><p><strong>Sucursal GIAMA</strong><br />Gascón 3265, Mar del Plata</p></div>
+            <div className="conc-detail"><MapIcon /><p><strong>Sucursal BENDU</strong><br />Av. de los Trabajadores 150, Mar del Plata</p></div>
+            <div className="conc-detail"><PhoneIcon /><p><strong>Teléfono</strong><br /><a href={CONTACT.phoneLink}>{CONTACT.phone}</a></p></div>
+            <div className="conc-detail"><PhoneIcon /><p><strong>WhatsApp</strong><br /><a href={WHATSAPP_LINKS.general} target="_blank" rel="noopener noreferrer">{CONTACT.whatsappDisplay}</a></p></div>
             <div className="conc-detail"><ClockIcon /><p><strong>Horarios</strong><br />Lunes a Viernes 9 a 18 hs<br />Sábados 9 a 13 hs</p></div>
             <div className="conc-detail"><EmailIcon /><p><strong>Email</strong><br /><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p></div>
-            <div className="conc-detail"><GlobeIcon /><p><strong>Zona de cobertura</strong><br />Mar del Plata</p></div>
             <a href={WHATSAPP_LINKS.general} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{marginTop:20}}>
               Contactar por WhatsApp
             </a>
@@ -147,11 +148,11 @@ export default function HomePage() {
         <p className="section-tag reveal">Test Drive</p>
         <h2 className="section-title reveal">Agendá tu prueba de manejo</h2>
         <div className="form-grid">
-          <div className="form-visual reveal" style={{background:"url('/img/test-drive-bg.webp') center/cover no-repeat",padding:0}}>
+          <div className="form-visual reveal" style={{background:"url('/ZS/Exterior/High-left-front-45.webp') center/cover no-repeat",padding:0}}>
             <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 50%)',borderRadius:12}} />
             <div className="form-visual-text" style={{zIndex:1}}>
               <h3>Viví la experiencia MG</h3>
-              <p>Agendá tu test drive y conocé la tecnología híbrida y eléctrica de cerca</p>
+              <p>Agendá tu test drive y conocé la tecnología híbrida de cerca</p>
             </div>
           </div>
           <div className="form-box reveal">
@@ -276,8 +277,9 @@ export default function HomePage() {
           <div className="footer-col">
             <h4>Contacto</h4>
             <a href={`https://maps.google.com/?q=${CONTACT.mapsQuery}`} target="_blank" rel="noopener noreferrer">{CONTACT.addressShort}</a>
-            <a href={`tel:${CONTACT.phone}`}>{CONTACT.whatsappDisplay}</a>
-            <a href={WHATSAPP_LINKS.general} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href={`https://maps.google.com/?q=Av+de+los+Trabajadores+150+Mar+del+Plata`} target="_blank" rel="noopener noreferrer">{CONTACT.addressBendu} (BENDU)</a>
+            <a href={CONTACT.phoneLink}>{CONTACT.phone}</a>
+            <a href={WHATSAPP_LINKS.general} target="_blank" rel="noopener noreferrer">WhatsApp: {CONTACT.whatsappDisplay}</a>
             <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
           </div>
         </div>

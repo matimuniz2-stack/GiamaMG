@@ -47,14 +47,25 @@ const jsonLd = {
   image: 'https://giamamg.com/og-image.jpg',
   telephone: CONTACT.phone,
   email: CONTACT.email,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Gascón 3265',
-    addressLocality: 'Mar del Plata',
-    addressRegion: 'Buenos Aires',
-    postalCode: '7600',
-    addressCountry: 'AR',
-  },
+  address: [
+    {
+      '@type': 'PostalAddress',
+      streetAddress: 'Gascón 3265',
+      addressLocality: 'Mar del Plata',
+      addressRegion: 'Buenos Aires',
+      postalCode: '7600',
+      addressCountry: 'AR',
+    },
+    {
+      '@type': 'PostalAddress',
+      name: 'BENDU',
+      streetAddress: 'Av. de los Trabajadores 150',
+      addressLocality: 'Mar del Plata',
+      addressRegion: 'Buenos Aires',
+      postalCode: '7600',
+      addressCountry: 'AR',
+    },
+  ],
   geo: {
     '@type': 'GeoCoordinates',
     latitude: -38.0055,
@@ -110,7 +121,7 @@ const faqJsonLd = {
       name: '¿Dónde se encuentra el concesionario GIAMA?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'GIAMA se encuentra en Gascón 3265, Mar del Plata, Buenos Aires. Horario: lunes a viernes de 9 a 18 hs, sábados de 9 a 13 hs.',
+        text: 'GIAMA tiene dos locales en Mar del Plata: Gascón 3265 y Av. de los Trabajadores 150 (BENDU). Horario: lunes a viernes de 9 a 18 hs, sábados de 9 a 13 hs.',
       },
     },
     {
@@ -118,7 +129,7 @@ const faqJsonLd = {
       name: '¿Cómo puedo agendar un test drive?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: `Podés agendar tu test drive completando el formulario en la web, contactando por WhatsApp al ${CONTACT.whatsappDisplay} o acercándote al concesionario.`,
+        text: `Podés agendar tu test drive completando el formulario en la web, llamando al ${CONTACT.phone}, contactando por WhatsApp al ${CONTACT.whatsappDisplay} o acercándote al concesionario.`,
       },
     },
     {

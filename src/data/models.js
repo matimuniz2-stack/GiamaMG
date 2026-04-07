@@ -18,7 +18,6 @@ export const MODELS = {
       { color: '#2266DD', src: '/MG3/Colores/MG3-azul.webp', name: 'Azul' },
       { color: '#C0C0C0', src: '/MG3/Colores/MG3-plata.webp', name: 'Plata' },
       { color: '#6B6B6B', src: '/MG3/Colores/MG3-gris.webp', name: 'Gris' },
-      { color: '#F5C518', src: '/MG3/Colores/MG3-amarillo.webp', name: 'Amarillo' },
     ],
     specs: [
       { tab: 'Motor', rows: [['Motor','1.5L Hybrid + motor eléctrico'],['Potencia combinada','195 CV'],['Torque combinado','425 Nm'],['Consumo','4.4 L/100 km (hasta 43.5 km/L)'],['Transmisión','Automática e-CVT'],['Tipo','Full Hybrid (no requiere enchufe)']] },

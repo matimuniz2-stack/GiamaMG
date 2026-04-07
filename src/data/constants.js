@@ -1,11 +1,13 @@
 export const CONTACT = {
-  whatsapp: '5491131347853',
-  whatsappDisplay: '+54 9 11 3134 7853',
-  email: 'autos.mg.ventas@giama.com.ar',
+  whatsapp: '5492233443011',
+  whatsappDisplay: '223 344-3011',
+  email: 'autos.mg.ventas@gmail.com',
   address: 'Gascón 3265, Mar del Plata, Buenos Aires',
   addressShort: 'Gascón 3265, Mar del Plata',
+  addressBendu: 'Av. de los Trabajadores 150, Mar del Plata',
   mapsQuery: 'Gascón+3265+Mar+del+Plata+Argentina',
-  phone: '+5491131347853',
+  phone: '0810 999 9878',
+  phoneLink: 'tel:08109999878',
 }
 
 export const WHATSAPP_LINKS = {

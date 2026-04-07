@@ -5,8 +5,8 @@ import Image from 'next/image'
 
 const slides = [
   { img: '/img/hero/KV-1.jpg', alt: 'MG3 Hybrid+ — vista frontal en Mar del Plata' },
-  { img: '/img/hero/Leopard eye headlights.jpg', alt: 'MG3 Hybrid+ — faros LED Leopard Eye' },
-  { img: '/img/hero/Front grille.jpg', alt: 'MG3 Hybrid+ — parrilla frontal detalle' },
+  { img: '/ZS/Portada.webp', alt: 'MG ZS Hybrid+ — SUV híbrido' },
+  { img: '/img/hero/KV-2.jpg', alt: 'MG3 Hybrid+ — vista nocturna' },
 ]
 
 export default function HeroSlider() {
