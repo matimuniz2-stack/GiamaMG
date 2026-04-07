@@ -55,7 +55,7 @@ export default function HeroSlider() {
         <h1 className="hero-title">Tradición británica.<br />Tecnología de vanguardia.</h1>
         <p className="hero-sub">Más de 100 años de legado automotriz. Tecnología Full Hybrid que no requiere enchufe. Ahora en Mar del Plata.</p>
         <div className="hero-ctas">
-          <a href="#modelos" className="btn-primary">Descubrí los modelos</a>
+          <a href="#modelos" className="btn-hero-white">Descubrí los modelos</a>
           <a href="#test-drive" className="btn-outline-white">Agendar Test Drive</a>
         </div>
       </div>

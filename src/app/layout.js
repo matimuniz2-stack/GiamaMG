@@ -6,7 +6,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], weight: ['400','600','700','800'] })
 
 export const viewport = {
-  themeColor: '#C41230',
+  themeColor: '#1B365D',
 }
 
 export const metadata = {

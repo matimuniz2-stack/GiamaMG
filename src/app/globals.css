@@ -1,6 +1,6 @@
 /* ============ VARIABLES ============ */
 :root {
-  --red: #C41230;
+  --red: #1B365D;
   --black: #1B1B1B;
   --white: #ffffff;
   --grey-light: #f5f5f5;
@@ -131,13 +131,20 @@ input, select, textarea { font-family: var(--font); }
   max-width: 500px; line-height: 1.6;
 }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-hero-white {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px; background: #fff; color: #1a1a1a;
+  font-size: 14px; font-weight: 600; border: none; border-radius: 4px;
+  transition: background 0.3s;
+}
+.btn-hero-white:hover { background: #e0e0e0; }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 14px 32px; background: var(--red); color: #fff;
   font-size: 14px; font-weight: 600; border: none; border-radius: 4px;
   transition: background 0.3s;
 }
-.btn-primary:hover { background: #a00f28; }
+.btn-primary:hover { background: #122744; }
 .btn-outline-white {
   display: inline-flex; align-items: center; padding: 14px 32px;
   border: 1.5px solid rgba(255,255,255,0.5); color: #fff; font-size: 14px; font-weight: 500;
@@ -202,7 +209,7 @@ input, select, textarea { font-family: var(--font); }
 .model-card .card-price span { font-size: 12px; font-weight: 400; color: #999; }
 .warranty-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 14px; background: rgba(196,18,48,0.08); border-radius: 20px;
+  padding: 6px 14px; background: rgba(27,54,93,0.08); border-radius: 20px;
   font-size: 11px; font-weight: 700; color: var(--red); margin-bottom: 16px;
 }
 .warranty-badge svg { width: 14px; height: 14px; fill: var(--red); }
@@ -268,7 +275,7 @@ input, select, textarea { font-family: var(--font); }
 .giama-block p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 16px; }
 .giama-highlight {
   display: flex; align-items: center; gap: 14px; padding: 20px 24px;
-  background: rgba(196,18,48,0.06); border-radius: 10px; border-left: 4px solid var(--red);
+  background: rgba(27,54,93,0.06); border-radius: 10px; border-left: 4px solid var(--red);
 }
 .giama-highlight p { margin: 0; font-weight: 600; color: var(--black); }
 .giama-imgs {
@@ -322,7 +329,7 @@ input, select, textarea { font-family: var(--font); }
   font-size: 15px; font-weight: 700; border: none; border-radius: 6px;
   margin-top: 8px; transition: background 0.3s; cursor: pointer;
 }
-.btn-submit:hover { background: #a00f28; }
+.btn-submit:hover { background: #122744; }
 .btn-submit:disabled { background: #999; cursor: not-allowed; }
 
 /* Form feedback */
@@ -332,7 +339,7 @@ input, select, textarea { font-family: var(--font); }
   margin-top: 16px; text-align: center;
 }
 .form-error {
-  padding: 16px 20px; background: rgba(196,18,48,0.08); border: 1px solid var(--red);
+  padding: 16px 20px; background: rgba(27,54,93,0.08); border: 1px solid var(--red);
   border-radius: 8px; color: var(--red); font-weight: 600; font-size: 14px;
   margin-top: 16px; text-align: center;
 }
@@ -496,7 +503,7 @@ input, select, textarea { font-family: var(--font); }
 /* Warranty banner */
 .warranty-banner {
   display: flex; align-items: center; gap: 16px; padding: 24px 30px;
-  background: linear-gradient(135deg, var(--red), #8b0a1e); border-radius: 12px;
+  background: linear-gradient(135deg, var(--red), #0f2238); border-radius: 12px;
   color: #fff; margin-bottom: 40px;
 }
 .warranty-banner svg { width: 40px; height: 40px; fill: #fff; flex-shrink: 0; }
@@ -835,7 +842,7 @@ input, select, textarea { font-family: var(--font); }
   width: 100%; padding: 12px; background: var(--red); color: #fff; border: none;
   border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s;
 }
-.admin-login-form button:hover { background: #a01030; }
+.admin-login-form button:hover { background: #122744; }
 .admin-login-form button:disabled { opacity: 0.6; cursor: not-allowed; }
 .admin-error { display: block; color: var(--red); font-size: 14px; margin-bottom: 12px; }
 
@@ -850,7 +857,7 @@ input, select, textarea { font-family: var(--font); }
   border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s;
 }
 .admin-btn-primary { background: var(--red); color: #fff; }
-.admin-btn-primary:hover { background: #a01030; }
+.admin-btn-primary:hover { background: #122744; }
 .admin-btn-outline { background: #fff; color: #333; border: 1px solid #ddd; }
 .admin-btn-outline:hover { background: #f5f5f5; }
 
