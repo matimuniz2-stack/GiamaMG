@@ -11,7 +11,20 @@ const slides = [
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0)
+  // Los slides 2 y 3 se montan recién cuando el hilo principal está libre, así la
+  // imagen LCP (slide 0) no compite por ancho de banda en la carga inicial.
+  const [mountRest, setMountRest] = useState(false)
   const intervalRef = useRef(null)
+
+  useEffect(() => {
+    const cb = () => setMountRest(true)
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(cb, { timeout: 3000 })
+      return () => window.cancelIdleCallback(id)
+    }
+    const id = setTimeout(cb, 1500)
+    return () => clearTimeout(id)
+  }, [])
 
   const goToSlide = useCallback((n) => {
     setCurrent((n + slides.length) % slides.length)
@@ -30,6 +43,7 @@ export default function HeroSlider() {
   }, [resetInterval])
 
   const handleDotClick = (i) => {
+    setMountRest(true)
     goToSlide(i)
     resetInterval()
   }
@@ -39,14 +53,16 @@ export default function HeroSlider() {
       {slides.map((slide, i) => (
         <div key={i} className={`hero-slide ${i === current ? 'active' : ''}`}>
           <div className="slide-bg" style={{ animation: i === current ? 'heroZoom 12s ease-out forwards' : 'none' }}>
-            <Image
-              src={slide.img}
-              alt={slide.alt}
-              fill
-              sizes="100vw"
-              style={{ objectFit: 'cover' }}
-              priority={i === 0}
-            />
+            {(i === 0 || mountRest) && (
+              <Image
+                src={slide.img}
+                alt={slide.alt}
+                fill
+                sizes="100vw"
+                style={{ objectFit: 'cover' }}
+                priority={i === 0}
+              />
+            )}
           </div>
         </div>
       ))}

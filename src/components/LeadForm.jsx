@@ -7,6 +7,33 @@ const VERSIONES = {
   'MG ZS Hybrid+': ['Comfort', 'Luxury'],
 }
 
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+
+// Carga reCAPTCHA v3 bajo demanda (al primer foco del formulario) en vez de en
+// toda la web. Devuelve una promesa que resuelve cuando grecaptcha está listo.
+// Es idempotente: el script se inyecta una sola vez aunque haya varios formularios.
+let recaptchaPromise = null
+function loadRecaptcha() {
+  if (typeof window === 'undefined' || !RECAPTCHA_SITE_KEY) return Promise.resolve(null)
+  if (window.grecaptcha && window.grecaptcha.execute) return Promise.resolve(window.grecaptcha)
+  if (recaptchaPromise) return recaptchaPromise
+  recaptchaPromise = new Promise((resolve) => {
+    const script = document.createElement('script')
+    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`
+    script.async = true
+    script.onload = () => {
+      if (window.grecaptcha && window.grecaptcha.ready) {
+        window.grecaptcha.ready(() => resolve(window.grecaptcha))
+      } else {
+        resolve(window.grecaptcha || null)
+      }
+    }
+    script.onerror = () => { recaptchaPromise = null; resolve(null) }
+    document.head.appendChild(script)
+  })
+  return recaptchaPromise
+}
+
 export default function LeadForm({ tipo }) {
   const [status, setStatus] = useState('idle') // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('')
@@ -46,13 +73,15 @@ export default function LeadForm({ tipo }) {
     }
 
     try {
-      // reCAPTCHA v3 token
+      // reCAPTCHA v3 token — se carga on-demand y se espera acá para no enviar
+      // sin token (la API rechaza el lead si falta).
       let recaptchaToken = ''
-      if (typeof window !== 'undefined' && window.grecaptcha) {
-        try {
-          recaptchaToken = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: 'submit_lead' })
-        } catch (err) { console.warn('reCAPTCHA falló, enviando sin token:', err) }
-      }
+      try {
+        const grecaptcha = await loadRecaptcha()
+        if (grecaptcha && grecaptcha.execute) {
+          recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_lead' })
+        }
+      } catch (err) { console.warn('reCAPTCHA falló, enviando sin token:', err) }
       data.recaptchaToken = recaptchaToken
 
       const res = await fetch('/api/lead', {
@@ -97,7 +126,7 @@ export default function LeadForm({ tipo }) {
 
   if (tipo === 'test-drive') {
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onFocus={() => loadRecaptcha()}>
         <div className="form-row">
           <div className="form-field">
             <label htmlFor="td-nombre">Nombre completo</label>
