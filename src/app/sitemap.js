@@ -36,6 +36,12 @@ export default async function sitemap() {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/privacidad`,
+      lastModified: new Date().toISOString().split('T')[0],
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
     ...posts,
   ]
 }

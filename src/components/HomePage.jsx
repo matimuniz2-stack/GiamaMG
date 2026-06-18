@@ -273,6 +273,7 @@ export default function HomePage() {
             <a href="#postventa">Postventa</a>
             <a href="#contacto">Contacto</a>
             <Link href="/blog">Blog</Link>
+            <Link href="/privacidad">Política de Privacidad</Link>
           </div>
           <div className="footer-col">
             <h4>Contacto</h4>
