@@ -20,17 +20,17 @@ export default function PrivacidadPage() {
 
         <h2>Declaración de Privacidad</h2>
         <p>
-          A través de esta política de privacidad, SAIC Motor Argentina S.A. (en adelante, “MG Motor”
-          o “nosotros”) informa cómo recopila, utiliza y almacena (en otras palabras, cómo procesa) los
-          datos personales de los usuarios que ingresan a sus sitios web generales y a los sitios de su
-          red de concesionarios oficiales, entre ellos GIAMA, concesionario oficial MG en Mar del Plata,
-          titular del sitio <strong>giamamg.com</strong>. Estas personas pueden incluir contactos
-          comerciales, proveedores, clientes y potenciales clientes, representantes, empleados y/o
-          accionistas, según corresponda. MG Motor y GIAMA actúan como responsables del tratamiento de
-          datos personales en estas actividades. Cuando en esta política hablamos de “usted” o “el
-          usuario”, nos referimos a cualquier persona cuyos datos se encuentren dentro del alcance de la
-          presente declaración. Otros servicios ofrecidos por MG Motor pueden estar sujetos a políticas
-          de privacidad específicas.
+          A través de esta política de privacidad, GIAMA, concesionario oficial MG en Mar del Plata y
+          titular del sitio <strong>giamamg.com</strong> (en adelante, “GIAMA” o “nosotros”), informa
+          cómo recopila, utiliza y almacena (en otras palabras, cómo procesa) los datos personales de
+          los usuarios que ingresan a este sitio web. GIAMA forma parte de la red oficial de
+          concesionarios de SAIC Motor Argentina S.A. (“MG Motor”) y adhiere a su marco de protección de
+          datos. Estas personas pueden incluir contactos comerciales, proveedores, clientes y
+          potenciales clientes, representantes y/o empleados, según corresponda. GIAMA actúa como
+          responsable del tratamiento de los datos personales recopilados a través de este sitio. Cuando
+          en esta política hablamos de “usted” o “el usuario”, nos referimos a cualquier persona cuyos
+          datos se encuentren dentro del alcance de la presente declaración. Otros servicios ofrecidos
+          por GIAMA o por MG Motor pueden estar sujetos a políticas de privacidad específicas.
         </p>
 
         <h2>1. Datos personales que recopilamos</h2>
@@ -83,7 +83,7 @@ export default function PrivacidadPage() {
           <li>Su consentimiento.</li>
           <li>La ejecución de un contrato o medidas precontractuales.</li>
           <li>El cumplimiento de obligaciones legales.</li>
-          <li>El interés legítimo de MG Motor (por ejemplo, seguridad informática, gestión de relaciones comerciales, actividades de marketing).</li>
+          <li>El interés legítimo de GIAMA (por ejemplo, seguridad informática, gestión de relaciones comerciales, actividades de marketing).</li>
         </ul>
 
         <h2>5. Finalidades</h2>
@@ -145,8 +145,9 @@ export default function PrivacidadPage() {
         <h2>Contacto</h2>
         <p>
           Para ejercer sus derechos o realizar consultas sobre esta política, puede escribirnos a{' '}
-          <a href="mailto:contacto@eximar.com.ar">contacto@eximar.com.ar</a> o contactar a GIAMA a{' '}
-          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>, o acercarse a {CONTACT.address}.
+          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> o acercarse a {CONTACT.address}.
+          También puede contactar a MG Motor (importador Eximar) a{' '}
+          <a href="mailto:contacto@eximar.com.ar">contacto@eximar.com.ar</a>.
         </p>
       </article>
     </div>
