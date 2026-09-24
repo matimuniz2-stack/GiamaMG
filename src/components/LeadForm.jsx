@@ -130,17 +130,17 @@ export default function LeadForm({ tipo }) {
         <div className="form-row">
           <div className="form-field">
             <label htmlFor="td-nombre">Nombre completo</label>
-            <input type="text" id="td-nombre" name="nombre" required placeholder="Tu nombre" />
+            <input type="text" id="td-nombre" name="nombre" className="quasor-name" required placeholder="Tu nombre" />
           </div>
           <div className="form-field">
             <label htmlFor="td-telefono">Teléfono</label>
-            <input type="tel" id="td-telefono" name="telefono" required placeholder="+54 9 223..." />
+            <input type="tel" id="td-telefono" name="telefono" className="quasor-phone" required placeholder="+54 9 223..." />
           </div>
         </div>
         <div className="form-row">
           <div className="form-field">
             <label htmlFor="td-email">Email</label>
-            <input type="email" id="td-email" name="email" required placeholder="tu@email.com" />
+            <input type="email" id="td-email" name="email" className="quasor-email" required placeholder="tu@email.com" />
           </div>
           <div className="form-field">
             <label htmlFor="td-modelo">Modelo de interés</label>
@@ -186,17 +186,17 @@ export default function LeadForm({ tipo }) {
       <div className="form-row">
         <div className="form-field">
           <label htmlFor="q-nombre">Nombre completo</label>
-          <input type="text" id="q-nombre" name="nombre" required placeholder="Tu nombre" />
+          <input type="text" id="q-nombre" name="nombre" className="quasor-name" required placeholder="Tu nombre" />
         </div>
         <div className="form-field">
           <label htmlFor="q-telefono">Teléfono</label>
-          <input type="tel" id="q-telefono" name="telefono" required placeholder="+54 9 223..." />
+          <input type="tel" id="q-telefono" name="telefono" className="quasor-phone" required placeholder="+54 9 223..." />
         </div>
       </div>
       <div className="form-row">
         <div className="form-field">
           <label htmlFor="q-email">Email</label>
-          <input type="email" id="q-email" name="email" required placeholder="tu@email.com" />
+          <input type="email" id="q-email" name="email" className="quasor-email" required placeholder="tu@email.com" />
         </div>
         <div className="form-field">
           <label htmlFor="q-modelo">Modelo</label>

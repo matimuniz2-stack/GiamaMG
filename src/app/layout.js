@@ -5,6 +5,11 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], weight: ['400','600','700','800'] })
 
+// Quasor — rastreo de leads de formularios. La clave es pública (viaja en el src
+// del script) y solo acepta envíos desde los dominios autorizados en el panel
+// de Quasor (giamamg.com), así que los envíos de dev/preview se descartan solos.
+const QUASOR_KEY = 'qsr_aiq95yijfaf1gwbv6npepqy2'
+
 export const viewport = {
   themeColor: '#1B365D',
 }
@@ -168,6 +173,13 @@ export default function RootLayout({ children }) {
         {children}
         {/* reCAPTCHA v3 — se carga on-demand desde LeadForm (primer foco del formulario)
             para no competir por ancho de banda en la carga inicial. */}
+        {/* Quasor — captura los leads de los formularios (nombre, email, teléfono)
+            y los atribuye a la campaña/anuncio vía los parámetros UTM de la URL. */}
+        <Script
+          id="quasor-tracking"
+          src={`https://api.quasor.app/api/t/q.js?k=${QUASOR_KEY}`}
+          strategy="afterInteractive"
+        />
         {/* Google Analytics 4 — only in production */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
