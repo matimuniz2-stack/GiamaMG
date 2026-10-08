@@ -104,7 +104,7 @@ export default function HomePage() {
             <h3>MG3</h3>
             <p className="card-specs">Hybrid+ 191 HP | 1.5 Nafta CVT</p>
             <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} aria-hidden="true" /> 6 años de garantía</div>
-            <p className="card-price">Desde USD 23.500* <span>Hybrid+ Comfort</span></p>
+            <p className="card-price">USD 25.900* <span>Hybrid+ Luxury</span></p>
             <span className="btn-ver-modelo">Ver modelo</span>
           </Link>
 

@@ -32,7 +32,7 @@ const jsonLd = {
   brand: { '@type': 'Brand', name: 'MG Motor' },
   offers: {
     '@type': 'Offer',
-    price: '23500',
+    price: '25900',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     seller: {

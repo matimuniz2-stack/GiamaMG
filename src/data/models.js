@@ -26,9 +26,10 @@ export const MODELS = {
       { tab: 'Confort', rows: [['Climatizador','Automático'],['Pantalla central','Táctil multimedia'],['Tapizado (Luxury)','Cuero'],['Luces (Luxury)','Full LED'],['Cámara trasera','Sí']] },
     ],
     versions: {
-      headers: ['', 'Comfort', 'Luxury'],
-      rows: [['Motor','1.5L Hybrid 191 HP','1.5L Hybrid 191 HP'],['Airbags','6','6'],['ADAS (ACC, AEB, LKA)','Sí','Sí'],['Climatizador','Sí','Sí'],['Tapizado de cuero','No','Sí'],['Luces full LED','No','Sí']],
-      prices: ['Precio','USD 23.500*','Consultar'],
+      // 2026-10-08: el Comfort Hybrid+ (USD 23.500) dejó de venir, queda solo el Luxury (Nicolás Arias, Giama).
+      headers: ['', 'Luxury'],
+      rows: [['Motor','1.5L Hybrid 191 HP'],['Airbags','6'],['ADAS (ACC, AEB, LKA)','Sí'],['Climatizador','Sí'],['Tapizado de cuero','Sí'],['Luces full LED','Sí']],
+      prices: ['Precio','USD 25.900*'],
     },
     exteriorGallery: [
       { src: '/MG3/Exterior/Right Front 45°.webp', alt: 'MG3 frontal derecho 45°', wide: true },
@@ -81,7 +82,7 @@ export const MODELS = {
     leadModel: 'MG3 Hybrid+',
     cotizarText: 'Hola,%20quiero%20cotizar%20el%20MG3%20Hybrid+',
     cotizarLabel: 'Cotizar MG3',
-    priceFrom: 'USD 23.500',
+    priceFrom: 'USD 25.900',
   },
   zs: {
     name: 'MG ZS Hybrid+',

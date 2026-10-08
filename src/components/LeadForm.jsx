@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 
 // Los nombres de modelo son los que llegan a /api/lead y a Quasor: no renombrar los existentes.
 const VERSIONES = {
-  'MG3 Hybrid+': ['Comfort', 'Luxury'],
+  'MG3 Hybrid+': ['Luxury'],
   'MG3 Nafta': ['Luxury'],
   'MG ZS Hybrid+': ['Comfort', 'Luxury'],
   'MG ZS Nafta': ['Comfort', 'Luxury'],
