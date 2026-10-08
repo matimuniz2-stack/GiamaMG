@@ -17,14 +17,14 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://giamamg.com'),
   title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
-  description: 'Concesionario oficial MG en Mar del Plata. MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa. Grupo GIAMA, más de 40 años en el mercado automotor.',
-  keywords: 'MG, GIAMA, concesionario, Mar del Plata, MG3, ZS, híbrido, test drive',
+  description: 'Concesionario oficial MG en Mar del Plata. MG3 y ZS, híbridos y a nafta, y la nueva MG HS. Test drive, cotización y postventa. Grupo GIAMA, más de 40 años en el mercado automotor.',
+  keywords: 'MG, GIAMA, concesionario, Mar del Plata, MG3, ZS, MG HS, híbrido, nafta, test drive',
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
-    description: 'MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa en Mar del Plata.',
+    description: 'MG3 y ZS, híbridos y a nafta, y la nueva MG HS. Test drive, cotización y postventa en Mar del Plata.',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'GIAMA - Concesionario Oficial MG' }],
     type: 'website',
     locale: 'es_AR',
@@ -32,7 +32,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'GIAMA | Concesionario Oficial MG en Mar del Plata',
-    description: 'MG3 Hybrid+ y ZS Hybrid+. Test drive, cotización y postventa en Mar del Plata.',
+    description: 'MG3 y ZS, híbridos y a nafta, y la nueva MG HS. Test drive, cotización y postventa en Mar del Plata.',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'GIAMA - Concesionario Oficial MG' }],
   },
   icons: {
@@ -46,7 +46,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'AutoDealer',
   name: 'GIAMA - Concesionario Oficial MG',
-  description: 'Concesionario oficial MG en Mar del Plata. Venta de vehículos híbridos MG3 y ZS.',
+  description: 'Concesionario oficial MG en Mar del Plata. Venta de MG3 y ZS, híbridos y a nafta, y la nueva MG HS.',
   url: 'https://giamamg.com',
   logo: 'https://giamamg.com/logo-mg.png',
   image: 'https://giamamg.com/og-image.jpg',
@@ -110,7 +110,7 @@ const faqJsonLd = {
       name: '¿Qué garantía tienen los vehículos MG?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Todos los vehículos MG cuentan con 6 años o 120.000 km de garantía en el vehículo y hasta 7 años o 140.000 km en la batería híbrida.',
+        text: 'Todos los vehículos MG cuentan con 6 años o 120.000 km de garantía en el vehículo y hasta 7 años o 150.000 km en la batería híbrida de las versiones Hybrid+.',
       },
     },
     {

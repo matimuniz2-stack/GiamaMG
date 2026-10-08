@@ -69,7 +69,7 @@ export default function HeroSlider() {
       <div className="hero-content">
         <div className="hero-badge">Concesionario Oficial MG</div>
         <h1 className="hero-title">Tradición británica.<br />Tecnología de vanguardia.</h1>
-        <p className="hero-sub">Más de 100 años de legado automotriz. Tecnología Full Hybrid que no requiere enchufe. Ahora en Mar del Plata.</p>
+        <p className="hero-sub">Más de 100 años de legado automotriz. Versiones Full Hybrid sin enchufe y a nafta. Ahora en Mar del Plata.</p>
         <div className="hero-ctas">
           <a href="#modelos" className="btn-hero-white">Descubrí los modelos</a>
           <a href="#test-drive" className="btn-outline-white">Agendar Test Drive</a>

@@ -14,4 +14,5 @@ export const WHATSAPP_LINKS = {
   general: `https://wa.me/${CONTACT.whatsapp}?text=Hola,%20quiero%20información%20sobre%20MG`,
   mg3: `https://wa.me/${CONTACT.whatsapp}?text=Hola,%20quiero%20cotizar%20el%20MG3%20Hybrid+`,
   zs: `https://wa.me/${CONTACT.whatsapp}?text=Hola,%20quiero%20cotizar%20el%20MG%20ZS%20Hybrid+`,
+  hs: `https://wa.me/${CONTACT.whatsapp}?text=Hola,%20quiero%20reservar%20la%20nueva%20MG%20HS`,
 }

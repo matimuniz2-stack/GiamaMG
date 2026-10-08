@@ -185,8 +185,8 @@ input, select, textarea { font-family: var(--font); }
 
 /* ============ MODELS GRID ============ */
 .models-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-  max-width: 900px; margin: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 1200px; margin: 0;
 }
 .model-card {
   background: var(--grey-light); border-radius: 12px; padding: 24px 20px;
@@ -200,6 +200,44 @@ input, select, textarea { font-family: var(--font); }
 }
 .card-tag.hybrid { background: rgba(21,219,65,0.15); color: #0a8c25; }
 .card-tag.electric { background: rgba(0,119,255,0.15); color: #005cc5; }
+.model-card .card-tags { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.card-tag.nafta { background: rgba(27,54,93,0.1); color: var(--red); }
+.card-tag.soon { background: #C1121F; color: #fff; }
+
+/* ============ MOTORIZACIÓN (Hybrid+ | Nafta) ============ */
+.powertrain-switch {
+  display: inline-flex; gap: 4px; padding: 4px; margin-bottom: 28px;
+  background: var(--grey-light); border-radius: 999px;
+}
+.powertrain-option {
+  border: none; background: transparent; padding: 10px 26px; border-radius: 999px;
+  font-size: 14px; font-weight: 700; color: var(--grey-mid); transition: all 0.25s;
+}
+.powertrain-option.active { background: var(--red); color: #fff; }
+
+/* ============ SE VIENE LA HS ============ */
+.soon-badge {
+  display: inline-block; padding: 6px 14px; border-radius: 4px; margin-bottom: 14px;
+  background: #C1121F; color: #fff; font-size: 12px; font-weight: 800;
+  letter-spacing: 1.5px; text-transform: uppercase;
+}
+.hs-teaser { position: relative; min-height: 460px; display: flex; align-items: center; overflow: hidden; background: #111; }
+.hs-teaser-bg { object-fit: cover; object-position: center; }
+.hs-teaser::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0) 75%);
+}
+.hs-teaser-content { position: relative; z-index: 1; max-width: 560px; padding: 60px 80px; color: #fff; }
+.hs-teaser-content h2 { font-size: clamp(30px, 4.5vw, 52px); font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+.hs-teaser-content p { font-size: 17px; line-height: 1.6; opacity: 0.9; margin-bottom: 28px; }
+@media (max-width: 768px) {
+  /* En el celular la foto va arriba (la camioneta está en la parte baja de la imagen) y el texto abajo. */
+  .hs-teaser { display: block; min-height: 0; padding-top: 64vw; }
+  .hs-teaser-bg { height: 64vw !important; object-position: 80% 85%; }
+  .hs-teaser::after { display: none; }
+  .hs-teaser-content { padding: 24px 16px 40px; }
+  .powertrain-option { padding: 10px 20px; }
+}
 .model-card .card-img { height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
 .model-card .card-img img { max-height: 110px; width: auto; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15)); transition: transform 0.4s; }
 .model-card:hover .card-img img { transform: scale(1.05); }

@@ -31,6 +31,12 @@ export default async function sitemap() {
       priority: 0.9,
     },
     {
+      url: `${BASE_URL}/modelos/hs`,
+      lastModified: new Date().toISOString().split('T')[0],
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${BASE_URL}/blog`,
       lastModified: new Date().toISOString().split('T')[0],
       changeFrequency: 'weekly',

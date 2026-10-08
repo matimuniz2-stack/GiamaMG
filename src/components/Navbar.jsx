@@ -39,6 +39,18 @@ export default function Navbar() {
                   <Image src="/img/zs-icon.webp" alt="" width={80} height={45} />
                   MG ZS Hybrid+
                 </a>
+                <a href="/modelos/mg3?motor=nafta" role="menuitem">
+                  <Image src="/img/mg3-icon.webp" alt="" width={80} height={45} />
+                  MG3 Nafta
+                </a>
+                <a href="/modelos/zs?motor=nafta" role="menuitem">
+                  <Image src="/img/zs-icon.webp" alt="" width={80} height={45} />
+                  MG ZS Nafta
+                </a>
+                <a href="/modelos/hs" role="menuitem">
+                  <Image src="/img/hs-icon.webp" alt="" width={80} height={45} />
+                  Nueva MG HS · Próximamente
+                </a>
               </div>
             </div>
             <a href="/#concesionario">Concesionario</a>
@@ -70,6 +82,9 @@ export default function Navbar() {
         <a href="/#modelos" onClick={closeMenu}>Modelos</a>
         <a href="/modelos/mg3" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG3 Hybrid+</a>
         <a href="/modelos/zs" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG ZS Hybrid+</a>
+        <a href="/modelos/mg3?motor=nafta" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG3 Nafta</a>
+        <a href="/modelos/zs?motor=nafta" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— MG ZS Nafta</a>
+        <a href="/modelos/hs" className="mobile-sub" onClick={closeMenu} style={{paddingLeft:20,fontSize:14,fontWeight:400,opacity:0.7}}>— Nueva MG HS (próximamente)</a>
         <a href="/#concesionario" onClick={closeMenu}>Concesionario</a>
         <a href="/#sobre-mg" onClick={closeMenu}>Sobre MG</a>
         <a href="/#test-drive" onClick={closeMenu}>Test Drive</a>

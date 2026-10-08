@@ -36,11 +36,15 @@ const WhatsAppSvg = () => (
 const FAQ_ITEMS = [
   {
     q: '¿Qué garantía tienen los vehículos MG?',
-    a: 'Todos los vehículos MG cuentan con 6 años o 120.000 km de garantía en el vehículo y hasta 7 años o 140.000 km en la batería híbrida. Es la garantía más extensa del segmento en Argentina.',
+    a: 'Todos los vehículos MG cuentan con 6 años o 120.000 km de garantía en el vehículo. En las versiones Hybrid+, la batería híbrida tiene hasta 7 años o 150.000 km. Es la garantía más extensa del segmento en Argentina.',
   },
   {
     q: '¿Los MG Hybrid+ necesitan enchufe?',
     a: 'No. Tanto el MG3 Hybrid+ como el MG ZS Hybrid+ son Full Hybrid, lo que significa que la batería se recarga sola con el motor de combustión y la frenada regenerativa. No necesitás ningún tipo de enchufe o cargador.',
+  },
+  {
+    q: '¿El MG3 y el MG ZS vienen también a nafta?',
+    a: 'Sí. Además de las versiones Hybrid+, el MG3 y el MG ZS tienen versión a nafta con caja automática CVT. En la página de cada modelo podés comparar las dos motorizaciones.',
   },
   {
     q: '¿Dónde se encuentra el concesionario GIAMA?',
@@ -87,31 +91,54 @@ export default function HomePage() {
 
       <HeroSlider />
 
+      {/* ========== SE VIENE LA HS ========== */}
+      <section className="hs-teaser" aria-labelledby="hs-teaser-title">
+        <Image src="/HS/Portada.webp" alt="Nueva MG HS" fill sizes="100vw" className="hs-teaser-bg" />
+        <div className="hs-teaser-content">
+          <span className="soon-badge">Próximamente</span>
+          <h2 id="hs-teaser-title">Se viene la nueva MG HS</h2>
+          <p>El SUV familiar de MG llega a GIAMA. Reservá la tuya y enterate primero de versiones, precios y fecha de entrega.</p>
+          <div className="hero-ctas">
+            <Link href="/modelos/hs" className="btn-hero-white">Conocela</Link>
+            <a href={WHATSAPP_LINKS.hs} target="_blank" rel="noopener noreferrer" className="btn-outline-white">Reservá la tuya</a>
+          </div>
+        </div>
+      </section>
+
       {/* ========== MODELOS ========== */}
       <section className="section" id="modelos">
         <p className="section-tag reveal">Modelos</p>
         <h2 className="section-title reveal">Encontrá tu MG ideal</h2>
-        <p className="section-subtitle reveal">Tecnología híbrida de última generación con garantía extendida líder en el segmento.</p>
+        <p className="section-subtitle reveal">Híbridos y a nafta, con la garantía extendida líder en el segmento. Y se viene la nueva MG HS.</p>
 
         <div className="models-grid">
           <Link href="/modelos/mg3" className="model-card reveal">
-            <span className="card-tag hybrid">Full Hybrid</span>
-            <div className="card-img"><Image src="/img/mg3-icon.webp" alt="MG3 Hybrid+" width={400} height={250} /></div>
-            <h3>MG3 Hybrid+</h3>
-            <p className="card-specs">195 CV | 4.4 L/100 km</p>
+            <div className="card-tags"><span className="card-tag hybrid">Full Hybrid</span><span className="card-tag nafta">Nafta</span></div>
+            <div className="card-img"><Image src="/img/mg3-icon.webp" alt="MG3" width={400} height={250} /></div>
+            <h3>MG3</h3>
+            <p className="card-specs">Hybrid+ 191 HP | 1.5 Nafta CVT</p>
             <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} aria-hidden="true" /> 6 años de garantía</div>
-            <p className="card-price">Desde USD 23.500* <span>Comfort</span></p>
+            <p className="card-price">Desde USD 23.500* <span>Hybrid+ Comfort</span></p>
             <span className="btn-ver-modelo">Ver modelo</span>
           </Link>
 
           <Link href="/modelos/zs" className="model-card reveal">
-            <span className="card-tag hybrid">Hybrid+</span>
-            <div className="card-img"><Image src="/img/zs-icon.png" alt="MG ZS Hybrid+" width={400} height={250} /></div>
-            <h3>MG ZS Hybrid+</h3>
-            <p className="card-specs">191 CV | 4.9 L/100 km</p>
+            <div className="card-tags"><span className="card-tag hybrid">Hybrid+</span><span className="card-tag nafta">Nafta</span></div>
+            <div className="card-img"><Image src="/img/zs-icon.png" alt="MG ZS" width={400} height={250} /></div>
+            <h3>MG ZS</h3>
+            <p className="card-specs">Hybrid+ 191 HP | 1.5 y 1.5T Nafta CVT</p>
             <div className="warranty-badge"><ShieldIcon style={{width:14,height:14,fill:'var(--red)'}} aria-hidden="true" /> 6 años de garantía</div>
-            <p className="card-price">Desde USD 27.500* <span>Comfort</span></p>
+            <p className="card-price">Desde USD 27.500* <span>Hybrid+ Comfort</span></p>
             <span className="btn-ver-modelo">Ver modelo</span>
+          </Link>
+
+          <Link href="/modelos/hs" className="model-card reveal">
+            <div className="card-tags"><span className="card-tag soon">Próximamente</span></div>
+            <div className="card-img"><Image src="/img/hs-icon.webp" alt="Nueva MG HS" width={400} height={250} /></div>
+            <h3>Nueva MG HS</h3>
+            <p className="card-specs">SUV familiar · Versiones y precio a confirmar</p>
+            <p className="card-price">Reservá la tuya</p>
+            <span className="btn-ver-modelo">Conocela</span>
           </Link>
         </div>
         <p className="price-note" style={{textAlign:'center',marginTop:30}}>* Precios en USD. Sujetos a modificación sin previo aviso. Consultar condiciones vigentes en el concesionario.</p>
@@ -265,6 +292,9 @@ export default function HomePage() {
             <h4>Modelos</h4>
             <Link href="/modelos/mg3">MG3 Hybrid+</Link>
             <Link href="/modelos/zs">MG ZS Hybrid+</Link>
+            <Link href="/modelos/mg3?motor=nafta">MG3 Nafta</Link>
+            <Link href="/modelos/zs?motor=nafta">MG ZS Nafta</Link>
+            <Link href="/modelos/hs">Nueva MG HS</Link>
           </div>
           <div className="footer-col">
             <h4>GIAMA</h4>

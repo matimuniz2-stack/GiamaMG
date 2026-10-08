@@ -60,6 +60,18 @@ export default function NotFound() {
         }}>
           Ver MG ZS
         </Link>
+        <Link href="/modelos/hs" style={{
+          display: 'inline-block',
+          padding: '12px 32px',
+          border: '1px solid rgba(255,255,255,0.3)',
+          color: '#fff',
+          borderRadius: 8,
+          textDecoration: 'none',
+          fontWeight: 600,
+          fontSize: 14,
+        }}>
+          Nueva MG HS
+        </Link>
       </div>
       <p style={{ fontSize: 12, opacity: 0.4, marginTop: 48 }}>
         GIAMA — Concesionario Oficial MG en Mar del Plata
