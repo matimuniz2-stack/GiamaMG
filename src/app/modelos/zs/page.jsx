@@ -6,7 +6,7 @@ const data = MODELS.zs
 export const metadata = {
   title: `${data.name} | Precio, Ficha Técnica y Test Drive — GIAMA Mar del Plata`,
   description: data.description,
-  keywords: 'MG ZS Hybrid+, precio MG ZS Argentina, MG ZS ficha técnica, MG ZS Mar del Plata, SUV híbrido, concesionario MG',
+  keywords: 'MG ZS Hybrid+, MG ZS nafta, precio MG ZS Argentina, MG ZS ficha técnica, MG ZS Mar del Plata, SUV híbrido, concesionario MG',
   alternates: { canonical: '/modelos/zs' },
   openGraph: {
     title: `${data.name} — Desde ${data.priceFrom} | GIAMA`,

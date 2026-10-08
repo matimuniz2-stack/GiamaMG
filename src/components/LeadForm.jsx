@@ -2,10 +2,15 @@
 
 import { useState, useEffect, useRef } from 'react'
 
+// Los nombres de modelo son los que llegan a /api/lead y a Quasor: no renombrar los existentes.
 const VERSIONES = {
   'MG3 Hybrid+': ['Comfort', 'Luxury'],
+  'MG3 Nafta': ['Luxury'],
   'MG ZS Hybrid+': ['Comfort', 'Luxury'],
+  'MG ZS Nafta': ['Comfort', 'Luxury'],
+  'MG HS': [],
 }
+const MODELOS = Object.keys(VERSIONES)
 
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
@@ -34,13 +39,15 @@ function loadRecaptcha() {
   return recaptchaPromise
 }
 
-export default function LeadForm({ tipo }) {
+export default function LeadForm({ tipo, modeloInicial = '' }) {
   const [status, setStatus] = useState('idle') // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('')
-  const [modelo, setModelo] = useState('')
+  const [modelo, setModelo] = useState(modeloInicial)
   const resetTimerRef = useRef(null)
 
   const versiones = VERSIONES[modelo] || []
+
+  useEffect(() => { setModelo(modeloInicial) }, [modeloInicial])
 
   useEffect(() => {
     return () => {
@@ -146,8 +153,7 @@ export default function LeadForm({ tipo }) {
             <label htmlFor="td-modelo">Modelo de interés</label>
             <select id="td-modelo" name="modelo" required value={modelo} onChange={(e) => setModelo(e.target.value)}>
               <option value="">Seleccionar modelo</option>
-              <option value="MG3 Hybrid+">MG3 Hybrid+</option>
-              <option value="MG ZS Hybrid+">MG ZS Hybrid+</option>
+              {MODELOS.map((m) => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
         </div>
@@ -202,8 +208,7 @@ export default function LeadForm({ tipo }) {
           <label htmlFor="q-modelo">Modelo</label>
           <select id="q-modelo" name="modelo" required value={modelo} onChange={(e) => setModelo(e.target.value)}>
             <option value="">Seleccionar modelo</option>
-            <option value="MG3 Hybrid+">MG3 Hybrid+</option>
-            <option value="MG ZS Hybrid+">MG ZS Hybrid+</option>
+            {MODELOS.map((m) => <option key={m} value={m}>{m}</option>)}
           </select>
         </div>
       </div>

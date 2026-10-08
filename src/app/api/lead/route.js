@@ -14,7 +14,7 @@ function escapeHtml(str) {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_RE = /^[\d\s+\-()]{7,20}$/
 const MAX_LEN = 500
-const ALLOWED_MODELS = ['MG3 Hybrid+', 'MG ZS Hybrid+']
+const ALLOWED_MODELS = ['MG3 Hybrid+', 'MG3 Nafta', 'MG ZS Hybrid+', 'MG ZS Nafta', 'MG HS']
 const ALLOWED_TYPES = ['test-drive', 'cotizacion']
 
 // Simple rate limiter (per serverless instance)

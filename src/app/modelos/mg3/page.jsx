@@ -6,7 +6,7 @@ const data = MODELS.mg3
 export const metadata = {
   title: `${data.name} | Precio, Ficha Técnica y Test Drive — GIAMA Mar del Plata`,
   description: data.description,
-  keywords: 'MG3 Hybrid+, precio MG3 Argentina, MG3 ficha técnica, MG3 Mar del Plata, concesionario MG, test drive MG3',
+  keywords: 'MG3 Hybrid+, MG3 nafta, precio MG3 Argentina, MG3 ficha técnica, MG3 Mar del Plata, concesionario MG, test drive MG3',
   alternates: { canonical: '/modelos/mg3' },
   openGraph: {
     title: `${data.name} — Desde ${data.priceFrom} | GIAMA`,
@@ -45,7 +45,7 @@ const jsonLd = {
   fuelType: 'Hybrid',
   vehicleEngine: {
     '@type': 'EngineSpecification',
-    enginePower: { '@type': 'QuantitativeValue', value: '195', unitCode: 'BHP' },
+    enginePower: { '@type': 'QuantitativeValue', value: '191', unitCode: 'BHP' },
     fuelType: 'Hybrid',
   },
 }
