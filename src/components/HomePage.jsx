@@ -91,20 +91,6 @@ export default function HomePage() {
 
       <HeroSlider />
 
-      {/* ========== SE VIENE LA HS ========== */}
-      <section className="hs-teaser" aria-labelledby="hs-teaser-title">
-        <Image src="/HS/Portada.webp" alt="Nueva MG HS" fill sizes="100vw" className="hs-teaser-bg" />
-        <div className="hs-teaser-content">
-          <span className="soon-badge">Próximamente</span>
-          <h2 id="hs-teaser-title">Se viene la nueva MG HS</h2>
-          <p>El SUV familiar de MG llega a GIAMA. Reservá la tuya y enterate primero de versiones, precios y fecha de entrega.</p>
-          <div className="hero-ctas">
-            <Link href="/modelos/hs" className="btn-hero-white">Conocela</Link>
-            <a href={WHATSAPP_LINKS.hs} target="_blank" rel="noopener noreferrer" className="btn-outline-white">Reservá la tuya</a>
-          </div>
-        </div>
-      </section>
-
       {/* ========== MODELOS ========== */}
       <section className="section" id="modelos">
         <p className="section-tag reveal">Modelos</p>
@@ -136,9 +122,10 @@ export default function HomePage() {
             <div className="card-tags"><span className="card-tag soon">Próximamente</span></div>
             <div className="card-img"><Image src="/img/hs-icon.webp" alt="Nueva MG HS" width={400} height={250} /></div>
             <h3>Nueva MG HS</h3>
-            <p className="card-specs">SUV familiar · Versiones y precio a confirmar</p>
-            <p className="card-price">Reservá la tuya</p>
-            <span className="btn-ver-modelo">Conocela</span>
+            <p className="card-specs">SUV familiar | Próximamente</p>
+            <div className="warranty-badge">Reservas abiertas</div>
+            <p className="card-price">Precio a confirmar <span>Lanzamiento</span></p>
+            <span className="btn-ver-modelo">Ver modelo</span>
           </Link>
         </div>
         <p className="price-note" style={{textAlign:'center',marginTop:30}}>* Precios en USD. Sujetos a modificación sin previo aviso. Consultar condiciones vigentes en el concesionario.</p>

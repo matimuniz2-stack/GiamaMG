@@ -49,7 +49,7 @@ export default function Navbar() {
                 </a>
                 <a href="/modelos/hs" role="menuitem">
                   <Image src="/img/hs-icon.webp" alt="" width={80} height={45} />
-                  Nueva MG HS · Próximamente
+                  Nueva MG HS <span className="nav-soon">Pronto</span>
                 </a>
               </div>
             </div>

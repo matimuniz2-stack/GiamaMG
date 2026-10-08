@@ -2,9 +2,13 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { WHATSAPP_LINKS } from '@/data/constants'
 
+// Un slide con `hs: true` muestra su propio texto (lanzamiento de la HS) en vez del general.
 const slides = [
   { img: '/img/hero/KV-1.jpg', alt: 'MG3 Hybrid+ — vista frontal en Mar del Plata' },
+  { img: '/HS/Portada.webp', alt: 'Nueva MG HS — próximamente en GIAMA', hs: true, pos: '72% center' },
   { img: '/ZS/Portada.webp', alt: 'MG ZS Hybrid+ — SUV híbrido' },
   { img: '/img/hero/KV-2.jpg', alt: 'MG3 Hybrid+ — vista nocturna' },
 ]
@@ -59,14 +63,25 @@ export default function HeroSlider() {
                 alt={slide.alt}
                 fill
                 sizes="100vw"
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', objectPosition: slide.pos || 'center' }}
                 priority={i === 0}
               />
             )}
           </div>
         </div>
       ))}
-      <div className="hero-content">
+      {slides[current].hs ? (
+        <div className="hero-content" key="hs">
+          <div className="hero-badge hero-badge--soon">Próximamente</div>
+          <h2 className="hero-title">Se viene la<br />nueva MG HS.</h2>
+          <p className="hero-sub">El SUV familiar de MG llega a GIAMA. Reservá la tuya y enterate primero de versiones, precios y fecha de entrega.</p>
+          <div className="hero-ctas">
+            <Link href="/modelos/hs" className="btn-hero-white">Conocela</Link>
+            <a href={WHATSAPP_LINKS.hs} target="_blank" rel="noopener noreferrer" className="btn-outline-white">Reservá la tuya</a>
+          </div>
+        </div>
+      ) : (
+      <div className="hero-content" key="general">
         <div className="hero-badge">Concesionario Oficial MG</div>
         <h1 className="hero-title">Tradición británica.<br />Tecnología de vanguardia.</h1>
         <p className="hero-sub">Más de 100 años de legado automotriz. Versiones Full Hybrid sin enchufe y a nafta. Ahora en Mar del Plata.</p>
@@ -75,6 +90,7 @@ export default function HeroSlider() {
           <a href="#test-drive" className="btn-outline-white">Agendar Test Drive</a>
         </div>
       </div>
+      )}
       <div className="hero-scroll">
         <div className="hero-scroll-line"></div>
         <span>Scroll</span>
