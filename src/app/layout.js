@@ -98,7 +98,7 @@ const jsonLd = {
     '@type': 'City',
     name: 'Mar del Plata',
   },
-  priceRange: 'USD 23,500 - USD 29,900',
+  priceRange: 'USD 25,900 - USD 29,900',
 }
 
 const faqJsonLd = {
