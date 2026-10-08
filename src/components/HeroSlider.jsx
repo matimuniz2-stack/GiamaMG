@@ -7,15 +7,15 @@ import { WHATSAPP_LINKS } from '@/data/constants'
 
 // Un slide con `hs: true` muestra su propio texto (lanzamiento de la HS) en vez del general.
 const slides = [
-  { img: '/img/hero/KV-1.jpg', alt: 'MG3 Hybrid+ — vista frontal en Mar del Plata' },
   { img: '/HS/Portada.webp', alt: 'Nueva MG HS — próximamente en GIAMA', hs: true, pos: '72% center' },
+  { img: '/img/hero/KV-1.jpg', alt: 'MG3 Hybrid+ — vista frontal en Mar del Plata' },
   { img: '/ZS/Portada.webp', alt: 'MG ZS Hybrid+ — SUV híbrido' },
   { img: '/img/hero/KV-2.jpg', alt: 'MG3 Hybrid+ — vista nocturna' },
 ]
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0)
-  // Los slides 2 y 3 se montan recién cuando el hilo principal está libre, así la
+  // Los demás slides se montan recién cuando el hilo principal está libre, así la
   // imagen LCP (slide 0) no compite por ancho de banda en la carga inicial.
   const [mountRest, setMountRest] = useState(false)
   const intervalRef = useRef(null)
@@ -73,7 +73,7 @@ export default function HeroSlider() {
       {slides[current].hs ? (
         <div className="hero-content" key="hs">
           <div className="hero-badge hero-badge--soon">Próximamente</div>
-          <h2 className="hero-title">Se viene la<br />nueva MG HS.</h2>
+          <h1 className="hero-title">Se viene la<br />nueva MG HS.</h1>
           <p className="hero-sub">El SUV familiar de MG llega a GIAMA. Reservá la tuya y enterate primero de versiones, precios y fecha de entrega.</p>
           <div className="hero-ctas">
             <Link href="/modelos/hs" className="btn-hero-white">Conocela</Link>
