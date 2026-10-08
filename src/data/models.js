@@ -185,7 +185,6 @@ export const MODELS = {
       { src: '/HS/Exterior/frontal-45.webp', alt: 'MG HS frontal', wide: true },
       { src: '/HS/Exterior/frontal-alto.webp', alt: 'MG HS frontal izquierdo alto' },
       { src: '/HS/Exterior/frente.webp', alt: 'MG HS vista frontal' },
-      { src: '/HS/Exterior/lateral.webp', alt: 'MG HS vista lateral' },
       { src: '/HS/Exterior/baul.webp', alt: 'MG HS baúl' },
     ],
     interiorGallery: [
